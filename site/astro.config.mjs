@@ -9,11 +9,12 @@ export default defineConfig({
 			title: 'Kỹ thuật Smarthome',
 			description: 'Wiki kỹ thuật – tài liệu đào tạo & vận hành',
 			logo: {
-				src: './src/assets/logo.svg',
+				src: './src/assets/brand/logo-192.png',
 				alt: 'Kỹ thuật Smarthome',
 			},
 			head: [
-				{ tag: 'link', attrs: { rel: 'icon', href: '/logo.svg' } },
+				{ tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/brand/favicon-32.png' } },
+				{ tag: 'link', attrs: { rel: 'apple-touch-icon', sizes: '192x192', href: '/brand/logo-192.png' } },
 			],
 			customCss: ['./src/styles/custom.css'],
 			social: [
