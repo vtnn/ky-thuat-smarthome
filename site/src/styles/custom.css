@@ -1,0 +1,55 @@
+:root {
+  /* Inspired by thachanhitt.com (Mulish + deep red accent) */
+  --sl-color-accent-low: #2a0a0a;
+  --sl-color-accent: #ab1313;
+  --sl-color-accent-high: #ffd6d6;
+
+  /* Softer radius like their cards */
+  --sl-border-radius: 18px;
+
+  /* Typography tuning (smaller on iPhone) */
+  --sl-text-base: 0.95rem; /* default 1rem */
+  --sl-line-height: 1.6;
+}
+
+/* Prefer Mulish if available (similar vibe). Falls back safely. */
+:root, body {
+  font-family: Mulish, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Reduce heading scale a touch on mobile */
+@media (max-width: 480px) {
+  :root {
+    --sl-text-base: 0.9rem;
+  }
+  h1 { font-size: clamp(1.6rem, 5vw, 2.1rem) !important; }
+  h2 { font-size: clamp(1.25rem, 4vw, 1.6rem) !important; }
+}
+
+/* Landing hero background */
+.sl-hero {
+  position: relative;
+}
+.sl-hero::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background:
+    radial-gradient(900px 400px at 10% 10%, rgba(171, 19, 19, 0.18), transparent 60%),
+    radial-gradient(700px 300px at 90% 20%, rgba(204, 42, 42, 0.12), transparent 55%),
+    radial-gradient(700px 380px at 30% 90%, rgba(171, 19, 19, 0.10), transparent 60%);
+  filter: blur(0px);
+  z-index: -1;
+}
+
+/* Make cards more “lộng lẫy” but still clean */
+.card {
+  border-radius: var(--sl-border-radius) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+.card:hover {
+  transform: translateY(-2px);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}

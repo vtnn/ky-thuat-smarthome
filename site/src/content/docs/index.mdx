@@ -1,15 +1,61 @@
 ---
 title: Kỹ thuật Smarthome
-description: Wiki kỹ thuật – tài liệu đào tạo & vận hành
+description: Wiki kỹ thuật – tài liệu đào tạo & vận hành (public)
+template: splash
+hero:
+  tagline: Wiki kỹ thuật cho thi công • lập trình • xử lý sự cố • chuẩn chất lượng
+  image:
+    file: ../../assets/logo.svg
+  actions:
+    - text: Vào Wiki
+      link: /wiki/
+      icon: right-arrow
+    - text: Module C — WiFi & Mạng
+      link: /wiki/module-c-wifi-va-mang/c1-quy-hoach-mang/
+      variant: minimal
 ---
 
-# Kỹ thuật Smarthome
-
-Chào mừng anh em tới wiki kỹ thuật. Nội dung được quản lý bằng Markdown trong repo GitHub để cập nhật nhanh, review bằng PR, và deploy tự động lên Cloudflare Pages.
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ## Bắt đầu nhanh
-- Vào **Tổng quan**: xem cấu trúc tài liệu và cách học theo level.
-- Duyệt theo **Modules** (A → G) ở sidebar.
-- Xem **FAQ / Glossary** trong mục **Reference**.
 
-> Góp ý/chỉnh sửa: tạo PR hoặc edit trực tiếp file `.md` trên GitHub.
+<CardGrid>
+  <Card title="Modules A → G" icon="list" link="/wiki/module-a-ky-thuat-co-ban/a1-doc-ban-ve-ky-thuat/">
+    Đi theo lộ trình đào tạo: cơ bản → thiết bị → mạng → lập trình → sự cố.
+  </Card>
+  <Card title="Biểu mẫu / Checklist" icon="clipboard" link="/wiki/bieu-mau-templates/">
+    Checklist thi công, nghiệm thu, báo cáo tiến độ, bàn giao.
+  </Card>
+  <Card title="Reference (FAQ / Glossary)" icon="open-book" link="/wiki/reference/faq/">
+    Tra nhanh thuật ngữ & câu hỏi thường gặp.
+  </Card>
+</CardGrid>
+
+## Các module chính
+
+<CardGrid stagger>
+  <Card title="Module A — Kỹ thuật cơ bản" icon="tool" link="/wiki/module-a-ky-thuat-co-ban/a1-doc-ban-ve-ky-thuat/">
+    Bản vẽ, dụng cụ, an toàn, tiêu chuẩn thi công.
+  </Card>
+  <Card title="Module B — Hệ thống thiết bị" icon="cog" link="/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/00-gioi-thieu-lifesmart/">
+    LifeSmart, MobiEyes, KNX, DALI, Camera, WiFi Ruijie.
+  </Card>
+  <Card title="Module C — WiFi & Mạng" icon="wifi" link="/wiki/module-c-wifi-va-mang/c1-quy-hoach-mang/">
+    Quy hoạch mạng, VLAN, switch/router, firewall, bảo mật.
+  </Card>
+  <Card title="Module D — Lập trình" icon="code" link="/wiki/module-d-lap-trinh/d1-nguyen-tac-lap-trinh/">
+    Naming, scene, automation review, tích hợp hệ thống.
+  </Card>
+  <Card title="Module E — Xử lý sự cố" icon="bug" link="/wiki/module-e-xu-ly-su-co/e1-quy-trinh-xu-ly-su-co-chuan/">
+    Troubleshooting theo hệ: LifeSmart/MobiEyes/KNX/Camera/WiFi.
+  </Card>
+  <Card title="Module F — Tiêu chuẩn chất lượng" icon="check" link="/wiki/module-f-tieu-chuan-chat-luong/f1-tieu-chuan-hinh-anh-cong-trinh/">
+    Hình ảnh công trình, checklist nghiệm thu, bảo hành.
+  </Card>
+</CardGrid>
+
+---
+
+### Góp ý / cập nhật nội dung
+- Sửa trực tiếp file `.md` trong GitHub hoặc tạo PR.
+- Deploy lên Cloudflare Pages sẽ tự chạy khi merge vào `main`.

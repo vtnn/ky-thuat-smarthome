@@ -8,6 +8,14 @@ export default defineConfig({
 		starlight({
 			title: 'Kỹ thuật Smarthome',
 			description: 'Wiki kỹ thuật – tài liệu đào tạo & vận hành',
+			logo: {
+				src: './src/assets/logo.svg',
+				alt: 'Kỹ thuật Smarthome',
+			},
+			head: [
+				{ tag: 'link', attrs: { rel: 'icon', href: '/logo.svg' } },
+			],
+			customCss: ['./src/styles/custom.css'],
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/vtnn/ky-thuat-smarthome' },
 			],
