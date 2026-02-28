@@ -1,0 +1,9 @@
+# Node
+node_modules/
+
+# Astro
+site/dist/
+site/.astro/
+
+# OS
+.DS_Store
