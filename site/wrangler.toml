@@ -1,5 +1,3 @@
 name = "kythuat-smarthome"
 compatibility_date = "2026-02-28"
-
-[assets]
-directory = "./dist"
+pages_build_output_dir = "dist"
