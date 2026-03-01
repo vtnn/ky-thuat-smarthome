@@ -26,7 +26,17 @@ export default defineConfig({
 					label: 'Lộ trình học',
 					items: [
 						{ label: 'A — Nền tảng kỹ thuật', autogenerate: { directory: 'wiki/module-a-ky-thuat-co-ban' } },
-						{ label: 'B — Thiết bị & hệ thống', autogenerate: { directory: 'wiki/module-b-he-thong-thiet-bi' } },
+						{
+							label: 'B — Thiết bị & hệ thống',
+							items: [
+								{ label: 'B1 - LifeSmart', autogenerate: { directory: 'wiki/module-b-he-thong-thiet-bi/b1-lifesmart' } },
+								{ label: 'B2 - MobiEyes', autogenerate: { directory: 'wiki/module-b-he-thong-thiet-bi/b2-mobieyes' } },
+								{ label: 'B3 - KNX', autogenerate: { directory: 'wiki/module-b-he-thong-thiet-bi/b3-knx' } },
+								{ label: 'B4 - DALI Dimmer', autogenerate: { directory: 'wiki/module-b-he-thong-thiet-bi/b4-dali-dimmer' } },
+								{ label: 'B5 - Camera Hikvision', autogenerate: { directory: 'wiki/module-b-he-thong-thiet-bi/b5-camera-hikvision' } },
+								{ label: 'B6 - WiFi Ruijie', autogenerate: { directory: 'wiki/module-b-he-thong-thiet-bi/b6-wifi-ruijie' } },
+							],
+						},
 						{ label: 'C — WiFi & Mạng', autogenerate: { directory: 'wiki/module-c-wifi-va-mang' } },
 						{ label: 'D — Lập trình & Tự động hoá', autogenerate: { directory: 'wiki/module-d-lap-trinh' } },
 						{ label: 'E — Xử lý sự cố (Troubleshooting)', autogenerate: { directory: 'wiki/module-e-xu-ly-su-co' } },
