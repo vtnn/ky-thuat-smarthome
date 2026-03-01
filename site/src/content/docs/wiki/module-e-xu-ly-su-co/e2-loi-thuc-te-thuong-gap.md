@@ -1,38 +1,42 @@
 ---
-title: "Lỗi thực tế thường gặp"
+title: "E2 — Các lỗi thực tế thường gặp"
+description: "Tổng hợp danh mục các lỗi phổ biến trong thi công và vận hành smarthome thực tế."
 module: "e"
 level: "3-6"
 tags: ["lỗi", "thực tế", "catalog"]
 ---
-# E2 — Lỗi Thực Tế Thường Gặp ⭐⭐⭐
 
-## 🔴 LỖI MẠNG
-- Nhầm IP thiết bị (cùng IP với thiết bị khác)
-- Nhầm VLAN (camera nằm VLAN smart home)
-- Conflict IP address (2 thiết bị cùng IP)
-- Gateway sai (thiết bị không ra Internet)
-- DNS không hoạt động (ping IP được, ping domain không)
+## Mục tiêu
+- Nhận diện nhanh các tình huống lỗi phổ biến đã từng xảy ra tại công trình.
+- Giúp kỹ thuật viên mới rút kinh nghiệm và tránh các sai lầm tương tự.
 
-## 🔴 LỖI CẤU HÌNH
-- Sai mapping module (MobiEyes: bật đèn PK nhưng đèn PN sáng)
-- Sai địa chỉ KNX (Group Address link sai actuator)
-- Device ID trùng lặp (module RS485 cùng ID)
-- Firmware không tương thích (sau update thiết bị không phản hồi)
+---
 
-## 🔴 LỖI LẬP TRÌNH
-- Trùng automation gây loop (Scene A → Scene B → Scene A)
-- Logic IF-THEN sai (bật đèn khi có người nhưng không tắt khi không có)
-- Scene không kích hoạt (trigger/condition sai)
-- Timer không chạy (múi giờ sai, Hub mất Internet)
+## 1. Lỗi mạng (Internet/LAN)
+- **Nhầm IP:** Cài IP tĩnh trùng với thiết bị khác (Conflict IP).
+- **Nhầm VLAN:** Camera nằm ở VLAN smarthome thay vì VLAN camera riêng.
+- **Lỗi Gateway:** Gán sai gateway khiến thiết bị nội bộ chạy được nhưng không ra được Cloud/Internet.
+- **Lỗi DNS:** Ping được IP 8.8.8.8 nhưng không vào được website/app (không phân giải được domain).
 
-## 🔴 LỖI PHẦN CỨNG
-- Thiết bị không nhận nguồn (adapter hỏng, CB nhảy)
-- LED báo lỗi (đèn đỏ/cam trên Hub)
-- Relay không đóng/ngắt (công tắc hỏng)
-- Cảm biến không phản hồi (hết pin, hỏng)
+---
 
-## 🔴 LỖI THI CÔNG
-- Dây đấu sai cực (L/N/Load đảo)
-- Dây bị đứt (bấm cáp mạng hỏng 1 sợi)
-- Khoảng cách quá xa (Zigbee > 30m qua tường, KNX bus > 700m)
-- Nhiễu điện từ (cáp mạng đi chung ống cáp điện)
+## 2. Lỗi cấu hình (Mapping/ID)
+- **Sai mapping:** Bật đèn Phòng khách nhưng đèn Phòng ăn sáng (do gán kênh Relay/Group sai).
+- **Trùng ID:** Hai thiết bị RS485/Bus có cùng địa chỉ vật lý.
+- **Firmware:** Update firmware không đồng bộ khiến thiết bị lỗi phản hồi hoặc mất automation cũ.
+
+---
+
+## 3. Lỗi lập trình (Automation)
+- **Trùng Trigger:** Hai scene cùng 1 trigger nhưng lệnh ngược nhau.
+- **Loop vô hạn:** Scene A kích hoạt Scene B, rồi Scene B kích hoạt lại Scene A.
+- **Logic sai:** Bật đèn khi có người nhưng quên điều kiện OFF khi hết người (hoặc delay sai).
+- **Timer không chạy:** Do múi giờ Hub sai hoặc Hub mất kết nối Internet để đồng bộ giờ.
+
+---
+
+## 4. Lỗi thi công và Đấu nối
+- **Nhiễu điện từ:** Cáp mạng/Bus đi chung ống cáp điện 220V gây chập chờn tín hiệu.
+- **Sai cực tính:** Đấu nhầm L/N hoặc đảo cực Tx+/Tx- trên đường bus.
+- **Khoảng cách:** Thiết bị Zigbee/WiFi quá xa Hub (>30m qua nhiều tường) gây rớt kết nối.
+- **Jack nối:** Jack RJ45/terminal bị lỏng hoặc bấm hỏng 1-2 sợi cáp con.

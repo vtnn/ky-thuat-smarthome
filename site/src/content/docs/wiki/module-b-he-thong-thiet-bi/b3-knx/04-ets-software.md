@@ -1,40 +1,48 @@
 ---
-title: "Phần mềm ETS"
+title: "B3.04 — Phần mềm ETS (Engineering Tool Software)"
+description: "Hướng dẫn cơ bản dùng ETS: tạo project, nhập catalog, gán địa chỉ vật lý và Group Address."
 module: "b"
 level: "4-6"
 tags: ["KNX", "ETS", "lập trình"]
 ---
-# B3.04 — Phần Mềm ETS
 
-## Cài đặt
-1. Tải từ [my.knx.org](https://my.knx.org). Cài trên Windows (.NET Framework).
-2. Kích hoạt license (Demo miễn phí ≤ 5 thiết bị).
+## Mục tiêu
+- Biết quy trình lập trình hệ KNX từ bước tạo dự án đến bước Download cấu hình.
+- Nắm bắt cơ chế **Communication Objects** và liên kết chúng với Group Address.
 
-## Tạo Project
-1. New Project → Đặt tên `[Công trình] - [Năm]`.
-2. Tạo Building Structure: Building → Floor → Room.
+---
 
-## Import Product Database
-1. Catalog → Import → file `.knxprod` từ hãng.
-2. Import: Push Button, Actuator, Binary Input, DALI Gateway, Power Supply, IP Gateway.
+## 1. Cấu hình dự án (Project Setup)
 
-## Thêm thiết bị
-1. Kéo từ Catalog vào Topology (Line).
-2. ETS gán Physical Address tự động.
-3. Kéo vào Room trong Building Structure.
+1. Tải và cài đặt ETS từ **my.knx.org**.
+2. **New Project:** Đặt tên theo cú pháp `[Công trình] - [Năm]`.
+3. **Import Catalog:** Tải file `.knxprod` của hãng về và import vào ETS.
 
-## Tạo Group Address
-Format 3 cấp: `Main/Middle/Sub`. Quy ước: 0=Switching, 1=Dimming, 2=Blinds, 3=Scenes, 4=Status.
+---
 
-## Liên kết Communication Objects
-- Kéo thả object từ thiết bị → vào Group Address.
-- Ví dụ: Push Button "Switch" → GA `0/0/1` ← Switch Actuator "Switching".
+## 2. Gán địa chỉ vật lý (Physical Address)
 
-## Download
-1. Kết nối KNX/IP Gateway (cùng LAN).
-2. Bus → Connection → Chọn Gateway → Test.
-3. Full Download (lần đầu) hoặc Partial Download (sửa đổi).
+- Kéo thiết bị từ Catalog vào Topology.
+- ETS tự gán địa chỉ (VD: `1.1.1`).
+- Nhấn nút **Programming Button** trên thiết bị thật khi ETS yêu cầu download địa chỉ.
 
-## Group Monitor
-- Bus → Group Monitor → Start → xem telegram real-time.
-- Debug: nhấn nút → xem telegram xuất hiện không.
+---
+
+## 3. Tạo Group Address (GA)
+
+Quy ước GA 3 cấp: `Main / Middle / Sub`. Ví dụ:
+- `0/0/1`: Switching (Main=0) / Tầng 1 / Đèn khách.
+- `1/0/1`: Dimming (Main=1).
+
+---
+
+## 4. Liên kết Object & Download
+
+1. Kéo Communication Object của phím bấm thả vào Group Address tương ứng.
+2. Kéo Communication Object của relay/dimmer thả vào GA đó.
+3. **Download:** Chọn Full Download (lần đầu) hoặc Partial Download (sau khi sửa đổi).
+
+---
+
+## 5. Group Monitor
+Dùng công cụ này để debug: xem telegram chạy trên bus theo thời gian thực (real-time).

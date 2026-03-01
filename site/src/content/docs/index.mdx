@@ -1,61 +1,77 @@
 ---
-title: Kỹ thuật Smarthome
-description: Wiki kỹ thuật – tài liệu đào tạo & vận hành (public)
+title: Wiki Kỹ thuật Smarthome
+description: Wiki kỹ thuật – tài liệu đào tạo & vận hành chuyên sâu cho kỹ thuật viên smarthome.
 template: splash
 hero:
-  tagline: Wiki kỹ thuật cho thi công • lập trình • xử lý sự cố • chuẩn chất lượng
+  tagline: Hệ thống hóa quy trình thi công • Lập trình • Xử lý sự cố • Tiêu chuẩn chất lượng
   image:
-    file: ../../assets/logo.svg
+    file: ../../../public/tech-hero.png
   actions:
-    - text: Vào Wiki
-      link: /wiki/
+    - text: Bắt đầu học ngay
+      link: /wiki/module-a-ky-thuat-co-ban/a1-doc-ban-ve-ky-thuat/
       icon: right-arrow
-    - text: Chuyên mục C — WiFi & Mạng
-      link: /wiki/module-c-wifi-va-mang/c1-quy-hoach-mang/
+    - text: Tra cứu FAQ
+      link: /wiki/reference/faq/
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import CustomCard from '../../components/CustomCard.astro';
 
-## Bắt đầu nhanh
+## 🚀 Lộ trình & Biểu mẫu
 
 <CardGrid>
-  <Card title="Lộ trình đào tạo A → G" icon="rocket" link="/wiki/module-a-ky-thuat-co-ban/a1-doc-ban-ve-ky-thuat/">
-    Đi theo lộ trình chuẩn: cơ bản → thiết bị → mạng → lập trình → sự cố.
-  </Card>
-  <Card title="Biểu mẫu & Checklist" icon="document" link="/wiki/bieu-mau-templates/">
-    Checklist thi công, nghiệm thu, báo cáo tiến độ, bàn giao.
-  </Card>
-  <Card title="Tra cứu nhanh (FAQ/Glossary)" icon="magnifier" link="/wiki/reference/faq/">
-    Thuật ngữ & câu hỏi thường gặp.
-  </Card>
+  <CustomCard title="Lộ trình đào tạo (A-G)" icon="rocket" href="/wiki/module-a-ky-thuat-co-ban/a1-doc-ban-ve-ky-thuat/">
+    Từ cơ bản đến chuyên sâu dành cho KTV các cấp độ.
+  </CustomCard>
+  <CustomCard title="Biểu mẫu & Checklist" icon="document" href="/wiki/bieu-mau-templates/form-danh-gia-nang-luc/">
+    Các form mẫu báo cáo, checklist thi công và nghiệm thu thực tế.
+  </CustomCard>
+  <CustomCard title="Thuật ngữ Glossary" icon="magnifier" href="/wiki/reference/glossary/">
+    Giải nghĩa các thuật ngữ kỹ thuật smarthome A-Z.
+  </CustomCard>
 </CardGrid>
 
-## Chuyên mục đào tạo
+## 📂 Các Chuyên mục Chính
 
 <CardGrid stagger>
-  <Card title="Chuyên mục A — Kỹ thuật cơ bản" icon="open-book" link="/wiki/module-a-ky-thuat-co-ban/a1-doc-ban-ve-ky-thuat/">
-    Bản vẽ, dụng cụ, an toàn, tiêu chuẩn thi công.
-  </Card>
-  <Card title="Chuyên mục B — Hệ thống thiết bị" icon="setting" link="/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/00-gioi-thieu-lifesmart/">
-    LifeSmart, MobiEyes, KNX, DALI, Camera, WiFi Ruijie.
-  </Card>
-  <Card title="Chuyên mục C — WiFi & Mạng" icon="laptop" link="/wiki/module-c-wifi-va-mang/c1-quy-hoach-mang/">
-    Quy hoạch mạng, VLAN, switch/router, firewall, bảo mật.
-  </Card>
-  <Card title="Chuyên mục D — Lập trình" icon="pencil" link="/wiki/module-d-lap-trinh/d1-nguyen-tac-lap-trinh/">
-    Naming, scene, automation review, tích hợp hệ thống.
-  </Card>
-  <Card title="Chuyên mục E — Xử lý sự cố" icon="warning" link="/wiki/module-e-xu-ly-su-co/e1-quy-trinh-xu-ly-su-co-chuan/">
-    Troubleshooting theo hệ: LifeSmart/MobiEyes/KNX/Camera/WiFi.
-  </Card>
-  <Card title="Chuyên mục F — Tiêu chuẩn chất lượng" icon="approve-check" link="/wiki/module-f-tieu-chuan-chat-luong/f1-tieu-chuan-hinh-anh-cong-trinh/">
-    Hình ảnh công trình, checklist nghiệm thu, bảo hành.
-  </Card>
+  <CustomCard title="A — Kỹ thuật cơ bản" icon="open-book" href="/wiki/module-a-ky-thuat-co-ban/a1-doc-ban-ve-ky-thuat/">
+    Đọc bản vẽ, dụng cụ thi công, an toàn lao động.
+  </CustomCard>
+  <CustomCard title="B — Hệ thống thiết bị" icon="setting" href="/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/00-gioi-thieu-lifesmart/">
+    LifeSmart, MobiEyes, KNX, DALI, Camera, WiFi.
+  </CustomCard>
+  <CustomCard title="C — WiFi & Mạng" icon="laptop" href="/wiki/module-c-wifi-va-mang/c1-quy-hoach-mang/">
+    Quy hoạch VLAN, cấu hình Switch, Router, Firewall.
+  </CustomCard>
+  <CustomCard title="D — Lập trình hệ thống" icon="pencil" href="/wiki/module-d-lap-trinh/d1-nguyen-tac-lap-trinh/">
+    Nguyên tắc naming, logic scene, kịch bản tự động.
+  </CustomCard>
+  <CustomCard title="E — Xử lý sự cố" icon="warning" href="/wiki/module-e-xu-ly-su-co/e1-quy-trinh-xu-ly-su-co-chuan/">
+    Quy trình chuẩn xử lý các lỗi thực tế tại công trình.
+  </CustomCard>
+  <CustomCard title="F — Chuẩn chất lượng" icon="approve-check" href="/wiki/module-f-tieu-chuan-chat-luong/f1-tieu-chuan-hinh-anh-cong-trinh/">
+    Tiêu chuẩn hình ảnh, bàn giao và bảo hành.
+  </CustomCard>
 </CardGrid>
 
 ---
 
-### Góp ý / cập nhật nội dung
-- Sửa trực tiếp file `.md` trong GitHub hoặc tạo PR.
-- Deploy lên Cloudflare Pages sẽ tự chạy khi merge vào `main`.
+## 📘 Giới thiệu chung
+
+Trang **Wiki Kỹ thuật Smarthome** là hệ thống tài liệu quản trị tri thức nội bộ, tập trung vào việc chuẩn hóa kỹ năng cho đội ngũ kỹ thuật viên. 
+
+### Mục tiêu chính:
+- **Chuẩn hóa:** Đảm bảo mọi kỹ thuật viên đều làm việc theo một tiêu chuẩn chất lượng duy nhất.
+- **Đào tạo:** Hỗ trợ kỹ thuật viên mới nắm bắt hệ thống nhanh chóng qua lộ trình bài bản.
+- **Thực chiến:** Cung cấp công cụ tra cứu và biểu mẫu ngay tại công trình.
+
+## ✉️ Thông tin liên hệ
+
+Nếu có bất kỳ thắc mắc, góp ý hoặc cần cập nhật tài liệu mới, anh/em vui lòng liên hệ:
+
+- **Người phụ trách:** Anh Nghĩa Vũ
+- **Nội dung góp ý:** Gửi kèm tên dự án, mô tả chi tiết hoặc hình ảnh/video minh họa.
+
+---
+*Cập nhật lần cuối: 01/03/2026*

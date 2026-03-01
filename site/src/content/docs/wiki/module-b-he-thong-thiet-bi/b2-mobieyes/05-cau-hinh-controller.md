@@ -1,68 +1,41 @@
 ---
-title: "Cấu hình Controller MobiEyes"
+title: "B2.05 — Cấu hình Controller MobiEyes"
+description: "Hướng dẫn dùng System Commander cấu hình LAN Bridge và dùng DIN-RY Config Tool gán ID cho module."
 module: "b"
 level: "4-6"
 tags: ["MobiEyes", "LAN Bridge", "System Commander", "DIN-RY Config Tool"]
 ---
 
-# B2.05 — Cấu Hình Controller
-
-## 1. Cấu Hình LAN Bridge (CF-IP) — Bằng System Commander
-
-### Phần mềm: **System Commander** (CommandFusion)
-
-### Kết nối
-1. Kết nối laptop và LAN Bridge cùng mạng LAN (Ethernet).
-2. Mở System Commander → quét mạng → phát hiện LAN Bridge.
-
-### Thiết lập cần cấu hình
-
-| Hạng mục | Chi tiết |
-|---------|---------|
-| **IP Address** | Gán IP tĩnh theo quy hoạch VLAN Smart Home (vd: 192.168.10.201) |
-| **DHCP** | Tắt DHCP trên LAN Bridge — dùng IP tĩnh |
-| **Date/Time** | Thiết lập thời gian thực (real-time clock) — **quan trọng cho Scheduler** |
-| **COM Mode** | Chọn chế độ giao tiếp CFLink |
-| **Baud Rate** | Thiết lập Baud Rate phù hợp (mặc định theo hãng) |
-| **Firmware** | Kiểm tra và cập nhật firmware phiên bản mới nhất |
-
-### Kiểm tra sau cấu hình
-- [ ] Ping IP LAN Bridge từ laptop → OK.
-- [ ] System Commander thấy LAN Bridge → OK.
-- [ ] Date/Time chính xác (ảnh hưởng Scheduler).
-- [ ] LAN Bridge quét thấy tất cả Board trên CFLink Bus.
+## Mục tiêu
+- Chốt **IP tĩnh** cho LAN Bridge và thiết lập thời gian thực chính xác.
+- Gán **Board ID** duy nhất cho từng module DIN-RY8-N.
 
 ---
 
-## 2. Cấu Hình DIN-RY8-N — Bằng DIN-RY Config Tool
+## 1. Cấu hình LAN Bridge (CF-IP)
+Sử dụng phần mềm: **System Commander**.
 
-### Phần mềm: **DIN-RY Config Tool** (CommandFusion)
-
-### Kết nối
-1. Kết nối qua IP và Port (qua LAN Bridge) hoặc trực tiếp.
-2. Mở DIN-RY Config Tool → nhập IP + Port → kết nối.
-
-### Thiết lập cần cấu hình
-
-| Hạng mục | Chi tiết |
-|---------|---------|
-| **Board ID** | Gán ID cho mỗi bo: Board 01, 21, 22, 23... (phải duy nhất) |
-| **Firmware** | Update firmware bo lên phiên bản mới nhất |
-| **Relay Parameters** | Thiết lập thông số relay (nếu cần: toggle mode, momentary, latching) |
-| **Input Parameters** | Cấu hình loại input (NO/NC, debounce time) |
-
-### Quy trình gán Board ID
-1. Kết nối 1 bo tại một thời điểm (tháo các bo khác khỏi bus tạm thời).
-2. Mở DIN-RY Config Tool → gán ID (vd: Board 21).
-3. Lưu → ngắt bo → kết nối bo tiếp theo → gán ID khác.
-4. Sau khi gán xong tất cả → nối lại toàn bộ bus.
-5. Kiểm tra: System Commander quét thấy đầy đủ board.
+### 1.1. Các bước chính
+1. Scan mạng để phát hiện LAN Bridge.
+2. Gán **IP Address tĩnh** (VD: `192.168.10.201`).
+3. Tắt DHCP.
+4. **Set Date/Time:** cực kỳ quan trọng để các lệnh Scheduler (hẹn giờ) chạy đúng.
 
 ---
 
-## 3. Backup Cấu Hình
+## 2. Cấu hình module DIN-RY8-N
+Sử dụng phần mềm: **DIN-RY Config Tool**.
 
-- **LUÔN backup** sau khi hoàn thành cấu hình.
-- Lưu file cấu hình LAN Bridge + DIN-RY vào thư mục dự án + USB.
-- Đặt tên: `config_[ten_du_an]_LANBridge_[ngay].cfg`
-- Ghi nhận: Danh sách Board ID + IP + cấu hình vào biên bản bàn giao.
+### 2.1. Quy trình gán Board ID
+1. **Cô lập:** Chỉ kết nối 1 bo vào bus tại mỗi thời điểm khi đang gán ID.
+2. Connect qua IP của LAN Bridge.
+3. Gán ID duy nhất (VD: 21, 22, 23...).
+4. Lưu và ngắt bo, lặp lại cho bo tiếp theo.
+5. Sau khi xong, nối lại toàn bộ bus và scan lại trên System Commander.
+
+---
+
+## 3. Backup cấu hình
+
+- Luôn xuất file backup cấu hình (`.cfg`) sau khi xong.
+- Lưu trữ vào thư mục dự án với format: `config_<ten_du_an>_<ngay>.cfg`.

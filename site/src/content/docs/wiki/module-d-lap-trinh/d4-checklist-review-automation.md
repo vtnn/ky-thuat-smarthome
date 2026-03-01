@@ -1,27 +1,36 @@
 ---
-title: "Checklist Review Automation"
+title: "D4 — Checklist Review Automation"
+description: "Checklist bắt buộc trước khi bàn giao: kiểm tra logic, test thực tế và xác nhận với khách hàng."
 module: "d"
 level: "4-6"
 tags: ["checklist", "review", "automation"]
 ---
-# D4 — Checklist Review Automation
 
-## Trước khi bàn giao, kiểm tra:
+## Mục tiêu
+- Đảm bảo automation chạy đúng, không xung đột và không tạo vòng lặp.
+- Giảm lỗi phát sinh sau bàn giao.
 
-### Logic
-- [ ] ☑️ Có đúng theo tư vấn ban đầu (đối chiếu với phòng kinh doanh)?
-- [ ] ☑️ Có trùng automation (2 scene cùng trigger)?
-- [ ] ☑️ Có gây xung đột logic (bật ↔ tắt cùng lúc)?
-- [ ] ☑️ Có loop vô hạn (Scene A → Scene B → Scene A)?
-- [ ] ☑️ Delay/Timer hoạt động đúng?
+---
 
-### Test
-- [ ] ☑️ Có test TẤT CẢ trường hợp (ban ngày, ban đêm, có người, không người)?
-- [ ] ☑️ Test scene bằng cả App + nút vật lý?
-- [ ] ☑️ Test khi mất Internet (local fallback)?
-- [ ] ☑️ Test edge case (bật đèn khi đèn đã bật, tắt khi đã tắt)?
+## 1. Checklist Logic
+- [ ] Đúng theo tư vấn ban đầu (đối chiếu phòng kinh doanh).
+- [ ] Không trùng automation (2 scene cùng trigger).
+- [ ] Không xung đột (bật ↔ tắt cùng lúc).
+- [ ] Không có loop vô hạn (Scene A → Scene B → Scene A).
+- [ ] Delay/Timer hoạt động đúng.
 
-### Khách hàng
-- [ ] ☑️ Khách hàng đã confirm danh sách kịch bản?
-- [ ] ☑️ Khách hàng đã test thử từ App?
-- [ ] ☑️ Hướng dẫn khách cách tạo/sửa scene đơn giản?
+---
+
+## 2. Checklist Test thực tế
+- [ ] Test ban ngày + ban đêm.
+- [ ] Test có người + không người.
+- [ ] Test bằng App + nút vật lý.
+- [ ] Test khi mất Internet (Local control vẫn chạy).
+- [ ] Test edge case: bật khi đã bật, tắt khi đã tắt.
+
+---
+
+## 3. Checklist Khách hàng
+- [ ] Khách hàng đã confirm danh sách kịch bản.
+- [ ] Khách hàng đã test thử trên App.
+- [ ] Khách hàng được hướng dẫn cách bật/tắt và chỉnh sửa cơ bản.

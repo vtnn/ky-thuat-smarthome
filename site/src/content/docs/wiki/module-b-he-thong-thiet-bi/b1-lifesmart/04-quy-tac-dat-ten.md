@@ -1,84 +1,58 @@
 ---
-title: "Quy tắc đặt tên thiết bị LifeSmart"
+title: "B1.04 — Quy tắc đặt tên thiết bị LifeSmart"
+description: "Chuẩn định danh thiết bị và IO port để dễ quản lý, tìm kiếm và tạo ngữ cảnh AI Builder."
 module: "b"
 level: "3-6"
 tags: ["LifeSmart", "đặt tên", "quy tắc", "IO port"]
 ---
 
-# B1.04 — Quy Tắc Đặt Tên Thiết Bị LifeSmart
+## Mục tiêu
+- Biết **format đặt tên chuẩn** để kỹ thuật viên nào nhìn vào cũng hiểu.
+- Đảm bảo tính nhất quán trên toàn hệ thống, đặc biệt là đặt tên cho từng nút (IO port).
 
-## 1. Quy Tắc Chung
+---
 
-### Format
+## 1. Quy tắc chung (Format)
+
+Dùng tiền tố khu vực kết hợp tên thiết bị:
 ```
 [KHU_VUC]_[TEN_THIET_BI / TEN_DEN]
 ```
 
-### Ví dụ
-```
-PhongKhach_DenTran
-PhongKhach_DenHat
-PhongNgu_CongTac1
-```
+**Ví dụ:** `PhongKhach_DenTran`, `PN_Master_DieuHoa`.
 
 ---
 
-## 2. Định Danh Trên Hệ Thống LifeSmart
+## 2. Định danh IO port (Quan trọng)
 
-Mỗi thiết bị khi add vào App đều cho phép đổi:
-- **Tên thiết bị chính** (device name)
-- **Tên các "nút" (IO port)** bên trong thiết bị
+Nhiều thiết bị (như công tắc 3 nút) cần đặt tên cả thiết bị chính và các nút con:
 
-### Ví dụ: Công tắc 3 nút lắp ở Phòng Khách
-
-| Cấp | Tên |
-|-----|-----|
-| Thiết bị chính | `PhongKhach_CongTacChinh` |
-| IO port L1 | `PhongKhach_DenChum` |
-| IO port L2 | `PhongKhach_DenHat` |
-| IO port L3 | `PhongKhach_QuatTran` |
-
-### Ví dụ: Công tắc 2 nút lắp ở Phòng Ngủ Master
-
-| Cấp | Tên |
-|-----|-----|
-| Thiết bị chính | `PNMaster_CongTac` |
-| IO port L1 | `PNMaster_DenNgu` |
-| IO port L2 | `PNMaster_DenWC` |
+| Cấp | Ví dụ tên |
+|---|---|
+| **Thiết bị chính** | `PhongKhach_CongTac1` |
+| **Nút L1** | `PhongKhach_DenChum` |
+| **Nút L2** | `PhongKhach_DenHat` |
+| **Nút L3** | `PhongKhach_QuatTran` |
 
 ---
 
-## 3. Quy Ước Khu Vực
+## 3. Quy ước viết tắt Khu vực
 
-| Viết tắt | Khu vực |
-|----------|---------|
-| PhongKhach / PK | Phòng khách |
-| PhongAn / PA | Phòng ăn |
-| PhongBep / PB | Phòng bếp |
-| PNMaster | Phòng ngủ Master |
-| PN1, PN2, PNCon | Phòng ngủ 1, 2, con |
-| WCMaster, WCChung | WC |
-| HanhLang / HL | Hành lang |
-| BanCong / BC | Ban công |
-| SanKhach / SK | Sân khách |
-| SanThuong / ST | Sân thượng |
-| Garage / HM | Hầm / Garage |
-| CuaChinh | Cửa chính |
+| Viết tắt | Ý nghĩa |
+|---|---|
+| **PK / PhongKhach** | Phòng khách |
+| **PB / PhongBep** | Phòng bếp |
+| **PN / PhongNgu** | Phòng ngủ |
+| **WC** | Nhà vệ sinh |
+| **HL / HanhLang** | Hành lang |
+| **ST / SanThuong** | Sân thượng |
+| **CuaChinh** | Cửa chính |
 
 ---
 
-## 4. Phân Bổ Phòng (Rooms/Groups)
+## 4. Lưu ý khi đặt tên
 
-App LifeSmart cho phép gán thiết bị vào các **"Room"** cụ thể.
-
-Việc đặt tên tiền tố `[KHU_VUC]` đóng vai trò **dự phòng** — giúp dễ tìm kiếm ngay cả khi xem ở giao diện **"All Devices"**.
-
----
-
-## 5. Lưu Ý
-
-- Đặt tên **TRƯỚC khi** ghép nối (nghĩ trước, làm sau).
-- Đặt theo cụm công tắc: **khu vực trước → sau**, **phòng lớn → phòng nhỏ**.
-- **Không dùng** ký tự đặc biệt, dấu tiếng Việt (một số hệ thống không hỗ trợ tốt).
-- Đặt tên **nhất quán** trong toàn bộ dự án — một người chịu trách nhiệm naming.
-- Đặt tên cả **IO port** (L1/L2/L3) — không chỉ đặt tên thiết bị chính.
+1. **Không dùng dấu:** Tránh tiếng Việt có dấu và ký tự đặc biệt (@, #, !).
+2. **Nghĩ trước khi làm:** Lên danh sách naming trên giấy/file trước khi add vào App.
+3. **Nhất quán:** Một dự án chỉ nên do một người phụ trách đặt tên để tránh "ông nói gà bà nói vịt".
+4. **Tên dự phòng:** Luôn có `[KHU_VUC]` ở đầu để khi xem danh sách "All Devices" không bị rối.

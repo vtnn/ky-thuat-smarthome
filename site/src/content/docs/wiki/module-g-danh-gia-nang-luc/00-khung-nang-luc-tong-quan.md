@@ -1,20 +1,31 @@
 ---
-title: "Khung năng lực tổng quan"
+title: "00 — Khung năng lực kỹ thuật viên"
+description: "Tổng quan về lộ trình phát triển năng lực KTV Smarthome từ cấp 1 (Hỗ trợ) đến cấp 6 (Chỉ huy trưởng)."
 module: "g"
-level: "all"
-tags: ["đánh giá", "năng lực", "6 cấp"]
+level: "1-6"
+tags: ["năng lực", "đào tạo", "lộ trình"]
 ---
-# G0 — Khung Năng Lực Tổng Quan
 
-## 6 Cấp Độ
+## Mục tiêu
+- Cung cấp cái nhìn tổng thể về lộ trình thăng tiến nghề nghiệp tại công ty.
+- Giúp KTV tự xác định vị trí hiện tại và các kỹ năng cần bổ sung để lên cấp.
 
-| Cấp | Tên | Mô tả | Thời gian |
-|-----|-----|-------|----------|
-| 1 | Kỹ thuật hỗ trợ | Đi theo phụ, làm theo hướng dẫn | 1-3 tháng |
-| 2 | Kỹ thuật thi công dây | Đọc bản vẽ, kéo dây đúng chuẩn | 3-6 tháng |
-| 3 | Kỹ thuật lắp đặt | Lắp thiết bị đúng tiêu chuẩn | 6-12 tháng |
-| 4 | Kỹ thuật cấu hình lập trình | Cấu hình IP, lập trình automation | 12-18 tháng |
-| 5 | Kỹ thuật triển khai độc lập | Tự triển khai dự án hoàn chỉnh | 18-30 tháng |
-| 6 | Trưởng nhóm / Chỉ huy | Quản lý team, kiểm soát chất lượng | 30+ tháng |
+---
 
-Xem chi tiết từng level tại các file `g1` - `g6`.
+## 🚀 Lộ trình 6 cấp độ năng lực
+
+| Cấp | Tên gọi | Trọng tâm công việc |
+|:---:|---|---|
+| **G1** | **KTV Hỗ trợ** | Phụ việc, chuẩn bị dụng cụ, dọn dẹp hiện trường. |
+| **G2** | **KTV Thi công dây** | Kéo cáp chuẩn, dán nhãn, đi ống nẹp thẩm mỹ. |
+| **G3** | **KTV Lắp đặt** | Đấu nối thiết bị tủ điện, lắp camera/AP WiFi. |
+| **G4** | **KTV Cấu hình** | Setup App, SADP Tool, gán IP, lập trình automation cơ bản. |
+| **G5** | **KTV Triển khai độc lập** | Chủ trì công trình vừa/nhỏ, xử lý sự cố tại chỗ. |
+| **G6** | **Chỉ huy trưởng** | Quản lý đội nhóm, đọc bản vẽ hệ thống phức tạp, bàn giao khách hàng. |
+
+---
+
+## Nguyên tắc đánh giá
+- **Định kỳ:** Đánh giá 6 tháng một lần.
+- **Tiêu chí:** Dựa trên kiến thức (Lý thuyết) và hiệu quả tại công trình (Thực tế).
+- **Phần thưởng:** Tăng bậc lương và phụ trách các dự án quy mô lớn hơn.

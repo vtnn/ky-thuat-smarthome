@@ -1,25 +1,34 @@
 ---
-title: "Quy tắc đặt tên DALI"
+title: "B4.03 — Quy tắc đặt tên DALI"
+description: "Quy ước đặt tên cho module DALI và từng Group theo khu vực và chức năng."
 module: "b"
 level: "3-6"
 tags: ["DALI", "đặt tên"]
 ---
-# B4.03 — Quy Tắc Đặt Tên DALI
 
-## Format
+## Mục tiêu
+- Thống nhất tên Group để khi gọi Scene (Xem phim, Ăn tối...) kỹ thuật viên nhận diện nhanh.
+- Tránh trùng lặp tên giữa các module DALI khác nhau trong công trình.
+
+---
+
+## 1. Format đặt tên
 ```
 [DALI_KHU_VUC] - Group [Số]
 ```
 
-## Ví dụ
-| Tên | Nội dung Group |
-|-----|---------------|
-| DALI_PK - Group 1 | Đèn Trần PK (ballast 3-4-5-6) |
-| DALI_PK - Group 2 | Đèn Hắt PK (ballast 7-8) |
-| DALI_PA - Group 3 | Đèn Trần PA (ballast 9-10-11) |
-| DALI_PN_Master - Group 4 | Đèn Ngủ (ballast 12-13) |
+## 2. Ví dụ thực tế
 
-## Quy tắc
-- Ghi rõ **module DALI** + **số ballast** trong group.
-- Mapping table dán trong tủ.
-- Dùng cùng viết tắt khu vực với LifeSmart/MobiEyes/KNX.
+| Tên Group | Chức năng chi tiết |
+|---|---|
+| **DALI_PK - Group 1** | Đèn trần Phòng khách |
+| **DALI_PK - Group 2** | Đèn hắt trần Phòng khách |
+| **DALI_PA - Group 3** | Đèn bàn ăn |
+| **DALI_PN_Master - Group 4** | Đèn ngủ |
+
+---
+
+## 3. Lưu ý
+- Ghi rõ nội dung các ballast trong từng Group vào bảng mapping.
+- Dán bảng mapping ngay tại tủ điện/tủ điều khiển.
+- Sử dụng đúng viết tắt khu vực đồng bộ với hệ điều khiển chính.

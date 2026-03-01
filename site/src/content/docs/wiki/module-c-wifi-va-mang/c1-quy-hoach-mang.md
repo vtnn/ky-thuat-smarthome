@@ -1,71 +1,69 @@
 ---
-title: "Quy hoạch mạng"
+title: "C1 — Quy hoạch mạng"
+description: "Mô hình mạng tối giản 2 VLAN: VLAN 1 nội bộ + VLAN Guest, kèm IP plan và rule cách ly cơ bản."
 module: "c"
 level: "4-6"
 tags: ["mạng", "VLAN", "IP"]
 ---
 
-# C1 — Quy hoạch mạng (trọng tâm)
-
-**Mục tiêu:** dựng được một kiến trúc mạng *ổn định, dễ quản lý, dễ mở rộng* cho SmartHome + Camera + WiFi.
-
-**Nguyên tắc cốt lõi:** tách mạng theo chức năng (VLAN) để giảm rủi ro và dễ khoanh vùng khi có sự cố.
+## Mục tiêu
+- Dựng kiến trúc mạng **dễ thi công, dễ bàn giao** nhưng vẫn đủ an toàn.
+- Tách mạng khách khỏi mạng nội bộ để tránh rủi ro và giảm sự cố.
 
 ---
 
-## VLAN khuyến nghị (chuẩn nội bộ)
+## 1. Nguyên tắc thiết kế (Mô hình 2 VLAN)
+Hệ thống mạng được quy hoạch theo mô hình tối giản để đảm bảo tính ổn định và dễ vận hành:
+- **VLAN 1 (Default / Nội bộ):** Gom chung **Smarthome + Camera + Nội bộ gia đình**.
+- **VLAN Guest (Riêng):** Chỉ dành cho khách, không truy cập vào tài nguyên nội bộ.
 
-| VLAN | Subnet | Dùng cho | Gợi ý cấu hình |
-|------|--------|---------|----------------|
-| 10 | 192.168.10.0/24 | SmartHome (Hub/Controller/Module/Gateway) | Chỉ mở những luồng thật sự cần |
-| 20 | 192.168.20.0/24 | Camera (NVR/Camera IP) | Ưu tiên *không* ra Internet trực tiếp |
-| 30 | 192.168.30.0/24 | WiFi nội bộ gia đình | Internet + truy cập nội bộ theo rule |
-| 40 | 192.168.40.0/24 | WiFi khách | Client isolation, chỉ Internet |
-
-> Nếu hệ nhỏ (căn hộ) có thể tối giản VLAN, nhưng vẫn nên giữ nguyên tinh thần: **SmartHome / Camera tách khỏi mạng người dùng**.
+> Mục tiêu: Giảm độ phức tạp, ưu tiên vận hành ổn định và dễ dàng hỗ trợ kỹ thuật từ xa.
 
 ---
 
-## Quy định cách ly (để an toàn & dễ vận hành)
+## 2. VLAN khuyến nghị
 
-- SmartHome (**VLAN 10**) **không** chung mạng với người dùng (**VLAN 30/40**).
-- Camera (**VLAN 20**) **không** ra Internet trực tiếp (tránh lộ thiết bị/giảm bề mặt tấn công).
-- Mạng chính (**VLAN 30**) *có thể* xem camera (**VLAN 20**) theo rule rõ ràng.
-- Guest (**VLAN 40**) **không** truy cập bất kỳ VLAN nội bộ nào.
+| VLAN | Subnet | Dùng cho |
+|---:|---|---|
+| **1** | 192.168.1.0/24 | Nội bộ (Smarthome + Camera + Gia đình) |
+| **40** | 192.168.40.0/24 | WiFi khách (Guest) |
 
 ---
 
-## Sơ đồ mạng tham chiếu
+## 3. Rule cách ly tối thiểu (bắt buộc)
+
+- **Guest (VLAN 40) → VLAN 1:** Deny toàn bộ.
+- **Guest (VLAN 40) → Internet:** Allow.
+- **VLAN 1 → Internet:** Allow (theo nhu cầu công trình).
+
+Nếu AP hỗ trợ: bật thêm **Client Isolation** cho SSID Guest.
+
+---
+
+## 4. Sơ đồ mạng tham chiếu
 
 ```
 [ISP Modem/ONT]
       │
 [Router/Firewall]
-      │
+      │ (VLAN 1 untag + VLAN 40 tag)
 [Managed PoE Switch]
-   ├── VLAN 10 (SmartHome) ── Hub, Controller, Module
-   ├── VLAN 20 (Camera) ───── NVR, Camera IP
-   ├── VLAN 30 (WiFi Private) ─ AP → SSID Private
-   └── VLAN 40 (WiFi Guest) ── AP → SSID Guest
+   ├── VLAN 1 (Nội bộ) ── Hub/Controller/Camera/NVR/AP (SSID Private)
+   └── VLAN 40 (Guest) ── AP (SSID Guest)
 ```
 
 ---
 
-## IP planning template (gợi ý)
+## 5. IP planning template (gợi ý)
 
 | Thiết bị | VLAN | IP | Ghi chú |
-|----------|------|-----|---------|
-| Router/Firewall | - | 192.168.1.1 | Gateway |
-| Switch (mgmt) | - | 192.168.1.2 | Quản lý |
-| Hub LifeSmart | 10 | 192.168.10.200 | |
-| Controller MobiEyes | 10 | 192.168.10.201 | |
-| KNX/IP Gateway | 10 | 192.168.10.202 | |
-| NVR | 20 | 192.168.20.200 | |
-| Camera #1-#N | 20 | 192.168.20.201-250 | |
-| AP #1 | 30 | 192.168.30.10 | Tầng 1 |
-| AP #2 | 30 | 192.168.30.11 | Tầng 2 |
+|---|---:|---|---|
+| Router/Firewall | 1 | 192.168.1.1 | Gateway |
+| Switch (mgmt) | 1 | 192.168.1.2 | Quản lý |
+| NVR | 1 | 192.168.1.200 | IP tĩnh |
+| Camera #1-#N | 1 | 192.168.1.201-250 | IP tĩnh |
+| Hub/Controller | 1 | 192.168.1.150-199 | IP tĩnh |
+| AP #1 | 1 | 192.168.1.10 | IP tĩnh (khuyến nghị) |
 
-### Mẹo nhỏ khi triển khai
-- Dành một dải IP cho **static** (VD: .200–.250) để nhìn là biết ngay thiết bị hạ tầng.
-- Ghi chú “tầng/khu vực” ngay trong bảng IP để bàn giao dễ.
-
+Mẹo:
+- Dành dải `.150–.250` cho **static** để nhìn là biết thiết bị hạ tầng.

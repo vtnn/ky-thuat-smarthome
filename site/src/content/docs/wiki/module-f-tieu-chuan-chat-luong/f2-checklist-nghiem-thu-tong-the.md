@@ -1,35 +1,40 @@
 ---
-title: "Checklist nghiệm thu tổng thể"
+title: "F2 — Checklist nghiệm thu tổng thể"
+description: "Quy trình test theo phòng, theo hệ thống, kịch bản tích hợp và bàn giao mật khẩu cho khách hàng."
 module: "f"
 level: "4-6"
 tags: ["nghiệm thu", "checklist", "bàn giao"]
 ---
-# F2 — Checklist Nghiệm Thu Tổng Thể
 
-## Theo Phòng
-Mỗi phòng kiểm tra:
-- [ ] Tất cả công tắc hoạt động (bấm tay + App).
-- [ ] Đèn sáng đúng, không nhấp nháy.
-- [ ] Cảm biến phản hồi đúng.
-- [ ] Camera góc quay đúng, hình rõ.
-- [ ] WiFi RSSI ≥ -65dBm.
+## Mục tiêu
+- Kiểm soát chất lượng toàn diện trước khi mời khách hàng ký biên bản.
+- Đảm bảo đầy đủ bàn giao về: Thiết bị, Cấu hình và Mật khẩu.
 
-## Theo Hệ Thống
-- [ ] LifeSmart: Hub online, tất cả thiết bị online, Scene hoạt động.
-- [ ] MobiEyes: Controller kết nối, module OK, mapping đúng.
-- [ ] KNX: Bus 21-29V, ETS kết nối, telegram đúng.
-- [ ] DALI: Dim hoạt động, group/scene đúng.
-- [ ] Camera: NVR ghi hình, playback OK, Hik-Connect xem từ xa.
-- [ ] WiFi: Tất cả SSID phát, VLAN đúng, phủ sóng đủ.
+---
 
-## Test Cases Tích Hợp
-- [ ] Scene "Về nhà" hoạt động đúng.
-- [ ] Scene "Đi ngủ" tắt tất cả, khóa cửa.
-- [ ] Voice control (nếu có) phản hồi đúng.
-- [ ] Mất Internet → local control vẫn hoạt động.
+## 1. Nghiệm thu theo Phòng
+- [ ] Mọi công tắc hoạt động (bấm phím + bấm App).
+- [ ] Cảm biến kích hoạt đúng thời gian/độ nhạy.
+- [ ] Camera hình rõ, WiFi sóng khoẻ (RSSI ≥ -65dBm).
 
-## Biên Bản Bàn Giao
-- [ ] Bàn giao mật khẩu WiFi, Admin Router, NVR, App.
-- [ ] Hướng dẫn khách sử dụng App cơ bản.
-- [ ] Ghi nhận thông tin bảo hành.
-- [ ] Chữ ký khách hàng.
+---
+
+## 2. Nghiệm thu theo Hệ thống
+- [ ] **LifeSmart:** Hub online, thiết bị đồng bộ đầy đủ.
+- [ ] **MobiEyes:** Board relay nhảy đúng mapping, không nhiễu.
+- [ ] **KNX/DALI:** ETS nạp đủ chương trình, Dimming mượt.
+- [ ] **Camera/WiFi:** Ghi hình liên tục, xem từ xa P2P OK.
+
+---
+
+## 3. Test kịch bản tích hợp
+- [ ] Scene "Về nhà", "Đi ngủ" chạy đúng logic.
+- [ ] Voice control phản hồi chính xác (nếu có).
+- [ ] Mất Internet nội bộ vẫn điều khiển được.
+
+---
+
+## 4. Biên bản bàn giao
+- [ ] Bàn giao danh sách mật khẩu: WiFi, Router Admin, NVR, App.
+- [ ] Hướng dẫn sử dụng App cho chủ nhà.
+- [ ] Ký biên bản xác nhận khối lượng và chất lượng.

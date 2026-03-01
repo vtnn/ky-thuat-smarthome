@@ -1,24 +1,36 @@
 ---
-title: "Tích hợp hệ thống"
+title: "D5 — Tích hợp hệ thống đa thiết bị"
+description: "Hướng dẫn tích hợp Camera vào Smarthome, điều khiển Voice (Google/Alexa) và các bên thứ 3."
 module: "d"
 level: "5-6"
 tags: ["tích hợp", "voice", "API"]
 ---
-# D5 — Tích Hợp Hệ Thống
 
-## Smarthome + Camera
-- LifeSmart scene → camera snapshot (qua IFTTT hoặc App tích hợp).
-- Cảm biến chuyển động → camera bật recording.
+## Mục tiêu
+- Kết nối luồng dữ liệu giữa camera, điều hòa và hệ thống smarthome.
+- Cấu hình điều khiển bằng giọng nói mượt mà.
 
-## Smarthome + Điều hòa
-- LifeSmart: Remote IR học lệnh điều hòa.
-- MobiEyes/KNX: IR Module hoặc Modbus gateway.
+---
 
-## Voice Control
-- **Google Home:** Liên kết tài khoản hãng → Discover Devices → điều khiển bằng giọng nói.
-- **Amazon Alexa:** Tương tự qua Skill.
-- Lưu ý: Đặt tên thiết bị bằng tiếng Anh cho voice recognition tốt hơn.
+## 1. Smarthome + Camera
+- Trigger: Motion Sensor phát hiện chuyển động → Camera snapshot / bật recording.
+- Xem camera trực tiếp trên màn hình Nature hoặc LifeSmart App.
 
-## Third-party
-- **Home Assistant:** Tích hợp KNX, MQTT, camera RTSP.
-- **IFTTT:** Kết nối LifeSmart + dịch vụ khác (hạn chế).
+---
+
+## 2. Smarthome + Điều hòa
+- **IR Blaster:** Học lệnh từ remote gốc (cho LifeSmart/MobiEyes).
+- **Modbus/KNX Gateway:** Điều khiển trực tiếp vào bo mạch dàn lạnh (chuyên sâu).
+
+---
+
+## 3. Voice Control (Giọng nói)
+- **Nền tảng:** Google Home, Amazon Alexa.
+- **Quy trình:** Liên kết tài khoản hãng (LifeSmart/MobiEyes) → Discover Devices.
+- **Lưu ý:** Đặt tên thiết bị tiếng Việt không dấu hoặc tiếng Anh để AI nhận diện tốt hơn.
+
+---
+
+## 4. Bên thứ 3 (Nâng cao)
+- **Home Assistant:** Tích hợp KNX, MQTT, Camera RTSP vào giao diện dashboard tùy biến.
+- **IFTTT:** Kết nối liên thông dịch vụ Cloud (nếu cần).

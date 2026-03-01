@@ -1,27 +1,38 @@
 ---
-title: "Lập trình KNX"
+title: "B3.06 — Lập trình kịch bản KNX"
+description: "Các bước lập trình đèn, dim, rèm, scene và timer trong hệ thống KNX qua phần mềm ETS."
 module: "b"
 level: "4-6"
 tags: ["KNX", "lập trình", "scene", "logic"]
 ---
-# B3.06 — Lập Trình KNX
 
-## 1. Nút bấm → Switch Actuator
-Push Button object "Switch" → GA `0/0/1` ← Actuator object "Switching".
+## Mục tiêu
+- Lập trình được các chức năng cơ bản: nhấn nút bật đèn, nhấn giữ dimming.
+- Hiểu cách gọi **Scene** (Ngữ cảnh) bằng scene number.
 
-## 2. Binary Input (công tắc cơ) → Actuator
-Binary Input Ch1 "Switch" → GA `0/0/2` ← Actuator Ch2 "Switching".
-Cấu hình chọn đúng: Toggle hoặc Push Button.
+---
 
-## 3. Nút bấm → Dim DALI
-Push Button "Dimming" → GA `1/0/1` ← DALI Gateway Group 0 "Dimming".
+## 1. Nút bấm → Bật/tắt đèn
+- Nút bấm Object "Switch" → Kéo vào GA `0/0/1`.
+- Actuator Object "Switching" → Kéo vào GA `0/0/1`.
+- Kết quả: Nhấn nút gửi telegram 0/1 vào GA `0/0/1`, relay nhận được lệnh thực thi.
 
-## 4. Scene
-Tạo GA `3/0/1`. Push Button nhấn giữ → gửi Scene Number. Actuator + DALI Gateway nhận Scene → thực hiện.
+---
 
-## 5. Timer
-Logic Module / KNX Timer: 06:00 → mở rèm, 22:00 → tắt đèn.
+## 2. Nút bấm → Dim đèn DALI
+- Push Button "Dimming" → GA `1/0/1`.
+- DALI Gateway Group "Dimming" → GA `1/0/1`.
 
-## Bài tập
-1. Tạo project: 1 Push Button 4 nút + 1 Switch Actuator 4 kênh + 1 Binary Input 4 kênh + 1 DALI Gateway.
-2. Liên kết + test trên Group Monitor.
+---
+
+## 3. Lập trình Ngữ cảnh (Scene)
+- Tạo Group Address chuyên dụng cho Scene (Main=3).
+- Cấu hình phím bấm gửi "Scene Number" khi nhấn giữ.
+- Cấu hình các Actuator tham gia vào Scene: khi nhận Scene Number X sẽ chuyển trạng thái Y.
+
+---
+
+## 4. Timer và Logic
+Sử dụng các module logic/timer rời của hãng:
+- 06:00 → Mở rèm.
+- 22:00 → Tắt toàn bộ đèn ngoài nhà.

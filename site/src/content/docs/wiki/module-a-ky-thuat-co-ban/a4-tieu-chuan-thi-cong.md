@@ -1,13 +1,18 @@
 ---
-title: "Tiêu chuẩn thi công"
+title: "A4 — Tiêu chuẩn thi công"
+description: "Chuẩn lắp đặt: chiều cao, khoảng cách, quy cách đi dây và checklist hoàn thiện."
 module: "a"
 level: "2-6"
 tags: ["tiêu chuẩn", "thi công", "lắp đặt", "hoàn thiện"]
 ---
 
-# A4 — Tiêu Chuẩn Thi Công
+## Mục tiêu
+- Chuẩn hóa **chiều cao lắp đặt** và **khoảng cách kỹ thuật**.
+- Chuẩn hóa **đi dây, đấu nối và hoàn thiện** để bàn giao đẹp và dễ bảo trì.
 
-## 1. Chiều Cao Lắp Thiết Bị
+---
+
+## 1. Chiều cao lắp thiết bị
 
 | Thiết bị | Chiều cao (từ sàn) | Ghi chú |
 |----------|-------------------|---------|
@@ -19,13 +24,13 @@ tags: ["tiêu chuẩn", "thi công", "lắp đặt", "hoàn thiện"]
 | Camera ngoài trời (Thân) | 3.0m – 4.0m | Tránh tầm tay với |
 | Access Point WiFi | 2.5m – 3.0m | Gắn trần, trung tâm vùng phủ sóng |
 | Cảm biến PIR | 2.2m – 2.5m | Góc phòng, hướng xuống |
-| Cảm biến cửa | Cạnh khung cửa | Phần thân trên khung, nam châm trên cánh |
+| Cảm biến cửa | Cạnh khung cửa | Thân trên khung, nam châm trên cánh |
 | Hub / Controller | 1.0m – 1.5m | Trong tủ hoặc trên kệ, giữa nhà |
 | Tủ điện | 1.5m – 1.8m | Tâm tủ ngang tầm mắt |
 
 ---
 
-## 2. Khoảng Cách Tối Thiểu
+## 2. Khoảng cách tối thiểu
 
 | Quy tắc | Khoảng cách |
 |---------|-------------|
@@ -40,7 +45,7 @@ tags: ["tiêu chuẩn", "thi công", "lắp đặt", "hoàn thiện"]
 
 ---
 
-## 3. Quy Chuẩn Kéo Dây
+## 3. Quy chuẩn kéo dây
 
 ### Tránh nguồn / tránh nhiễu
 - Cáp mạng (Cat6) và cáp bus (KNX) **KHÔNG đi chung ống** với cáp điện 220V.
@@ -62,7 +67,7 @@ tags: ["tiêu chuẩn", "thi công", "lắp đặt", "hoàn thiện"]
 
 ---
 
-## 4. Tiêu Chuẩn Hoàn Thiện
+## 4. Tiêu chuẩn hoàn thiện (Checklist)
 
 ### Thẩm mỹ
 - [ ] Thiết bị gắn **thẳng hàng**, không lệch.
@@ -85,7 +90,7 @@ tags: ["tiêu chuẩn", "thi công", "lắp đặt", "hoàn thiện"]
 
 ---
 
-## 📝 Bài Tập Thực Hành
+## 5. Bài tập thực hành
 
 1. Đo và đánh dấu vị trí lắp 3 công tắc trong 1 phòng theo chiều cao chuẩn.
 2. Kéo 1 tuyến cáp mạng từ tủ mạng đến vị trí camera — đúng quy chuẩn (tách cáp điện, nhãn 2 đầu).

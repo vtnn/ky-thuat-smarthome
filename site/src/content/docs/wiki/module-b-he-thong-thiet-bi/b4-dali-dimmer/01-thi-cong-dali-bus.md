@@ -1,29 +1,34 @@
 ---
-title: "Thi công DALI Bus"
+title: "B4.01 — Thi công DALI Bus"
+description: "Quy chuẩn cáp, topology đi dây và nguyên tắc 'không phân cực' khi thi công bus DALI."
 module: "b"
 level: "2-4"
 tags: ["DALI", "bus", "thi công"]
 ---
-# B4.01 — Thi Công DALI Bus
 
-## Cáp DALI
-- 2 dây, **không phân cực** (A/B nối đảo vẫn hoạt động).
-- Có thể dùng cáp điện thông thường 2×1.5mm².
-- ĐẶC BIỆT: **được phép đi chung ống** với dây nguồn 220V.
+## Mục tiêu
+- Biết chọn cáp và kéo bus đúng cách để tránh sụt áp tín hiệu.
+- Tận dụng khả năng **đi chung ống 220V** để tiết kiệm hạ tầng nếu thiết kế cho phép.
 
-## Đấu nối
-```
-[DALI Gateway] ── DA ── [Driver 1] ── DA ── [Driver 2] ── ... ── [Driver N]
-              └── DA ──┘           └── DA ──┘
-```
-Topology: bus, star, tree hoặc kết hợp. **Không vòng kín.**
+---
 
-## Nguồn DALI
-- Một số Gateway tích hợp nguồn DALI (≈ 16V).
-- Nếu không → cần power supply DALI riêng.
+## 1. Cáp sử dụng
+- **Loại cáp:** 2 dây (có thể dùng 2×1.5mm²).
+- **Phân cực:** 2 dây bus (DA/DA) **không phân cực** — không lo đấu nhầm cực (+/-).
+- **Hạ tầng:** DALI là bus duy nhất cho phép đi chung ống với dây nguồn 220V (theo chuẩn IEC 62386).
 
-## Checklist
-- [ ] Cáp 2 dây đúng tiết diện.
-- [ ] Tổng chiều dài ≤ 300m.
-- [ ] Driver/Ballast lắp đúng vị trí, gần đèn.
-- [ ] Nguồn DALI bus đủ (kiểm tra Gateway có tích hợp không).
+---
+
+## 2. Topology và Đấu nối
+
+- **Mô hình:** Tuyến (Bus), Sao (Star), Cây (Tree) hoặc kết hợp.
+- **Cấm:** Tuyệt đối **không nối vòng kín (Ring)**.
+- **Sơ đồ:** Các driver mắc song song vào đường DA/DA.
+
+---
+
+## 3. Checklist thi công
+- [ ] Cáp 2 dây đúng tiết diện; tổng chiều dài ≤ 300m.
+- [ ] Driver/Ballast lắp đúng vị trí, ưu tiên gần đèn.
+- [ ] Đảm bảo nguồn DALI bus (≈16V) có trên đường dây.
+- [ ] Kiểm tra ngắn mạch trước khi bật nguồn tổng.

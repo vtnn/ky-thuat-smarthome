@@ -1,105 +1,60 @@
 ---
-title: "Đọc bản vẽ kỹ thuật"
+title: "A1 — Đọc bản vẽ kỹ thuật"
+description: "Cách đọc và ưu tiên các loại bản vẽ để thi công đúng ngay từ đầu."
 module: "a"
 level: "2-6"
-tags: ["bản vẽ", "ký hiệu", "tuyến dây", "thi công"]
+tags: ["bản vẽ", "sơ đồ nguyên lý", "smarthome", "camera", "wifi", "điện nhẹ"]
 ---
 
-# A1 — Đọc Bản Vẽ Kỹ Thuật
-
-## 1. Phân Loại Bản Vẽ
-
-| Loại bản vẽ | Nội dung | Hệ thống liên quan |
-|------------|---------|-------------------|
-| Bản vẽ Điện nhẹ | Vị trí công tắc, ổ cắm, hộp module | LifeSmart, MobiEyes, KNX |
-| Bản vẽ Camera | Vị trí camera, NVR, Switch PoE, tuyến cáp | Hikvision |
-| Bản vẽ Mạng | Sơ đồ mạng, vị trí AP, Switch, tủ mạng | Ruijie, hạ tầng |
-| Bản vẽ Smarthome | Sơ đồ hệ thống, kết nối Hub/Controller, bus | LifeSmart, MobiEyes, KNX |
-| Bản vẽ DALI | Sơ đồ nhóm đèn, bus DALI, vị trí driver | DALI Dimmer |
+## Mục tiêu
+- Biết **đọc đúng thứ tự** các loại bản vẽ để tránh làm sai từ hạ tầng.
+- Biết **tách phần nào là nguyên lý** (logic/kết nối) và phần nào là **mặt bằng vị trí** (thi công).
 
 ---
 
-## 2. Ký Hiệu Thiết Bị
+## 1. Thứ tự ưu tiên khi đọc bản vẽ
 
-### Ký hiệu điện nhẹ
+Nguyên tắc: **Đọc “Nguyên lý” trước, “Mặt bằng bố trí” sau.**
 
-| Ký hiệu | Thiết bị |
-|---------|---------|
-| ⊗ | Đèn trần / Đèn downlight |
-| ◎ | Đèn tường / Đèn hắt |
-| ▢ | Công tắc thông minh |
-| ▣ | Ổ cắm |
-| △ | Cảm biến (PIR, cửa, môi trường) |
-| ◇ | Hub / Controller trung tâm |
-
-### Ký hiệu camera
-
-| Ký hiệu | Thiết bị |
-|---------|---------|
-| 📹 / ▷ | Camera IP |
-| ■ | NVR (đầu ghi) |
-| ⬡ | Switch PoE |
-
-### Ký hiệu mạng
-
-| Ký hiệu | Thiết bị |
-|---------|---------|
-| 〇 | Access Point WiFi |
-| ═══ | Đường cáp mạng |
-| ─── | Đường cáp bus (KNX/DALI) |
+| Thứ tự | Loại bản vẽ | Công dụng |
+|:---:|---|---|
+| **1** | **Bản vẽ nguyên lý** | Hiểu **tổng thể hệ thống**: kết nối giữa các thiết bị, nguồn cấp, luồng tín hiệu/mạng. |
+| **2** | **Bản vẽ Smarthome** | Xác định **vị trí thiết bị** và cách đi dây tín hiệu (Bus) theo từng khu vực. |
+| **3** | **Bản vẽ Camera & WiFi** | Xác định **vị trí Camera, NVR, Switch PoE** và vùng phủ sóng của các AP. |
+| **4** | **Bản vẽ Điện nhẹ** | Chốt **hạ tầng điểm chờ**: công tắc, ổ cắm, hộp âm và đường ống thô. |
 
 ---
 
-## 3. Xác Định Vị Trí Lắp Đặt
+## 2. Quy trình đọc bản vẽ nhanh (5 bước)
 
-### Đọc từ bản vẽ
-1. Xác định **tỷ lệ** bản vẽ (thường 1:50 hoặc 1:100).
-2. Tìm **ký hiệu thiết bị** trên mặt bằng.
-3. Đối chiếu với **bảng thống kê thiết bị** (Bill of Materials).
-4. Ghi nhận khoảng cách từ tường/góc tham chiếu → vị trí thiết bị.
-
-### Lưu ý
-- So sánh bản vẽ với **thực địa** — có thể có sai lệch (tường thêm, kích thước khác).
-- Nếu phát hiện sai lệch → **báo ngay** cho quản lý kỹ thuật, không tự ý thay đổi.
-- Đánh dấu vị trí trên tường/trần **trước khi** khoan/đục.
+1. **Xác nhận phiên bản:** Luôn kiểm tra ngày phát hành và đảm bảo đang dùng bản vẽ mới nhất (Revision cuối).
+2. **Đọc sơ đồ nguyên lý:** Hiểu điểm tập trung (tủ điện/tủ mạng) và cách các thiết bị trung tâm liên kết với nhau.
+3. **Đọc mặt bằng theo luồng thi công:** Xem bản vẽ theo thứ tự từ tầng thấp đến tầng cao hoặc khu vực ưu tiên.
+4. **Đối chiếu danh mục thiết bị (BOM):** Kiểm tra model và số lượng thực tế có khớp với ký hiệu trên bản vẽ không.
+5. **Chốt điểm thi công:** Đánh dấu vị trí chính xác trên thực địa; nếu phát hiện vướng nội thất thì báo quản lý trước khi đục.
 
 ---
 
-## 4. Xác Định Tuyến Dây
+## 3. Nguyên tắc đi dây cơ bản
 
-### Nguyên tắc kéo dây
-
-| Loại dây | Quy tắc |
-|----------|---------|
-| Cáp mạng (Cat6/Cat5e) | Tách khỏi cáp điện ≥ 30cm, dùng ống luồn riêng |
-| Cáp bus KNX (2×2×0.8) | Tách khỏi cáp điện, ống luồn riêng |
-| Cáp DALI (2 dây) | Có thể đi chung ống với dây nguồn 220V |
-| Cáp RS485 (MobiEyes) | Tách khỏi cáp điện, topology daisy chain |
-| Cáp nguồn (220V) | Đi ống riêng, đúng tiết diện theo tải |
-
-### Đọc tuyến dây trên bản vẽ
-1. Xác định **điểm bắt đầu** (tủ điện, tủ mạng).
-2. Theo tuyến đến **điểm kết thúc** (thiết bị).
-3. Ghi nhận: qua bao nhiêu tường, lên trần hay đi sàn, chiều dài ước tính.
-4. Đánh dấu **điểm giao** tuyến dây khác nhau.
+- **Cáp mạng (Cat6/Cat5e):** Đi riêng ống, cách xa cáp điện động lực ít nhất 30cm để tránh nhiễu.
+- **Bus KNX / RS485:** Đi riêng ống; tuân thủ đúng topology thiết kế (Line, Daisy-chain...).
+- **Cáp DALI:** Có thể đi chung ống với dây nguồn 220V nếu dây có chuẩn cách điện tương ứng.
 
 ---
 
-## 5. Checklist Xác Nhận Trước Thi Công
+## 4. Link tham khảo
 
-### Kiểm tra bản vẽ
-- [ ] Bản vẽ đã được phê duyệt (có chữ ký / đóng dấu).
-- [ ] Phiên bản bản vẽ là mới nhất (kiểm tra ngày / revision).
-- [ ] Có đầy đủ bản vẽ: mặt bằng, sơ đồ nguyên lý, chi tiết lắp đặt.
+- Bản vẽ nguyên lý: **[Đang cập nhật]**
+- Bản vẽ Smarthome: **[Đang cập nhật]**
+- Bản vẽ Camera & WiFi: **[Đang cập nhật]**
+- Bản vẽ điện nhẹ: **[Đang cập nhật]**
 
-### Đối chiếu thực địa
-- [ ] Kiểm tra kích thước phòng thực tế so với bản vẽ.
-- [ ] Kiểm tra vị trí hộp âm, ống luồn đã sẵn sàng.
-- [ ] Kiểm tra hệ thống điện hiện có (CB, dây N tại hộp công tắc).
-- [ ] Xác nhận không có chướng ngại vật tại vị trí lắp đặt.
+---
 
-### Xác nhận với quản lý
-- [ ] Xác nhận danh sách thiết bị (đủ số lượng, đúng model).
-- [ ] Xác nhận dụng cụ cần thiết đã chuẩn bị.
-- [ ] Xác nhận timeline thi công.
-- [ ] Ghi nhận số điện thoại liên hệ khách hàng / quản lý.
+## 5. Checklist xác nhận trước thi công
+
+- [ ] Bản vẽ đúng **revision mới nhất**.
+- [ ] Đã đọc hiểu **sơ đồ nguyên lý** và luồng tín hiệu chính.
+- [ ] Đã đối chiếu **thực địa** (vị trí tường, trần, chướng ngại vật).
+- [ ] Đã báo cáo quản lý các điểm **sai lệch hoặc xung đột** bản vẽ.

@@ -1,76 +1,72 @@
 ---
-title: "Danh sách thiết bị MobiEyes"
+title: "B2.01 — Danh sách thiết bị MobiEyes"
+description: "Danh mục thiết bị chính: LAN Bridge (CF-IP), DIN-RY8-N, IR Blaster, nguồn Meanwell và ngoại vi."
 module: "b"
 level: "2-6"
 tags: ["MobiEyes", "thiết bị", "DIN-RY8-N", "LAN Bridge", "IR Blaster"]
 ---
 
-# B2.01 — Danh Sách Thiết Bị MobiEyes
+## Mục tiêu
+- Biết đâu là **thiết bị trung tâm** và đâu là **module điều khiển tải**.
+- Nắm nhanh thông số quan trọng để tránh cấp sai nguồn/đấu sai chức năng.
 
-## Bộ Xử Lý Trung Tâm
+---
 
-### LAN Bridge (CF-IP)
+## 1. Bộ xử lý trung tâm
+
+### 1.1. LAN Bridge (CF-IP)
 | Thông số | Chi tiết |
-|---------|---------|
-| Chức năng | Bộ xử lý trung tâm, cầu nối Ethernet ↔ CFLink Bus |
+|---|---|
+| Chức năng | Cầu nối Ethernet ↔ CFLink Bus |
 | Giao tiếp | TCP/UDP qua Ethernet (RJ45) |
-| Tích hợp | Đồng hồ thời gian thực (Real-Time Clock) |
-| Scheduler | Lên lịch tự động (hẹn giờ bật/tắt) |
-| Cấu hình | Qua phần mềm **System Commander** |
-| Firmware | Có thể cập nhật qua mạng |
+| Tích hợp | Real-Time Clock + Scheduler |
+| Cấu hình | System Commander |
 
 ---
 
-## Bộ Điều Khiển Tải
+## 2. Bộ điều khiển tải
 
-### DIN-RY8-N (Module Relay + Input)
+### 2.1. DIN-RY8-N (Relay + Input)
 | Thông số | Chi tiết |
-|---------|---------|
-| Relay Output | **8 kênh** — bật/tắt thiết bị điện |
-| Tải tối đa | **16A / kênh** tại 240VAC |
-| Dry Contact Input | **8 kênh** — nhận tín hiệu từ công tắc cơ, cảm biến |
-| Giao thức | CFLink (RS485 nâng cao) |
-| Lắp đặt | Rail DIN trong tủ điện |
-| Cấu hình | Qua phần mềm **DIN-RY Config Tool** |
-| Board ID | Gán ID riêng (01, 21, 22, 23...) |
+|---|---|
+| Relay Output | 8 kênh |
+| Tải tối đa | 16A/kênh tại 240VAC |
+| Dry Contact Input | 8 kênh |
+| Lắp đặt | Rail DIN trong tủ |
+| Cấu hình | DIN-RY Config Tool |
 
-> **Lưu ý:** Mỗi DIN-RY8-N vừa là bộ **điều khiển tải** (8 relay output) vừa là bộ **nhận tín hiệu** (8 dry contact input) — tích hợp 2 trong 1.
+> Lưu ý: DIN-RY8-N là "2 trong 1": vừa điều khiển tải, vừa nhận tín hiệu công tắc/cảm biến.
 
 ---
 
-## Bộ Điều Khiển Hồng Ngoại
+## 3. Điều khiển hồng ngoại
 
-### IR Blaster
+### 3.1. IR Blaster
 | Thông số | Chi tiết |
-|---------|---------|
-| Phạm vi phát | **270 độ** bao phủ |
-| Thư viện IR | Hơn **500,000 mã lệnh** tích hợp sẵn |
-| Học lệnh | Hỗ trợ học lệnh từ remote gốc |
-| Điều khiển | TV, máy lạnh, ampli, đầu phát |
-| Kết nối | CFLink Bus, cáp CAT5e/CAT6 từ tủ |
+|---|---|
+| Phạm vi phát | 270° |
+| Thư viện | > 500,000 mã IR |
+| Kết nối | CFLink Bus |
 
 ---
 
-## Nguồn Cấp
+## 4. Nguồn cấp
 
-### Meanwell HDR-60-24
+### 4.1. Meanwell HDR-60-24
 | Thông số | Chi tiết |
-|---------|---------|
-| Loại | Nguồn xung Meanwell |
-| Đầu ra | **24VDC / 2.5A (60W)** |
-| Lắp đặt | Rail DIN trong tủ smarthome |
-| Cấp cho | Tất cả module trong 1 tủ smarthome |
+|---|---|
+| Đầu ra | 24VDC / 2.5A (60W) |
+| Lắp đặt | Rail DIN |
+| Cấp cho | Module trong 1 tủ smarthome |
 
 ---
 
-## Thiết Bị Ngoại Vi
+## 5. Thiết bị ngoại vi (tham khảo)
 
 | Thiết bị | Kết nối | Ghi chú |
-|----------|--------|---------|
-| Công tắc 2 chiều (cơ) | Dry Contact Input | 1 sợi CAT5e/CAT6 từ công tắc → tủ |
-| Cảm biến chuyển động (PIR) | 2 cặp dây 2×1.5mm² | Cấp nguồn + tín hiệu |
-| Công tắc từ (cửa) | Cáp điện thoại 4 lõi | Tiếp điểm đóng/mở |
-| Cửa cuốn / Cổng | 1 sợi CAT5e/CAT6 | Điều khiển COM + OP/CL |
-| Motor rèm | 2 kênh Relay | 1 mở + 1 đóng |
-| Camera IP | Ethernet (PoE) | Tích hợp vào App |
-| Còi báo động | 1 kênh Relay | Bật/tắt bằng Macro |
+|---|---|---|
+| Công tắc cơ | Dry Contact Input | CAT5e/CAT6 từ công tắc về tủ |
+| PIR | 2×1.5mm² | Cấp nguồn + tín hiệu |
+| Công tắc từ | Cáp điện thoại 4 lõi | Tiếp điểm đóng/mở |
+| Motor rèm | 2 kênh Relay | Mở + đóng |
+| Còi | 1 kênh Relay | Điều khiển bằng macro |

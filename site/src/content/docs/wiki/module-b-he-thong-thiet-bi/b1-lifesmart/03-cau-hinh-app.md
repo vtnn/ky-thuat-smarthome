@@ -1,111 +1,82 @@
 ---
-title: "Cấu hình App LifeSmart"
+title: "B1.03 — Cấu hình App LifeSmart"
+description: "Quy trình thêm Hub, ghép nối thiết bị con, đồng bộ HVAC và quản lý nhiều Smart Station (Cascade)."
 module: "b"
 level: "3-5"
 tags: ["LifeSmart", "cấu hình", "App", "HVAC", "pairing"]
 ---
 
-# B1.03 — Cấu Hình App LifeSmart
+## Mục tiêu
+- Thêm **Smart Station** đúng cách và đảm bảo Hub online ổn định.
+- Ghép nối thiết bị con (pairing) nhanh, hạn chế lỗi time-out.
+
+---
 
 ## 1. Thêm Smart Station
-
 1. Tải **LifeSmart App** (iOS / Android).
 2. Đăng ký tài khoản hoặc đăng nhập.
-3. Cấp nguồn Smart Station + cắm cáp mạng Ethernet.
-4. Trong App → **"+"** → **Add Device** → App tự quét mạng cục bộ.
+3. Cấp nguồn Smart Station + ưu tiên cắm cáp mạng Ethernet.
+4. Trong App → **+** → **Add Device** → App tự quét mạng cục bộ.
 5. Chọn Smart Station → hoàn tất.
 
 ---
 
-## 2. Thêm Thiết Bị Con (Sub-devices)
+## 2. Thêm thiết bị con (Sub-devices)
 
-### Quy trình chung
-1. Mở App → nhấn dấu **"+"** góc trên bên phải → **"Add Device"**.
-2. Chọn loại thiết bị tương ứng từ danh sách.
-3. Đưa thiết bị vào chế độ **Pairing**:
-   - Nhấn giữ nút **Pairing/Set** trên thiết bị khoảng **5 giây**.
-   - Đèn báo trên thiết bị **nhấp nháy** = sẵn sàng ghép nối.
-4. Đợi App hoàn tất quét và ghép nối.
+### 2.1. Quy trình chung
+1. App → **+** → **Add Device**.
+2. Chọn loại thiết bị tương ứng.
+3. Đưa thiết bị vào **Pairing**:
+   - Nhấn giữ nút Pairing/Set khoảng 5 giây.
+   - Đèn nhấp nháy = sẵn sàng.
+4. Đợi App ghép nối hoàn tất.
 5. Đặt tên thiết bị theo quy tắc (xem `04-quy-tac-dat-ten.md`).
 
-### Lưu ý
-- Nếu App báo **"time-out"** → lặp lại thao tác nhấn giữ nút vật lý trên thiết bị.
-- Đặt thiết bị **gần Smart Station** (< 5m) trong quá trình pairing.
-- Sau khi pairing thành công, có thể di chuyển thiết bị đến vị trí lắp đặt chính thức.
+### 2.2. Lưu ý nhanh
+- Nếu App báo **time-out** → làm lại thao tác nhấn giữ nút vật lý.
+- Đặt thiết bị **gần Smart Station** (< 5m) trong lúc pairing.
+- Pairing xong mới đem thiết bị ra vị trí lắp đặt.
 
 ---
 
-## 3. Đồng Bộ Thiết Bị HVAC (Điều Hòa Trung Tâm)
+## 3. Đồng bộ HVAC (Điều hòa trung tâm)
 
-### Quy trình
-1. Thêm HVAC Gateway vào App (như thiết bị con thông thường).
-2. Vào **All Devices** → chọn HVAC Gateway → **Settings**.
+1. Thêm HVAC Gateway vào App như thiết bị con.
+2. All Devices → chọn HVAC Gateway → **Settings**.
 3. **Trượt màn hình từ phải sang trái** để đồng bộ nhóm địa chỉ.
-4. Chờ quá trình lấy thông tin dàn lạnh: **1 – 10 phút**.
-   - Trong lúc đồng bộ, thiết bị hiển thị **màu xám**.
-   - Khi hoàn tất → thiết bị hiển thị bình thường.
-5. Đổi tên từng dàn lạnh theo vị trí (vd: `PN_Master_DieuHoa`, `PK_DieuHoa`).
+4. Chờ đồng bộ 1–10 phút.
 
-> ⚠️ **KHÔNG thao tác trên HVAC Gateway trong khi đang đồng bộ** — chờ cho đến khi tất cả dàn lạnh hiển thị bình thường.
+> ⚠️ Không thao tác trên HVAC Gateway trong lúc đang đồng bộ.
 
 ---
 
-## 4. Quản Lý Nhiều Smart Station (Cascade Management)
+## 4. Quản lý nhiều Smart Station (Cascade Management)
 
-Khi nhà quá rộng, cần 2+ Smart Station:
-
-1. Đảm bảo tất cả Smart Station nằm trong **cùng mạng LAN**.
-2. Vào **Advanced Settings → Engineering Mode → Smart Station Cascade Management**.
-3. Chọn Smart Station **nguồn** (chứa thiết bị cần chia sẻ).
-4. Chọn Smart Station **đích** (nhận thiết bị).
-5. Chia sẻ → thiết bị xuất hiện trên cả 2 Smart Station.
+1. Đảm bảo các Smart Station cùng **mạng LAN**.
+2. Advanced Settings → Engineering Mode → Smart Station Cascade Management.
+3. Chọn Smart Station nguồn.
+4. Chọn Smart Station đích.
+5. Share → thiết bị xuất hiện trên cả 2 Hub.
 
 ---
 
-## 5. Tích Hợp Thiết Bị Bên Thứ 3
+## 5. Tích hợp thiết bị bên thứ 3
 
-### Sonos (Loa)
-- Sonos phải nằm cùng mạng LAN với Smart Station.
-- App tự phát hiện qua **UPnP**.
+### 5.1. Sonos
+- Sonos cùng mạng LAN → App tự phát hiện qua UPnP.
 
-### Philips Hue (Đèn)
-- Cần **Hue Bridge** kết nối cùng mạng.
-- Thêm Hue Bridge trong App LifeSmart → phát hiện bóng đèn.
+### 5.2. Philips Hue
+- Cần Hue Bridge cùng mạng → add Hue Bridge trong App → phát hiện bóng.
 
-### Camera Hikvision
-- Trên giao diện web camera:
-  - Bật **UPnP**.
-  - Bật **Hikvision-CGI**.
-- Sau đó thêm camera trong App LifeSmart.
+### 5.3. Camera Hikvision
+- Trên web camera: bật UPnP + Hikvision-CGI → sau đó add trong App.
 
 ---
 
-## 6. Cấu Trúc Trong App
+## 6. Chia sẻ quyền
 
-```
-Tài khoản LifeSmart
-  └── Nhà (Home)
-        ├── Phòng khách
-        │   ├── PhongKhach_CongTacChinh (công tắc 3 nút)
-        │   │   ├── L1: PhongKhach_DenChum
-        │   │   ├── L2: PhongKhach_DenHat
-        │   │   └── L3: PhongKhach_QuatTran
-        │   ├── PhongKhach_CamBienCua
-        │   └── PhongKhach_SPOT (IR)
-        ├── Phòng ngủ Master
-        │   ├── PNMaster_CongTac (công tắc 2 nút)
-        │   │   ├── L1: PNMaster_DenNgu
-        │   │   └── L2: PNMaster_DenWC
-        │   └── PNMaster_DieuHoa (HVAC)
-        └── ...
-```
+1. App → Cài đặt → Quản lý thành viên.
+2. Mời thành viên bằng email / QR.
+3. Chọn quyền: Quản trị hoặc Thành viên.
 
----
-
-## 7. Chia Sẻ Quyền
-
-1. App → **Cài đặt → Quản lý thành viên**.
-2. Mời thành viên bằng email / QR code.
-3. Chọn quyền: **Quản trị** hoặc **Thành viên** (chỉ điều khiển).
-
-> Chỉ cung cấp tài khoản chia sẻ cho khách hàng. Tài khoản Admin bàn giao sau khi quyết toán thành công.
+> Khuyến nghị: chỉ cấp quyền phù hợp cho khách hàng; tránh chia sẻ Admin nếu chưa bàn giao đầy đủ.

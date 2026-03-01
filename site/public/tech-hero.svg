@@ -1,0 +1,15 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stylized House -->
+  <path d="M200 60L60 180H100V320H300V180H340L200 60Z" fill="#3B82F6" fill-opacity="0.1" stroke="#3B82F6" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Technician Icon (Stylized) -->
+  <circle cx="200" cy="180" r="30" stroke="#3B82F6" stroke-width="4"/>
+  <path d="M160 260C160 230 180 220 200 220C220 220 240 230 240 260V280H160V260Z" stroke="#3B82F6" stroke-width="4"/>
+  <!-- Cog/Settings representing system -->
+  <circle cx="280" cy="120" r="25" stroke="#F59E0B" stroke-width="3" stroke-dasharray="8 4"/>
+  <!-- WiFi Symbol -->
+  <path d="M120 120C120 90 145 65 175 65" stroke="#10B981" stroke-width="4" stroke-linecap="round"/>
+  <path d="M100 140C100 100 135 65 175 65" stroke="#10B981" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <!-- Toolkit/Document -->
+  <rect x="250" y="240" width="60" height="40" rx="4" stroke="#6366F1" stroke-width="3"/>
+  <path d="M265 255H295M265 265H285" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+</svg>

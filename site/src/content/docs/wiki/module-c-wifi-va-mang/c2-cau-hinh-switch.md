@@ -1,58 +1,41 @@
 ---
-title: "Cấu hình switch"
+title: "C2 — Cấu hình Switch"
+description: "Cách cấu hình port Switch (Managed / PoE) cho mô hình 2 VLAN ổn định."
 module: "c"
 level: "4-6"
 tags: ["switch", "VLAN", "PoE", "QoS"]
 ---
 
-# C2 — Cấu hình switch (Managed / PoE)
-
-**Mục tiêu:** cấu hình switch đúng chuẩn để chạy VLAN ổn định, cấp PoE an toàn và dễ bảo trì.
-
----
-
-## Checklist trước khi cấu hình
-- Xác định model switch (Ruijie / Mikrotik / UniFi /…)
-- Có sơ đồ port: uplink/router, trunk đến AP, port camera, port smarthome
-- Chốt VLAN ID + subnet theo tài liệu **C1 — Quy hoạch mạng**
+## Mục tiêu
+- Cấu hình port Switch đúng loại: Access cho thiết bị, Trunk cho AP/Uplink.
+- Quản lý công suất PoE an toàn cho Camera và Access Point.
 
 ---
 
-## Cấu hình VLAN theo tư duy “port-based”
+## 1. Phân bổ Port theo VLAN
 
-### 1) Uplink lên Router/Firewall
-- Port uplink để **TRUNK** (tag nhiều VLAN)
-- Native/untag VLAN: tuỳ thiết kế (khuyến nghị tránh native nếu không cần)
+### 1.1. Port Uplink (Nối lên Router)
+- **Cấu hình:** Trunk (cho phép VLAN 1 và VLAN 40).
+- **Lưu ý:** VLAN 1 thường là native (untagged).
 
-### 2) Port xuống Access Point
-- Port xuống AP thường để **TRUNK** (tag VLAN 30 + 40)
-- Nếu AP tách SSID theo VLAN: map SSID Private/Guest tương ứng
+### 1.2. Port Access (Nội bộ)
+- Dành cho: Camera, NVR, Smarthome Hub, Smart TV...
+- **Cấu hình:** Access VLAN 1.
 
-### 3) Port cho Camera / NVR
-- Port camera: **ACCESS VLAN 20**
-- Port NVR: **ACCESS VLAN 20**
-
-### 4) Port cho SmartHome
-- Hub/Controller/Gateway: **ACCESS VLAN 10**
+### 1.3. Port xuống Access Point (AP)
+- **Cấu hình:** Trunk (cho phép VLAN 1 và VLAN 40).
+- SSID Private sẽ map vào VLAN 1.
+- SSID Guest sẽ map vào VLAN 40.
 
 ---
 
-## PoE: cấu hình để “không cháy, không sập”
-- Bật PoE đúng port cần dùng (AP/Camera)
-- Kiểm tra **PoE budget** tổng (đặc biệt khi nhiều AP WiFi 6)
-- Đặt priority PoE (nếu switch hỗ trợ): AP/NVR ưu tiên cao
+## 2. Quản lý nguồn PoE
+- Đảm bảo **PoE Budget** tổng của Switch lớn hơn tổng công suất thiết bị.
+- Ưu tiên PoE cho AP WiFi 6 (cần công suất cao hơn).
 
 ---
 
-## QoS (tuỳ chọn)
-- Nếu có voice/video quan trọng: ưu tiên traffic tương ứng
-- Với hệ nhà phố/villa thường: QoS chỉ cần ở mức cơ bản
-
----
-
-## Kiểm tra sau cấu hình
-- [ ] Các VLAN lên được (ping gateway từng VLAN)
-- [ ] AP phát đúng SSID + đúng VLAN
-- [ ] Camera lên hình nội bộ (VLAN 20)
-- [ ] Thiết bị SmartHome ổn định (VLAN 10)
-
+## 3. Checklist sau cấu hình
+- [ ] Laptop cắm vào port VLAN 1 nhận đúng dải IP 192.168.1.x.
+- [ ] AP nhận nguồn PoE và phát đủ 2 SSID.
+- [ ] NVR thấy được tất cả camera trong cùng VLAN 1.

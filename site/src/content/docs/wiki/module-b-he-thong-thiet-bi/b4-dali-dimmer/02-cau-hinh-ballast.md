@@ -1,19 +1,28 @@
 ---
-title: "Cấu hình Ballast DALI"
+title: "B4.02 — Cấu hình Ballast DALI (Commissioning)"
+description: "Quy trình quét thiết bị, gán địa chỉ 0–63, gom group 0–15 và test dimming/scene."
 module: "b"
 level: "4-6"
 tags: ["DALI", "ballast", "commissioning"]
 ---
-# B4.02 — Cấu Hình Ballast (Commissioning)
 
-## Commissioning DALI
+## Mục tiêu
+- Commissioning đúng để mỗi driver có **địa chỉ duy nhất**.
+- Gán group/scene có mapping rõ ràng để bàn giao dễ bảo trì.
+
+---
+
+## 1. Quy trình Commissioning chuẩn
 1. Kết nối tất cả driver/ballast vào bus DALI.
-2. Dùng phần mềm (ETS cho KNX-DALI, hoặc tool riêng) để quét thiết bị.
-3. Gán **địa chỉ DALI** (0-63) cho mỗi driver.
-4. Gán vào **Group** (0-15).
-5. Test: gửi lệnh dim từng group.
+2. Mở tool commissioning (ETS nếu là KNX-DALI, hoặc tool riêng của gateway).
+3. Quét thiết bị (scan).
+4. Gán **địa chỉ DALI** (0–63) cho từng ballast/driver.
+5. Gom ballast vào **Group** (0–15).
+6. Test: gửi lệnh dim từng group và kiểm tra đèn phản hồi.
 
-## Lưu ý
+---
+
+## 2. Lưu ý bắt buộc
 - Mỗi driver phải có địa chỉ **duy nhất**.
-- Ghi nhận: địa chỉ → driver → đèn → vị trí.
+- Ghi nhận mapping: `Địa chỉ → Driver → Đèn → Vị trí`.
 - Backup cấu hình sau commissioning.

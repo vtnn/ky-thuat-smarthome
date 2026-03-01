@@ -1,22 +1,33 @@
 ---
-title: "Giới thiệu DALI"
+title: "B4.00 — Giới thiệu DALI Dimmer"
+description: "Tổng quan DALI (IEC 62386), thông số bus 2 dây và cách tích hợp DALI vào LifeSmart/MobiEyes/KNX."
 module: "b"
 level: "2-6"
 tags: ["DALI", "dimmer", "chiếu sáng"]
 ---
-# B4.00 — Giới Thiệu DALI Dimmer
 
-## DALI là gì?
-DALI (Digital Addressable Lighting Interface) — giao thức tiêu chuẩn quốc tế cho điều khiển chiếu sáng. 2 dây, không phân cực, tối đa 64 ballast/driver, 16 nhóm, 16 scene.
+## Mục tiêu
+- Hiểu bản chất DALI: **2 dây, không phân cực**, địa chỉ hoá từng driver/ballast.
+- Nắm các giới hạn quan trọng: **64 thiết bị**, **16 group**, **16 scene**, bus ~16V.
 
-## Áp dụng cho cả 3 hệ thống
+---
+
+## 1. DALI là gì?
+DALI (Digital Addressable Lighting Interface) là tiêu chuẩn quốc tế điều khiển chiếu sáng. Mỗi driver/ballast được gán địa chỉ (0–63) và có thể được gom vào group/scene để điều khiển đồng bộ.
+
+---
+
+## 2. Áp dụng tại công ty (3 hệ thống)
+
 | Hệ thống | Kết nối DALI qua |
-|----------|------------------|
+|---|---|
 | LifeSmart | DALI Gateway riêng |
 | MobiEyes | Dimmer Module + DALI |
 | KNX | KNX-DALI Gateway |
 
-## Kiến trúc
+---
+
+## 3. Kiến trúc tổng quát
 ```
 [Hệ thống điều khiển] → [DALI Gateway/Module]
                               ↕ (DALI Bus - 2 dây)
@@ -25,12 +36,15 @@ DALI (Digital Addressable Lighting Interface) — giao thức tiêu chuẩn qu�
                     [LED 1]    [LED 2]
 ```
 
-## Thông số DALI Bus
+---
+
+## 4. Thông số DALI Bus
+
 | Thông số | Giá trị |
-|---------|---------|
+|---|---|
 | Điện áp bus | ≈ 16V DC |
 | Số thiết bị tối đa | 64 driver/ballast |
-| Số nhóm | 16 |
-| Số scene | 16 |
+| Số nhóm | 16 (0–15) |
+| Số scene | 16 (0–15) |
 | Chiều dài bus tối đa | 300m |
-| Có thể đi chung ống 220V | ✅ Có (IEC 62386) |
+| Đi chung ống 220V | ✅ Có (theo IEC 62386) |

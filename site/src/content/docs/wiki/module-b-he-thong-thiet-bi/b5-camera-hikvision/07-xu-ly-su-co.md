@@ -1,24 +1,32 @@
 ---
-title: "Xử lý sự cố Camera"
+title: "B5.07 — Xử lý sự cố Camera"
+description: "Checklist kiểm tra khi camera offline, hình ảnh bị mờ ban đêm hoặc NVR không ghi hình."
 module: "b"
 level: "3-6"
 tags: ["camera", "troubleshooting"]
 ---
-# B5.07 — Xử Lý Sự Cố Camera
 
-| Triệu chứng | Kiểm tra |
-|-------------|----------|
-| Camera offline | Nguồn PoE, cáp, IP |
-| Hình đen ban đêm | IR LEDs, khoảng cách |
-| Hình mờ/nhiễu | Ống kính bẩn, WDR, focus |
-| NVR không ghi | HDD, cấu hình recording |
-| Không xem từ xa | Hik-Connect, Internet, mã xác minh |
-| Mất 1 camera trên NVR | IP conflict, mật khẩu, cáp |
+## Mục tiêu
+- Debug nhanh các lỗi phổ biến: mất hình, offline, không lưu trữ.
+- Biết cách dùng SADP Tool để chẩn đoán lỗi mạng nội bộ.
 
-## Checklist
-- [ ] LED PoE port sáng?
-- [ ] Ping IP camera được?
-- [ ] SADP Tool thấy camera?
-- [ ] Hình ảnh sáng/rõ (ngày + đêm)?
-- [ ] NVR ghi + playback OK?
-- [ ] Hik-Connect xem được từ xa?
+---
+
+## 1. Bảng triệu chứng và Cách xử lý
+
+| Triệu chứng | Kiểm tra / Khắc phục |
+|---|---|
+| Camera Offline | Đo nguồn PoE tại port; check cáp; ping IP camera. |
+| Hình đen ban đêm | Check hồng ngoại (IR LEDs); dọn vật cản sát ống kính. |
+| Hình mờ/nhiễu | Vệ sinh ống kính; check đấu nối jack RJ45. |
+| NVR không ghi | Check trạng thái HDD trong menu Storage; format lại HDD. |
+| Không xem từ xa | Check Internet; check trạng thái Hik-Connect (Online/Offline). |
+
+---
+
+## 2. Checklist xử lý nhanh
+- [ ] LED tại port PoE của Switch có sáng không?
+- [ ] Laptop cùng LAN có Ping được IP camera/NVR không?
+- [ ] SADP Tool có quét thấy thiết bị không?
+- [ ] HDD trong NVR trạng thái có báo "Normal" không?
+- [ ] Tín hiệu Internet đến NVR có ổn định không?

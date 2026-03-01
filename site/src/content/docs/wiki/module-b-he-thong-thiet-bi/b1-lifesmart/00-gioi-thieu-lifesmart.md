@@ -1,95 +1,50 @@
 ---
-title: "Giới thiệu hệ thống LifeSmart"
+title: "B1.00 — Giới thiệu hệ thống LifeSmart"
+description: "Tổng quan về hệ sinh thái LifeSmart, giao thức truyền thông CoSS và khả năng tích hợp đa nền tảng."
 module: "b"
 level: "1-6"
 tags: ["LifeSmart", "giới thiệu", "CoSS", "Smart Station"]
 ---
 
-# B1.00 — Giới Thiệu Hệ Thống LifeSmart
-
-## 1. Tổng Quan
-
-LifeSmart là hệ thống nhà thông minh toàn diện, giúp biến các thiết bị điện thông thường thành thiết bị thông minh — cho phép **điều khiển từ xa, tự động hóa và thiết lập ngữ cảnh (Scene)**.
+## Mục tiêu
+- Hiểu rõ **giao thức CoSS** và tại sao LifeSmart truyền tin ổn định hơn Zigbee thông thường.
+- Nắm bắt **kiến trúc hệ thống** và khả năng kết nối đa nền tảng (HomeKit, Google, Alexa).
 
 ---
 
-## 2. Giao Thức Truyền Thông — CoSS
+## 1. Tổng quan
+LifeSmart là hệ thống nhà thông minh toàn diện, tập trung vào tính ổn định cao và khả năng phản hồi tức thì. Hệ thống biến các thiết bị điện thông thường thành thiết bị thông minh, cho phép điều khiển qua App, giọng nói và tự động hóa AI.
 
-LifeSmart sử dụng giao thức không dây độc quyền **CoSS (CommandFusion Smart Signal)**:
+## 2. Giao thức truyền thông CoSS
+LifeSmart sử dụng giao thức không dây độc quyền **CoSS (CommandFusion Smart Signal)** hoạt động ở tần số Sub-GHz:
 
-| Thông số | Chi tiết |
-|---------|---------|
-| Độ phản hồi | Tính bằng **mili-giây** |
-| Khoảng cách truyền | Lên đến **200m** (không gian mở) |
-| Tiêu thụ điện năng | Cực thấp (low power) |
-| Tần số | Sub-GHz |
+| Đặc tính | Chi tiết |
+|---|---|
+| **Độ trễ** | Phản hồi trong vài **mili-giây** (gần như tức thì). |
+| **Tầm xa** | Lên đến **200m** trong môi trường mở (xuyên tường cực tốt). |
+| **Bảo mật** | Mã hóa cấp quân đội, chống can nhiễu từ WiFi/Zigbee 2.4GHz. |
+| **Tiết kiệm** | Tiêu thụ điện năng cực thấp, giúp pin cảm biến dùng nhiều năm. |
 
-### Giao thức bổ sung (tùy model)
-Một số bộ trung tâm và màn hình điều khiển (Nature Mini PRO, DEFED Smart Station) còn hỗ trợ thêm:
-- **Z-Wave**
-- **Zigbee**
-- **Wi-Fi**
-- **Bluetooth**
+## 3. Bộ xử lý trung tâm — Smart Station
+Smart Station là **"trái tim"** của toàn bộ hệ thống:
+- **Kết nối:** Quản lý hàng trăm thiết bị con qua CoSS.
+- **Hạ tầng:** Ưu tiên kết nối mạng qua cổng **Ethernet (LAN)** để đảm bảo ổn định.
+- **Tính năng Cascade:** Cho phép gộp nhiều Smart Station trong cùng mạng LAN để mở rộng phạm vi điều khiển cho biệt thự/căn hộ lớn.
 
----
+## 4. Khả năng tương thích & Tích hợp
 
-## 3. Bộ Xử Lý Trung Tâm — Smart Station
-
-Smart Station là **"trái tim"** của hệ thống LifeSmart:
-- Kết nối tất cả thiết bị con qua giao thức CoSS.
-- Giao tiếp với **LifeSmart App** và nền tảng **Cloud**.
-- Kết nối mạng qua Ethernet (khuyến cáo) hoặc WiFi.
-- Quản lý Scene, Automation, Scheduler.
-
-### Cascade Management (Nhiều Smart Station)
-- Nếu nhà quá rộng, **2 Smart Station** trong cùng mạng LAN có thể **gộp chung lại**.
-- Vào **Advanced Settings → Engineering Mode → Smart Station Cascade Management**.
-- Cho phép chia sẻ thiết bị giữa Smart Station nguồn và Smart Station đích.
+- **Hỗ trợ Đa nền tảng:** Apple HomeKit (Siri), Google Home, Amazon Alexa.
+- **Tích hợp Bên thứ 3:**
+    - **Sonos:** Điều khiển âm thanh đa vùng.
+    - **Philips Hue:** Đồng bộ đèn thông minh qua Hue Bridge.
+    - **Hikvision:** Xem camera trực tiếp trên LifeSmart App và màn hình Nature.
 
 ---
 
-## 4. Hỗ Trợ Đa Nền Tảng
-
-| Nền tảng | Hỗ trợ |
-|---------|--------|
-| **Apple HomeKit** | ✅ Điều khiển qua Siri, Home App |
-| **Google Assistant** | ✅ Điều khiển bằng giọng nói |
-| **Amazon Alexa** | ✅ Điều khiển bằng giọng nói |
-| **LifeSmart App** | ✅ iOS / Android — điều khiển đầy đủ |
-
----
-
-## 5. Tích Hợp Bên Thứ 3
-
-| Thiết bị / Hệ thống | Cách tích hợp |
-|---------------------|---------------|
-| **Sonos** (Loa) | Qua UPnP |
-| **Philips Hue** (Đèn) | Cần Hue Bridge, add qua App |
-| **Camera Hikvision** | Bật UPnP + Hikvision-CGI trên web camera trước khi add |
-
----
-
-## 6. Kiến Trúc Hệ Thống
-
-```
-[LifeSmart Cloud]
-       ↕ (Internet)
-[Smart Station] ← Ethernet (khuyến cáo) hoặc WiFi
-       ↕ (CoSS / Z-Wave / Zigbee)
-┌──────┼──────┬──────┬──────┬──────┐
-[Công  [Màn   [Cảm   [HVAC  [Camera
- tắc]  hình   biến]  GW]    & An
-       Nature]              ninh]
-```
-
----
-
-## 7. Ưu / Nhược Điểm
+## 5. Ưu và nhược điểm hệ thống
 
 | Ưu điểm | Nhược điểm |
-|---------|-----------|
-| CoSS: phản hồi ms, tầm xa 200m | Phụ thuộc WiFi/Internet cho remote |
-| Hỗ trợ HomeKit, Google, Alexa | Cần dây N tại hộp công tắc |
-| App trực quan, AI Builder dễ dùng | Phụ thuộc Cloud cho một số tính năng |
-| Hệ sinh thái thiết bị đa dạng | Chi phí trung bình |
-| Cascade: mở rộng nhiều Smart Station | |
+|---|---|
+| Phản hồi siêu nhanh và ổn định cao. | Cần dây N (nguội) cho hầu hết các công tắc. |
+| Khoảng cách kết nối xa nhất trong các hệ không dây. | Phụ thuộc Internet để điều khiển từ xa. |
+| App thiết kế chuyên nghiệp, AI Builder mạnh mẽ. | Chi phí đầu tư ở mức trung bình cao. |

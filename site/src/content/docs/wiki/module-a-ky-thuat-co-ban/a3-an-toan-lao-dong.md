@@ -1,13 +1,18 @@
 ---
-title: "An toàn lao động"
+title: "A3 — An toàn lao động"
+description: "Quy tắc an toàn bắt buộc khi thi công điện, làm việc trên cao và xử lý sự cố khẩn cấp."
 module: "a"
 level: "1-6"
 tags: ["an toàn", "lao động", "khẩn cấp", "bảo hộ"]
 ---
 
-# A3 — An Toàn Lao Động
+## Mục tiêu
+- Thuộc các quy tắc **an toàn điện** và **an toàn công trình** trước khi thao tác.
+- Biết cách xử lý các tình huống khẩn cấp cơ bản: điện giật, cháy chập, ngã cao.
 
-## 1. Quy Định An Toàn Điện
+---
+
+## 1. Quy định an toàn điện
 
 ### Nguyên tắc BẮT BUỘC
 1. **LUÔN ngắt CB/MCB** trước khi thao tác với dây điện 220V.
@@ -27,9 +32,9 @@ tags: ["an toàn", "lao động", "khẩn cấp", "bảo hộ"]
 
 ---
 
-## 2. Bảo Hộ Lao Động
+## 2. Bảo hộ lao động (PPE)
 
-### Trang bị cá nhân (PPE)
+Trang bị cá nhân đầy đủ giúp giảm thiểu rủi ro chấn thương tại công trường:
 
 | Trang bị | Khi nào sử dụng |
 |----------|----------------|
@@ -43,22 +48,22 @@ tags: ["an toàn", "lao động", "khẩn cấp", "bảo hộ"]
 
 ---
 
-## 3. Xử Lý Sự Cố Khẩn Cấp
+## 3. Xử lý sự cố khẩn cấp
 
-### Bị điện giật
+### 3.1. Bị điện giật
 1. **KHÔNG chạm** vào người bị giật khi chưa ngắt nguồn.
 2. Ngắt CB / rút phích cắm ngay lập tức.
 3. Nếu không ngắt được → dùng vật cách điện (gậy gỗ, nhựa) tách nạn nhân.
 4. Kiểm tra hô hấp → CPR nếu cần.
 5. Gọi **115** (cấp cứu) ngay.
 
-### Cháy / Chập điện
+### 3.2. Cháy / Chập điện
 1. Ngắt CB tổng ngay.
 2. Sử dụng bình chữa cháy **CO2** hoặc **bột** (KHÔNG dùng nước cho cháy điện).
 3. Sơ tán khỏi khu vực.
 4. Gọi **114** (cứu hỏa).
 
-### Ngã từ trên cao
+### 3.3. Ngã từ trên cao
 1. Không di chuyển nạn nhân nếu nghi ngờ chấn thương cột sống.
 2. Gọi **115** ngay.
 3. Kiểm tra ý thức, hô hấp.
@@ -66,23 +71,15 @@ tags: ["an toàn", "lao động", "khẩn cấp", "bảo hộ"]
 
 ---
 
-## 4. Checklist An Toàn Công Trường
+## 4. Checklist an toàn công trường
 
-### Trước khi bắt đầu
 - [ ] Kiểm tra trang bị PPE đầy đủ.
 - [ ] Xác nhận vị trí tủ điện và CB tổng.
 - [ ] Kiểm tra đường thoát hiểm.
 - [ ] Xác nhận vị trí bình chữa cháy.
 - [ ] Gắn biển cảnh báo tại tủ điện (nếu thao tác điện).
-
-### Trong khi thi công
 - [ ] Luôn có ít nhất 2 người khi làm việc trên cao.
 - [ ] Không để dụng cụ / vật liệu trên cao không có giá đỡ.
 - [ ] Dây điện cắt ra phải được cuộn gọn, không nằm dưới đất.
 - [ ] Thang/giàn giáo phải ổn định trước khi leo.
-
-### Sau khi hoàn thành
-- [ ] Thu dọn dụng cụ, vật liệu thừa.
-- [ ] Kiểm tra không có dây hở, mối nối chưa bọc.
-- [ ] Tháo biển cảnh báo khi công việc đã hoàn tất.
-- [ ] Đóng CB, kiểm tra hệ thống hoạt động bình thường.
+- [ ] Sau khi hoàn thành: dọn dẹp vật liệu thừa, kiểm tra không dây hở.
