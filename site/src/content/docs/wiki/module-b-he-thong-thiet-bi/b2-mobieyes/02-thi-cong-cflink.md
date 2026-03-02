@@ -70,19 +70,9 @@ Dây không dán nhãn thì khi bảo trì sau này sẽ mất hàng giờ để
 - Cáp Bus giữa các tủ: `CFLink-[Board Nguồn]-[Board Đích]` (ví dụ: `CFLink-21-22`)
 - Cáp ngoại vi: `[Loại]-[Khu vực]-[Số]` (ví dụ: `SW-PK-01` cho công tắc phòng khách số 1)
 
-### 3.4. Quy tắc màu đầu cos (ferrule)
+### 3.4. Dự phòng chiều dài
 
-Để tủ smarthome chuyên nghiệp và dễ bảo trì, đội thi công phải tuân thủ chuẩn màu đầu cos của công ty:
-
-| Loại dây | Màu đầu cos | Ghi chú |
-|---|---|---|
-| **Line ra đèn (Load)** | Đỏ | Dây từ Relay C ra thiết bị |
-| **Dây nguội (Neutral)** | Đen / Xanh dương | Dây N chung |
-| **Dây công tắc (Switch)** | Vàng | Dây từ công tắc về L1-L2 của Relay |
-
-Việc dùng đúng màu cos giúp kỹ thuật viên nhìn vào tủ là biết ngay chức năng của từng sợi dây mà không cần cầm bảng mapping, cực kỳ hữu ích khi xử lý sự cố trong điều kiện thiếu sáng hoặc gấp rút.
-
-### 3.5. Dự phòng chiều dài
+Để thừa 30-50cm dây tại mỗi đầu tủ. Dây cắt vừa khít nhìn gọn nhưng khi cần tháo ra đấu lại thì không đủ chiều dài, phải nối thêm hoặc kéo lại từ đầu.
 
 Để thừa 30-50cm dây tại mỗi đầu tủ. Dây cắt vừa khít nhìn gọn nhưng khi cần tháo ra đấu lại thì không đủ chiều dài, phải nối thêm hoặc kéo lại từ đầu.
 

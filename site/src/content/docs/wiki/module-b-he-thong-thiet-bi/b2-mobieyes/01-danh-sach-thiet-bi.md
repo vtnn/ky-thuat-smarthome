@@ -82,7 +82,7 @@ Ngoài thiết bị chính trong tủ, hệ thống MobiEyes kết nối với c
 |---|---|---|
 | Công tắc cơ | 2 sợi cáp 1x1.5mm² về Relay Output | Đấu vào L1-L2 của relay, line đèn đấu vào C tương ứng |
 | Công tắc đảo | Cáp CAT5e/CAT6 về Dry Contact Input | Không cấp điện 220V vào input, chỉ truyền tín hiệu tiếp điểm khô |
-| Cảm biến chuyển động | Cáp 2×1.5mm² | Cấp nguồn và tín hiệu chung một cáp |
+| Cảm biến chuyển động (220V) | 2 sợi Cáp 2×1.5mm² | 1 sợi cấp nguồn và 1 sợi tín hiệu về đấu qua role 220v để nhận tín hiệu dry contact |
 | Công tắc từ (cửa) | Cáp điện thoại 4 lõi | Tiếp điểm đóng/mở, gắn ở cửa ra vào |
 | Motor rèm | 2 kênh Relay trên cùng board | Một kênh mở, một kênh đóng |
 | Còi báo động | 1 kênh Relay | Điều khiển bằng macro trong phần mềm |

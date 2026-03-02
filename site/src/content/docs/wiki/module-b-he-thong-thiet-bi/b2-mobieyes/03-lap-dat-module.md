@@ -91,5 +91,15 @@ Cổng và cửa cuốn: kéo cáp CAT6 từ motor về tủ smarthome. Đấu t
 - [ ] Dây mạng kéo ra mắt hồng ngoại (IR) đã được dán nhãn **"KHÔNG CẮT, THÁO RA"**. PHẢI ĐO KIỂM bằng đồng hồ (thang đo DC) đảm bảo không lọt áp 24V sang chân tín hiệu Tx+/Tx- trước khi cắm nối module.
 - [ ] CFLink Bus đấu đúng Tx+/Tx-/G, nhất quán với toàn bộ bus.
 - [ ] Test từng kênh relay ngay sau khi đấu xong.
+
+### 5.1. Quy tắc màu đầu cos (ferrule)
+Để tủ smarthome chuyên nghiệp và dễ bảo trì, đội thi công phải tuân thủ chuẩn màu đầu cos của công ty khi đấu nối module:
+
+| Loại dây | Màu đầu cos | Ghi chú |
+|---|---|---|
+| **Line ra đèn (Load)** | Đỏ | Dây từ Relay C ra thiết bị |
+| **Dây nguội (Neutral)** | Đen / Xanh dương | Dây N chung |
+| **Dây công tắc (Switch)** | Vàng | Dây từ công tắc về L1-L2 của Relay |
+
 - [ ] Bấm đầu cos (ferrule) đúng chuẩn màu: Đỏ (Load), Đen/Xanh dương (N), Vàng (Switch).
 - [ ] Có bảng mapping dán trong tủ trước khi đóng nắp.
