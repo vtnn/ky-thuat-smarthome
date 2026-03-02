@@ -1,9 +1,26 @@
-# Node
+# Dependencies
 node_modules/
+site/node_modules/
 
-# Astro
+# Build & Astro output
+dist/
 site/dist/
+.astro/
 site/.astro/
 
-# OS
+# Logs
+*-debug.log*
+*-error.log*
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# OS specific files
 .DS_Store
+Thumbs.db
+
+# Wrangler/Cloudflare
+.wrangler/
+site/.wrangler/
