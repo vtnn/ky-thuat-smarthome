@@ -1,12 +1,6 @@
 ---
-title: "FAQ"
----
-
----
 title: "Câu hỏi thường gặp (FAQ)"
-module: "all"
-level: "1-6"
-tags: ["FAQ", "câu hỏi", "hỗ trợ"]
+description: "Tổng hợp các câu hỏi thường gặp khi thi công, lập trình và vận hành hệ thống smarthome."
 ---
 
 # Câu Hỏi Thường Gặp (FAQ)

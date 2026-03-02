@@ -1,12 +1,6 @@
 ---
-title: "Glossary"
----
-
----
-title: "Thuật ngữ chuyên ngành A-Z"
-module: "all"
-level: "1-6"
-tags: ["thuật ngữ", "glossary", "từ điển"]
+title: "Thuật ngữ chuyên ngành (Glossary)"
+description: "Giải nghĩa các thuật ngữ kỹ thuật smarthome, camera, mạng và tự động hoá từ A-Z."
 ---
 
 # Thuật Ngữ Chuyên Ngành A-Z

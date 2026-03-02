@@ -1,5 +1,6 @@
 ---
-title: "hikvision-official-docs"
+title: "Tài liệu Hikvision"
+description: "Tổng hợp tài liệu chính hãng Hikvision — camera IP, NVR, SADP Tool, firmware và user guide."
 ---
 
 # Tài liệu tham khảo — Hikvision

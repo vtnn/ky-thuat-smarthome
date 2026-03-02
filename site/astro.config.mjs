@@ -7,7 +7,11 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Kỹ thuật Smarthome',
-			description: 'Wiki kỹ thuật – tài liệu đào tạo & vận hành',
+			description: 'Wiki kỹ thuật – tài liệu đào tạo & vận hành hệ thống nhà thông minh, camera và WiFi.',
+			defaultLocale: 'vi',
+			locales: {
+				root: { label: 'Tiếng Việt', lang: 'vi' },
+			},
 			logo: {
 				src: './src/assets/brand/logo-192.png',
 				alt: 'Kỹ thuật Smarthome',
@@ -15,7 +19,15 @@ export default defineConfig({
 			head: [
 				{ tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/brand/favicon-32.png' } },
 				{ tag: 'link', attrs: { rel: 'apple-touch-icon', sizes: '192x192', href: '/brand/logo-192.png' } },
+				{ tag: 'meta', attrs: { name: 'theme-color', content: '#ab1313' } },
+				{ tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
+				{ tag: 'meta', attrs: { property: 'og:locale', content: 'vi_VN' } },
+				{ tag: 'meta', attrs: { property: 'og:site_name', content: 'Wiki Kỹ thuật Smarthome' } },
 			],
+			editLink: {
+				baseUrl: 'https://github.com/vtnn/ky-thuat-smarthome/edit/main/site/src/content/docs/',
+			},
+			lastUpdated: true,
 			customCss: ['./src/styles/custom.css'],
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/vtnn/ky-thuat-smarthome' },
