@@ -8,57 +8,87 @@ tags: ["MobiEyes", "đặt tên", "mapping", "naming"]
 
 ## Mục tiêu
 - Đặt tên nhất quán để đội thi công và đội lập trình nhìn vào hiểu ngay.
-- Đảm bảo có **bảng mapping** trước khi đấu dây để tránh sai kênh.
+- Có bảng mapping trước khi đấu dây để tránh sai kênh.
 
 ---
 
 ## 1. Định danh thiết bị vật lý (Board-Kênh)
 
-Format chuẩn: `[Board]-[Kênh]`
+Mỗi kênh relay hoặc input trên module DIN-RY8-N được gọi bằng cặp số: Board ID và số kênh, cách nhau bằng dấu gạch ngang.
+
+Format: `[Board ID]-[Kênh]`
 
 | Ví dụ | Ý nghĩa |
 |---|---|
-| `21-1` | Board 21, Relay kênh 1 |
-| `21-8` | Board 21, Relay kênh 8 |
-| `23-2` | Board 23, Input kênh 2 |
+| 21-1 | Board số 21, Relay kênh 1 |
+| 21-8 | Board số 21, Relay kênh 8 |
+| 23-2 | Board số 23, Input kênh 2 |
+
+Board ID do kỹ thuật viên gán khi cấu hình (xem bài B2.05). Thường gán số theo thứ tự tủ: tủ 1 là board 21, tủ 2 là board 22... Không gán từ số 1 vì dễ nhầm với số kênh.
 
 ---
 
-## 2. Ví dụ mapping (tham khảo)
+## 2. Bảng mapping
 
-### 2.1. Relay
-| Board-Kênh | Thiết bị | Khu vực |
-|---|---|---|
-| 21-1 | Đèn trần | Phòng khách |
-| 21-2 | Đèn LED hắt | Phòng khách |
-| 21-8 | Còi báo động | Toàn nhà |
+Bảng mapping là linh hồn của dự án MobiEyes. Để tối giản và dễ đọc cho kỹ thuật viên hiện trường, ta quy chuẩn bảng mapping về **2 cột** duy nhất. Tên thiết bị và Khu vực được viết tắt và gộp chung.
 
-### 2.2. Dry Contact Input
-| Board-Kênh | Thiết bị | Khu vực |
-|---|---|---|
-| 23-3 | PIR | Hành lang T1 |
-| 23-4 | Công tắc từ | Cửa chính |
+### 2.1. Mapping Relay (ngõ ra)
 
----
+| Board-Kênh | Tên thiết bị - Khu vực |
+|---|---|
+| **21-1** | Đèn trần PK |
+| **21-2** | Đèn LED hắt PK |
+| **21-3** | Quạt trần PK |
+| **21-4** | Rèm mở PK |
+| **21-5** | Rèm đóng PK |
+| **21-6** | Đèn trần PN 1 |
+| **21-7** | Đèn ngủ PN 1 |
+| **21-8** | Còi báo động (Toàn nhà) |
 
-## 3. Đặt tên Macro và Rule
+### 2.2. Mapping Dry Contact Input (ngõ vào)
 
-### 3.1. Macro
-Đặt tên bám sát chức năng, không dấu, dùng `_`:
-- `baoDong_on`, `baoDong_off`
-- `tiepkhach`, `di_ngu`
-- `rem_pk_mo`, `rem_pk_dong`
-
-### 3.2. Rule
-Đặt tên mô tả sự kiện kích hoạt:
-- `dao_den_led`
-- `bao_dong_cua_cong`
-- `wc_pir_bat`, `wc_pir_tat`
+| Board-Kênh | Tên thiết bị - Khu vực |
+|---|---|
+| **23-1** | CT Đèn trần PK |
+| **23-2** | CT Đèn LED hắt PK |
+| **23-3** | CB Chuyển động HL 1 |
+| **23-4** | Cửa chính |
+| **23-5** | Cửa cổng |
 
 ---
 
-## 4. Quy tắc chung
+## 3. Đặt tên Macro
 
-1. Lập bảng mapping **trước khi đấu dây**.
-2. In/dán bảng mapping **bên trong cửa tủ** (bắt buộc).
-3. Một dự án một file mapping riêng (`mapping_<ten_du_an>.xlsx/.md`).
+Macro là tập hợp các hành động chạy theo thứ tự. Tên macro phải mô tả chức năng, không dấu, dùng dấu gạch dưới ngăn cách.
+
+Một số ví dụ:
+- `baoDong_on`, `baoDong_off` — bật/tắt chế độ báo động.
+- `tiepkhach` — kịch bản tiếp khách (bật đèn trần, đèn LED hắt, mở rèm).
+- `di_ngu` — kịch bản đi ngủ (tắt hết đèn, đóng rèm, bật báo động).
+- `rem_pk_mo`, `rem_pk_dong` — mở/đóng rèm phòng khách.
+
+Tên macro nên ngắn nhưng đủ rõ. Sau vài tháng quay lại bảo trì, nếu thấy macro tên `m1`, `m2`, `test3` thì không biết bắt đầu từ đâu.
+
+---
+
+## 4. Đặt tên Rule
+
+Rule là điều kiện kích hoạt: khi sự kiện nào đó xảy ra thì gọi macro tương ứng. Tên rule nên mô tả sự kiện kích hoạt:
+
+- `dao_den_led` — công tắc đảo đèn LED.
+- `bao_dong_cua_cong` — cửa cổng mở thì kích hoạt báo động.
+- `wc_pir_bat`, `wc_pir_tat` — cảm biến chuyển động nhà vệ sinh bật/tắt đèn.
+
+---
+
+## 5. Quy tắc chung
+
+Lập bảng mapping trước khi đấu dây. Đấu dây theo bảng, không phải đấu xong rồi mới lập bảng. Làm ngược lại thì khi đấu sai một kênh, cả bảng phải sửa theo và dễ lộn xộn.
+
+In bảng mapping ra giấy và dán bên trong cửa tủ. Bắt buộc. Khi bảo trì sau này, mở tủ ra là thấy ngay kênh nào điều khiển gì, không cần mở máy tính tìm file.
+
+Để thuận tiện cho việc lưu trữ và chia sẻ, công ty cung cấp sẵn mẫu bảng mapping trên Google Sheets. Bạn chỉ cần nhân bản (duplicate) và cập nhật thông tin theo dự án:
+
+👉 **[Mẫu Mapping MobiEyes - Google Sheets](https://docs.google.com/spreadsheets/d/1jDPGmwbRIDvApFc0gygo3p_zRyDM4jVRPqu-UFzGlvI)**
+
+Mỗi dự án phải có file mapping riêng, đặt tên theo format: `<ten_du_an-dia_chi>`. Lưu vào thư mục dự án trên cloud để mọi người cùng truy cập khi cần.

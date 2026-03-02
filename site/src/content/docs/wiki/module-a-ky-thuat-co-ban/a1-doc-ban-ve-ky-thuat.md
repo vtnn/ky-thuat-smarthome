@@ -7,54 +7,62 @@ tags: ["bản vẽ", "sơ đồ nguyên lý", "smarthome", "camera", "wifi", "đ
 ---
 
 ## Mục tiêu
-- Biết **đọc đúng thứ tự** các loại bản vẽ để tránh làm sai từ hạ tầng.
-- Biết **tách phần nào là nguyên lý** (logic/kết nối) và phần nào là **mặt bằng vị trí** (thi công).
+- Phân biệt được bản vẽ nguyên lý (logic kết nối) và bản vẽ mặt bằng (vị trí thi công), rồi đọc đúng thứ tự.
+- Tránh sai lệch hạ tầng do đọc nhầm bản vẽ hoặc dùng bản cũ.
 
 ---
 
-## 1. Thứ tự ưu tiên khi đọc bản vẽ
+## 1. Tại sao phải đọc đúng thứ tự?
 
-Nguyên tắc: **Đọc “Nguyên lý” trước, “Mặt bằng bố trí” sau.**
+Lỗi phổ biến nhất ở công trường là thợ cầm bản vẽ mặt bằng rồi bắt tay thi công luôn. Nhìn thấy vị trí công tắc, ổ cắm thì bắt đầu đục, khoan. Kết quả là đi dây xong mới phát hiện luồng tín hiệu Bus sai, hoặc đường mạng đấu nhầm Switch.
 
-| Thứ tự | Loại bản vẽ | Công dụng |
+Nguyên tắc đơn giản: đọc nguyên lý trước, mặt bằng bố trí sau. Nguyên lý cho biết các thiết bị nói chuyện với nhau kiểu gì. Mặt bằng cho biết đặt chúng ở đâu. Hiểu logic trước rồi mới thi công vị trí.
+
+| Thứ tự | Loại bản vẽ | Đọc để làm gì |
 |:---:|---|---|
-| **1** | **Bản vẽ nguyên lý** | Hiểu **tổng thể hệ thống**: kết nối giữa các thiết bị, nguồn cấp, luồng tín hiệu/mạng. |
-| **2** | **Bản vẽ Smarthome** | Xác định **vị trí thiết bị** và cách đi dây tín hiệu (Bus) theo từng khu vực. |
-| **3** | **Bản vẽ Camera & WiFi** | Xác định **vị trí Camera, NVR, Switch PoE** và vùng phủ sóng của các AP. |
-| **4** | **Bản vẽ Điện nhẹ** | Chốt **hạ tầng điểm chờ**: công tắc, ổ cắm, hộp âm và đường ống thô. |
+| 1 | Bản vẽ nguyên lý | Nắm tổng thể hệ thống: thiết bị nào cấp nguồn cho thiết bị nào, tín hiệu đi theo đường nào. |
+| 2 | Bản vẽ Smarthome | Xem vị trí từng thiết bị Smarthome và đường dây tín hiệu Bus theo khu vực. |
+| 3 | Bản vẽ Camera & WiFi | Xác định chỗ đặt Camera, NVR, Switch PoE và vùng phủ sóng AP. |
+| 4 | Bản vẽ Điện nhẹ | Chốt hạ tầng điểm chờ: công tắc, ổ cắm, hộp âm, đường ống thô. |
 
 ---
 
-## 2. Quy trình đọc bản vẽ nhanh (5 bước)
+## 2. Quy trình đọc bản vẽ (5 bước)
 
-1. **Xác nhận phiên bản:** Luôn kiểm tra ngày phát hành và đảm bảo đang dùng bản vẽ mới nhất (Revision cuối).
-2. **Đọc sơ đồ nguyên lý:** Hiểu điểm tập trung (tủ điện/tủ mạng) và cách các thiết bị trung tâm liên kết với nhau.
-3. **Đọc mặt bằng theo luồng thi công:** Xem bản vẽ theo thứ tự từ tầng thấp đến tầng cao hoặc khu vực ưu tiên.
-4. **Đối chiếu danh mục thiết bị (BOM):** Kiểm tra model và số lượng thực tế có khớp với ký hiệu trên bản vẽ không.
-5. **Chốt điểm thi công:** Đánh dấu vị trí chính xác trên thực địa; nếu phát hiện vướng nội thất thì báo quản lý trước khi đục.
+Trước khi đọc bất kỳ bản vẽ nào, kiểm tra phiên bản. Nghe thì hiển nhiên nhưng trên thực tế, cầm nhầm bản cũ trong khi đội thiết kế đã phát hành bản mới là chuyện xảy ra liên tục.
 
----
-
-## 3. Nguyên tắc đi dây cơ bản
-
-- **Cáp mạng (Cat6/Cat5e):** Đi riêng ống, cách xa cáp điện động lực ít nhất 30cm để tránh nhiễu.
-- **Bus KNX / RS485:** Đi riêng ống; tuân thủ đúng topology thiết kế (Line, Daisy-chain...).
-- **Cáp DALI:** Có thể đi chung ống với dây nguồn 220V nếu dây có chuẩn cách điện tương ứng.
+1. Kiểm tra ngày phát hành và số phiên bản trên khung tên bản vẽ. Nếu không trùng với bản mới nhất từ thiết kế, dừng lại và xin lại bản đúng.
+2. Mở sơ đồ nguyên lý trước. Tìm điểm tập trung (tủ điện, tủ mạng) và vẽ lại trong đầu cách các thiết bị trung tâm liên kết với nhau. Bước này mất khoảng 10-15 phút nhưng tiết kiệm cả ngày sửa sai.
+3. Sau đó mới mở mặt bằng. Đọc theo luồng thi công: từ tầng thấp lên tầng cao, hoặc theo khu vực ưu tiên mà quản lý đã chỉ định.
+4. Đối chiếu danh mục thiết bị (BOM) với ký hiệu trên bản vẽ. Kiểm tra model và số lượng có khớp không. Ví dụ: bản vẽ ghi Switch 24 port nhưng BOM ghi 16 port thì phải hỏi lại ngay.
+5. Ra thực địa đánh dấu vị trí. Nếu vị trí bản vẽ bị vướng nội thất, dầm, hoặc đường ống nước thì báo quản lý trước khi đục. Đục rồi mới báo thì coi như chậm ít nhất nửa ngày.
 
 ---
 
-## 4. Link tham khảo
+## 3. Đi dây: mấy lỗi hay gặp
 
-- Bản vẽ nguyên lý: **[Xem bản vẽ PDF](/drawings/Ban_ve_nguyen_ly.pdf)**
-- Bản vẽ Smarthome: **[Xem bản vẽ PDF](/drawings/Ban_ve_Smarthome.pdf)**
-- Bản vẽ Camera & WiFi: **[Xem bản vẽ PDF](/drawings/Ban_ve_Camera.pdf)**
-- Bản vẽ điện nhẹ: **[Xem bản vẽ PDF](/drawings/Ban_ve_dien_nhe.pdf)**
+Cáp mạng (Cat6/Cat5e) phải đi riêng ống và cách cáp điện động lực tối thiểu 30 cm. Đi gần hơn sẽ bị nhiễu, test cáp vẫn pass nhưng khi chạy tải thực thì mất gói hoặc tốc độ tụt.
+
+Bus KNX và CFLinks cũng đi riêng ống. Quan trọng hơn là phải đấu đúng kiểu mà bản vẽ thiết kế, ví dụ kiểu nối tiếp thì đấu lần lượt từ thiết bị này sang thiết bị kế tiếp chứ không rẽ nhánh tự do.
+
+Cáp DALI thì khác, có thể đi chung ống với dây nguồn 220V nếu dây đạt chuẩn cách điện. Nhưng thực tế nên hỏi lại thiết kế trước khi đi chung, vì mỗi dự án có yêu cầu khác nhau.
 
 ---
 
-## 5. Checklist xác nhận trước thi công
+## 4. Bản vẽ tham khảo
 
-- [ ] Bản vẽ đúng **revision mới nhất**.
-- [ ] Đã đọc hiểu **sơ đồ nguyên lý** và luồng tín hiệu chính.
-- [ ] Đã đối chiếu **thực địa** (vị trí tường, trần, chướng ngại vật).
-- [ ] Đã báo cáo quản lý các điểm **sai lệch hoặc xung đột** bản vẽ.
+| Loại | File PDF |
+|---|---|
+| Nguyên lý | [Ban_ve_nguyen_ly.pdf](/drawings/Ban_ve_nguyen_ly.pdf) |
+| Smarthome | [Ban_ve_Smarthome.pdf](/drawings/Ban_ve_Smarthome.pdf) |
+| Camera & WiFi | [Ban_ve_Camera.pdf](/drawings/Ban_ve_Camera.pdf) |
+| Điện nhẹ | [Ban_ve_dien_nhe.pdf](/drawings/Ban_ve_dien_nhe.pdf) |
+
+---
+
+## 5. Checklist trước thi công
+
+- [ ] Bản vẽ đúng phiên bản mới nhất (kiểm tra khung tên bản vẽ).
+- [ ] Đã đọc sơ đồ nguyên lý và hiểu luồng tín hiệu chính.
+- [ ] Đã ra thực địa đối chiếu vị trí tường, trần, chướng ngại vật.
+- [ ] Đã báo quản lý các điểm sai lệch hoặc xung đột giữa bản vẽ và thực tế.
