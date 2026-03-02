@@ -45,10 +45,10 @@ Nguyên tắc: **Đọc “Nguyên lý” trước, “Mặt bằng bố trí”
 
 ## 4. Link tham khảo
 
-- Bản vẽ nguyên lý: **[Đang cập nhật]**
-- Bản vẽ Smarthome: **[Đang cập nhật]**
-- Bản vẽ Camera & WiFi: **[Đang cập nhật]**
-- Bản vẽ điện nhẹ: **[Đang cập nhật]**
+- Bản vẽ nguyên lý: **[Xem bản vẽ PDF](/drawings/Ban_ve_nguyen_ly.pdf)**
+- Bản vẽ Smarthome: **[Xem bản vẽ PDF](/drawings/Ban_ve_Smarthome.pdf)**
+- Bản vẽ Camera & WiFi: **[Xem bản vẽ PDF](/drawings/Ban_ve_Camera.pdf)**
+- Bản vẽ điện nhẹ: **[Xem bản vẽ PDF](/drawings/Ban_ve_dien_nhe.pdf)**
 
 ---
 
