@@ -14,7 +14,7 @@ tags: ["MobiEyes", "LAN Bridge", "System Commander", "DIN-RY Config Tool"]
 
 ## 1. Cấu hình LAN Bridge (CF-IP)
 
-Phần mềm sử dụng: System Commander (cài trên máy tính Windows).
+Phần mềm sử dụng: **System Commander** (cài trên máy tính Windows).
 
 ### 1.1. Kết nối
 
@@ -24,65 +24,57 @@ Nếu phần mềm không tìm thấy LAN Bridge: kiểm tra dây mạng, kiểm
 
 ### 1.2. Gán IP tĩnh
 
-1. Chọn LAN Bridge trong danh sách.
-2. Vào mục Network Settings.
-3. Gán IP tĩnh (ví dụ: 192.168.10.201).
-4. Tắt DHCP.
-5. Lưu cấu hình.
+Nên gán IP tĩnh nằm ngoài dải DHCP của router để tránh xung đột IP. 
+- **Lớp mạng DHCP thông thường:** Thường đặt từ `.100` đến `.200`.
+- **IP tĩnh khuyến nghị:** Thường đặt là `192.168.1.65` (hoặc `.6x` tùy dự án).
 
-Tại sao phải gán IP tĩnh? Vì ứng dụng điều khiển trên điện thoại kết nối trực tiếp đến IP của LAN Bridge. Nếu để DHCP, mỗi lần router khởi động lại có thể cấp IP khác, ứng dụng sẽ mất kết nối và chủ nhà phải cấu hình lại.
-
-Nên chọn IP nằm ngoài dải DHCP của router. Ví dụ router cấp DHCP từ 192.168.10.100 đến 192.168.10.199, thì gán LAN Bridge IP 192.168.10.201 để không bao giờ bị trùng.
+Tại sao phải gán IP tĩnh? Vì ứng dụng trên điện thoại kết nối trực tiếp đến IP của LAN Bridge. Nếu để DHCP, mỗi lần router khởi động lại có thể cấp IP khác, ứng dụng sẽ mất kết nối.
 
 ### 1.3. Thiết lập thời gian
 
-Vào mục Date/Time trên System Commander, đồng bộ với giờ máy tính. Bước này cực kỳ quan trọng nhưng hay bị bỏ qua.
-
-LAN Bridge có đồng hồ thời gian thực tích hợp. Toàn bộ lịch hẹn giờ (Scheduler) dựa vào đồng hồ này. Nếu giờ sai thì macor hẹn "23:00 bật báo động" sẽ bật lúc 21:00 hoặc 01:00 — chủ nhà sẽ rất khó chịu.
-
-Sau mỗi lần mất điện kéo dài (vài ngày), đồng hồ có thể bị lệch. Nên kiểm tra lại giờ khi bảo trì định kỳ.
+Vào mục Date/Time trên System Commander, đồng bộ với giờ máy tính. Toàn bộ lịch hẹn giờ (Scheduler) dựa vào đồng hồ này. Nếu giờ sai thì macro hẹn giờ sẽ chạy không đúng yêu cầu của chủ nhà.
 
 ---
 
 ## 2. Cấu hình module DIN-RY8-N
 
-Phần mềm sử dụng: DIN-RY Config Tool.
+Mỗi module DIN-RY8-N trên cùng bus phải có Board ID riêng, không được trùng.
 
 ### 2.1. Quy trình gán Board ID
 
-Mỗi module DIN-RY8-N trên cùng bus phải có Board ID riêng, không được trùng. Nếu hai board cùng ID, cả hai sẽ nhận cùng lệnh và hệ thống hoạt động sai hoàn toàn.
+Có 2 cách để gán Board ID và cấu hình module:
 
-Quy trình gán ID:
+#### 2.1.1. Cách 1: Gán thủ công bằng nút bấm trực tiếp
+Dùng trong trường hợp không muốn cắm cáp USB hoặc xử lý nhanh tại tủ:
+1. Bấm nút **Setup** trên module.
+2. Bấm các nút **Lên/Xuống** để chọn số hàng chục.
+3. Bấm **Setup** để chuyển sang hàng đơn vị, tiếp tục bấm Lên/Xuống để chọn số.
+4. Bấm **Setup** lần nữa để lưu lại.
 
-1. Chỉ kết nối một board duy nhất vào bus tại thời điểm gán ID. Rút tất cả board khác ra trước.
-2. Mở DIN-RY Config Tool, kết nối qua IP của LAN Bridge.
-3. Phần mềm sẽ nhận diện board duy nhất trên bus.
-4. Gán Board ID (ví dụ: 21, 22, 23...).
-5. Lưu cấu hình, rút board ra.
-6. Cắm board tiếp theo vào bus, lặp lại bước 2-5.
-7. Sau khi gán xong tất cả board, nối lại toàn bộ bus.
-8. Mở System Commander, quét lại — phải thấy đủ tất cả board với ID đúng.
+#### 2.1.2. Cách 2: Dùng phần mềm DIN-RY Config Tool (Khuyên dùng)
+Dùng để gán ID và cập nhật Firmware (FW) mới nhất:
+1. **Cắm cáp USB riêng** vào từng bo (không cắm chung bus khi cấu hình cách này).
+2. Dùng **DIN-RY Config Tool** để đặt ID.
+3. Kiểm tra và **Update Firmware** bản mới nhất cho board.
 
-Bước "cô lập" (chỉ cắm 1 board) rất quan trọng. Nếu cắm nhiều board cùng lúc khi tất cả đang mang ID mặc định (thường là 0 hoặc 1), phần mềm không phân biệt được board nào với board nào.
+#### 2.1.3. Kiểm tra hệ thống
+Sau khi đã gán ID và update FW cho từng board xong, ta cắm toàn bộ dây tín hiệu hệ thống vào bus. Sử dụng **System Commander** hoặc **LAN Bridge** để kết nối và quét lại toàn bộ bus xem đã hiển thị đầy đủ các Board ID và thiết bị chưa.
 
 ### 2.2. Quy ước đánh số Board ID
+Để dễ quản lý, ta quy ước đánh số theo tầng:
+- **Tầng 1:** Bắt đầu từ **11**, 12, 13...
+- **Tầng 2:** Bắt đầu từ **21**, 22, 23...
+- **Tầng 3:** Bắt đầu từ **31**, 32, 33...
 
-Nên đánh số Board ID theo nguyên tắc dễ nhớ:
-- Tủ tầng 1: Board 21, 22 (nếu có 2 board).
-- Tủ tầng 2: Board 31, 32.
-- Tủ tầng 3: Board 41, 42.
-
-Chữ số hàng chục là tầng, hàng đơn vị là thứ tự board trong tủ. Cách đánh này giúp nhìn Board ID là biết ngay board ở tủ nào, tầng nào.
+Cách đánh này giúp nhìn vào Board ID là biết ngay thiết bị đó thuộc tầng nào.
 
 ---
 
 ## 3. Backup cấu hình
 
-Sau khi cấu hình xong toàn bộ hệ thống, xuất file backup ngay. System Commander cho phép Export ra file `.cfg`.
+Sau khi hoàn tất, bắt buộc phải backup cấu hình. Có 2 loại backup cần lưu trữ:
 
-Đặt tên file theo chuẩn của công ty: **`<ten_du_an-dia_chi>-config-<ngay>.cfg`**
-*(Ví dụ: `Villa_Hinh_Thanh-Q2-config-20240302.cfg`)*
+1. **Backup LAN Bridge:** Sử dụng phần mềm **System Commander** để Export cấu hình (Rule, Macro, Scheduler).
+2. **Backup Module:** Sử dụng phần mềm **DIN-RY Config** để lưu lại cấu hình riêng của từng bo.
 
-Lưu file backup và file mapping (`<ten_du_an-dia_chi>.xlsx`) vào cùng thư mục dự án trên Cloud. Đồng thời gửi bản sao cho quản lý kỹ thuật. Nếu LAN Bridge hỏng và phải thay mới, import file backup vào là khôi phục lại toàn bộ cấu hình, không phải cài lại từ đầu.
-
-Trên thực tế, đã có trường hợp LAN Bridge hỏng sau 2 năm, không ai nhớ cấu hình cũ và không có file backup. Phải ngồi lập trình lại toàn bộ rule, macro, scheduler — mất gần một tuần.
+Lưu file backup theo chuẩn: **`<ten_du_an-dia_chi>-config-<ngay>.cfg`**. Nếu hệ thống gặp sự cố hoặc thay mới thiết bị, chỉ cần Import lại file backup là xong, không phải lập trình lại từ đầu.
