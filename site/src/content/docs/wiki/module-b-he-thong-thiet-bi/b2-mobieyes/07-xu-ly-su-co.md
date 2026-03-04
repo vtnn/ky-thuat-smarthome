@@ -19,7 +19,7 @@ tags: ["MobiEyes", "xử lý sự cố", "troubleshooting"]
 | Ứng dụng mất kết nối (icon đỏ) | Lỗi mạng, router mất Internet, LAN Bridge mất nguồn |
 | Bật/tắt ngược với công tắc cơ | Đấu nhầm L1/L2 và C trên board DIN-RY8-N |
 | Trạng thái trên ứng dụng hiển thị sai | Cấp nhầm dây lửa vào chân N của bo mạch |
-| Relay nhảy loạn, input không nhạy | Nhiễu từ cáp điện 220V đi chung với cáp tín hiệu |
+| Relay nhảy loạn, ngõ vào không nhạy | Nhiễu từ cáp điện 220V đi chung với cáp tín hiệu |
 | Module không phản hồi lệnh | Nguồn 24V sụt, bus CFLink đứt, Board ID trùng |
 | Cả hệ thống mất nguồn, bo mạch cháy khét | Cắt nhầm cáp mạng IR làm chập tín hiệu Tx+/- với đường 24V |
 
@@ -39,18 +39,18 @@ Nếu nhà vừa đổi modem (Viettel, FPT, VNPT): kiểm tra cài đặt NAT l
 
 ---
 
-## 3. Bật/tắt không đồng bộ giữa App và Công tắc cơ
+## 3. Bật/tắt không đồng bộ giữa ứng dụng và công tắc cơ
 
-Đây là lỗi phổ biến nhất khi lắp mới. Triệu chứng: trạng thái trên App hiện "Bật" nhưng thực tế bóng đèn đang tắt, hoặc icon trên App không tự động cập nhật khi nhấn công tắc cơ trên tường.
+Đây là lỗi phổ biến nhất khi lắp mới. Triệu chứng: trạng thái trên ứng dụng hiện "Bật" nhưng thực tế bóng đèn đang tắt, hoặc icon trên ứng dụng không tự động cập nhật khi nhấn công tắc cơ trên tường.
 
-**Nguyên nhân**: Đấu nhầm sơ đồ "cầu" giữa module và công tắc đảo bên ngoài. Thông thường là do thợ đấu lộn vị trí giữa dây cặp (Travelers) và dây ra tải (Load).
+Nguyên nhân: đấu nhầm sơ đồ "cầu" giữa module và công tắc đảo bên ngoài. Thông thường là do thợ đấu lộn vị trí giữa dây cặp và dây ra tải.
 
-**Khắc phục**: 
-- Kiểm tra lại: Dây cặp (2 sợi từ công tắc cơ về) phải vào chân **L1** và **L2**.
-- Dây ra tải (đèn) phải vào chân **C (Common)**.
-- Đảm bảo dây Lửa (L) đã được cấp vào chân chung của công tắc cơ ngoài hiện trường.
+Khắc phục:
+- Dây cặp (2 sợi từ công tắc cơ về) phải vào chân L1 và L2.
+- Dây ra tải (đèn) phải vào chân C (Common).
+- Đảm bảo dây lửa (L) đã được cấp vào chân chung của công tắc cơ ngoài hiện trường.
 
-Sau khi đấu đúng, App sẽ luôn biết chính xác trạng thái thực của đèn dù bạn bật/tắt bằng cách nào.
+Sau khi đấu đúng, ứng dụng sẽ luôn biết chính xác trạng thái thực của đèn dù bạn bật/tắt bằng cách nào.
 
 ---
 
@@ -66,7 +66,7 @@ Cách phát hiện: dùng bút thử điện chấm vào chân N trên bo. Nếu
 
 ## 5. Nhiễu điện
 
-Triệu chứng: relay tự nhảy không theo lệnh, input thỉnh thoảng tự kích hoạt, bút thử điện chấm vào nhiều dây đều báo có điện.
+Triệu chứng: relay tự nhảy không theo lệnh, ngõ vào thỉnh thoảng tự kích hoạt, bút thử điện chấm vào nhiều dây đều báo có điện.
 
 Đây thường là vấn đề thi công chứ không phải lỗi thiết bị.
 
@@ -91,12 +91,13 @@ Khi System Commander quét bus mà không thấy một hoặc nhiều module:
 
 ## 7. Toàn bộ hệ thống mất kết nối, bo mạch bốc mùi khét
 
-Đây là sự cố nghiêm trọng nhất, thường do thợ hiện trường vô tình cắt đoạn cáp mạng kéo ra mắt hồng ngoại (IR) rồi đấu nối lộn dây. 
+Đây là sự cố nghiêm trọng nhất, thường do thợ hiện trường vô tình cắt đoạn cáp mạng kéo ra mắt hồng ngoại (IR) rồi đấu nối lộn dây.
 
-Vì cáp mạng IR mang theo nguồn 24V (qua cặp Lá/Nâu) đi cùng các chân tín hiệu Tx+/Tx- (qua cặp Trắng Dương/Dương), nếu quá trình nối lại làm các dây này chạm nhau, điện 24V sẽ phi thẳng vào đường tín hiệu. 
+Vì cáp mạng IR mang theo nguồn 24V (qua cặp Lá/Nâu) đi cùng các chân tín hiệu Tx+/Tx- (qua cặp Trắng Dương/Dương), nếu quá trình nối lại làm các dây này chạm nhau, điện 24V sẽ phi thẳng vào đường tín hiệu.
 
 Bo mạch trung tâm sẽ cháy ngay lập tức. Với lỗi này, không có cách nào sửa chữa tại chỗ, thiết bị không được bảo hành và chủ thầu phải đền thiết bị mới.
-Để phòng tránh: **Tuyệt đối không cắt cáp IR**. Nếu bắt buộc phải can thiệp, phải dùng đồng hồ đo điện kiểm tra kỹ từng chân xem có lọt áp 24V sang khe tín hiệu không trước khi cắm nối mạng lại.
+
+Để phòng tránh: tuyệt đối không cắt cáp IR. Nếu bắt buộc phải can thiệp, phải dùng đồng hồ đo điện kiểm tra kỹ từng chân xem có lọt áp 24V sang khe tín hiệu không trước khi cắm nối mạng lại.
 
 ---
 

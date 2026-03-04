@@ -29,21 +29,21 @@ MobiEyes giải quyết bằng cách dùng cáp vật lý cho mọi kết nối.
 | Đặc điểm | Chi tiết |
 |---|---|
 | Độ bền | Thiết kế chuẩn công nghiệp, chịu được sai dây và sụt áp trong thi công |
-| Phân tán | Một thiết bị lỗi không làm sập toàn bộ hệ thống. Các module hoạt động độc lập với nhau |
-| Chế độ cơ | Khi bo mạch mất nguồn, công tắc cơ vẫn bật/tắt được. Chủ nhà không bao giờ bị "kẹt tối" |
+| Phân tán | Một thiết bị lỗi không làm sập toàn bộ hệ thống — các module hoạt động độc lập với nhau |
+| Chế độ cơ | Khi bo mạch mất nguồn, công tắc cơ vẫn bật/tắt được. Chủ nhà không bao giờ bị kẹt tối |
 | Không phụ thuộc WiFi | Truyền thông hoàn toàn bằng dây cáp, không lo nhiễu sóng hay rớt mạng |
 
-Chế độ cơ là điểm khác biệt lớn. Với LifeSmart, nếu Hub hỏng thì không điều khiển được gì cho đến khi thay Hub mới. Còn MobiEyes, công tắc vẫn hoạt động ở chế độ thủ công ngay cả khi hệ thống mất nguồn.
+Chế độ cơ là điểm khác biệt lớn. Với LifeSmart, nếu bộ điều khiển trung tâm hỏng thì không điều khiển được gì cho đến khi thay cái mới. Còn MobiEyes, công tắc vẫn hoạt động ở chế độ thủ công ngay cả khi hệ thống mất nguồn.
 
 ## 3. Kiến trúc hệ thống
 
-Hệ thống kết nối cực kỳ linh hoạt, hỗ trợ cả hai kiểu: nối tiếp (Daisy Chain) hoặc hình sao (Star):
+Hệ thống kết nối linh hoạt, hỗ trợ cả hai kiểu đấu nối: nối tiếp hoặc hình sao.
 
-- **Tủ mạng chính** chứa LAN Bridge (CF-IP) — đóng vai trò cầu nối giữa mạng tính toán Ethernet và bus CFLink.
-- Từ LAN Bridge, cáp mạng được linh động **nối tiếp** (vòng qua từng tủ) hoặc thu về **hình sao** (tọa ra từng mạch độc lập) về các tủ phụ chứa module DIN-RY8-N.
-- Mỗi tủ sẽ được trang bị bộ nguồn riêng biệt. Việc cấp nguồn qua cáp mạng LAN **chỉ áp dụng cho module IR**. Tuyệt đối cẩn thận: luôn dán nhãn ghi chú "KHÔNG ĐƯỢC CẮT, THÁO RA" trên cáp IR. Nếu để nguồn chạm vào các chân tín hiệu Tx+/-, hệ thống sẽ cháy hỏng ngay lập tức. Đã có rất nhiều trường hợp phải đền thiết bị vì thợ cắt nhầm dây mạng của IR và đấu lộn dây.
+Tủ mạng chính chứa LAN Bridge (CF-IP), đóng vai trò cầu nối giữa mạng Ethernet và bus CFLink. Từ LAN Bridge, cáp mạng được kéo nối tiếp (vòng qua từng tủ) hoặc thu về hình sao (tỏa ra từng mạch độc lập) đến các tủ phụ chứa module DIN-RY8-N.
 
-Cách làm này thích nghi hoàn hảo với mọi địa hình công trình: thiết kế hẹp ngang thì đi nối tiếp cho gọn, mặt bằng rộng mênh mông thì đi hình sao để an toàn (nhánh nào đứt chỉ mất mình nhánh đó). Không còn rào cản gò ép phải đi dây kiểu "sợi cáp duy nhất" như ngày xưa.
+Mỗi tủ được trang bị bộ nguồn riêng biệt. Việc cấp nguồn qua cáp mạng LAN chỉ áp dụng cho module hồng ngoại (IR). Phải dán nhãn ghi chú "KHÔNG ĐƯỢC CẮT, THÁO RA" trên cáp IR. Nếu để nguồn chạm vào các chân tín hiệu Tx+/-, hệ thống sẽ cháy hỏng ngay lập tức. Đã có rất nhiều trường hợp phải đền thiết bị vì thợ cắt nhầm dây mạng của IR và đấu lộn dây.
+
+Cách làm này thích nghi với mọi địa hình công trình: thiết kế hẹp ngang thì đi nối tiếp cho gọn, mặt bằng rộng thì đi hình sao để an toàn (nhánh nào đứt chỉ mất mình nhánh đó).
 
 ## 4. So sánh nhanh với LifeSmart
 
@@ -51,7 +51,7 @@ Cách làm này thích nghi hoàn hảo với mọi địa hình công trình: t
 |---|---|---|
 | Độ ổn định | Rất cao, chạy trên cáp vật lý | Cao, chạy trên sóng CoSS |
 | Thi công | Phức tạp, phải đi dây từ giai đoạn thô | Đơn giản, lắp thêm vào nhà đã hoàn thiện |
-| Chế độ cơ | Có, công tắc vẫn dùng được khi mất hệ thống | Không, phụ thuộc Hub |
+| Chế độ cơ | Có, công tắc vẫn dùng được khi mất hệ thống | Không, phụ thuộc bộ điều khiển trung tâm |
 | Chi phí | Cao hơn (vật tư + nhân công đi dây) | Trung bình cao |
 | Phù hợp | Biệt thự, dự án xây mới, penthouse | Căn hộ, nhà phố, nhà cải tạo |
 
