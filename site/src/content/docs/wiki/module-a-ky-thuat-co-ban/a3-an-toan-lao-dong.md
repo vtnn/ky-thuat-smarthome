@@ -12,8 +12,7 @@ tags: ["an toàn", "lao động", "khẩn cấp", "bảo hộ"]
 
 ---
 
-{/* TODO: Thay link hình khi có ảnh thật */}
-<img src="/wiki/assets/images/a3-hero-an-toan.jpg" alt="Tủ điện gắn biển cảnh báo ĐANG THI CÔNG — KHÔNG ĐÓNG ĐIỆN, kỹ thuật viên mang đầy đủ bảo hộ" class="hero-image" />
+![Tủ điện công trường đã ngắt CB, gắn biển cảnh báo đỏ KHÔNG ĐÓNG ĐIỆN](../../../../assets/images/a3-hero-an-toan.png)
 <p class="hero-image-caption">Biển cảnh báo trên tủ điện — thứ cứu mạng khi người khác vô tình đóng điện lại.</p>
 
 ## 1. An toàn điện

@@ -12,9 +12,9 @@ tags: ["tiêu chuẩn", "thi công", "lắp đặt", "hoàn thiện"]
 
 ---
 
-{/* TODO: Thay link hình khi có ảnh thật */}
-<img src="/wiki/assets/images/a4-hero-tieu-chuan.jpg" alt="Tủ mạng thi công chuẩn: dây gom gọn, nhãn rõ ràng, sơ đồ đấu nối dán trong tủ" class="hero-image" />
+![Tủ mạng thi công chuẩn: dây gom gọn, nhãn rõ ràng, sơ đồ đấu nối dán trong tủ](../../../../assets/images/a4-hero-tieu-chuan.png)
 <p class="hero-image-caption">Tủ mạng hoàn thiện chuẩn — gọn gàng, có nhãn, ai mở tủ cũng hiểu.</p>
+
 
 ## 1. Chiều cao lắp thiết bị
 
