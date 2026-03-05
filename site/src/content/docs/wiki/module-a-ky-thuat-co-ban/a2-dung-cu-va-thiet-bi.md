@@ -12,6 +12,10 @@ tags: ["dụng cụ", "thiết bị đo", "bảo dưỡng"]
 
 ---
 
+{/* TODO: Thay link hình khi có ảnh thật */}
+<img src="/wiki/assets/images/a2-hero-dung-cu.jpg" alt="Bộ dụng cụ kỹ thuật viên smarthome xếp gọn gàng: kìm, tuốc-nơ-vít, đồng hồ vạn năng, máy test cáp" class="hero-image" />
+<p class="hero-image-caption">Thiếu một món là chưa sẵn sàng ra công trường.</p>
+
 ## 1. Dụng cụ cơ bản
 
 Thiếu một trong những thứ dưới đây thì coi như chưa sẵn sàng ra công trường.

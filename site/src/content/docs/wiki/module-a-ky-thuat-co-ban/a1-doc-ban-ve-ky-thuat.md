@@ -12,6 +12,9 @@ tags: ["bản vẽ", "sơ đồ nguyên lý", "smarthome", "camera", "wifi", "đ
 
 ---
 
+<img src="/wiki/assets/images/a1-hero-doc-ban-ve.png" alt="Kỹ thuật viên đối chiếu bản vẽ nguyên lý với tủ điện thực tế tại công trường" class="hero-image" />
+<p class="hero-image-caption">Đọc nguyên lý trước, mặt bằng sau — sai thứ tự là sửa cả ngày.</p>
+
 ## 1. Tại sao phải đọc đúng thứ tự?
 
 Lỗi phổ biến nhất ở công trường là thợ cầm bản vẽ mặt bằng rồi bắt tay thi công luôn. Nhìn thấy vị trí công tắc, ổ cắm thì bắt đầu đục, khoan. Kết quả là đi dây xong mới phát hiện luồng tín hiệu Bus sai, hoặc đường mạng đấu nhầm Switch.

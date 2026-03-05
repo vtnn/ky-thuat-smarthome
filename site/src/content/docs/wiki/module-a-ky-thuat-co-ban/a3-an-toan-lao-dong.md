@@ -12,6 +12,10 @@ tags: ["an toàn", "lao động", "khẩn cấp", "bảo hộ"]
 
 ---
 
+{/* TODO: Thay link hình khi có ảnh thật */}
+<img src="/wiki/assets/images/a3-hero-an-toan.jpg" alt="Tủ điện gắn biển cảnh báo ĐANG THI CÔNG — KHÔNG ĐÓNG ĐIỆN, kỹ thuật viên mang đầy đủ bảo hộ" class="hero-image" />
+<p class="hero-image-caption">Biển cảnh báo trên tủ điện — thứ cứu mạng khi người khác vô tình đóng điện lại.</p>
+
 ## 1. An toàn điện
 
 Điện 220V giật chết người. Nghe thì ai cũng biết, nhưng tai nạn điện ở công trường vẫn xảy ra đều đặn vì thợ chủ quan hoặc vội.

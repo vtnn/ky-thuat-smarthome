@@ -149,6 +149,99 @@ Format: `[TÊN THIẾT BỊ] [KHU VỰC]`
    CLOUDFLARE_API_TOKEN="$CLOUDFLARE_API_TOKEN" npx wrangler pages deploy dist --project-name kythuat-smarthome --branch main --commit-dirty=true
    ```
 
+## 🖼️ Quy chuẩn hình ảnh / video minh họa bài học (Hero Visual)
+
+Mỗi trang bài học có thể có **tối đa 1 hình ảnh hoặc 1 video** đặt ngay sau mục tiêu, trước nội dung chính. Mục đích là tạo ấn tượng đầu tiên mạnh, giúp người học ghi nhớ bài ngay khi mở trang.
+
+### Nguyên tắc chọn hình / video
+
+1. **Chỉ 1 visual duy nhất mỗi trang** — hoặc hình, hoặc video. Nếu bài không cần minh họa thì bỏ qua, không ép.
+2. **Ưu tiên ảnh thực tế công trường** hơn ảnh stock hoặc ảnh AI tạo. Ảnh thật gây ấn tượng mạnh hơn.
+3. **Nội dung hình phải gắn với bài học chính**, không trang trí. Hình phải trả lời được câu hỏi: "Nhìn ảnh này, người học nhớ ngay điều gì?"
+4. **Caption (chú thích) bắt buộc** — viết ngắn, giọng thực tế, nhấn vào bài học cốt lõi.
+5. **Không dùng hình quá nặng** — tối ưu dưới 300KB, định dạng `.jpg` hoặc `.webp`.
+6. **Tỉ lệ hình 16:9** — phù hợp cả điện thoại lẫn laptop, không bị cắt xấu trên bất kỳ màn hình nào.
+7. **Video chỉ dùng khi thao tác khó giải thích bằng ảnh tĩnh** (vd: quy trình bấm cáp, cách đo bằng đồng hồ vạn năng).
+
+### Cách đặt tên file
+
+Format: `[mã-bài]-hero-[từ-khóa].[jpg|webp|mp4]`
+
+Ví dụ:
+- `a1-hero-doc-ban-ve.jpg`
+- `a3-hero-an-toan.jpg`
+- `b1-03-hero-cau-hinh-app.mp4`
+
+### Vị trí lưu file
+
+- Hình ảnh: `site/public/wiki/assets/images/`
+- Video: `site/public/wiki/assets/videos/`
+
+### Cách chèn vào Markdown
+
+```markdown
+{/* TODO: Thay link hình khi có ảnh thật */}
+<img src="/wiki/assets/images/a1-hero-doc-ban-ve.jpg" alt="Mô tả ngắn nội dung hình" class="hero-image" />
+<p class="hero-image-caption">Caption ngắn — nhấn vào bài học cốt lõi.</p>
+```
+
+Với video:
+```markdown
+<video src="/wiki/assets/videos/b1-03-hero-cau-hinh-app.mp4" controls class="hero-image" />
+<p class="hero-image-caption">Caption mô tả thao tác trong video.</p>
+```
+
+### Vị trí chèn trong bài
+
+Chèn **ngay sau phần `---` (ngăn cách sau Mục tiêu), trước heading `## 1.`**:
+
+```markdown
+## Mục tiêu
+- Mục tiêu 1...
+- Mục tiêu 2...
+
+---
+
+<img src="/wiki/assets/images/xx-hero-xxx.jpg" alt="..." class="hero-image" />
+<p class="hero-image-caption">Caption...</p>
+
+## 1. Nội dung bắt đầu từ đây
+```
+
+### CSS đã có sẵn trong `custom.css`
+
+Class `.hero-image` và `.hero-image-caption` đã được định nghĩa — không cần thêm CSS mới.
+
+### Bảng prompt tạo hình cho Module A (tham khảo)
+
+| Trang | File hình | Prompt tạo hình (dùng cho AI image gen hoặc brief cho photographer) | Caption |
+|---|---|---|---|
+| A1 | `a1-hero-doc-ban-ve.jpg` | Tỉ lệ 16:9. Một kỹ thuật viên mặc đồng phục đang cầm bản vẽ kỹ thuật (A3), đứng trước tủ điện đã mở nắp, tay kia chỉ vào sơ đồ nguyên lý trên bản vẽ để đối chiếu với thiết bị bên trong tủ. Ánh sáng tự nhiên từ công trường. Góc chụp ngang tầm mắt, lấy nét vào bản vẽ. | Đọc nguyên lý trước, mặt bằng sau — sai thứ tự là sửa cả ngày. |
+| A2 | `a2-hero-dung-cu.jpg` | Tỉ lệ 16:9. Bộ dụng cụ kỹ thuật viên smarthome bày trên mặt bàn: kìm cắt, tuốc-nơ-vít bộ, đồng hồ vạn năng đang bật, máy test cáp mạng, bút thử điện, cuộn băng keo điện, dây rút nhựa. Nền bàn gỗ hoặc thảm tool-mat. Chụp từ trên xuống (flat lay), ánh sáng đều. | Thiếu một món là chưa sẵn sàng ra công trường. |
+| A3 | `a3-hero-an-toan.jpg` | Tỉ lệ 16:9. Cận cảnh tủ điện công trường, CB đã ngắt, gắn biển cảnh báo đỏ-trắng ghi "ĐANG THI CÔNG — KHÔNG ĐÓNG ĐIỆN". Bên cạnh có bút thử điện và găng tay cách điện treo trên tay nắm tủ. Ánh sáng hơi tối (công trường), biển cảnh báo nổi bật. | Biển cảnh báo trên tủ điện — thứ cứu mạng khi người khác vô tình đóng điện lại. |
+| A4 | `a4-hero-tieu-chuan.jpg` | Tỉ lệ 16:9. Tủ mạng (rack) sau khi thi công xong: cáp mạng gom gọn bằng nẹp, từng sợi cáp dán nhãn trắng rõ ràng ở cả 2 đầu, sơ đồ đấu nối in A4 dán bên trong cánh tủ. Chụp thẳng chính diện, ánh sáng tốt. | Tủ mạng hoàn thiện chuẩn — gọn gàng, có nhãn, ai mở tủ cũng hiểu. |
+
+### Gợi ý prompt cho các module tiếp theo
+
+Khi viết prompt cho module mới, tuân theo nguyên tắc:
+
+1. **Chọn khoảnh khắc đại diện nhất** của bài — cái hình phải "kể" được nội dung bài trong 1 giây.
+2. **Ưu tiên hình có con người đang thao tác** hơn hình chỉ có thiết bị nằm im.
+3. **Mô tả chi tiết trong prompt**: trang phục, góc chụp, ánh sáng, tiêu điểm (focus point). Luôn ghi rõ "Tỉ lệ 16:9" ở đầu prompt.
+4. **Caption viết giọng thực tế**, ngắn gọn, như lời dặn dò của kỹ thuật trưởng.
+5. **Nếu bài quá lý thuyết (bảng thông số, danh sách spec) thì không cần hình** — ép hình vào sẽ vô nghĩa.
+
+| Loại bài | Nên dùng | Ví dụ |
+|---|---|---|
+| Quy trình thi công | Ảnh kỹ thuật viên đang làm | Lắp đặt, kéo dây, đấu nối |
+| An toàn / Cảnh báo | Ảnh cận cảnh biển cảnh báo, trang bị bảo hộ | Biển "KHÔNG ĐÓNG ĐIỆN", PPE |
+| Cấu hình phần mềm | Video quay màn hình (screencast) | Cấu hình app, giao diện controller |
+| Troubleshooting | Ảnh lỗi thực tế + ảnh sau khi sửa | Dây đấu sai → đấu đúng |
+| Danh sách thiết bị / Spec | KHÔNG cần hình | Chỉ bảng thông số |
+| Biểu mẫu / Template | KHÔNG cần hình | Đã có file mẫu download |
+
+---
+
 ## ⚠️ Lưu ý quan trọng cho IDE/Agent
 - **Không tự ý đổi cấu trúc thư mục:** Starlight dựa trên file system để tạo sidebar.
 - **Dữ liệu lớn:** Nếu nội dung quá dài, ưu tiên dùng Bảng (Table) hoặc Checklist để người dùng "lướt" nhanh.
