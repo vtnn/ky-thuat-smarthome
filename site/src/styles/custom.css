@@ -133,10 +133,11 @@ pre {
   text-align: center;
   font-size: 0.82rem;
   color: var(--sl-color-gray-3);
-  margin-top: -1rem;
+  margin-top: 0.5rem;
   margin-bottom: 1.5rem;
   font-style: italic;
 }
+
 
 /* ===== Print-friendly ===== */
 @media print {
