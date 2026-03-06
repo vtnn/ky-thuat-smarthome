@@ -30,8 +30,8 @@ tags: ["LifeSmart", "thiết bị", "danh sách", "Nature", "điều hòa"]
 
 | Dòng sản phẩm | Số nút | Ghi chú |
 |---|---|---|
-| SUBLIME | Đa dạng | Dòng công tắc nghệ thuật cao cấp. **[Chi tiết dòng SUBLIME](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01a-dong-sublime)** |
-| Nature | 1–3 nút | Cảm ứng, mặt kính. **[Chi tiết dòng Nature](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01b-dong-nature)** |
+| SUBLIME | Đa dạng | Dòng công tắc nghệ thuật cao cấp. [Chi tiết dòng SUBLIME](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01a-dong-sublime) |
+| Nature | 1–3 nút | Cảm ứng, mặt kính. [Chi tiết dòng Nature](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01b-dong-nature) |
 | BLEND | 1–3 nút | Nút bấm cơ, mặt nhựa hoặc kim loại  |
 | Polar | 1–3 nút | Nút bấm cơ, mặt nhựa (đơn giản)|
 | 120 Switch | 1–3 nút | Đế chữ nhật |
@@ -40,8 +40,8 @@ tags: ["LifeSmart", "thiết bị", "danh sách", "Nature", "điều hòa"]
 
 | Thiết bị | Chức năng |
 |---|---|
-| General Controller | Bộ điều khiển đa năng, dùng cho cửa cuốn, cổng. **[Chi tiết cấu hình](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01d-general-controller)** |
-| CUBE Switch Module | Công tắc dạng hộp nhỏ, giấu trong đế âm. **[Chi tiết CUBE](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01e-cube-switch-module)** |
+| General Controller | Bộ điều khiển đa năng, dùng cho cửa cuốn, cổng. [Chi tiết cấu hình](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01d-general-controller) |
+| CUBE Switch Module | Công tắc dạng hộp nhỏ, giấu trong đế âm. [Chi tiết CUBE](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01e-cube-switch-module) |
 | Curtain Controller | Điều khiển motor rèm hãng khác |
 
 ### 2.3. Ổ cắm
@@ -71,7 +71,7 @@ tags: ["LifeSmart", "thiết bị", "danh sách", "Nature", "điều hòa"]
 
 | Thiết bị | Chức năng | Lưu ý |
 |---|---|---|
-| HVAC Gateway | Điều khiển điều hòa trung tâm | Kết nối qua dàn nóng. **[Chi tiết HVAC Gateway](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01c-hvac-gateway)** |
+| HVAC Gateway | Điều khiển điều hòa trung tâm | Kết nối qua dàn nóng. [Chi tiết HVAC Gateway](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01c-hvac-gateway) |
 | Central Air Board | Bo điều khiển điều hòa đơn lẻ | Chỉ 1 máy lạnh đang kết nối (Kết nối qua dàn lạnh) |
 | QuickLink Motor | Motor rèm + ray lắp ráp | Nếu là rèm 2 lớp thì hộc rèm cần 25cm |
 | Tubular Motor | Motor rèm cuốn ống | Dùng cho rèm cuốn |

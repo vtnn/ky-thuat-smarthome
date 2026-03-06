@@ -6,7 +6,7 @@ level: "2-4"
 ---
 
 ## Mục tiêu
-- Biết cách đấu nối điện tiếp điểm khô và cấp nguồn một chiều (DC) an toàn.
+- Biết cách đấu nối tiếp điểm khô và cấp nguồn một chiều an toàn.
 - Thiết lập chế độ rơ-le (Jog / Follow) phục vụ đúng hệ thống cổng, rèm và cảm biến ngoại vi.
 
 ---
@@ -14,36 +14,37 @@ level: "2-4"
 ![Đấu nối General Controller](../../../../../assets/images/01d-general-controller/img_17.png)
 <p class="hero-image-caption">Bảng mạch General Controller xử lý tốt thiết bị 3 trạng thái và cảm biến độc lập.</p>
 
-## 1. Thông số thiết bị (I/O Definition)
+## 1. Thông số thiết bị
 
-General Controller là một hộp thiết bị đặc biệt dành cho dân làm kỹ thuật nhà thông minh. Anh em coi nó như một rơ-le khô (Dry Contact) 3 nhánh kết hợp thêm ngõ vào đón tín hiệu. Mục đích chính là biến mấy đồ điện tự động bình thường (mô-tơ cổng, cửa cuốn, chuông báo) thành đồ thông minh chui tuốt vào ứng dụng LifeSmart.
+General Controller là hộp rơ-le khô 3 nhánh kết hợp thêm ngõ vào đón tín hiệu. Mục đích chính là biến các thiết bị tự động bình thường (mô-tơ cổng, cửa cuốn, chuông báo) thành thiết bị thông minh điều khiển qua ứng dụng LifeSmart.
 
-- **Nguồn cấp nuôi thiết bị:** Nguồn **12V / 24V DC** qua chân tròn tiêu chuẩn (5.5*2.5 mm) hoặc chích dây trực tiếp vào chân domino `DC+ / GND`. Vui lòng chỉ cắm 1 đường, cắm cả 2 chân là khét bảng mạch.
-- **Tiếp điểm ngõ vào (Input):** Khung `K1, K2, K3`. Dùng cho tín hiệu mộc nhận từ nút nhấn nút khẩn cấp, cảm biến cháy...
-- **Tiếp điểm ngõ ra rơ-le (Output):** Khung `CH1, CH2, CH3` là cụm chốt đóng rơ-le qua chân `COM` / `COM-` / `COM+`.
-- **Tải tối đa Output:** Kéo nổi được **3A**. Đồ nặng hơn (máy bơm tưới cây, van từ) thì phải quàng rơ-le trung gian.
+- Nguồn cấp nuôi: 12V hoặc 24V một chiều qua chân tròn tiêu chuẩn (5.5×2.5 mm) hoặc đấu dây trực tiếp vào chân domino DC+ / GND. Chỉ cắm 1 trong 2 đường nguồn, cắm cả hai cùng lúc sẽ hỏng bảng mạch.
+- Ngõ vào tín hiệu (Input): khung K1, K2, K3 — dùng nhận tín hiệu từ nút nhấn khẩn cấp, cảm biến cháy hoặc công tắc từ ngoại vi.
+- Ngõ ra rơ-le (Output): khung CH1, CH2, CH3 — cụm đóng rơ-le qua chân COM / COM- / COM+.
+- Tải tối đa: kéo được 3A. Đồ nặng hơn (máy bơm tưới cây, van từ) thì phải quàng thêm rơ-le trung gian.
 
 ## 2. Ứng dụng đấu nối thực tế
 
-Bạn có cực nhiều "bài dọn" cho món này tùy hoàn cảnh thi công.
+### 2.1. Đưa thiết bị báo khói thường vào hệ thống thông minh
 
-### 2.1. Đẩy thiết bị báo khói không thông minh vào hệ thống (Công tắc từ tương tự)
-Cắm cảm biến khói loại công nghiệp chạy nguồn 12V DC:
-- Chích `NC` từ bảng cảm biến vô ngõ `K1`. Nhớ chèn 1 chân GND về ngõ `COM` để nối kín luồng báo động.
-- Cứ hễ thiết bị khói nhảy cắt tiếp điểm khô, App sẽ nảy báo động cháy nhà thông qua cài đặt Kịch bản.
+Cắm cảm biến khói loại công nghiệp chạy nguồn 12V một chiều:
 
-### 2.2. Điều khiển Cổng tự động / Cửa cuốn
-- Xác định tiếp điểm đóng mở cổng đấu về `CH1` và chân `COM+`.
-- Nếu cổng / cửa cuốn sử dụng nhiều kênh cần phải đấu qua rơ-le trung gian, và sử dụng các chân `CH1`, `CH2`, `CH3` kết hợp với `COM+` để đấu nối điều khiển rơ-le trung gian này.
+- Đấu chân NC từ cảm biến khói vào ngõ K1. Nhớ nối thêm 1 chân GND về ngõ COM để khép kín mạch báo động.
+- Khi cảm biến khói nhảy cắt tiếp điểm khô, ứng dụng sẽ bật cảnh báo thông qua kịch bản đã cài sẵn. Cách này đơn giản nhưng hiệu quả — biến hệ báo cháy công nghiệp thường thành hệ báo cháy thông minh gửi thông báo về điện thoại.
+
+### 2.2. Điều khiển cổng tự động hoặc cửa cuốn
+
+- Xác định tiếp điểm đóng mở cổng, đấu về CH1 và chân COM+.
+- Nếu cổng hoặc cửa cuốn cần dùng nhiều kênh thì phải đấu qua rơ-le trung gian, sử dụng các chân CH1, CH2, CH3 kết hợp với COM+ để điều khiển rơ-le trung gian đó.
 
 ## 3. Cài đặt chế độ kích rơ-le trên ứng dụng
 
-Quan trọng nhất của việc biến thiết bị chạy rơ-le theo ý muốn là tùy chọn Working Mode bên trong App:
+Phần quan trọng nhất khi cấu hình General Controller là chọn đúng chế độ hoạt động:
 
-- **Follow (Đảo Trạng Thái):** Kích điểm đầu vào thì điểm đầu ra lật công tắc. Cụ thể: Bấm 1 nhát nhả ra, rơ-le `CH1` đảo mạch; Bấm lại vào K1 nhả ra, `CH1` lại lật lại. Dùng kết nối phím cứng thay công tắc cơ.
-- **Jog (Bấm Giữ - Nhả Chạm):** Trạng thái Rơ-le ăn theo nhịp tay của phím bấm. Bấm giữ nút (K1 chạm chập GND) thì `CH1` hít xuống COM+. Nếu nhả nút (K1 tách ra) thì rơ-le tự động nảy buông ra. Cực kỳ ngon để thiết kế nút nhấn khóa từ mở cửa, hoặc còi hụ khẩn cấp đè tay.
+- Follow (đảo trạng thái): mỗi lần kích ngõ vào, ngõ ra sẽ lật trạng thái. Bấm 1 nhát thì rơ-le CH1 đảo mạch, bấm lại thì CH1 lật lại. Dùng khi cần thay thế công tắc cơ bằng phím cứng.
+- Jog (bấm giữ - nhả buông): rơ-le chỉ duy trì khi giữ nút. Bấm giữ thì CH1 hít xuống COM+, nhả nút thì rơ-le tự buông ra. Chế độ này rất phù hợp cho nút nhấn khóa từ mở cửa, hoặc còi báo khẩn cấp — giữ tay thì kêu, bỏ tay thì tắt.
 
-Có cả bảng delay chỉnh thông số cắt trễ (Auto close delay time) cho mô-tơ nếu cần chỉnh thời gian kẹp hành trình cửa hẹp (mô-tơ cổng rào). Tùy lúc thi công đo thời gian mô-tơ mở cánh mà nhập số giây vào ứng dụng.
+Ngoài ra còn có bảng chỉnh thông số trễ tự đóng cho mô-tơ. Ví dụ cổng rào mở mất 15 giây thì nhập 15 giây vào ứng dụng, sau khi mở hết hành trình rơ-le sẽ tự ngắt. Tùy lúc thi công, đo thời gian mô-tơ mở cánh rồi nhập số giây phù hợp.
 
 ---
 

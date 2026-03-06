@@ -6,73 +6,83 @@ level: "2-5"
 ---
 
 ## Mục tiêu
-- Nắm rõ cách đấu nối cầu đấu Mô-đun CUBE 1 lộ và 2 lộ vào hộp công tắc âm tường.
+- Nắm rõ cách đấu nối mô-đun CUBE 1 lộ và 2 lộ vào hộp công tắc âm tường.
 - Hiểu nguyên lý cấp nguồn mạch và nguyên lý kích hoạt bằng công tắc cơ truyền thống (chân G / K1 / K2).
-- Trọng tâm: Biết cách thi công đấu nối công tắc đảo chiều (Dual Control) dùng mô-đun CUBE tại chân cầu thang.
-- Hiểu cách thiết lập kịch bản hẹn giờ (Schedule) và tự động hóa (Trigger/Intelligence) từ phím cơ qua ứng dụng.
+- Biết cách thi công công tắc đảo chiều dùng mô-đun CUBE tại chân cầu thang.
+- Hiểu cách thiết lập kịch bản hẹn giờ và tự động hóa từ phím cơ qua ứng dụng.
 
 ---
 
 ![Hình dáng thiết bị CUBE Switch Module](../../../../../assets/images/01e-cube-switch-module/cube_1.png)
-<p class="hero-image-caption">Mô-đun CUBE có kích thước siêu nhỏ, thiết kế để nhét giấu vừa vặn vào đế âm phía sau công tắc cơ.</p>
+<p class="hero-image-caption">Mô-đun CUBE có kích thước siêu nhỏ, thiết kế để nhét vừa vặn vào đế âm phía sau công tắc cơ.</p>
 
-## 1. Môi trường lắp đặt và Yêu cầu Tải trọng
+## 1. Môi trường lắp đặt và yêu cầu tải
 
-CUBE Switch Module giấu mình hoàn toàn lọt thỏm sau cụm mặt nạ công tắc lẩy truyền thống. Do thiết kế chia sẻ không gian hộc hộp đế âm tường chật hẹp, anh em thi công bắt buộc đáp ứng các thông số cốt tử sau:
-- **Kích thước hộc đế:** Khoảng không gian sâu đáy hộp đế âm tối thiểu phải chừa lại rỗng **16mm đến 20mm** tính từ mặt đít công tắc cơ hắt vào trong để nhét khối CUBE. Nếu hộp quá nông, tuyệt đối không cố ép tay tì chèn dây điện, sức căng lớn sẽ làm bục rỗng chân terminal đồng trên bộ phát.
-- **Bắt buộc kéo dây Nguội (N):** CUBE yêu cầu nuôi điện liên tục. Trong hộp công tắc phải có luồng hạ đủ tiết diện cả dây N (Nguội) và dây L (Lửa). Dây nguồn không xuống đủ, hệ thống không chạy.
-- **Tải trọng tối đa cho phép kéo:**
-    - Thiết bị rơ-le trong vỏ nhét tường cực nhạy cảm với nhiệt tỏa. Với tải thuần trở (đèn sợi đốt sưởi): Kéo không quá **300W**.
-    - Tuy nhiên, khi đánh dàn tải cảm kháng / dung kháng có dòng nạp xả khởi động lớn (như đèn LED phổ thông hiện nay, hoặc quạt thông gió nhỏ): Anh em phải ép công suất rơ-le chịu tải hạ xuống dưới **150W/kênh**. Không dùng CUBE để gánh van tổng bình nóng lạnh hay bơm cao áp phòng mạch ngắt.
-- **Bộ định hướng Ăng-ten Sóng (Antenna):** Đoạn dây đuôi chuội màu đen thò ra hông chính là bộ phận ăng-ten để bắt nhịp phát truyền mạng lên bộ não Smart Station. Lúc nhồi CUBE vào tường, anh em phải lựa chiều hướng cọng ăng-ten vểnh ra phía sát mặt nạ nhựa. Tuyệt đối: Không cuộn tròn xoắn ăng-ten cho gọn, không bẻ gãy gập góc 90 độ, và nên lách hướng sóng tránh xa cùm sắt / viền mặt nạ kim loại để không bị chắn lồng Faraday làm chết tín hiệu (Offline).
+CUBE Switch Module giấu mình hoàn toàn phía sau mặt nạ công tắc lẩy truyền thống. Do chia sẻ không gian hộp đế âm tường chật hẹp, anh em thi công cần đáp ứng các yêu cầu sau:
 
-## 2. Cách đấu dây cơ bản mô-đun khiển điện (1 Kênh / 2 Kênh)
+- Khoảng không gian sâu đáy hộp đế âm tối thiểu phải còn rỗng 16–20 mm tính từ mặt đít công tắc cơ để nhét được CUBE. Nếu hộp quá nông thì không cố ép — sức căng lớn sẽ bục chân terminal đồng trên mô-đun.
+- Bắt buộc kéo dây nguội (N): CUBE cần được nuôi điện liên tục. Trong hộp công tắc phải có cả dây N (nguội) và dây L (lửa). Thiếu dây nguội thì hệ thống không chạy được.
+- Tải trọng tối đa cho phép: với tải thuần trở (đèn sợi đốt) không quá 300W. Với tải cảm kháng hoặc dung kháng có dòng khởi động lớn (đèn LED phổ thông, quạt thông gió nhỏ) phải hạ xuống dưới 150W mỗi kênh. Không dùng CUBE để gánh bình nóng lạnh hay máy bơm cao áp.
+- Ăng-ten: đoạn dây đen thò ra hông chính là ăng-ten bắt sóng CoSS lên bộ điều khiển trung tâm. Lúc nhồi CUBE vào tường, lựa chiều ăng-ten vểnh ra phía sát mặt nạ. Không cuộn tròn xoắn ăng-ten cho gọn, không bẻ gãy gập góc 90 độ, và tránh xa viền mặt nạ kim loại — kim loại sẽ chắn sóng như lồng Faraday làm thiết bị mất kết nối.
 
-Hệ CUBE Switch xé ra làm loại điều khiển 1 lộ đèn (1 Way) và 2 lộ đèn (2 Way). Cùng tham chiếu nguyên lý đấu chung, thiết kế phần cổng nguồn cách ly sạch sẽ với cổng tín hiệu:
+## 2. Cách đấu dây cơ bản (1 kênh / 2 kênh)
 
-### 2.1. Đấu cụm dây truyền lưới điện nặng (N, L, L1, L2)
-- **Chân N / L:** Cắm kẹp dây Nguội và Lửa của điện lưới 220V vào để nuôi bảng mạch sống.
-- **Chân L1 / L2 (Live Out):** Đây là rơ-le nảy nguồn cấp thẳng điện Lửa lên cho các lộ bóng đèn trên trần. Tách rời đấu nối với cáp khiển đèn tại công trình.
-*(Chú ý an toàn cháy nổ: Kìm tuốt vỏ chỉ cắt xén lõi đồng lộ tối đa vừa chạm ngưỡng tiêu chuẩn **5mm**, đâm rút lút cáp cắm thẳng vào lỗ đồng terminal. Nhô đầu đồng cao sẽ dễ chạm chập phóng điện lửa hồ quang).*
+CUBE Switch có loại điều khiển 1 lộ đèn và 2 lộ đèn. Cổng nguồn và cổng tín hiệu được cách ly rõ ràng.
 
-### 2.2. Đấu dây thu tín hiệu một chiều với Công tắc Cơ Lẫy (G, K1, K2)
-Rời xa cụm điện lưới 220V nguy hiểm, chân G / K1 / K2 bên phía góc hông chỉ mang luồng áp tín hiệu cực vi nhạy một chiều (Low DC), có mục đích là "đọc" xung xem anh em có đang bật lên / tắt xuống cái lẫy công tắc cơ gắn ốp nổi ở mặt ngoài không:
-- **Chân G (Ground/COM):** Đóng vai trò là dây chung đón mạch (COM tín hiệu). Anh em đấu mồi vắt ngược dây này đâm vào lỗ chờ cực chung giữa của cụm lẫy công tắc vật lý.
-- **Chân K1 / K2:** Đưa ngược luồng cắm nốt vào cực chờ lộ L1 / L2 trên vỏ mặt công tắc cơ. Khi tay chủ nhà bấm bật lẫy, K1 sẽ đi chập kín bo mạch với chân G, xung nhịp truyền xuống cấp vi xử lý con CUBE, tức thì CUBE phát lệnh bắn đóng rơ-le nhả cục điện 220V ở cổng L1 to ngoài cùng bay thẳng lên bóng đèn trên trần tường. 
+### 2.1. Đấu cụm dây điện lưới (N, L, L1, L2)
+
+- Chân N / L: cắm dây nguội và lửa của điện lưới 220V vào để nuôi bảng mạch.
+- Chân L1 / L2 (Live Out): đây là ngõ ra cấp điện lên các lộ bóng đèn trên trần. Tách rời đấu nối với cáp đèn tại công trình.
+
+Lưu ý an toàn: kìm tuốt vỏ chỉ cắt xén lõi đồng lộ tối đa 5 mm vừa chạm ngưỡng tiêu chuẩn, cắm thẳng vào lỗ terminal. Nhô đầu đồng cao quá sẽ dễ chạm chập phóng hồ quang.
+
+### 2.2. Đấu dây tín hiệu với công tắc cơ (G, K1, K2)
+
+Rời xa cụm điện lưới 220V nguy hiểm, chân G / K1 / K2 chỉ mang luồng tín hiệu điện áp rất thấp (một chiều), có mục đích "đọc" xem công tắc cơ đang ở vị trí bật hay tắt:
+
+- Chân G (dây chung): đấu vào cực chung giữa của công tắc lẩy.
+- Chân K1 / K2: đấu vào cực lộ L1 / L2 trên vỏ mặt công tắc cơ.
+
+Khi bật công tắc lẩy, K1 sẽ chập kín mạch với chân G, vi xử lý CUBE nhận tín hiệu và lập tức đóng rơ-le cấp điện 220V qua cổng L1, bóng đèn sáng.
 
 ![Sơ đồ CUBE 2 lộ điều khiển sáng đèn](../../../../../assets/images/01e-cube-switch-module/cube_6.png)
-<p class="hero-image-caption">Bảng mạch cổng thu tín hiệu G/K1/K2 chỉ nối mộc với nẫy công tắc cơ. Có dải bo hoàn toàn cách ly cụm cáp nguy hiểm 220V chân L, N, L1, L2.</p>
+<p class="hero-image-caption">Cổng thu tín hiệu G/K1/K2 chỉ nối với công tắc cơ, cách ly hoàn toàn với cụm cáp 220V chân L, N, L1, L2.</p>
 
-## 3. Bài vở thực chiến: Lắp công tắc đảo chiều Cầu Thang (Dual Control)
+## 3. Thực chiến: Lắp công tắc đảo chiều tại cầu thang
 
-Tại các vùng thi công nhạy cảm như nhà nối tầng đất, đường cầu thang rẽ nhánh, ta thường gặp mạch điện "Đảo Chiều" 1 cụm 2 công tắc đầu cuối cùng nhau quyết định chiếu sáng 1 bộ đèn rọi đi trên bậc chéo. Nhờ ứng dụng nhúng bộ CUBE, có 2 cách thức chuyên trị cho mạng đảo cầu thang cực dễ:
+Tại các vị trí như cầu thang, thường có 2 công tắc ở đầu và cuối cùng điều khiển 1 đèn. Với CUBE có 2 cách xử lý.
 
-### Cách 1: Đấu chéo vật lý dùng chung 1 CUBE (Sửa chữa lưới cũ có đi sẵn cáp liên lạc)
-- **Hoàn cảnh bối cảnh:** Hai mặt vách tường công tắc trên dưới đã liên tuyến thông với nhau sẵn bởi 3 sợi dây tín hiệu chạy giấu luồn trong ruột rỗng của ruột gà tường lõi (Traveler cables / dây liên lạc); Hộp đế nào đó tại mặt tiếp nhận điện có thả đủ tổ hợp cả cục N, dây L, cộng thêm đuôi cáp luồng bắt chờ lên chóp cụm đèn.
-- **Cách thi công:** Nhồi duy nhất 1 cục thiết bị ảo CUBE áp chặt vào trong hộc hộp đế cắm cáp tụ góc. Chân tín hiệu hông G và chân hông K1 của cục CUBE nhện mắc nối vắt nhại theo cổng L và ngõ L1/L2 của hệ lẫy đấu 3 cực đảo chéo vật lý truyền thống. Lệnh nhú từ phím nào vắt mượn dây nối chung cũng bắn nhịp dập vào cổng G-K1, CUBE kích đọc tín hiệu lẩy lật một bóng đèn vẹn tròn.
+### Cách 1: Đấu chéo vật lý dùng 1 CUBE (nhà đã có sẵn cáp liên lạc)
 
-![Sơ đồ đảo chiều bằng liên kết dòng cáp lẫy mạch chéo K1](../../../../../assets/images/01e-cube-switch-module/cube_double_1.png)
-<p class="hero-image-caption">Cách đi chéo kinh điển mượn 3 lõi cáp thông dụng báo gộp vào chuỗi chéo K1. Nhồi ép duy nhất 1 cục Module vào vách tường nhện.</p>
+Áp dụng khi hai hộp công tắc trên dưới đã có sẵn 3 sợi dây liên lạc chạy thông với nhau trong tường. Một trong hai hộp phải có đủ dây N, L và dây kéo lên đèn.
 
-### Cách 2: Bắn phát không dây dùng chéo 2 CUBE (Cứu cánh trị vướng đường ghen chôn ngầm không nối thông nhau)
-Đây là cách làm hiện đại, xé toạc ràng buộc về dây đồng chéo đi đường vòng, lợi dụng cơ chế nhúng "Trường Cảnh - Liên Minh" (Trigger) đồng bộ sóng đám mây giữa các nút mạng ở mặt bằng riêng biệt.
-- **Điều kiện khung sàn:** Xui rủi là đường hai cầu thang xa nhau tít tắp, đi rách trần không có ruột dây móc. Hai đế vách chôn xa rời. Xong chỉ cần chắc chắn cả 2 hộc hộp chờ đế đó cắm thọc được mồi L (Lửa) cộng N (Nguội). Môt đầu đế trên không vướng tải lên đèn rọi, một đế hộp góc dưới xách tay nắm đầu cáp kéo dây đèn chóp trần chờ. Bắt buộc bỏ chi phí quất nguyên 2 cục CUBE xé lẻ từng phòng đế.
-- **Cách thi công lắp điện sống:** 
-    - Lỗ hộp đế dưới trống cắm mồi đèn: Kìm ốp giấu CUBE nhánh số 1. Chân mồi G và chân mồi K1 bấu vòng khép cho lẩy lật bấm cơ. Lưới cáp N và L cấp điện sạc nuôi sống thiết bị mạng nảy báo CUBE 1. Chân ngõ ra lộ sáng L1 cắt gọt bỏ trống cụt xơ rễ do phòng đó chả kéo nối bóng đèn vật lý nào.
-    - Lỗ hộp chôn phía trên, nơi nắm đầu chuôi giắc cắm bóng đèn trần: Ép CUBE chính số 2. Chân lẫy G / K1 sập vô ngàm nẫy cơ. Mắc N, L cấp sống board. Và thọc đúng cáp L1 cắm phập lút ngập vô sợi cáp kéo thốc nối điện vào bóng đèn.
-    - Thi công lật tay lên kho điện thoại phần hệ thống LifeSmart App, truy xuất gán lệnh Liên Đới Logic (Trigger / Scene / Logic Bộ Lập Trình Boolean) gõ đầu 2 mạng không dây con CUBE trỏ ngầm liên minh dính chéo vào nhau. Theo lý thuyết, ông đứng hộp góc dưới rạch mặt phím cơ, CUBE góc đế sàn một nảy gửi đi sóng điện ngầm báo, CUBE nấp đỉnh hộc hai trần đập gót nhảy giật bắn điện ra L1 lóe sáng đèn choẹt cầu thang giữa đỉnh tầng. Ngược lại tắt thình lình trên trần cũng báo lệnh ngầm xuống. 
+Cách thi công: nhồi 1 CUBE duy nhất vào hộp đế có đủ cáp. Chân G và K1 nối vào cổng L và L1/L2 của hệ lẩy đấu 3 cực đảo chéo truyền thống. Bấm phím ở đầu nào, tín hiệu cũng chạy qua dây liên lạc chung về cổng G-K1, CUBE đọc được và đảo trạng thái đèn.
 
-![Sơ đồ thả nổi tự lập Triggers bằng hai bo CUBE riêng](../../../../../assets/images/01e-cube-switch-module/cube_double_2.png)
-<p class="hero-image-caption">Mô hình cực đắt giá dùng vắt 2 mạng CUBE thả nổi cô lập hộc tường, giải cứu luồng mạch cấu hình chéo trên giao diện mềm lưới sóng không cần bắn khoan bít luồn cáp điện thông vách.</p>
+![Sơ đồ đảo chiều bằng cáp chéo K1](../../../../../assets/images/01e-cube-switch-module/cube_double_1.png)
+<p class="hero-image-caption">Cách đi chéo truyền thống: mượn 3 lõi cáp liên lạc báo gộp vào K1, chỉ cần 1 CUBE duy nhất.</p>
 
-## 4. Ráp phần mềm CUBE lên cấu hình ứng dụng (LifeSmart App)
+### Cách 2: Dùng 2 CUBE kết nối không dây (nhà không có cáp liên lạc nối thông)
 
-Kết thúc khóa vỏ mặt lẫy nhựa trùm về vị trí chôn ban đầu và chập sập cầu dao điện aptomat (CB) sáng board, thao tác "ép nhận máu" (Pairing) cho mô-đun nhúng ứng dụng App:
-1. Mở vạch giao diện gốc trên con điện thoại LifeSmart App -> Móc **Dấu "+" Add Device** -> Rê tay nhặt hình biểu tượng **CUBE Switch Module**.
-2. **Kích hoạt học lẩm Pairing:** Nhịp này bắt thợ nhanh tay lẩy lật liền tay **bật/tắt dập nhả mặt công tắc lẫy cơ liên tiếp gõ chừng độ 6 vòng (tổng cộng ấn vạch 12 lần lẩy công tắc hất kịch lên hất rạc xuống)**. Chú ý tĩnh không gian thính tai nghe kỹ ruột khối nhựa CUBE chọt phát khấc chông *"tạch tạch"* cắn nhả rơ-le liên thanh nháy nhịp ngắn nhanh, đánh dấu board nảy còi ngầm báo mạch chuyển thành trạng thái sẵn ép chóp vơ sóng đăng ký mồi vòng ghép Hub.
-3. Loanh quanh xoay loading chừng ngót phút, App sẽ tự lẩy nhện móc tóm thiết bị mạng thông hẻm cục CUBE hiển thị Icon công tắc trên nhà diện Home mượt lừ lự rành rẽ ra, giờ thợ được bấm lách sang Tab Menu để đổi tên vùng vắn tắt lại (Ví dụ quy chuẩn gõ nhẹ: `Đèn Cầu Thang T1`).
-4. Anh em thi công xách tai khoét mò thêm ngách hẻm **Cài đặt giữ nếp (Set Default State):** Quẹt kéo lùa vào góc Settings bánh răng -> mục Save as Default, tính năng tinh chỉnh cực phê hỗ trợ cấu hình cái tật ngủ dở giấc của nếp nhúng CUBE khi công trình vừa bị cục điện lực cắt rứt cúp pha ngầm rồi đột ngột xả tống trào dòng pha có điện đỏ lại. Chủ nhà hay đập bàn do lúc 2h sáng đang ngủ ngon bị tự động sáng chói lòa bừng mắt cái đèn cục cầu thang nhà vệ sinh theo nếp sống sập sạp lại mạch. Ép rờ le Default ghi cứng mạch về chế trạng mốc OFF mộc mạc khi sập sống dội dòng có điện lại là hết kêu rên.
-5. Để phá tung vỡ mở nếp chốt trói toàn bộ kỹ thuật siêu trâu của vi xử lí nhồi mạch CUBE, thi công cấu hình chêm cả mảng định tuyến chạy lưới lập trình theo chuỗi khắc khe hẹp (Schedule rạch múi giờ), hoặc cài lẩy ma trận nút móc ảo chéo xích móc Logic bộ lọc nếu phòng cần dính móc cựa thêm với ngàm của cục Cối Radar mắt hồng ngoại liếc cảm biến bắt dáng quét bước chân khỏa khoảng (Cầm chịch lưới cấu hình phức ở vòm Menu Tab Trigger hay thâm thúy thì chui luồng thẻ gốc mạc Intelligence Template).
+Áp dụng khi hai hộp công tắc ở xa nhau, không có đường cáp liên lạc nối thông giữa hai đầu. Điều kiện là cả 2 hộp đều phải có dây N và L. Một đầu nắm cáp kéo lên đèn, đầu còn lại không cần.
+
+Cách thi công:
+
+- Hộp đế phía trên (nơi nắm cáp kéo đèn): ép CUBE số 2 vào. Đấu G / K1 cho lẩy công tắc cơ, mắc N / L nuôi sống board, và đấu L1 lên bóng đèn.
+- Hộp đế phía dưới (không có cáp đèn): ép CUBE số 1 vào. Đấu G / K1 cho lẩy công tắc cơ, mắc N / L cấp điện nuôi board. Chân L1 bỏ trống vì hộp này không nối bóng đèn.
+- Mở ứng dụng LifeSmart, tạo lệnh liên kết logic (kịch bản điều kiện kích hoạt) giữa 2 CUBE: khi CUBE 1 phát hiện công tắc bật, gửi lệnh không dây cho CUBE 2 đóng rơ-le bật đèn, và ngược lại.
+
+![Sơ đồ 2 CUBE không dây](../../../../../assets/images/01e-cube-switch-module/cube_double_2.png)
+<p class="hero-image-caption">Dùng 2 CUBE tách biệt, liên kết bằng kịch bản không dây — giải pháp khi tường không có cáp liên lạc nối thông.</p>
+
+## 4. Cấu hình CUBE trên ứng dụng LifeSmart
+
+Sau khi lắp xong phần cứng và bật CB cấp điện:
+
+1. Mở ứng dụng LifeSmart → dấu "+" → chọn CUBE Switch Module.
+2. Ghép nối: bật/tắt công tắc lẩy cơ liên tiếp khoảng 6 lần (tổng cộng 12 lần gạt lên gạt xuống). Lắng nghe tiếng rơ-le "tạch tạch" nhịp nhanh bên trong CUBE — đó là dấu hiệu thiết bị đã vào chế độ sẵn sàng ghép nối.
+3. Chờ khoảng 1 phút, ứng dụng sẽ tự nhận thiết bị. Sau đó đặt tên theo quy tắc chuẩn (ví dụ: Đèn Cầu Thang T1).
+4. Cài trạng thái mặc định (Save as Default): vào cài đặt (biểu tượng bánh răng) trong ứng dụng, tìm mục Save as Default. Tính năng này quyết định khi mất điện rồi có điện lại, rơ-le sẽ trở về trạng thái nào. Nên đặt mặc định là tắt — tránh tình huống 2 giờ sáng cúp điện rồi có lại, đèn cầu thang tự sáng chói làm cả nhà giật mình.
+5. Nếu cần mở rộng, cấu hình thêm kịch bản hẹn giờ (Schedule) hoặc liên kết logic (điều kiện kích hoạt) để kết hợp CUBE với cảm biến chuyển động, cảm biến radar — ứng dụng LifeSmart có sẵn các mẫu trong mục lập trình thông minh.
 
 ---
 
