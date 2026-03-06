@@ -40,8 +40,8 @@ tags: ["LifeSmart", "thiết bị", "danh sách", "Nature", "điều hòa"]
 
 | Thiết bị | Chức năng |
 |---|---|
-| General Controller | Bộ điều khiển đa năng, dùng cho cửa cuốn, cổng |
-| CUBE Switch Module | Công tắc dạng hộp nhỏ, giấu trong đế âm kết hợp với công tắc cơ thường |
+| General Controller | Bộ điều khiển đa năng, dùng cho cửa cuốn, cổng. **[Chi tiết cấu hình](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01d-general-controller)** |
+| CUBE Switch Module | Công tắc dạng hộp nhỏ, giấu trong đế âm. **[Chi tiết CUBE](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01e-cube-switch-module)** |
 | Curtain Controller | Điều khiển motor rèm hãng khác |
 
 ### 2.3. Ổ cắm
@@ -71,7 +71,7 @@ tags: ["LifeSmart", "thiết bị", "danh sách", "Nature", "điều hòa"]
 
 | Thiết bị | Chức năng | Lưu ý |
 |---|---|---|
-| HVAC Gateway | Điều khiển điều hòa trung tâm | Hỗ trợ toàn bộ máy lạnh trong nhà (Kết nối qua dàn nóng) |
+| HVAC Gateway | Điều khiển điều hòa trung tâm | Kết nối qua dàn nóng. **[Chi tiết HVAC Gateway](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01c-hvac-gateway)** |
 | Central Air Board | Bo điều khiển điều hòa đơn lẻ | Chỉ 1 máy lạnh đang kết nối (Kết nối qua dàn lạnh) |
 | QuickLink Motor | Motor rèm + ray lắp ráp | Nếu là rèm 2 lớp thì hộc rèm cần 25cm |
 | Tubular Motor | Motor rèm cuốn ống | Dùng cho rèm cuốn |
