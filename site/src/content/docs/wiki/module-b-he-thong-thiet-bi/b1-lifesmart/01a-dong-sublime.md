@@ -32,9 +32,6 @@ Hãng chia rành mạch các dải sản phẩm theo kích thước để anh em
 - **Pro (172x150 mm) / Max (258x150 mm):** Bảng tích hợp lai phím cứng với màn hình lớn. Yêu cầu tính toán đế chôn tường chuẩn xác.
 - **Ultra (316x170 mm):** Bảng chỉ huy lớn nhất trang bị màn hình 12.3 inch, đủ sức vẽ toàn bộ mô hình nhà lên để điều khiển (RoomMap).
 
-<video src="/wiki/assets/videos/Ultra(ENG%20subtitle).mp4" controls class="hero-video"></video>
-<p class="hero-image-caption">Trải nghiệm giao diện điều khiển toàn cảnh trực quan trên màn hình Ultra cỡ lớn.</p>
-
 Về chất liệu, mặt viền hoàn toàn có thể đặt tùy chỉnh riêng. Từ kim loại khắc CNC (Elite, Premium, Signature) cho đến ốp gỗ, bọc da theo đúng spec thiết kế nội thất để ẩn giấu hẳn công tắc vào kiến trúc của căn biệt thự.
 
 ## 3. Cấu trúc Actuator và giao thức CoSS cục bộ
@@ -109,5 +106,7 @@ Sự hiện diện của SUBLIME chính là thứ tách biệt căn nhà khỏi 
 ---
 
 ## Tài liệu tham khảo
-- [Sublime Training - CoTP.pdf](/wiki/assets/pdf/Sublime%20Training%20-%20CoTP.pdf)
-- [SUBLIME Catalog 260228 .pdf](/wiki/assets/pdf/SUBLIME%20Catalog%20260228%20.pdf)
+- [SUBLIME Catalog 260228 .pdf](https://drive.google.com/file/d/1hgFp9rl7HyK4aJ4U9_EG4qXJfZ7eLUr1/view?usp=drive_link)
+- [SUBLIME Configuration Guide.pdf](https://drive.google.com/file/d/1U8AEgErdfXP5csqE_Qhsmtz7lMSaRhe7/view?usp=drive_link)
+- [Sublime Training - CoTP.pdf](https://drive.google.com/file/d/1l5kP-1uUsMt_oM4oJ0ZLgyJPBhr1jTXg/view?usp=drive_link)
+- [SUBLIME Training - Video](https://drive.google.com/file/d/1895jjRN6FLiV9SgTLCvUJIU_iAcz-VVo/view?usp=sharing)

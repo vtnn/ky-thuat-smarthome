@@ -17,9 +17,6 @@ tags: ["LifeSmart", "Nature", "màn hình", "điều khiển"]
 
 Dòng Nature là niềm tự hào của LifeSmart trong phân khúc màn hình điều khiển gắn tường. Điểm khác biệt lớn nhất so với các dòng màn hình cảm ứng thuần túy trên thị trường là Nature giữ lại các phím bấm vật lý, giúp người dùng (đặc biệt là người già và trẻ em) có thể kích hoạt nhanh các kịch bản quan trọng mà không cần nhìn vào màn hình.
 
-<video src="/wiki/assets/videos/Nature%20Series%20Introduction.mp4" controls class="hero-video"></video>
-<p class="hero-image-caption">Video giới thiệu các dòng Nature: Sự liền mạch giữa công nghệ hiển thị và phím nhấn cơ học.</p>
-
 ## 1. Màn hình điều khiển trung tâm Nature 7
 
 Nature 7 là dòng màn hình cao cấp nhất, đóng vai trò như một "bộ não" hiển thị cho toàn bộ căn nhà. Với kích thước màn hình 7 inch cho không gian thao tác cực kỳ thoải mái.
@@ -88,6 +85,6 @@ Nature Mini là dòng thiết bị lai, kết hợp giữa công tắc thông mi
 ---
 
 ## Tài liệu tham khảo
-- [Giới thiệu dòng Nature (PDF)](/wiki/assets/pdf/LifeSmart%20Brochure%20250929.pdf)
-- [Hướng dẫn cài đặt Nature (Google Docs)](https://docs.google.com/document/d/1S0MaCi1mnk9KFl9eccn_drE-o1F8Iq-r/edit)
-- [Thư mục hướng dẫn cài đặt Nature (Drive)](https://drive.google.com/drive/folders/1B_znIzettzmx4HUYxsCR26Z_aZ9bF1Lm)
+- [Giới thiệu dòng Nature](https://drive.google.com/file/d/1fTBlvwOsanYKhR_P5AMORJnfAf_2o4uE/view?usp=drive_link)
+- [Hướng dẫn cài đặt Nature](https://docs.google.com/document/d/1S0MaCi1mnk9KFl9eccn_drE-o1F8Iq-r/edit)
+- [Thư mục hướng dẫn cài đặt Nature](https://drive.google.com/drive/folders/18Tr4YnW22HqCSOHBy8VgTpGbPkR8DLCo)

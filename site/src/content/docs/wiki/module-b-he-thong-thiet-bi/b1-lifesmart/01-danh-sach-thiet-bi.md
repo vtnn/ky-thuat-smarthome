@@ -103,6 +103,6 @@ Dùng để thay thế các remote hồng ngoại thông thường (TV, quạt, 
 ---
 
 ## Tài liệu tham khảo
-- [LifeSmart Brochure 250929.pdf](/wiki/assets/pdf/LifeSmart%20Brochure%20250929.pdf)
+- [LifeSmart Brochure 250929.pdf](https://drive.google.com/file/d/1fTBlvwOsanYKhR_P5AMORJnfAf_2o4uE/view?usp=drive_link)
 - [Thư mục tài liệu tổng hợp LifeSmart (Drive)](https://drive.google.com/drive/folders/1RGZRgWJHFBUisvcJDJZeW6HBTIsZKWBy)
 - [Thư mục tài liệu kỹ thuật LifeSmart (Drive)](https://drive.google.com/drive/folders/1B_znIzettzmx4HUYxsCR26Z_aZ9bF1Lm)
