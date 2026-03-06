@@ -174,7 +174,7 @@ Ví dụ:
 
 ### Vị trí lưu file
 
-- Hình ảnh: **`site/src/assets/images/`** (bỏ hình thẳng vào đây, không cần chia thư mục theo module)
+- Hình ảnh: **`site/src/assets/images/[tên_trang_đang_sử_dụng]/`** (BẮT BUỘC CHIA THÊM THƯ MỤC THEO TÊN TRANG ĐANG SỬ DỤNG. Ví dụ trang `01b-dong-nature.md` thì ảnh nằm ở `assets/images/01b-dong-nature/`)
 - Video: `site/public/wiki/assets/videos/` (video vẫn giữ trong `public/` vì Astro không xử lý video)
 
 > **Lý do dùng `src/assets/` thay vì `public/`:** Ảnh trong `src/assets/` được Astro xử lý tự động khi build — convert sang WebP, nén, thêm lazy-load và kích thước chuẩn. Ảnh trong `public/` phục vụ nguyên bản, không tối ưu gì.
@@ -184,7 +184,7 @@ Ví dụ:
 Dùng **Markdown syntax chuẩn** (KHÔNG dùng thẻ `<img>` HTML thuần — Astro sẽ không tối ưu được):
 
 ```markdown
-![Mô tả ngắn nội dung hình](../../../../assets/images/a1-hero-doc-ban-ve.png)
+![Mô tả ngắn nội dung hình](../../../../../assets/images/a1-doc-ban-ve-ky-thuat/a1-hero-doc-ban-ve.png)
 <p class="hero-image-caption">Caption ngắn — nhấn vào bài học cốt lõi.</p>
 ```
 

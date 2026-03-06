@@ -12,7 +12,7 @@ tags: ["LifeSmart", "Nature", "màn hình", "điều khiển"]
 
 ---
 
-![Dòng sản phẩm Nature LifeSmart](../../../../../assets/images/01-danh-sach-thiet-bi-nature.png)
+![Dòng sản phẩm Nature LifeSmart](../../../../../assets/images/01b-dong-nature/01-danh-sach-thiet-bi-nature.png)
 <p class="hero-image-caption">Nature Series: Dòng màn hình điều khiển trung tâm kết hợp phím cơ vật lý, mang lại trải nghiệm tương tác trực quan nhất.</p>
 
 Dòng Nature là niềm tự hào của LifeSmart trong phân khúc màn hình điều khiển gắn tường. Điểm khác biệt lớn nhất so với các dòng màn hình cảm ứng thuần túy trên thị trường là Nature giữ lại các phím bấm vật lý, giúp người dùng (đặc biệt là người già và trẻ em) có thể kích hoạt nhanh các kịch bản quan trọng mà không cần nhìn vào màn hình.
@@ -45,18 +45,18 @@ Màn hình Nature chạy nền tảng hệ điều hành phức tạp và đấu
 1. **Cắt điện và kiểm tra an toàn:** Trước lúc can thiệp, dập hẳn aptomat/CB cấp nguồn và dùng bút thử điện xác nhận không còn dòng tại vị trí hộp âm.
 2. **Tách rời đế và mặt cảm ứng:** Ngàm liên kết mặt trước và cụm nguồn khá chặt. Chú ý điểm tiếp nối gờ nhựa, bẩy nhẹ nhàng để tách mạch hiển thị ra mà không gãy chốt.
 
-![Tách khớp đế và màn hình](../../../../../assets/images/nature_mini_doc_0.jpg)
+![Tách khớp đế và màn hình](../../../../../assets/images/01b-dong-nature/nature_mini_doc_0.jpg)
 <p class="hero-image-caption">Quá trình tách khớp giữa bộ điều khiển trung tâm và cụm đế âm cấp tải lưới.</p>
 
 3. **Đấu cáp tải chuẩn kỹ thuật:** Theo sơ đồ mặt sau, phải siết đủ ốc cáp N (nguội) và L (lửa). Nếu lộ L1, L2 không sử dụng chiếu sáng thì để trống cốt đồng, tuyệt đối không đấu chập nhánh. Bắt buộc siết chặt ốc tránh lỏng cáp sinh hồ quang.
 
-![Sơ đồ đấu cáp tải điện](../../../../../assets/images/nature_mini_doc_1.jpg)
+![Sơ đồ đấu cáp tải điện](../../../../../assets/images/01b-dong-nature/nature_mini_doc_1.jpg)
 <p class="hero-image-caption">Đấu cáp tải N và L cực kỳ quan trọng, quyết định nguồn cấp màn hình bật ổn định.</p>
 
 4. **Cố định hộp âm:** Lùa cáp gọn và ôm đế vào khu vực chôn chuẩn. Dùng ốc hai bên hông vặn chặt vừa tay định hình khối thân vuông.
 5. **Lên nguồn theo dõi khởi động:** Ráp khít mặt màn hình lại khớp cũ. Bật aptomat cấp điện trở lại. Thiết bị sẽ mất vài chục giây đẩy hệ điều hành từ mốc boot ban đầu đến lúc màn sáng hiện Home.
 
-![Boot khởi động màn hình](../../../../../assets/images/nature_mini_doc_2.jpg)
+![Boot khởi động màn hình](../../../../../assets/images/01b-dong-nature/nature_mini_doc_2.jpg)
 
 ### 3.2. Thiết lập chế độ giao tiếp (Mode of Operation)
 
@@ -69,12 +69,12 @@ Nature Mini có điểm đặc thù linh hoạt nhờ vào hai chế độ chạ
 1. Chạm điểm biểu tượng **ba dấu chấm** góc phải trên dải màn hình để đẩy bảng menu xuống.
 2. Chọt vào thanh **System Settings** (Cài đặt hệ thống).
 
-![Mở System Settings cài hệ thống](../../../../../assets/images/nature_mini_doc_3.jpg)
+![Mở System Settings cài hệ thống](../../../../../assets/images/01b-dong-nature/nature_mini_doc_3.jpg)
 <p class="hero-image-caption">Menu gọi các phân cấp tuỳ chọn lõi nằm phía trên bảng điều khiển giao diện hệ thống.</p>
 
 3. Chọn mục **Working Mode** và chọn chế độ Smart Station hay Sub Device phụ thuộc vào dự án.
 
-![Thiết lập Working Mode kết nối](../../../../../assets/images/nature_mini_doc_4.jpg)
+![Thiết lập Working Mode kết nối](../../../../../assets/images/01b-dong-nature/nature_mini_doc_4.jpg)
 <p class="hero-image-caption">Cấu hình Working Mode.</p>
 
 ## 4. Cốt lõi dành cho đội ngũ triển khai

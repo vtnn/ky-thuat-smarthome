@@ -11,7 +11,7 @@ level: "2-4"
 
 ---
 
-![Đấu nối General Controller](../../../../../assets/images/general_ctrl_1.png)
+![Đấu nối General Controller](../../../../../assets/images/01d-general-controller/general_ctrl_1.png)
 <p class="hero-image-caption">Bảng mạch General Controller xử lý tốt thiết bị 3 trạng thái và cảm biến độc lập.</p>
 
 ## 1. Thông số thiết bị (I/O Definition)

@@ -12,7 +12,7 @@ level: "3-6"
 
 ---
 
-![Hình ảnh thực tế HVAC Gateway](../../../../../assets/images/hvac_1.png)
+![Hình ảnh thực tế HVAC Gateway](../../../../../assets/images/01c-hvac-gateway/hvac_1.png)
 <p class="hero-image-caption">Bảng cổng kết nối và màn hình hiển thị trực quan của bộ chuyển đổi trung tâm nhiệt độ.</p>
 
 ## 1. Thông số cốt lõi
@@ -32,7 +32,7 @@ Các phiên bản bộ chuyển đổi đời cũ, anh em phải bật tắt tha
 
 ***Mẹo thực chiến:***  Các phiên bản Gateway mới ngày nay (loại vỏ kim loại/nhựa mới xám) thường có khả năng **Auto-Detect** — không cần gạt nút bằng tay nữa mà tự dò giao thức luôn. Tuy nhiên, nếu đấu vào mà màn hình bộ đọc không hiển thị trạng thái *"Searching HVAC"*, có thể thiết bị điều hoà đang không được dàn nóng cấp lệnh, vui lòng kiểm tra nguồn phía hệ VRV/VRF.
 
-![Vị trí chân đấu dây kết nối tín hiệu F1/F2](../../../../../assets/images/hvac_4.png)
+![Vị trí chân đấu dây kết nối tín hiệu F1/F2](../../../../../assets/images/01c-hvac-gateway/hvac_4.png)
 <p class="hero-image-caption">Chân gạt cấu hình (Config 1 và 2) và cổng nối cáp tới dàn lạnh.</p>
 
 ## 3. Luồng cấu hình lên ứng dụng (App)

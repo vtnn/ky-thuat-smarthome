@@ -12,7 +12,7 @@ tags: ["LifeSmart", "thiết bị", "danh sách", "Nature", "điều hòa"]
 
 ---
 
-![Hệ sinh thái thiết bị LifeSmart](../../../../../assets/images/01-danh-sach-thiet-bi.jpeg)
+![Hệ sinh thái thiết bị LifeSmart](../../../../../assets/images/01-danh-sach-thiet-bi/01-danh-sach-thiet-bi.jpeg)
 <p class="hero-image-caption">Các nhóm thiết bị LifeSmart: Từ bộ điều khiển trung tâm đến hệ thống an ninh và cảm biến.</p>
 
 ## 1. Bộ điều khiển trung tâm

@@ -12,7 +12,7 @@ tags: ["dụng cụ", "thiết bị đo", "bảo dưỡng"]
 
 ---
 
-![Bộ dụng cụ kỹ thuật viên smarthome bày gọn trên bàn làm việc](../../../../assets/images/a2-hero-dung-cu.png)
+![Bộ dụng cụ kỹ thuật viên smarthome bày gọn trên bàn làm việc](../../../../assets/images/a2-dung-cu-va-thiet-bi/a2-hero-dung-cu.png)
 <p class="hero-image-caption">Thiếu một món là chưa sẵn sàng ra công trường.</p>
 
 ## 1. Dụng cụ cơ bản
