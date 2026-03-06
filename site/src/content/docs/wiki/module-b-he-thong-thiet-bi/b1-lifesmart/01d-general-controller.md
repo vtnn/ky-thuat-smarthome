@@ -11,7 +11,7 @@ level: "2-4"
 
 ---
 
-![Đấu nối General Controller](../../../../../assets/images/01d-general-controller/general_ctrl_1.png)
+![Đấu nối General Controller](../../../../../assets/images/01d-general-controller/img_17.png)
 <p class="hero-image-caption">Bảng mạch General Controller xử lý tốt thiết bị 3 trạng thái và cảm biến độc lập.</p>
 
 ## 1. Thông số thiết bị (I/O Definition)
@@ -27,18 +27,14 @@ General Controller là một hộp thiết bị đặc biệt dành cho dân là
 
 Bạn có cực nhiều "bài dọn" cho món này tùy hoàn cảnh thi công.
 
-### 2.1. Đẩy thiết bị báo khói không thông minh vào hệ thống (Chế độ tự do)
+### 2.1. Đẩy thiết bị báo khói không thông minh vào hệ thống (Công tắc từ tương tự)
 Cắm cảm biến khói loại công nghiệp chạy nguồn 12V DC:
-- Chích `NC / NO` từ bảng cảm biến vô ngõ `K1`. Nhớ chèn 1 chân GND về ngõ `COM` để nối kín luồng báo động.
+- Chích `NC` từ bảng cảm biến vô ngõ `K1`. Nhớ chèn 1 chân GND về ngõ `COM` để nối kín luồng báo động.
 - Cứ hễ thiết bị khói nhảy cắt tiếp điểm khô, App sẽ nảy báo động cháy nhà thông qua cài đặt Kịch bản.
 
-### 2.2. Kéo mô-tơ điện một chiều (Motor rèm cuốn DC) / Cổng tự động
-- Đấu chốt mô tơ chiều quay trái quay phải vào chân `CH1`, `CH2`.
-- Cốt nguồn DC chia sang `COM+` / `COM-` tương ứng để điều hưởng điện. Dạng này cổng bấm 1 cái chạy, 1 cái dừng (Mode Rèm kéo 2 chiều). 
-
-### 2.3. Cắm thiết bị công tắc 3 dây chuẩn rèm (AC Motor)
-- Anh em vặn cáp lửa (L), nóng và trung tính (N) đẩy lệnh Tắt - Bật - Dừng.
-- Trong ứng dụng LifeSmart sẽ tự mọc lên bản đồ hiển thị rèm.
+### 2.2. Điều khiển Cổng tự động / Cửa cuốn
+- Xác định tiếp điểm đóng mở cổng đấu về `CH1` và chân `COM+`.
+- Nếu cổng / cửa cuốn sử dụng nhiều kênh cần phải đấu qua rơ-le trung gian, và sử dụng các chân `CH1`, `CH2`, `CH3` kết hợp với `COM+` để đấu nối điều khiển rơ-le trung gian này.
 
 ## 3. Cài đặt chế độ kích rơ-le trên ứng dụng
 
