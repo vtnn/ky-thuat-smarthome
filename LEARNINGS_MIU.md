@@ -288,6 +288,7 @@ Khi viết prompt cho module mới, tuân theo nguyên tắc:
 
 ## ⚠️ Lưu ý quan trọng cho IDE/Agent
 - **Không tự ý đổi cấu trúc thư mục:** Starlight dựa trên file system để tạo sidebar.
+- **Giới hạn File Tĩnh (Cloudflare Pages):** KHÔNG dùng Git LFS để push các file siêu nặng (như `.mp4`, `.pdf` > 25MB) lên repo. Máy chủ build của Cloudflare Pages KHÔNG kéo được file qua Git LFS, dẫn đến lỗi xem móm file trên web. **Cách xử lý:** Up file PDF lên Google Drive lấy link chia sẻ, up Video lên YouTube (chế độ Unlisted) rồi lấy mã nhúng iframe chèn vào file Markdown. Các file nhẹ như hình minh hoạ dưới 1-2MB cứ push bình thường với `.png`, `.jpg`.
 - **Dữ liệu lớn:** Nếu nội dung quá dài, ưu tiên dùng Bảng (Table) hoặc Checklist để người dùng "lướt" nhanh.
 - **Rollback:** Nếu deploy lỗi, kiểm tra ngay logs của `npm run build` để tìm file MD hỏng (thường do lỗi YAML frontmatter).
 - **Đọc file này trước khi viết/chỉnh bài:** Để áp dụng đúng humanizer rules và không lặp lại lỗi thông tin đã sửa.
