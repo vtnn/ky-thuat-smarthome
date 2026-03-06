@@ -12,7 +12,7 @@ level: "3-6"
 
 ---
 
-![Hình ảnh thực tế HVAC Gateway](../../../../../assets/images/01c-hvac-gateway/hvac_1.png)
+![Hình ảnh thực tế HVAC Gateway](../../../../../assets/images/01c-hvac-gateway/image18.png)
 <p class="hero-image-caption">Bảng cổng kết nối và màn hình hiển thị trực quan của bộ chuyển đổi trung tâm nhiệt độ.</p>
 
 ## 1. Thông số cốt lõi
@@ -24,16 +24,19 @@ Các thông số phần cứng anh em kỹ thuật lưu ý:
 - **Dây kết nối điều hòa (Communication Wire):** Nối giữa cổng Gateway và máy điều hòa cần dùng cáp tín hiệu 2 lõi xoắn có bọc nhiễu (Shielded twisted pair - STP). Tiết diện lớn hơn 0.75mm2. Tránh để song song với dây cấp điện xoay chiều (L), khoảng cách cách ly khuyến cáo ít nhất 30cm để không rớt gói tin tín hiệu.
 - **Các cổng ra tín hiệu:** Có cụm **AIR CON Terminals** (Cổng dữ liệu điều hoà).
 
-## 2. Giao diện chân gạt (Dialing / Dip Switch)
+## 2. Cấu hình chọn hãng điều hòa qua Ứng dụng / Bluetooth
 
-Các phiên bản bộ chuyển đổi đời cũ, anh em phải bật tắt thanh gạt trên bộ gạt díp (Dialing Terminals) cấu hình đúng hãng mã hóa.
-- **Cụm CONFIG 1 (Màu đỏ):** Lựa chọn chuẩn giao tiếp loại điều hoà (Ví dụ: 1/2 cho Hitachi/York, F1/F2...).
-- **Cụm CONFIG 2 (Màu xanh):** Cấu hình truyền thông tối ưu cho hệ điều hoà.
+Các phiên bản HVAC Gateway đời mới nhất hiện nay không sử dụng chân gạt phần cứng (Dialing Switches) nữa mà đã chuyển sang thi công cấu hình hoàn toàn qua kết nối Bluetooth.
 
-***Mẹo thực chiến:***  Các phiên bản Gateway mới ngày nay (loại vỏ kim loại/nhựa mới xám) thường có khả năng **Auto-Detect** — không cần gạt nút bằng tay nữa mà tự dò giao thức luôn. Tuy nhiên, nếu đấu vào mà màn hình bộ đọc không hiển thị trạng thái *"Searching HVAC"*, có thể thiết bị điều hoà đang không được dàn nóng cấp lệnh, vui lòng kiểm tra nguồn phía hệ VRV/VRF.
+**Cách lấy mã cấu hình trên điện thoại (App):**
+1. Lần đầu cắm điện (Power On), trên màn hình LCD của Gateway sẽ bung sẵn một tấm **mã QR (QR Code)**.
+2. Anh em dùng điện thoại (qua WeChat) quét ngang tấm mã QR này — hoặc có thể tìm tài khoản Official Account tên là **"迈斯" (hoặc "迈斯maisi")** để nhảy thẳng vào Mini Program có mục "Bluetooth Configuration".
+3. Nhấp dò kết nối qua Bluetooth với thiết bị "Gateway". Khi kết nối thành công, đèn Bluetooth (ST1) trên board sẽ báo sáng xanh lá cố định mượt mà.
+4. Ở Webpage giao diện nhúng trên điện thoại, thợ thi công chọn khai báo cấu hình tên của hãng Điều hoà / Nhãn hiệu máy lạnh cần đọc mã (Daikin, Mitsubishi, Toshiba, Panasonic...).
 
-![Vị trí chân đấu dây kết nối tín hiệu F1/F2](../../../../../assets/images/01c-hvac-gateway/hvac_4.png)
-<p class="hero-image-caption">Chân gạt cấu hình (Config 1 và 2) và cổng nối cáp tới dàn lạnh.</p>
+Ngoài ra thao tác tay vật lý trên nút nhấn board mạch chỉ dùng cho 2 trường hợp khẩn cấp:
+- **Nút SET:** Bấm đè gồng giữ nguyên 5 giây để Reset xả cấu hình khôi phục cài đặt gốc (nếu màn hình đang hiện ở trang Reset).
+- **Phím lên / xuống (UP/DOWN):** Chuyển xem các tab thông báo số lượng máy quét được phát hiện, hoặc nhấn tổ hợp `UP+DOWN` để khởi động lại nhanh Gateway.
 
 ## 3. Luồng cấu hình lên ứng dụng (App)
 
@@ -50,3 +53,4 @@ Sau khi nguồn DC 12V được cấp, thiết bị sẽ Boot lên:
 
 ## Tài liệu tham khảo
 - [Hướng dẫn cấu hình HVAC Gateway (Google Docs)](https://docs.google.com/document/d/10UfKaA0388Ols9M_CQSKtDEeTa9tBNiP/edit)
+- [Hướng dẫn sử dụng AC Gateway 2024 (PDF)](/wiki/assets/pdf/AC%20Gateway%20Manual%202024.pdf)
