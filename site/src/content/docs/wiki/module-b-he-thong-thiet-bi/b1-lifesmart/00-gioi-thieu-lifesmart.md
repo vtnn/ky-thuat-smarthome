@@ -44,7 +44,7 @@ LifeSmart hỗ trợ Apple HomeKit (Siri), Google Home và Amazon Alexa.
 Ngoài ra còn tích hợp được với:
 - Sonos: điều khiển âm thanh đa vùng.
 - Philips Hue: đồng bộ đèn thông qua Hue Bridge.
-- Hikvision: xem camera trực tiếp trên ứng dụng LifeSmart và màn hình Nature.
+- Hikvision: xem camera trực tiếp trên ứng dụng LifeSmart và màn hình Nature 7".
 
 ---
 

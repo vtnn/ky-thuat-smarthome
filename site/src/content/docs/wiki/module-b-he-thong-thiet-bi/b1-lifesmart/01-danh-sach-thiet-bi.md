@@ -12,40 +12,31 @@ tags: ["LifeSmart", "thiết bị", "danh sách", "Nature", "điều hòa"]
 
 ---
 
+![Hệ sinh thái thiết bị LifeSmart](../../../../../assets/images/01-danh-sach-thiet-bi.jpeg)
+<p class="hero-image-caption">Các nhóm thiết bị LifeSmart: Từ bộ điều khiển trung tâm đến hệ thống an ninh và cảm biến.</p>
+
 ## 1. Bộ điều khiển trung tâm
 
 | Thiết bị | Chức năng | Giao thức |
 |---|---|---|
 | Smart Station | Bộ điều khiển chính, kết nối tất cả thiết bị | CoSS + Zigbee  + mạng dây |
-| DEFED Smart Station | Bộ điều khiển kết hợp CoSS và Zigbee, làm trung tâm xử lý dữ liệu cho hệ thống an ninh | CoSS + Zigbee + mạng dây / WiFi |
+| DEFED Smart Station | Bộ điều khiển kết hợp CoSS và Zigbee, làm trung tâm xử lý dữ liệu cho hệ thống an ninh, có khay cắm pin (dự phòng trường hợp mất điện, option) | CoSS + Zigbee + mạng dây / WiFi |
 
 ---
 
-## 2. Màn hình điều khiển (dòng Nature)
+## 2. Công tắc và ổ cắm
 
-Dòng Nature khác biệt ở chỗ nó vừa là bộ điều khiển trung tâm, vừa có màn hình cảm ứng và phím bấm nhanh. Gắn lên tường thay cho vị trí công tắc thường.
-
-| Thiết bị | Đặc điểm |
-|---|---|
-| Nature 7 | Màn hình 7 inch, đầy đủ chức năng |
-| Nature Mini | Màn hình nhỏ gọn |
-| Nature Mini S | Phiên bản cải tiến |
-| Nature Mini PRO | Thêm Zigbee, Z-Wave, BLE |
-
----
-
-## 3. Công tắc và ổ cắm
-
-### 3.1. Công tắc
+### 2.1. Công tắc
 
 | Dòng sản phẩm | Số nút | Ghi chú |
 |---|---|---|
-| Stellar | 1–3 nút | Thiết kế cao cấp |
-| BLEND | 1–3 nút | Pha trộn vật liệu |
-| Polar | 1–3 nút | Phong cách tối giản |
-| 120 Smart Light Switch | 1–3 nút | Đế chữ nhật |
+| SUBLIME | Đa dạng | Dòng công tắc nghệ thuật cao cấp. **[Chi tiết dòng SUBLIME](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01a-dong-sublime)** |
+| Nature | 1–3 nút | Cảm ứng, mặt kính. **[Chi tiết dòng Nature](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/01b-dong-nature)** |
+| BLEND | 1–3 nút | Nút bấm cơ, mặt nhựa hoặc kim loại  |
+| Polar | 1–3 nút | Nút bấm cơ, mặt nhựa (đơn giản)|
+| 120 Switch | 1–3 nút | Đế chữ nhật |
 
-### 3.2. Bộ điều khiển đa năng
+### 2.2. Bộ điều khiển đa năng
 
 | Thiết bị | Chức năng |
 |---|---|
@@ -53,7 +44,7 @@ Dòng Nature khác biệt ở chỗ nó vừa là bộ điều khiển trung tâ
 | CUBE Switch Module | Công tắc dạng hộp nhỏ, giấu trong đế âm kết hợp với công tắc cơ thường |
 | Curtain Controller | Điều khiển motor rèm hãng khác |
 
-### 3.3. Ổ cắm
+### 2.3. Ổ cắm
 
 | Thiết bị | Chức năng |
 |---|---|
@@ -62,7 +53,7 @@ Dòng Nature khác biệt ở chỗ nó vừa là bộ điều khiển trung tâ
 
 ---
 
-## 4. Cảm biến
+## 3. Cảm biến
 
 | Thiết bị | Đo gì | Nguồn |
 |---|---|---|
@@ -76,7 +67,7 @@ Dòng Nature khác biệt ở chỗ nó vừa là bộ điều khiển trung tâ
 
 ---
 
-## 5. Điều hòa và rèm
+## 4. Điều hòa và rèm
 
 | Thiết bị | Chức năng | Lưu ý |
 |---|---|---|
@@ -87,7 +78,7 @@ Dòng Nature khác biệt ở chỗ nó vừa là bộ điều khiển trung tâ
 
 ---
 
-## 6. An ninh
+## 5. An ninh
 
 | Thiết bị | Chức năng |
 |---|---|
@@ -100,7 +91,7 @@ Dòng Nature khác biệt ở chỗ nó vừa là bộ điều khiển trung tâ
 
 ---
 
-## 7. Điều khiển hồng ngoại
+## 6. Điều khiển hồng ngoại
 
 Dùng để thay thế các remote hồng ngoại thông thường (TV, quạt, máy lạnh rời).
 
@@ -108,3 +99,10 @@ Dùng để thay thế các remote hồng ngoại thông thường (TV, quạt, 
 |---|---|---|
 | SPOT | Phát hồng ngoại thay remote | Có đèn tích hợp |
 | SPOT Mini | Phiên bản nhỏ gọn | Gắn tường hoặc trần |
+
+---
+
+## Tài liệu tham khảo
+- [LifeSmart Brochure 250929.pdf](/wiki/assets/pdf/LifeSmart%20Brochure%20250929.pdf)
+- [Thư mục tài liệu tổng hợp LifeSmart (Drive)](https://drive.google.com/drive/folders/1RGZRgWJHFBUisvcJDJZeW6HBTIsZKWBy)
+- [Thư mục tài liệu kỹ thuật LifeSmart (Drive)](https://drive.google.com/drive/folders/1B_znIzettzmx4HUYxsCR26Z_aZ9bF1Lm)

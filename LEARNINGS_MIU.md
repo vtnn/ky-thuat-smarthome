@@ -219,14 +219,51 @@ Chèn **ngay sau phần `---` (ngăn cách sau Mục tiêu), trước heading `#
 
 Class `.hero-image` và `.hero-image-caption` đã được định nghĩa — không cần thêm CSS mới.
 
-### Bảng prompt tạo hình cho Module A (tham khảo)
+### Bảng prompt tạo hình cho Module B5 (Camera Hikvision)
 
 | Trang | File hình | Prompt tạo hình (dùng cho AI image gen hoặc brief cho photographer) | Caption |
 |---|---|---|---|
-| A1 | `a1-hero-doc-ban-ve.png` | Tỉ lệ 16:9. Một kỹ thuật viên mặc đồng phục đang cầm bản vẽ kỹ thuật (A3), đứng trước tủ điện đã mở nắp, tay kia chỉ vào sơ đồ nguyên lý trên bản vẽ để đối chiếu với thiết bị bên trong tủ. Ánh sáng tự nhiên từ công trường. Góc chụp ngang tầm mắt, lấy nét vào bản vẽ. | Đọc nguyên lý trước, mặt bằng sau — sai thứ tự là sửa cả ngày. |
-| A2 | `a2-hero-dung-cu.png` | Tỉ lệ 16:9. Bộ dụng cụ kỹ thuật viên smarthome bày trên mặt bàn: kìm cắt, tuốc-nơ-vít bộ, đồng hồ vạn năng đang bật, máy test cáp mạng, bút thử điện, cuộn băng keo điện, dây rút nhựa. Nền bàn gỗ hoặc thảm tool-mat. Chụp từ trên xuống (flat lay), ánh sáng đều. | Thiếu một món là chưa sẵn sàng ra công trường. |
-| A3 | `a3-hero-an-toan.png` | Tỉ lệ 16:9. Cận cảnh tủ điện công trường, CB đã ngắt, gắn biển cảnh báo đỏ-trắng ghi "ĐANG THI CÔNG — KHÔNG ĐÓNG ĐIỆN". Bên cạnh có bút thử điện và găng tay cách điện treo trên tay nắm tủ. Ánh sáng hơi tối (công trường), biển cảnh báo nổi bật. | Biển cảnh báo trên tủ điện — thứ cứu mạng khi người khác vô tình đóng điện lại. |
-| A4 | `a4-hero-tieu-chuan.png` | Tỉ lệ 16:9. Tủ mạng (rack) sau khi thi công xong: cáp mạng gom gọn bằng nẹp, từng sợi cáp dán nhãn trắng rõ ràng ở cả 2 đầu, sơ đồ đấu nối in A4 dán bên trong cánh tủ. Chụp thẳng chính diện, ánh sáng tốt. | Tủ mạng hoàn thiện chuẩn — gọn gàng, có nhãn, ai mở tủ cũng hiểu. |
+| B5.00 | `b5-00-hero-gioi-thieu-hikvision.png` | Tỉ lệ 16:9. Kỹ thuật viên đứng tại phòng kỹ thuật với màn hình hiển thị nhiều kênh camera Hikvision, bên cạnh là đầu ghi NVR. Góc chụp ngang, ánh sáng rõ màn hình. | Nắm luồng camera từ đầu ghi tới màn hình trước thì triển khai sẽ gọn hơn nhiều. |
+| B5.01 | `b5-01-hero-danh-sach-camera.png` | Tỉ lệ 16:9. Bàn kỹ thuật bày các loại camera dome, bullet, phụ kiện nguồn và chân đế, có kỹ thuật viên kiểm đối chiếu danh sách thiết bị. | Chọn đúng loại camera theo vị trí lắp ngay từ đầu sẽ tránh thay đổi về sau. |
+| B5.02 | `b5-02-hero-thi-cong-camera.png` | Tỉ lệ 16:9. Kỹ thuật viên đang lắp camera lên trần, đi dây mạng gọn trong ống bảo vệ, có thang và đồ bảo hộ đầy đủ. | Lắp đúng góc từ đầu sẽ giảm công chỉnh lại sau khi bàn giao. |
+| B5.03 | `b5-03-hero-lap-dat-nvr.png` | Tỉ lệ 16:9. Cận cảnh lắp đầu ghi NVR trong tủ rack, cáp mạng và ổ cứng được đấu nối gọn, có nhãn từng cổng camera. | Tủ đầu ghi gọn và có nhãn giúp xử lý sự cố nhanh hơn rất nhiều. |
+| B5.04 | `b5-04-hero-cau-hinh-sadp-tool.png` | Tỉ lệ 16:9. Màn hình laptop mở công cụ SADP, kỹ thuật viên đang đổi địa chỉ mạng cho camera mới. Giao diện rõ danh sách camera online. | Cấu hình địa chỉ mạng chuẩn bằng SADP giúp tránh trùng địa chỉ và mất hình. |
+| B5.05 | `b5-05-hero-cau-hinh-ghi-hinh.png` | Tỉ lệ 16:9. Kỹ thuật viên cấu hình lịch ghi hình trên giao diện NVR, có timeline ghi liên tục và ghi theo chuyển động. | Thiết lập ghi hình đúng nhu cầu từ đầu để lúc cần xem lại không bị hụt dữ liệu. |
+| B5.06 | `b5-06-hero-remote-access.png` | Tỉ lệ 16:9. Kỹ thuật viên kiểm tra truy cập camera từ xa trên điện thoại qua ứng dụng Hikvision, cùng lúc theo dõi trạng thái mạng tại router. | Truy cập từ xa chỉ ổn khi mạng và quyền truy cập được cấu hình đúng chuẩn. |
+| B5.07 | `b5-07-hero-xu-ly-su-co.png` | Tỉ lệ 16:9. Kỹ thuật viên xử lý lỗi camera mất hình: kiểm tra nguồn cấp qua cáp mạng và trạng thái link tại switch. Bối cảnh thực tế tại tủ mạng. | Mất hình camera thì kiểm tra nguồn và đường truyền trước, đừng đổi camera vội. |
+
+### Bảng prompt tạo hình cho Module B6 (WiFi Ruijie)
+
+| Trang | File hình | Prompt tạo hình (dùng cho AI image gen hoặc brief cho photographer) | Caption |
+|---|---|---|---|
+| B6.00 | `b6-00-hero-gioi-thieu-ruijie.png` | Tỉ lệ 16:9. Kỹ thuật viên giới thiệu hệ WiFi Ruijie tại tủ mạng, có controller/switch và sơ đồ vùng phủ sóng trên màn hình laptop. | Hiểu kiến trúc WiFi từ đầu sẽ giúp triển khai nhanh và ít chỉnh sửa. |
+| B6.01 | `b6-01-hero-danh-sach-access-point.png` | Tỉ lệ 16:9. Bàn thiết bị gồm các mẫu Bộ phát WiFi Ruijie, nguồn cấp qua cáp mạng, phụ kiện gắn trần/tường và checklist kiểm hàng. | Chọn đúng mẫu Bộ phát WiFi theo công năng từng khu mới đạt phủ sóng ổn định. |
+| B6.02 | `b6-02-hero-thi-cong-wifi.png` | Tỉ lệ 16:9. Kỹ thuật viên đi dây mạng và gắn Bộ phát WiFi lên trần, cáp được bó gọn và đánh nhãn tại đầu tủ mạng. | Thi công chuẩn từ cáp tới vị trí lắp Bộ phát WiFi là nền cho mạng ổn định. |
+| B6.03 | `b6-03-hero-lap-dat-controller.png` | Tỉ lệ 16:9. Kỹ thuật viên lắp controller Ruijie trong tủ rack, kết nối switch và kiểm tra trạng thái đèn cổng mạng. | Lắp controller đúng sơ đồ giúp việc quản lý tập trung chạy trơn tru ngay từ đầu. |
+| B6.04 | `b6-04-hero-cau-hinh-ssid.png` | Tỉ lệ 16:9. Màn hình quản trị Ruijie hiển thị cấu hình SSID, bảo mật và VLAN, kỹ thuật viên đang rà lại thông số trước khi áp dụng. | Cấu hình SSID rõ ràng và bảo mật đúng chuẩn giúp mạng chạy ổn định lâu dài. |
+| B6.05 | `b6-05-hero-kiem-tra-phu-song.png` | Tỉ lệ 16:9. Kỹ thuật viên đi khảo sát sóng bằng điện thoại/laptop tại hành lang và phòng, màn hình hiển thị cường độ tín hiệu theo vị trí. | Đo phủ sóng thực tế luôn quan trọng hơn cảm giác chủ quan tại một điểm đứng. |
+| B6.06 | `b6-06-hero-xu-ly-su-co.png` | Tỉ lệ 16:9. Kỹ thuật viên xử lý mạng chập chờn: kiểm tra switch, controller và nhật ký sự kiện trên giao diện quản trị. | Mạng chập chờn muốn xử lý dứt điểm thì phải soi nhật ký và kiểm tra từng lớp. |
+
+### Bảng prompt tạo hình cho Module C (WiFi và mạng)
+
+| Trang | File hình | Prompt tạo hình (dùng cho AI image gen hoặc brief cho photographer) | Caption |
+|---|---|---|---|
+| C1 | `c1-hero-quy-hoach-mang.png` | Tỉ lệ 16:9. Kỹ thuật viên trải sơ đồ mặt bằng trên bàn, dùng bút đánh dấu vị trí tủ mạng, Bộ phát WiFi và tuyến cáp chính. Góc chụp từ trên xuống, rõ bản vẽ và ghi chú tay. | Quy hoạch mạng kỹ trước khi kéo dây sẽ tiết kiệm rất nhiều chi phí sửa lại. |
+| C2 | `c2-hero-cau-hinh-switch.png` | Tỉ lệ 16:9. Màn hình laptop mở giao diện cấu hình switch, kỹ thuật viên đang thiết lập VLAN và kiểm tra trạng thái từng cổng. Bên cạnh là switch thật trong tủ rack. | Cấu hình switch chuẩn ngay từ đầu giúp cả hệ thống chạy ổn định và dễ mở rộng. |
+| C3 | `c3-hero-cau-hinh-router-firewall.png` | Tỉ lệ 16:9. Kỹ thuật viên cấu hình router/firewall với các mục WAN, LAN, NAT và quy tắc lọc truy cập. Bối cảnh phòng kỹ thuật, góc chụp ngang. | Router và tường lửa làm đúng từ đầu sẽ giảm hẳn sự cố mất mạng ngẫu nhiên. |
+| C4 | `c4-hero-bao-mat-mang.png` | Tỉ lệ 16:9. Kỹ thuật viên rà soát bảo mật mạng trên bảng kiểm: đổi mật khẩu mặc định, tắt cổng không dùng, tách mạng khách. Bối cảnh thao tác thật trên máy tính. | Bảo mật mạng là việc phải làm trước, không phải đợi có sự cố mới xử lý. |
+
+### Bảng prompt tạo hình cho Module F (Tiêu chuẩn chất lượng)
+
+| Trang | File hình | Prompt tạo hình (dùng cho AI image gen hoặc brief cho photographer) | Caption |
+|---|---|---|---|
+| F1 | `f1-hero-tieu-chuan-hinh-anh-cong-trinh.png` | Tỉ lệ 16:9. Kỹ thuật viên chụp ảnh nghiệm thu công trình bằng điện thoại, khung hình rõ tủ điện, tủ mạng và vị trí thiết bị đã dán nhãn. Có checklist ảnh cần chụp đặt cạnh. | Ảnh chụp đúng chuẩn giúp đội sau nhìn vào là hiểu tình trạng công trình ngay. |
+| F2 | `f2-hero-checklist-nghiem-thu-tong-the.png` | Tỉ lệ 16:9. Bàn nghiệm thu với checklist tổng thể đã đánh dấu từng hạng mục, kỹ thuật viên và giám sát cùng rà ký xác nhận. Bối cảnh thực tế tại công trình hoàn thiện. | Nghiệm thu có checklist rõ ràng thì không bỏ sót hạng mục quan trọng. |
+| F3 | `f3-hero-tieu-chuan-bao-hanh.png` | Tỉ lệ 16:9. Kỹ thuật viên bàn giao tài liệu bảo hành cho khách hàng, trên bàn có biên bản bàn giao, thông tin liên hệ hỗ trợ và hướng dẫn xử lý sự cố cơ bản. | Bảo hành rõ quy trình từ đầu giúp khách yên tâm và đội kỹ thuật đỡ bị động. |
+
+### Bảng prompt tạo hình cho Module A (đã chuẩn hóa)
+
+Module A đã có đầy đủ prompt ở bảng phía trên (`a1` → `a4`). Khi cần tái tạo ảnh, dùng lại đúng tên file và caption để giữ đồng bộ toàn bộ site.
 
 ### Gợi ý prompt cho các module tiếp theo
 
