@@ -12,7 +12,7 @@ tags: ["bản vẽ", "sơ đồ nguyên lý", "smarthome", "camera", "wifi", "đ
 
 ---
 
-![Kỹ thuật viên đối chiếu bản vẽ nguyên lý với tủ điện thực tế tại công trường](../../../../assets/images/a1-doc-ban-ve-ky-thuat/a1-hero-doc-ban-ve.png)
+![Kỹ thuật viên đối chiếu bản vẽ nguyên lý với tủ điện thực tế tại công trường](../../../../assets/images/wiki/module-a/a1-hero-doc-ban-ve.png)
 <p class="hero-image-caption">Đọc nguyên lý trước, mặt bằng sau — sai thứ tự là sửa cả ngày.</p>
 
 ## 1. Tại sao phải đọc đúng thứ tự?

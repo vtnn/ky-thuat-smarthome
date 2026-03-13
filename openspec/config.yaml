@@ -1,0 +1,10 @@
+schema: spec-driven
+
+context: |
+  Dự án: Wiki kỹ thuật SmartHome nội bộ (Astro + Starlight)
+  Ngôn ngữ nội dung: tiếng Việt
+  Mục tiêu: đào tạo kỹ thuật viên, tra cứu nhanh, chuẩn hóa thi công / cấu hình / xử lý sự cố
+  Content path: site/src/content/docs/wiki/
+  Ưu tiên: nội dung thực chiến, ví dụ thật, giọng văn tự nhiên
+  Module hiện tại: đang khóa B1 (LifeSmart), chưa mở B2+
+  Deployment: Cloudflare Pages (kythuat-smarthome)

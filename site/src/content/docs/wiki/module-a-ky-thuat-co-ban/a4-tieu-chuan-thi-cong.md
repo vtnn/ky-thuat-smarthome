@@ -12,7 +12,7 @@ tags: ["tiêu chuẩn", "thi công", "lắp đặt", "hoàn thiện"]
 
 ---
 
-![Tủ mạng thi công chuẩn: dây gom gọn, nhãn rõ ràng, sơ đồ đấu nối dán trong tủ](../../../../assets/images/a4-tieu-chuan-thi-cong/a4-hero-tieu-chuan.png)
+![Tủ mạng thi công chuẩn: dây gom gọn, nhãn rõ ràng, sơ đồ đấu nối dán trong tủ](../../../../assets/images/wiki/module-a/a4-hero-tieu-chuan.png)
 <p class="hero-image-caption">Tủ mạng hoàn thiện chuẩn — gọn gàng, có nhãn, ai mở tủ cũng hiểu.</p>
 
 

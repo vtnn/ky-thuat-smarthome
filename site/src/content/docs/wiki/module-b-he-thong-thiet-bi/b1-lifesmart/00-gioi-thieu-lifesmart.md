@@ -55,3 +55,9 @@ Ngoài ra còn tích hợp được với:
 | Phản hồi nhanh, kết nối ổn định | Hầu hết công tắc cần dây N (nguội), nhà cũ thường không có |
 | Tầm xa kết nối tốt nhất trong các hệ không dây | Cần Internet để điều khiển từ xa (trong mạng nội bộ vẫn hoạt động) |
 | Ứng dụng dễ dùng, tự động hóa bằng kéo thả | Chi phí đầu tư ở mức trung bình cao |
+
+---
+
+## Tài liệu tham khảo
+- [Bản vẽ kỹ thuật: Sơ đồ nguyên lý](/drawings/MobiLife/MobiLife_SDNL.pdf)
+- [Bản vẽ kỹ thuật: Kết nối Station](/drawings/MobiLife/MobiLife_Ket_Noi_Station.pdf)
