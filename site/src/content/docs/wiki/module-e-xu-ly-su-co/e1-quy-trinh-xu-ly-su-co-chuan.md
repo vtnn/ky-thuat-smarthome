@@ -110,64 +110,66 @@ Khoanh vùng vào 1 nhóm nghi ngờ cao nhất:
 
 ## 3. Escalation (Báo cáo vượt cấp)
 
-113: Bất cứ sự cố nào xử lý **quá 30 phút mà chưa giải quyết xong**, phải thực hiện Escalation:
-114: 
-115: 1. **Ghi nhận chi tiết**: Ghi lại triệu chứng, các bước đã tự kiểm tra và kết quả đo đạc (bao nhiêu volt, báo đèn gì).
-116: 2. **Thu thập bằng chứng**: Chụp hoặc quay video màn hình lỗi, cụm tủ điện đang thi công, log lỗi hệ thống.
-117: 3. **Báo cáo cấp trên**: Báo cáo quản lý kỹ thuật để điều người hỗ trợ chéo hoặc trực tiếp liên hệ đội support của hãng. (Đừng đứng gãi đầu một mình quá lâu).
-118: 
-119: ---
-120: 
-121: ## 4. Các kịch bản hỗ trợ từ xa (Tele-support) thường gặp
-122: 
-123: Đây là các tài liệu hướng dẫn bắt bệnh nhanh để kỹ thuật viên hoặc bộ phận chăm sóc khách hàng tham khảo khi **trực tiếp tiếp nhận cuộc gọi của khách hàng** (Áp dụng tại Bước 6 của quy trình chuẩn).
-124: 
-125: ### 4.1. Sự cố mạng Internet / Wi-Fi
-126: 
-127: **a) Wi-Fi chập chờn, không sử dụng được**
-128: - **Không thấy tên Wi-Fi:**
-129:   - Nhờ khách dùng 1 thiết bị khác (điện thoại/máy tính) quét lại. Nếu thiết bị khác thấy và vào được → Lỗi ở điện thoại của khách → Hướng dẫn khách khởi động lại máy.
-130:   - Kiểm tra xem CB (Aptomat) cấp điện cho tủ mạng/vị trí đặt Wi-Fi có bị nhảy không. Nếu có, bật lại.
-131:   - Nếu CB vẫn đang bật: Nhờ khách tắt CB tổng hoặc rút điện modem/router ra khoảng 1 phút rồi cắm lại.
-132: - **Thấy tên Wi-Fi nhưng không vào được mạng:**
-133:   - Test tương tự bằng máy khác để loại trừ lỗi thiết bị cá nhân.
-134:   - Kiểm tra Modem nhà mạng: Đèn tín hiệu có sáng không? Nếu có đèn đỏ (đèn LOS) báo lỗi đường truyền quang → Báo cho nhà mạng cắt cử người qua sửa chữa ngay.
-135: 
-136: **b) Mạng có nhưng lướt rất chậm (nhất là Facebook, YouTube, web quốc tế)**
-137: - **Do đứt cáp quang biển hoặc ISP bảo trì:** Nếu đang có đợt đứt cáp quang biển chung, giải thích thực trạng cho khách hàng hiểu đây là lỗi hệ thống diện rộng của nhà cung cấp mạng.
-138: - **Chỉ chậm cục bộ tại 1 phòng hoặc 1 lầu:** Do thiết bị phát Wi-Fi (AP/Node) cục bộ đó phát sinh lỗi → Áp dụng quy trình tắt/mở nguồn 1 phút như mục (a).
-139: 
-140: ### 4.2. Sự cố phần mềm nhà thông minh (Đặc biệt: Mobieyes)
-141: 
-142: **a) Không điều khiển được hệ thống qua App**
-143: - **Điện thoại có ra Internet được không?** Nếu không, xử lý sự cố mạng trước. Nếu có mà vẫn lỗi, nhờ khách tắt mở lại Modem/Router mạng 1 phút.
-144: - **Khách hàng mới thay Modem?** Nếu có, modem mới chưa định tuyến đúng (NAT/Port) hoặc khác dải IP cấp cho bộ điều khiển trung tâm (Controller) → Tuyến cao hơn phải can thiệp cấu hình lại.
-145: - **Khách hàng dùng mạng Viettel / FPT:** Khả năng lớn bị nhà mạng tự động chặn/khóa Port (Đặc tả với Mobieyes sử dụng IP/Port tĩnh NAT).
-146:   - Hướng dẫn khách tự gọi tổng đài mạng (Viettel: 1800 8119 | FPT: 1900 6600).
-147:   - Khách đọc câu hỏi/yêu cầu: *"Nhà tôi đang dùng Smarthome/Camera, kỹ thuật kiểm tra báo bên mạng đang khóa port chặn thiết bị. Nhờ tổng đài kiểm tra và mở port giúp."*
-148:   - Nếu nhà mạng không xử lý kịp thời, báo bộ phận kỹ thuật để hỗ trợ từ xa cho khách hàng.
-149: - **Chỉ điều khiển bằng 4G được, về nhà cắm Wi-Fi lại lỗi:** Đây gọi là lỗi NAT Loopback yếu/không hỗ trợ của Modem ISP giao cho khách. Hướng dẫn khách gọi lên hãng mạng yêu cầu đổi cấp sang dòng Modem có hỗ trợ NAT Loopback. Và báo kỹ thuật bên công ty theo dõi.
-150: - **Ngược lại, ở nhà dùng Wi-Fi được, ra đường dùng 4G máy xoay tròn:** Có thay đổi modem (chưa mở port) hoặc khách dùng mạng FPT/Viettel bị khoá port/NAT như đề cập bên trên.
-151: 
-152: **b) Không điều khiển được cụm tầng hoặc phòng nhỏ**
-153: - Tầng/Phòng đấy mất điện? Thử bấm nút cứng. Kiểm tra CB điện tầng có sụp không? Nếu đang bật → Tắt 1 phút cho reset khối ngắt rồi bật lại.
-154: - Khởi động cục bộ không thấu, tắt CB tổng 1 phút xong mở lại nguyên hệ thống (tắt nguồn điện tầng hoặc tổng).
-155: 
-156: **c) App báo sai User / Mật khẩu truy cập**
-157: - Kiểm tra lại đường truyền của khách hàng đang xài coi rớt không. Điện thoại khách có bị bàn phím ảo tự động điền tự động sửa chữ, ghi hoa đầu dòng sai pass không.
-158: 
-159: ### 4.3. Sự cố Camera giám sát
-160: 
-161: **a) Không xem được cái nào**
-162: - Bị cô lập thiết bị di động? Thử lấy máy người nhà khác mở xem. Nếu máy kia coi bình thường → Khởi động lại máy đang bị lỗi.
-163: - Internet ở nhà hỏng? Xem hướng dẫn xử lý mạng. Nếu mạng tốt, tắt mở nguồn modem/router mạng 1 phút.
-164: - Cấp nguồn cho Camera/Đầu ghi hỏng? Tắt CB bộ nguồn camera, đầu ghi hình khoảng 1 phút rồi mở lại.
-165: - Có bị vụ **"Mới thay modem internet"** hoặc **"Bị FPT/Viettel khoá port"** không? → Xử lý y hệt smarthome ở trên (xin mở port 1900 6600, 1800 8119).
-166: 
-167: **b) Mất hình lẻ tẻ 1-2 mắt Camera**
-168: - Lấy máy khác check? Nếu máy khác xem bình thường, chứng tỏ điện thoại khách chưa **tick chọn hiển thị** hết trên App (Với iVMS-4500: Nhấn biểu tượng góc trên bên phải, đánh dấu tick chèn camera để mở).
-169: - Reset/tắt mở CB nguồn của Camera bị mất hình khoảng 1 phút rồi kiểm tra lại.
-170: 
-171: **c) Màn hình Tivi cắm trực tiếp không lên hình Camera**
-172: - Dây nối hiển thị (HDMI) từ đầu ghi lên tivi có lỏng/rút ra trúng không? Tivi có bị chọn nhầm kênh vào (Source HDMI) không?
-173: - Tắt nguồn đầu ghi (DVR/NVR) 1 phút rồi cắm lại để reboot.
+:::danger[Quy tắc 30 phút]
+Bất cứ sự cố nào xử lý **quá 30 phút mà chưa giải quyết xong**, bắt buộc phải thực hiện Escalation để tránh làm gián đoạn hệ thống khách hàng lâu hơn.
+:::
+
+1. **Ghi nhận chi tiết**: Ghi lại triệu chứng, các bước đã tự kiểm tra và kết quả đo đạc (bao nhiêu volt, báo đèn gì).
+2. **Thu thập bằng chứng**: Chụp hoặc quay video màn hình lỗi, cụm tủ điện đang thi công, log lỗi hệ thống.
+3. **Báo cáo cấp trên**: Báo cáo quản lý kỹ thuật để điều người hỗ trợ chéo hoặc trực tiếp liên hệ đội support của hãng. (Tuyệt đối không đứng gãi đầu một mình quá lâu).
+
+---
+
+## 4. Các kịch bản hỗ trợ từ xa (Tele-support) thường gặp
+
+Đây là các tài liệu hướng dẫn bắt bệnh nhanh để kỹ thuật viên hoặc bộ phận chăm sóc khách hàng tham khảo khi **trực tiếp tiếp nhận cuộc gọi của khách hàng** (Áp dụng tại Bước 6 của quy trình chuẩn).
+
+### 4.1. Sự cố mạng Internet / Wi-Fi
+
+**a) Wi-Fi chập chờn, không sử dụng được**
+- **Không thấy tên Wi-Fi:**
+  - Nhờ khách dùng 1 thiết bị khác (điện thoại/máy tính) quét lại. Nếu thiết bị khác thấy và vào được → Lỗi ở điện thoại của khách → Hướng dẫn khách khởi động lại máy.
+  - Kiểm tra xem CB (Aptomat) cấp điện cho tủ mạng/vị trí đặt Wi-Fi có bị nhảy không. Nếu có, bật lại.
+  - Nếu CB vẫn đang bật: Nhờ khách tắt CB tổng hoặc rút điện modem/router ra khoảng 1 phút rồi cắm lại.
+- **Thấy tên Wi-Fi nhưng không vào được mạng:**
+  - Test tương tự bằng máy khác để loại trừ lỗi thiết bị cá nhân.
+  - Kiểm tra Modem nhà mạng: Đèn tín hiệu có sáng không? Nếu có đèn đỏ (đèn LOS) báo lỗi đường truyền quang → Báo cho nhà mạng cắt cử người qua sửa chữa ngay.
+
+**b) Mạng có nhưng lướt rất chậm (nhất là Facebook, YouTube, web quốc tế)**
+- **Do đứt cáp quang biển hoặc ISP bảo trì:** Nếu đang có đợt đứt cáp quang biển chung, giải thích thực trạng cho khách hàng hiểu đây là lỗi hệ thống diện rộng của nhà cung cấp mạng.
+- **Chỉ chậm cục bộ tại 1 phòng hoặc 1 lầu:** Do thiết bị phát Wi-Fi (AP/Node) cục bộ đó phát sinh lỗi → Áp dụng quy trình tắt/mở nguồn 1 phút như mục (a).
+
+### 4.2. Sự cố phần mềm nhà thông minh (Đặc biệt: Mobieyes)
+
+**a) Không điều khiển được hệ thống qua App**
+- **Điện thoại có ra Internet được không?** Nếu không, xử lý sự cố mạng trước. Nếu có mà vẫn lỗi, nhờ khách tắt mở lại Modem/Router mạng 1 phút.
+- **Khách hàng mới thay Modem?** Nếu có, modem mới chưa định tuyến đúng (NAT/Port) hoặc khác dải IP cấp cho bộ điều khiển trung tâm (Controller) → Tuyến cao hơn phải can thiệp cấu hình lại.
+- **Khách hàng dùng mạng Viettel / FPT:** Khả năng lớn bị nhà mạng tự động chặn/khóa Port (Đặc tả với Mobieyes sử dụng IP/Port tĩnh NAT).
+  - Hướng dẫn khách tự gọi tổng đài mạng (Viettel: 1800 8119 | FPT: 1900 6600).
+  - Khách đọc câu hỏi/yêu cầu: *"Nhà tôi đang dùng Smarthome/Camera, kỹ thuật kiểm tra báo bên mạng đang khóa port chặn thiết bị. Nhờ tổng đài kiểm tra và mở port giúp."*
+  - Nếu nhà mạng không xử lý kịp thời, báo bộ phận kỹ thuật để hỗ trợ từ xa cho khách hàng.
+- **Chỉ điều khiển bằng 4G được, về nhà cắm Wi-Fi lại lỗi:** Đây gọi là lỗi NAT Loopback yếu/không hỗ trợ của Modem ISP giao cho khách. Hướng dẫn khách gọi lên hãng mạng yêu cầu đổi cấp sang dòng Modem có hỗ trợ NAT Loopback. Và báo kỹ thuật bên công ty theo dõi.
+- **Ngược lại, ở nhà dùng Wi-Fi được, ra đường dùng 4G máy xoay tròn:** Có thay đổi modem (chưa mở port) hoặc khách dùng mạng FPT/Viettel bị khoá port/NAT như đề cập bên trên.
+
+**b) Không điều khiển được cụm tầng hoặc phòng nhỏ**
+- Tầng/Phòng đấy mất điện? Thử bấm nút cứng. Kiểm tra CB điện tầng có sụp không? Nếu đang bật → Tắt 1 phút cho reset khối ngắt rồi bật lại.
+- Khởi động cục bộ không thấu, tắt CB tổng 1 phút xong mở lại nguyên hệ thống (tắt nguồn điện tầng hoặc tổng).
+
+**c) App báo sai User / Mật khẩu truy cập**
+- Kiểm tra lại đường truyền của khách hàng đang xài coi rớt không. Điện thoại khách có bị bàn phím ảo tự động điền tự động sửa chữ, ghi hoa đầu dòng sai pass không.
+
+### 4.3. Sự cố Camera giám sát
+
+**a) Không xem được cái nào**
+- Bị cô lập thiết bị di động? Thử lấy máy người nhà khác mở xem. Nếu máy kia coi bình thường → Khởi động lại máy đang bị lỗi.
+- Internet ở nhà hỏng? Xem hướng dẫn xử lý mạng. Nếu mạng tốt, tắt mở nguồn modem/router mạng 1 phút.
+- Cấp nguồn cho Camera/Đầu ghi hỏng? Tắt CB bộ nguồn camera, đầu ghi hình khoảng 1 phút rồi mở lại.
+- Có bị vụ **"Mới thay modem internet"** hoặc **"Bị FPT/Viettel khoá port"** không? → Xử lý y hệt smarthome ở trên (xin mở port 1900 6600, 1800 8119).
+
+**b) Mất hình lẻ tẻ 1-2 mắt Camera**
+- Lấy máy khác check? Nếu máy khác xem bình thường, chứng tỏ điện thoại khách chưa **tick chọn hiển thị** hết trên App (Với iVMS-4500: Nhấn biểu tượng góc trên bên phải, đánh dấu tick chèn camera để mở).
+- Reset/tắt mở CB nguồn của Camera bị mất hình khoảng 1 phút rồi kiểm tra lại.
+
+**c) Màn hình Tivi cắm trực tiếp không lên hình Camera**
+- Dây nối hiển thị (HDMI) từ đầu ghi lên tivi có lỏng/rút ra trúng không? Tivi có bị chọn nhầm kênh vào (Source HDMI) không?
+- Tắt nguồn đầu ghi (DVR/NVR) 1 phút rồi cắm lại để reboot.
