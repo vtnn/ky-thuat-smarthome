@@ -27,7 +27,7 @@ Bảng này dùng cho trường hợp thông thường. Nếu bản vẽ thiết
 | Camera trong nhà | 2.5m – 3.0m | Gắn trần hoặc tường |
 | Camera ngoài trời | 3.0m – 4.0m | Tránh tầm tay với |
 | Bộ phát WiFi | 2.5m – 3.0m | Gắn trần, ở giữa vùng phủ sóng |
-| Cảm biến chuyển động | 2.2m – 2.5m | Góc phòng, hướng xuống |
+| Cảm biến chuyển động | 2.2m – 2.5m | Thường gắn trần hoặc góc tường |
 | Cảm biến cửa | Cạnh khung cửa | Thân trên khung, nam châm trên cánh |
 | Bộ điều khiển trung tâm | 1.0m – 1.5m | Trên kệ hoặc ốp trần, gần giữa nhà |
 | Tủ điện | 1.5m – 1.8m | Tâm tủ ngang tầm mắt |
@@ -42,7 +42,7 @@ Bảng này dùng cho trường hợp thông thường. Nếu bản vẽ thiết
 | Cáp mạng giao nhau với cáp điện | Vuông góc 90° |
 | Camera cách đèn chiếu sáng trực tiếp | ≥ 1m (tránh lóa) |
 | Bộ phát WiFi cách nhau | 8m – 12m (tùy công suất) |
-| Bộ điều khiển LifeSmart tới thiết bị xa nhất | ≤ 30m (qua tường) |
+| Bộ điều khiển LifeSmart tới thiết bị xa nhất | ≤ 15m (qua tường) |
 | Bus KNX — 2 thiết bị xa nhất | ≤ 700m |
 | Bus DALI — tổng chiều dài | ≤ 300m |
 | Bus CFLinks — tổng chiều dài | ≤ 500m (thực tế) |

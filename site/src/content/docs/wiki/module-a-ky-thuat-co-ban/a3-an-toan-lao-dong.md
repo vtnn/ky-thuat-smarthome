@@ -81,7 +81,48 @@ Thiếu bảo hộ mà xảy ra tai nạn thì trách nhiệm thuộc về cả 
 
 ---
 
-## 4. Checklist an toàn công trường
+## 4. Phát hiện rủi ro thi công — Quy trình báo cáo
+
+Không phải lúc nào công trường cũng sẵn sàng để thi công an toàn. Có khi đến nơi thấy nền ướt, dây điện hở, đồ đạc giá trị cao chưa che chắn, hoặc vị trí lắp đặt quá cao mà không có giàn giáo. Khi gặp tình huống như vậy, nguyên tắc số một là: **không thi công khi thấy không an toàn**.
+
+### 4.1. Báo quản lý / công ty
+
+Gửi báo cáo vào group hoặc chat trực tiếp, nội dung cần đủ 4 ý:
+
+- **Công trình:** tên + địa chỉ.
+- **Hạng mục đang làm:** ví dụ lắp đèn trần tầng 2, kéo dây tủ điện…
+- **Vấn đề phát hiện:** nền ướt, dây điện hở, vị trí cao không có giàn giáo, đồ giá trị cao ngay khu vực thi công…
+- **Đề xuất:** tạm dừng thi công / cần biện pháp bảo vệ / cần chủ nhà xác nhận.
+
+Mẫu câu gửi nhanh:
+
+> *"Phát hiện rủi ro thi công tại [công trình]. Khu vực [mô tả] có [vấn đề]. Đề xuất [tạm dừng / cần xác nhận]. Đã chụp hình hiện trạng."*
+
+### 4.2. Báo chủ nhà
+
+Nói ngắn, rõ, không làm chủ nhà hoang mang:
+
+- Khu vực thi công hiện có rủi ro mất an toàn hoặc dễ ảnh hưởng tài sản.
+- Kỹ thuật xin phép tạm dừng hoặc xác nhận phương án trước khi tiếp tục.
+- Nhờ chủ nhà di dời đồ đạc / che chắn / xác nhận đồng ý cho thi công.
+
+### 4.3. Nguyên tắc xử lý
+
+1. **Dừng trước, hỏi sau.** Không cố thi công khi thấy nguy hiểm hoặc dễ gây thiệt hại tài sản.
+2. **Chụp hình hiện trạng** ngay khi phát hiện — đây là bằng chứng bảo vệ mình và công ty.
+3. **Báo cả hai bên** (quản lý + chủ nhà) trước khi quyết định làm tiếp hay dừng.
+
+:::tip[Cụm từ nên dùng khi báo cáo]
+- "Phát hiện rủi ro thi công"
+- "Điều kiện thi công không an toàn"
+- "Yêu cầu xác nhận trước khi thi công"
+
+Dùng đúng cụm từ giúp quản lý hiểu ngay mức độ và xử lý nhanh hơn.
+:::
+
+---
+
+## 5. Checklist an toàn công trường
 
 - [ ] Trang bị bảo hộ đầy đủ.
 - [ ] Biết vị trí tủ điện và CB tổng.

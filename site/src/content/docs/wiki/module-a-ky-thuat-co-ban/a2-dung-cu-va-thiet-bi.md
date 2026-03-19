@@ -21,23 +21,27 @@ Thiếu một trong những thứ dưới đây thì coi như chưa sẵn sàng 
 
 | Dụng cụ | Dùng để làm gì | Lưu ý |
 |:---|:---|:---|
+| Bút thử điện | Kiểm tra nhanh dây pha (dây lửa) | Chạm đầu bút vào đầu dây hoặc cọc đấu — đèn sáng là có điện. |
 | Tuốc-nơ-vít dẹt + bake | Tháo/lắp ốc vít | Bộ nhiều size, có đầu nam châm |
 | Kìm cắt | Cắt dây điện, thít nhựa | Loại cách điện 1000V |
-| Kìm tuốt dây | Tuốt vỏ dây điện | Chỉnh đúng tiết diện dây, tuốt thừa thì lõi đồng hở ra ngoài |
+| Kìm bằng | Giữ dây điện, uốn dây, cắt dây điện | Loại cách điện 1000V |
 | Kìm bấm mạng (RJ45) | Bấm đầu mạng RJ45 | Chuẩn Cat5e/Cat6 |
+| Dây rút (thít nhựa) | Gom dây, cố định cáp | Nhiều kích cỡ |
+| Băng keo điện | Cách điện mối nối | Quấn tối thiểu 3 lớp |
+| Đồng hồ vạn năng | Đo điện áp, dòng điện, điện trở và kiểm tra thông mạch | Đo được điện áp (xoay chiều và một chiều), dòng điện, điện trở và kiểm tra thông mạch. |
+| Thiết bị test cáp mạng | Kiểm tra cáp mạng | Kiểm tra 8 sợi bên trong cáp mạng có đấu đúng thứ tự không. |
 | Máy khoan pin | Khoan bê tông, gỗ, bắt vít | Kèm bộ mũi khoan đa năng |
 | Búa | Đóng tắc kê, đóng nở | Loại búa nhỏ (300g) |
 | Thước cuộn (5m) | Đo khoảng cách, lấy dấu | Lấy dấu trước khi khoan |
+| Kìm tuốt dây | Tuốt vỏ dây điện | Chỉnh đúng tiết diện dây, tuốt thừa thì lõi đồng hở ra ngoài |
 | Đèn pin / Đèn đội đầu | Làm việc trong tủ, trần | Sạc đầy pin trước khi đi |
-| Dây rút (thít nhựa) | Gom dây, cố định cáp | Nhiều kích cỡ |
-| Băng keo điện | Cách điện mối nối | Quấn tối thiểu 3 lớp |
 | Ống luồn / Nẹp điện | Bảo vệ và đi dây | Theo đúng kích thước thiết kế |
 
 ---
 
 ## 2. Thiết bị đo kiểm
 
-Biết dùng thiết bị đo thì phân biệt được dây nào sống, mạch nào thông, cáp nào đạt. Không biết thì chỉ đoán mò — và đoán mò với điện 220V thì rất nguy hiểm.
+Biết dùng thiết bị đo thì phân biệt được dây nào còn hoạt động, mạch nào thông, cáp nào đạt. Không biết thì chỉ đoán mò — và đoán mò với điện 220V thì rất nguy hiểm.
 
 ### 2.1. Đồng hồ vạn năng
 
@@ -62,7 +66,7 @@ Kiểm tra 8 sợi bên trong cáp mạng có đấu đúng thứ tự không. C
 
 ### 2.4. Thiết bị test mạng nâng cao
 
-Kiểm tra tốc độ thực tế, nguồn cấp qua cáp mạng, cấu hình mạng và lệnh Ping. Thường dùng trong giai đoạn nghiệm thu hoặc khi cần xử lý sự cố phức tạp.
+Kiểm tra độ dài cáp, nguồn cấp qua cáp mạng (PoE), xác định dây cáp trong tủ rack trong trường hợp không có đánh dấu. Thường dùng trong giai đoạn nghiệm thu hoặc khi cần xử lý sự cố phức tạp.
 
 ---
 
