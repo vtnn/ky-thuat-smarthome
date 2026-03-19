@@ -48,9 +48,3 @@ Biến repo thành wiki kỹ thuật dùng thật cho đào tạo, tra cứu và
 - B4 DALI
 - B5 Camera Hikvision
 - B6 WiFi Ruijie
-
-## Việc nên làm ngay
-1. Hoàn tất B1.05
-2. Hoàn tất B1.06
-3. Rà lại toàn bộ B1 theo done criteria
-4. Sau đó mới mở B3
