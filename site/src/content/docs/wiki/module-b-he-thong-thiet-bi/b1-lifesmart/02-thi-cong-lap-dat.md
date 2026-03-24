@@ -222,6 +222,15 @@ Nguồn điện yêu cầu: 12V một chiều. Cắm nhầm 220V vào chân tín
 - Dùng cáp xoắn đôi có chống nhiễu, tiết diện tối thiểu 0.75mm².
 - Không đi chung ống với đường điện xoay chiều 220V (L), khoảng cách cách ly khuyến cáo ít nhất 30cm để không rớt tín hiệu.
 
+![Hướng dẫn lắp đặt HVAC Gateway bước 1](../../../../../assets/images/wiki/module-b/b1-lifesmart/hvac-huong-dan-b1.jpg)
+<p class="hero-image-caption">Sơ đồ đấu nối cáp tín hiệu cho bộ HVAC Gateway. (Daikin)</p>
+
+![Hướng dẫn lắp đặt HVAC Gateway bước 2](../../../../../assets/images/wiki/module-b/b1-lifesmart/hvac-huong-dan-b2.jpg)
+<p class="hero-image-caption">Kết nối bộ HVAC Gateway vào hệ thống điều hòa.</p>
+
+![Hướng dẫn lắp đặt HVAC Gateway bước 3](../../../../../assets/images/wiki/module-b/b1-lifesmart/hvac-huong-dan-b3.jpg)
+<p class="hero-image-caption">Sơ đồ đấu nối liên kết khi hệ thống có nhiều dàn nóng.</p>
+
 
 
 </details>
@@ -248,6 +257,12 @@ Dùng nguồn DC 12V đi kèm thiết bị hoặc nguồn chuẩn quy cách từ
 - Cáp tín hiệu đấu từ cổng AIR CON Interface trên LS212 vào cổng tín hiệu trên board mạch dàn lạnh.
 - **Nếu đấu sai cực (đảo thứ tự dây)**: đèn RUN sẽ nháy nhanh mãi không dừng — thiết bị không tìm thấy điều hòa. Lúc này chỉ cần đảo lại 2 đầu dây tín hiệu là xong.
 - Không đi chung cáp tín hiệu với cáp nguồn điện lưới. Khoảng cách cách ly tối thiểu 15–30cm, hoặc đặt cáp tín hiệu trong ống gen sắt có nối đất để chống nhiễu.
+
+![Hướng dẫn lắp đặt LS212 bước 1](../../../../../assets/images/wiki/module-b/b1-lifesmart/ls212-huong-dan-b1.jpg)
+<p class="hero-image-caption">Các bước chuẩn bị và đấu nối cáp tín hiệu cho bộ LS212. (Daikin)</p>
+
+![Hướng dẫn lắp đặt LS212 bước 2](../../../../../assets/images/wiki/module-b/b1-lifesmart/ls212-huong-dan-b2.jpg)
+<p class="hero-image-caption">Hoàn thiện lắp đặt và cố định thiết bị LS212 vào vị trí dàn lạnh.</p>
 
 ### 4. Cảnh báo cháy nổ
 
@@ -293,10 +308,39 @@ Cắm cảm biến khói loại công nghiệp chạy nguồn 12V một chiều:
 - Đấu chân NC từ cảm biến khói vào ngõ K1. Nhớ nối thêm 1 chân GND về ngõ COM để khép kín mạch báo động.
 - Khi cảm biến khói nhảy cắt tiếp điểm khô, ứng dụng sẽ bật cảnh báo thông qua kịch bản đã cài sẵn. Cách này đơn giản nhưng hiệu quả — biến hệ báo cháy công nghiệp thường thành hệ báo cháy thông minh gửi thông báo về điện thoại.
 
-### 2. Điều khiển cổng tự động hoặc cửa cuốn
+![Sơ đồ đấu dây báo khói](../../../../../assets/images/wiki/chung/bao-khoi-tiep-diem.jpg)
+<p class="hero-image-caption">Hướng dẫn đấu nối tiếp điểm bộ báo khói về General Controller.</p>
 
-- Xác định tiếp điểm đóng mở cổng, đấu về CH1 và chân COM+.
+### 2. Điều khiển cổng tự động (tiếp điểm khô)
+
+- Xác định tiếp điểm đóng mở cổng (thường là NO), đấu về cổng CH và chân COM+.
+- Hầu hết các board mạch cổng tự động đều có ngõ vào cho nút nhấn tay (Push button), anh em đấu song song vào đó.
 - Nếu cổng hoặc cửa cuốn cần dùng nhiều kênh thì phải đấu qua rơ-le trung gian, sử dụng các chân CH1, CH2, CH3 kết hợp với COM+ để điều khiển rơ-le trung gian đó.
+
+![Đấu dây điều khiển cổng](../../../../../assets/images/wiki/chung/cua-cong-tiep-diem.jpg)
+<p class="hero-image-caption">Hướng dẫn đấu nối tiếp điểm điều khiển cho motor cổng tự động.</p>
+
+![Đấu qua rơ-le trung gian](../../../../../assets/images/wiki/module-b/b1-lifesmart/gc-huong-dan-b1.jpg)
+<p class="hero-image-caption">General Controller điều khiển thông qua rơ-le trung gian để đảm bảo an toàn và chịu tải.</p>
+
+### 3. Điều khiển cửa cuốn
+
+Tùy vào loại board mạch motor, sơ đồ tiếp điểm điều khiển có thể khác nhau. Dưới đây là các dạng đấu nối thông dụng:
+
+![Cửa cuốn tiếp điểm 1](../../../../../assets/images/wiki/chung/cua-cuon-tiep-diem-1.jpg)
+![Cửa cuốn tiếp điểm 2](../../../../../assets/images/wiki/chung/cua-cuon-tiep-diem-2.jpg)
+![Cửa cuốn tiếp điểm 3](../../../../../assets/images/wiki/chung/cua-cuon-tiep-diem-3.jpg)
+![Cửa cuốn tiếp điểm 4](../../../../../assets/images/wiki/chung/cua-cuon-tiep-diem-4.jpg)
+<p class="hero-image-caption">Tổng hợp các sơ đồ đấu nối tiếp điểm điều khiển cho các dòng motor cửa cuốn phổ biến trên thị trường.</p>
+
+![Đấu cửa cuốn 220V](../../../../../assets/images/wiki/module-b/b1-lifesmart/gc-huong-dan-b2.jpg)
+<p class="hero-image-caption">Sơ đồ đấu nối điều khiển cửa cuốn loại AC 220V qua bộ General Controller.</p>
+
+- Đối với của cuốn 220V chân Dừng (Stop) thường là dạng NC, chân Lên (Up) và Xuống (Down) là dạng NO.
+
+### 4. Bản vẽ kỹ thuật (Sơ đồ đấu nối)
+- [Cửa cổng và Beam](/drawings/MobiLife/MobiLife_CuaCong_Beam.pdf)
+- [Cửa cuốn](/drawings/MobiLife/MobiLife_CuaCuon.pdf)
 
 
 
@@ -441,6 +485,4 @@ Việc tích hợp khóa Yale thông qua module kết nối (SL_LK_YL) yêu cầ
 - [LifeSmart Brochure 250929.pdf](https://drive.google.com/file/d/1fTBlvwOsanYKhR_P5AMORJnfAf_2o4uE/view?usp=drive_link)
 - [Thư mục tài liệu tổng hợp LifeSmart (Drive)](https://drive.google.com/drive/folders/1RGZRgWJHFBUisvcJDJZeW6HBTIsZKWBy)
 - [Thư mục tài liệu kỹ thuật LifeSmart (Drive)](https://drive.google.com/drive/folders/1B_znIzettzmx4HUYxsCR26Z_aZ9bF1Lm)
-- [Bản vẽ kỹ thuật: Cửa cổng và Beam](/drawings/MobiLife/MobiLife_CuaCong_Beam.pdf)
-- [Bản vẽ kỹ thuật: Cửa cuốn](/drawings/MobiLife/MobiLife_CuaCuon.pdf)
 
