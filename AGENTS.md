@@ -76,6 +76,7 @@ openspec/
 - Không bold quá mức, không emoji trong body
 - Giải thích "tại sao", không chỉ "cái gì"
 - Ưu tiên ví dụ thực tế từ công trình / nhà ở
+- **Xử lý Video**: File `.mp4` (chữ thường) -> lưu tại `public/wiki/assets/videos/` -> không dùng Git LFS -> nhúng bằng thẻ `<video autoplay muted loop playsinline>`.
 - Chi tiết đầy đủ → xem `openspec/AGENTS.md` mục **Writing Rules**
 
 ## Quality Gate (checklist trước khi báo xong)

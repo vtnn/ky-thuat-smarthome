@@ -77,6 +77,11 @@ Khi nhận yêu cầu ngắn từ user, tra bảng này:
 - Không bold quá mức, không emoji trong body
 - Giải thích "tại sao", không chỉ "cái gì"
 - Ưu tiên ví dụ thực tế, ưu tiên tiếng Việt khi có thuật ngữ tương đương
+- **Quy tắc Video**:
+  - Đuôi file: Bắt buộc dùng chữ thường `.mp4`.
+  - Vị trí: Lưu vào `site/public/wiki/assets/videos/`.
+  - Hiển thị: Sử dụng thẻ `<video autoplay muted loop playsinline width="100%">`, KHÔNG dùng cú pháp markdown `![]()`.
+  - Git LFS: KHÔNG tracking file mp4 bằng Git LFS trên repo này (do Cloudflare Pages lỗi render pointer file). File size nhỏ tự push bình thường.
 
 ## Quality Gate
 
