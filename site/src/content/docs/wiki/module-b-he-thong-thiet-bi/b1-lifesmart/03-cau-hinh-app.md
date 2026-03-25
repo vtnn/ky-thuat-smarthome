@@ -209,7 +209,7 @@ Phần quan trọng nhất khi cấu hình General Controller là chọn đúng 
 - **Follow (đảo trạng thái):** mỗi lần kích ngõ vào, ngõ ra sẽ lật trạng thái. Bấm 1 nhát thì rơ-le CH1 đảo mạch, bấm lại thì CH1 lật lại. Dùng khi cần thay thế công tắc cơ bằng phím cứng.
 - **Jog (bấm giữ - nhả buông):** rơ-le chỉ duy trì khi giữ nút. Bấm giữ thì CH1 hít xuống COM+, nhả nút thì rơ-le tự buông ra. Chế độ này rất phù hợp cho nút nhấn khóa từ mở cửa, hoặc còi báo khẩn cấp — giữ tay thì kêu, bỏ tay thì tắt.
 
-Ngoài ra còn có bảng chỉnh thông số trễ tự đóng cho mô-tơ. Ví dụ cổng rào mở mất 15 giây thì nhập 15 giây vào ứng dụng, sau khi mở hết hành trình rơ-le sẽ tự ngắt. Tùy lúc thi công, đo thời gian mô-tơ mở cánh rồi nhập số giây phù hợp.
+Ngoài ra, trong phần cấu hình còn có mục chỉnh thông số trễ tự đóng rơ-le (Delay Time). Ví dụ: Khi cần kích hoạt tiếp điểm cổng (chỉ cần bật 1 giây rồi tự ngắt), anh em hãy nhập số "1" vào Delay Time trên ứng dụng. Tùy vào thiết bị thực tế, hãy đo thời gian phản hồi rồi nhập số giây phù hợp.
 
 ---
 
