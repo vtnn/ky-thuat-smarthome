@@ -162,7 +162,7 @@ Sau khi cấp nguồn 12V một chiều, thiết bị sẽ khởi động:
 
    ![Đồng bộ dàn lạnh HVAC Gateway](../../../../../assets/images/wiki/module-b/b1-lifesmart/hvac-sync.jpg)
    
-   <video controls width="100%">
+   <video autoplay muted loop playsinline width="100%">
      <source src="/wiki/assets/videos/hvac-sync.MP4" type="video/mp4">
      Trình duyệt của bạn không hỗ trợ phát video.
    </video>
