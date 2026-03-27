@@ -19,19 +19,19 @@ Biến repo thành wiki kỹ thuật dùng thật cho đào tạo, tra cứu và
 
 ## Roadmap chi tiết
 ### A — Kỹ thuật cơ bản
-- A1 Đọc bản vẽ kỹ thuật
-- A2 Dụng cụ và thiết bị
-- A3 An toàn lao động
-- A4 Tiêu chuẩn thi công
+- ~~A1 Đọc bản vẽ kỹ thuật~~ ✅ Done
+- ~~A2 Dụng cụ và thiết bị~~ ✅ Done
+- ~~A3 An toàn lao động~~ ✅ Done
+- ~~A4 Tiêu chuẩn thi công~~ ✅ Done
 
 ### B1 — LifeSmart
-- B1.00 Giới thiệu LifeSmart
-- B1.01 Danh sách thiết bị
-- B1.02 Thi công lắp đặt
-- B1.03 Cấu hình app
-- B1.04 Quy tắc đặt tên
-- B1.05 Lập trình scene
-- B1.06 Xử lý sự cố
+- ~~B1.00 Giới thiệu LifeSmart~~ ✅ Done
+- ~~B1.01 Danh sách thiết bị~~ ✅ Done
+- ~~B1.02 Thi công lắp đặt~~ ✅ Done
+- ~~B1.03 Cấu hình app~~ ✅ Done
+- ~~B1.04 Quy tắc đặt tên~~ ✅ Done
+- ~~B1.05 Lập trình scene~~ ✅ Done
+- ~~B1.06 Xử lý sự cố~~ ✅ Done
 
 ### B2 — Mobieyes / CommandFusion
 - B2.00 Giới thiệu Mobieyes
