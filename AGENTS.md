@@ -118,6 +118,7 @@ npm run build      # build production, kiểm tra lỗi
 | `openspec-propose` | Tạo change proposal mới |
 | `openspec-apply-change` | Triển khai task từ change đã có |
 | `openspec-archive-change` | Archive change hoàn tất |
+| `openspec-context-loading` | Xem trạng thái project, danh sách spec và change |
 | `content-qa-checklist` | Kiểm tra bài viết trước khi báo xong |
 | `module-planner` | Lên kế hoạch module mới |
 | `project-humanizer` | Chuẩn hóa giọng văn bài viết |

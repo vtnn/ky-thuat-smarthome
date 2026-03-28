@@ -398,12 +398,12 @@ Vì lý do bảo mật, tính năng mở khóa qua App mặc định có thể b
 
 ## 16. Chia sẻ Nhà (Family Management)
 
-1.Vào ứng dụng LifeSmart, chọn mũi tên xuống cạnh tên nhà ở góc trên bên trái.
+1. Vào ứng dụng LifeSmart, chọn mũi tên xuống cạnh tên nhà ở góc trên bên trái.
 2. Chọn Family Management.
 3. Mời thành viên bằng email hoặc UserID.
 4. Chọn quyền: Default hoặc tạo thêm quyền (có thể giới hạn quyền điều khiển theo từng phòng).
 
-**Lưu ý**: Chỉ tài khoản Admin mới có thể thêm thành viên và thay đổi quyền. Nếu chưa bàn giao đầy đủ mà đã cấp quyền Admin cho khách hàng, họ có thể vô tình xóa hoặc thay đổi cấu hình mà kỹ thuật đã thiết lập. Nên chỉ cấp cho khách hàng quyền Default qua tài khoản được chia sẻ, sau khi đã bàn giao và quyết toán đầy đủ thì mới cấp quyền Admin cho khách hàng.
+**Lưu ý**: Chỉ tài khoản Admin mới có thể thêm thành viên và thay đổi quyền. Nếu chưa bàn giao đầy đủ mà đã cấp quyền Admin cho khách hàng, họ có thể vô tình xóa hoặc thay đổi cấu hình mà kỹ thuật đã thiết lập. Nên chỉ cấp cho khách hàng quyền Default qua tài khoản được chia sẻ, sau khi đã bàn giao và quyết toán đầy đủ thì mới cấp tài khoản Admin cho khách hàng.
 
 ![Chọn Family Management](../../../../../assets/images/wiki/module-b/b1-lifesmart/family-management-1.jpeg)
 ![Mời thành viên](../../../../../assets/images/wiki/module-b/b1-lifesmart/family-management-2.jpeg)
