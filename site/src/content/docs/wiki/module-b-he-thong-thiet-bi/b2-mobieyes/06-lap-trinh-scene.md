@@ -50,16 +50,7 @@ Cách lập trình:
 
 Lưu ý quan trọng về đơn vị: trong phần mềm DIN-RY Config, đơn vị của delay là giây (s). Để chờ 3 phút, ta nhập giá trị 180. Nhập 180000 sẽ khiến hệ thống treo lệnh chờ cực lâu.
 
-### 2.3. Hẹn giờ
-
-Hẹn giờ chạy dựa vào đồng hồ trên LAN Bridge. Nếu giờ chưa đồng bộ (bài B2.05 mục 1.3) thì kịch bản hẹn giờ sẽ chạy sai.
-
-Ví dụ phổ biến:
-- 23:00 hàng ngày → gọi macro `bao_dong_on` (bật chế độ giám sát).
-- 05:00 sáng hôm sau → gọi macro `bao_dong_off` (tắt chế độ giám sát).
-- 18:00 → gọi macro `chieu_toi` (bật đèn sân, đèn hành lang).
-
-### 2.4. Giám sát kết hợp biến trạng thái
+### 2.3. Giám sát kết hợp biến trạng thái
 
 Kịch bản nâng cao: chỉ kích còi khi hệ thống đang ở chế độ giám sát. Ban ngày chủ nhà đi ra đi vào, cảm biến cửa kích hoạt liên tục nhưng không muốn còi kêu.
 
@@ -87,3 +78,87 @@ Bảng quy đổi delay (đơn vị: giây):
 - 3 phút = 180
 - 5 phút = 300
 - 10 phút = 600
+
+---
+
+## 4. Thiết lập kịch bản trên DIN-RY Config
+
+Ngoài System Commander, CommandFusion còn có phần mềm **DIN-RY Config** dùng để tạo Macro và Rule trực tiếp cho LAN Bridge. Phần mềm này phù hợp khi cần cấu hình chi tiết từng board.
+
+### 4.1. Cài đặt và kết nối
+
+1. **Tải phần mềm:**
+   Tải **CommandFusion DIN-RY Config** tại: [DIN-RY Config Setup](https://commandfusion.com/download/CommandFusion.DIN-RY.Config.Setup.0.13.2.exe)
+
+   ![DIN-RY Config](../../../../../assets/images/wiki/module-b/b2-mobieyes/kich-ban/image3.png)
+   <p class="hero-image-caption">Phần mềm CommandFusion DIN-RY Config.</p>
+
+2. **Kết nối đến LAN Bridge:**
+   Máy tính và LAN Bridge phải cùng mạng LAN (cắm chung switch hoặc router).
+   - Vào **Connection Settings** → **Manual Entry**.
+   - **Mode:** Network - TCP Client.
+   - **Network Interface:** Automatic.
+   - **IP Address or Hostname:** Nhập IP tĩnh của LAN Bridge.
+   - **Port:** Nhập port của LAN Bridge.
+
+   ![Cấu hình kết nối](../../../../../assets/images/wiki/module-b/b2-mobieyes/kich-ban/image7.png)
+   <p class="hero-image-caption">Điền IP và Port của LAN Bridge để kết nối.</p>
+
+   - Bấm **Connect** để bắt đầu kết nối.
+   - Sau khi kết nối thành công, chọn thiết bị cần cấu hình trong danh sách **Devices** (chọn theo Board ID).
+
+   ![Chọn thiết bị](../../../../../assets/images/wiki/module-b/b2-mobieyes/kich-ban/image1.png)
+   <p class="hero-image-caption">Chọn đúng Board ID của thiết bị cần lập trình.</p>
+
+   - Chuyển sang tab **Automation Macros** để bắt đầu tạo kịch bản.
+
+### 4.2. Tạo Macro
+
+1. Trong tab **Automation Macros**, bấm **Create New Macro** để tạo macro mới.
+
+   ![Tạo Macro](../../../../../assets/images/wiki/module-b/b2-mobieyes/kich-ban/image5.png)
+   <p class="hero-image-caption">Nút tạo Macro mới.</p>
+
+2. Đặt tên macro cho dễ nhận biết (ví dụ: `denPK` cho đèn phòng khách).
+3. Chọn macro vừa tạo, bấm **+ Action** để thêm hành động.
+4. Điền thông số trong cửa sổ **Action Builder**:
+
+   ![Action Builder](../../../../../assets/images/wiki/module-b/b2-mobieyes/kich-ban/image4.png)
+   <p class="hero-image-caption">Cửa sổ cấu hình Action cho relay.</p>
+
+   - **CONDITION:** Chọn `None` (hoặc thêm điều kiện nếu kịch bản cần logic phức tạp hơn).
+   - **Delay (s):** Thời gian chờ trước khi chạy lệnh, tính bằng giây.
+   - **Action Type:** Loại hành động — ví dụ *Relay Conditional* nghĩa là điều khiển relay có kèm điều kiện.
+   - **Target ID:** Board ID của thiết bị cần điều khiển.
+   - **When Load:** Kênh cần kiểm tra trạng thái hiện tại.
+   - **Is:** Trạng thái cần so sánh (ví dụ: kiểm tra relay đang tắt hay bật).
+   - **Set Relay:** Kênh relay cần đóng/mở.
+   - **To State:** Lệnh cần thực hiện (ví dụ: Toggle = đảo trạng thái).
+   - Điền xong thì bấm **Add Action** để lưu hành động vào macro.
+
+   > **Mẹo:** Bấm **Test Action** để thử chạy lệnh ngay tại công trình, kiểm tra đúng kênh chưa.
+
+5. Nếu macro cần điều khiển nhiều thiết bị cùng lúc, lặp lại bước thêm Action cho từng kênh.
+6. Bấm **Save Macro Changes** (biểu tượng đĩa mềm góc trên trái) để lưu và ghi xuống thiết bị.
+
+> **Quan trọng:** Luôn Backup cấu hình ra file trên laptop trước khi bấm Save. Nếu mất kết nối giữa chừng khi đang ghi, cấu hình trên thiết bị có thể bị lỗi.
+
+### 4.3. Tạo Rule (sự kiện tự động)
+
+Rule giúp hệ thống tự kích hoạt macro khi có sự kiện xảy ra — ví dụ ai đó bấm công tắc, cảm biến phát hiện chuyển động, hoặc cửa được mở.
+
+1. Chuyển sang tab **Automation Rules**, bấm **Create New Rule**.
+
+   ![Tạo Rule](../../../../../assets/images/wiki/module-b/b2-mobieyes/kich-ban/image6.png)
+   <p class="hero-image-caption">Tab quản lý Rule — nơi thiết lập sự kiện tự động.</p>
+
+2. Điền thông số trong cửa sổ **Rule Creator**:
+
+   ![Rule Creator](../../../../../assets/images/wiki/module-b/b2-mobieyes/kich-ban/image2.png)
+   <p class="hero-image-caption">Ví dụ: cấu hình Rule theo dõi Drycontact kênh 4 để kích macro đèn.</p>
+
+   - **Search String:** Chuỗi mà hệ thống dùng để nhận biết sự kiện. Ví dụ `*RRY.CHA\xF4MM|P04:*` nghĩa là "khi Drycontact kênh 4 thay đổi trạng thái (đóng ↔ mở)".
+   - **Rule Name:** Đặt tên gợi nhớ cho rule (ví dụ: `CT_PhongKhach`).
+   - **Trigger Macro:** Chọn macro sẽ chạy khi rule được kích.
+   - Bấm **Save Rule** để thêm rule vào danh sách.
+   - Bấm **Save Rule Changes** (biểu tượng đĩa mềm) để ghi cấu hình xuống thiết bị. Nhớ Backup trước khi Save.
