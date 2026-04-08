@@ -46,10 +46,12 @@ Do hệ thống mới chạy tín hiệu kèm nguồn một chiều ngay trên d
 
 Chân Tx+ và Tx- phải nhất quán xuyên suốt toàn bộ dự án. Nếu tủ 1 đấu Tx+ vào sợi Trắng Dương thì 100% các tủ còn lại phải làm y chang. Lộn âm dương (Tx+ cắm vào Tx-) là cả tuyến đi theo sau sẽ đứt kết nối hoàn toàn.
 
-> CẢNH BÁO TỪ THỰC TẾ CÔNG TRƯỜNG:
-> Việc cấp nguồn 24V đi chung trên dây mạng (theo sơ đồ Cặp Lá / Cặp Nâu ở trên) chỉ áp dụng riêng cho dây mạng kéo ra module hồng ngoại (IR). Các thiết bị còn lại và bản thân mỗi tủ phải có bộ nguồn riêng độc lập.
-> Tuyệt đối không được cắt, tháo ra hay đấu lộn dây mạng của IR. Nếu chẳng may cắt nhầm, hay bấm lộn khiến điện áp 24V từ dây Cặp Lá/Nâu chạm chập qua dây tín hiệu Tx+/Tx-, bo mạch trung tâm sẽ cháy hỏng ngay lập tức. Đã có quá nhiều trường hợp phải đền thiết bị do chủ quan vấn đề này.
-> Vì vậy: luôn phải dán nhãn cố định "KHÔNG ĐƯỢC CẮT, THÁO RA" lên cáp cấp cho IR, và trước khi cắm dây vào cụm thiết bị, phải dùng đồng hồ đo điện (đo một chiều) kiểm tra kỹ lưỡng các chân tín hiệu xem có vô tình lẫn điện không.
+:::tip[CẢNH BÁO TỪ THỰC TẾ CÔNG TRƯỜNG]
+- "Việc cấp nguồn 24V đi chung trên dây mạng (theo sơ đồ Cặp Lá / Cặp Nâu ở trên) chỉ áp dụng riêng cho dây mạng kéo ra module hồng ngoại (IR). Các thiết bị còn lại và bản thân mỗi tủ phải có bộ nguồn riêng độc lập."
+- "Tuyệt đối không được cắt, tháo ra hay đấu lộn dây mạng của IR. Nếu chẳng may cắt nhầm, hay bấm lộn khiến điện áp 24V từ dây Cặp Lá/Nâu chạm chập qua dây tín hiệu Tx+/Tx-, bo mạch trung tâm sẽ cháy hỏng ngay lập tức. Đã có quá nhiều trường hợp phải đền thiết bị do chủ quan vấn đề này."
+- "Vì vậy: luôn phải dán nhãn cố định "KHÔNG ĐƯỢC CẮT, THÁO RA" lên cáp cấp cho IR, và trước khi cắm dây vào cụm thiết bị, phải dùng đồng hồ đo điện (đo một chiều) kiểm tra kỹ lưỡng các chân tín hiệu xem có vô tình lẫn điện không."
+
+:::
 
 ---
 

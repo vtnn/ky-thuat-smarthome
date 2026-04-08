@@ -75,9 +75,9 @@ Từ công tắc trên tường, kéo cáp CAT5e/CAT6 về tủ. Một sợi đ�
 
 ## 4. Rèm, cửa cuốn và cổng
 
-Rèm cần 2 kênh relay trên cùng một board. Một kênh cho hướng mở, một kênh cho hướng đóng. Hai kênh này không được bật cùng lúc (motor chạy hai chiều đồng thời sẽ cháy), nên khi lập trình macro phải có logic đảm bảo tắt kênh này trước khi bật kênh kia.
+Cổng và cửa cuốn: kéo cáp CAT6 từ motor về tủ smarthome. Đấu theo sơ đồ của nhà sản xuất motor, thường là COM/PP (chung/mở+đóng+dừng). Mỗi loại motor có sơ đồ khác nhau, phải đọc tài liệu motor trước khi đấu.
 
-Cổng và cửa cuốn: kéo cáp CAT6 từ motor về tủ smarthome. Đấu theo sơ đồ của nhà sản xuất motor, thường là COM/OP/CL (chung/mở/đóng). Mỗi loại motor có sơ đồ khác nhau, phải đọc tài liệu motor trước khi đấu.
+Motor rèm: Kéo cáp CAT6 từ motor về tủ smarthome. Đấu theo sơ đồ của nhà sản xuất motor, thường là COM/UP/DOWN (chung/mở/đóng). Mỗi loại motor có sơ đồ khác nhau, phải đọc tài liệu motor trước khi đấu.
 
 ---
 
