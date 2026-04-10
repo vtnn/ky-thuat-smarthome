@@ -39,5 +39,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=kythuat-smarthome --branch=main
+          command: pages deploy dist --project-name=kythuat-smarthome --branch=main --commit-message="${{ github.sha }}"
           workingDirectory: site
+        env:
+          LANG: en_US.UTF-8
+          LC_ALL: en_US.UTF-8
