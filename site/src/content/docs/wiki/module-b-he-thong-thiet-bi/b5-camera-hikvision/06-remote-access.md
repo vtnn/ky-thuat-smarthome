@@ -65,33 +65,58 @@ Công ty chủ yếu bàn giao cho khách xem camera từ xa qua IP tĩnh hoặc
 - **Tốc độ**: Truy cập trực tiếp thường nhanh hơn đi qua cloud, đặc biệt khi playback (xem lại).
 - **Chủ động**: Khách hàng và công ty kiểm soát hoàn toàn đường truyền.
 
-### 3.1. Phương án 1 — IP tĩnh công cộng (WAN IP)
+### 3.1. Port chuẩn của công ty
+
+Công ty đổi port mặc định của Hikvision để giảm rủi ro bị bot quét tự động:
+
+| Mục đích | Port mặc định Hikvision | Port công ty dùng | Ghi chú |
+|---|---:|---:|---|
+| HTTP (Web) | 80 | **81** | Truy cập giao diện NVR qua trình duyệt |
+| RTSP (Video stream) | 554 | **8554** | Luồng video cho app, iVMS, tích hợp hệ thống |
+| SDK/App (Server port) | 8000 | **8100** | Dùng cho iVMS-4200, Hik-Connect qua IP |
+
+Cấu hình trên NVR: Configuration → Network → Basic Settings → đổi HTTP Port, RTSP Port, Server Port theo bảng trên.
+
+### 3.2. Phương án 1 — IP tĩnh công cộng (WAN IP)
 
 Nếu nhà mạng cấp IP tĩnh (hoặc IP tĩnh qua gói cước doanh nghiệp):
 
 1. Trên router, cấu hình **port forwarding** các port sau đến IP NVR (`192.168.1.30`):
-   - Port **80** (HTTP Web) hoặc đổi sang port khác (ví dụ 8080) để tránh bị scan.
-   - Port **554** (RTSP — xem video stream).
-   - Port **8000** (SDK, dùng cho iVMS-4200 và app Hik-Connect qua IP).
-2. Truy cập từ xa: `http://[IP-WAN]:8080` trên trình duyệt, hoặc nhập IP WAN + port vào app.
+   - Port **81** (HTTP Web)
+   - Port **8554** (RTSP)
+   - Port **8100** (SDK/App)
+2. Truy cập từ xa: `http://[IP-WAN]:81` trên trình duyệt, hoặc nhập IP WAN + port 8100 vào app.
 
-### 3.2. Phương án 2 — DDNS (Dynamic DNS)
+### 3.3. Phương án 2 — DDNS (Dynamic DNS)
 
-Khi nhà mạng cấp IP động (thay đổi mỗi lần restart modem) — đây là trường hợp phổ biến với gói cước gia đình:
+Khi nhà mạng cấp IP động (thay đổi mỗi lần restart modem) — đây là trường hợp phổ biến với gói cước gia đình. Công ty có sẵn dịch vụ DDNS riêng.
 
-1. Đăng ký dịch vụ DDNS. Hikvision tích hợp sẵn Hik-Connect DDNS hoặc dùng DynDNS, No-IP.
-2. Cấu hình DDNS trên NVR: Configuration → Network → DDNS → chọn nhà cung cấp → nhập tài khoản.
-3. Cấu hình port forwarding trên router (giống phương án 1).
-4. Truy cập từ xa bằng domain: `http://tencongtrình.hik-ddns.com:8080`.
+#### Cấu hình DDNS trên NVR
 
-### 3.3. Lưu ý bảo mật khi mở port
+Vào Configuration → Network → DDNS:
+
+| Trường | Giá trị |
+|---|---|
+| **DDNS Type** | DynDNS |
+| **Server** | `ddns.thachanhitt.vn` |
+| **Domain** | `[têncongtrình].thachanhitt.vn` (ví dụ: `ktxanha.thachanhitt.vn`) |
+| **Username** | Theo tài khoản được cấp (ví dụ: `thachanh`) |
+| **Password** | Theo tài khoản được cấp |
+
+Sau khi lưu, NVR sẽ tự động cập nhật IP WAN hiện tại lên server DDNS. Khi IP thay đổi (modem restart), NVR cập nhật lại mà không cần can thiệp.
+
+Cấu hình port forwarding trên router giống phương án 1 (port 81, 8554, 8100 forward về `192.168.1.30`).
+
+Truy cập từ xa: `http://ktxanha.thachanhitt.vn:81` trên trình duyệt.
+
+### 3.4. Lưu ý bảo mật khi mở port
 
 Khi dùng IP/domain + port forwarding, cần đặc biệt chú ý bảo mật vì thiết bị được truy cập trực tiếp từ Internet:
 
 | Bắt buộc | Lý do |
 |---|---|
 | Mật khẩu NVR mạnh (≥ 12 ký tự, kết hợp chữ hoa/thường/số/ký tự đặc biệt) | Port mở ra Internet = bị quét (scan) liên tục |
-| Đổi port mặc định (80 → 8080, 8000 → 8200, v.v.) | Giảm rủi ro bị bot quét port tự động |
+| Đã đổi port khác mặc định (81, 8554, 8100) | Giảm rủi ro bị bot quét port tự động |
 | Cập nhật firmware NVR thường xuyên | Hikvision liên tục vá lỗi bảo mật |
 | Tách VLAN Camera riêng | Nếu NVR bị tấn công, không ảnh hưởng các thiết bị khác trong mạng |
 | Bật HTTPS nếu NVR hỗ trợ | Mã hóa dữ liệu trên đường truyền |
@@ -141,7 +166,7 @@ Dù chọn phương án nào, đảm bảo khách nhận được:
 - [ ] Tài khoản Hik-Connect (email + mật khẩu)
 - [ ] Mật khẩu Admin NVR
 - [ ] Verification Code của NVR
-- [ ] Thông tin truy cập qua IP/domain (nếu có): địa chỉ, port, cách đăng nhập
+- [ ] Thông tin truy cập qua domain (ví dụ: `ktxanha.thachanhitt.vn:81`), port web 81, port app 8100
 - [ ] Hướng dẫn cơ bản: cách xem live, cách xem lại (playback)
 - [ ] Số hotline hỗ trợ kỹ thuật
 

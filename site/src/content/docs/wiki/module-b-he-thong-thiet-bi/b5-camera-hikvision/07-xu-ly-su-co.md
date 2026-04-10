@@ -136,7 +136,7 @@ Xử lý: Xoay camera hoặc dời vật cản. Nếu không thể, đổi sang 
 Công ty chủ yếu dùng truy cập qua IP/domain. Kiểm tra theo thứ tự:
 
 1. **NVR có Internet không?** Từ NVR: Configuration → Network → kiểm tra Default Gateway và DNS. Thử ping 8.8.8.8 nếu NVR hỗ trợ.
-2. **Port forwarding trên router còn đúng không?** Kiểm tra các port (HTTP, 554, 8000) có đang forward đúng về IP NVR (`192.168.1.30`). Nếu router bị reset, cấu hình port forwarding có thể mất.
+2. **Port forwarding trên router còn đúng không?** Kiểm tra các port (81, 8554, 8100) có đang forward đúng về IP NVR (`192.168.1.30`). Nếu router bị reset, cấu hình port forwarding có thể mất.
 3. **IP WAN có thay đổi không?** Nếu dùng IP động mà không có DDNS, IP sẽ thay đổi khi modem restart. Kiểm tra IP WAN hiện tại hoặc cấu hình DDNS.
 4. **Nếu dùng Hik-Connect (P2P)**: Configuration → Platform Access → kiểm tra Status. Nếu "Offline" → DNS sai, Firewall chặn outbound, hoặc mất Internet.
 5. **Xem được Live nhưng Playback không tải**: Upload Internet quá chậm. Playback đòi hỏi băng thông lớn hơn live view. Giải pháp: tăng gói cước Internet hoặc xem playback trực tiếp trên NVR tại chỗ.

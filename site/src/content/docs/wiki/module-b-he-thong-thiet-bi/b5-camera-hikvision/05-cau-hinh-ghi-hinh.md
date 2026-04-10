@@ -100,18 +100,20 @@ Khi cần đưa luồng camera vào Home Assistant, LifeSmart, VLC hoặc phần
 
 | Luồng | URL |
 |---|---|
-| Main Stream | `rtsp://[user]:[pass]@[IP]:554/Streaming/Channels/[kênh]01` |
-| Sub Stream | `rtsp://[user]:[pass]@[IP]:554/Streaming/Channels/[kênh]02` |
+| Main Stream | `rtsp://[user]:[pass]@[IP]:8554/Streaming/Channels/[kênh]01` |
+| Sub Stream | `rtsp://[user]:[pass]@[IP]:8554/Streaming/Channels/[kênh]02` |
+
+Công ty đổi RTSP port từ 554 (mặc định) sang **8554**. Nếu đầu ghi chưa đổi port thì vẫn dùng 554.
 
 ### Ví dụ cụ thể
 
 - Camera IP `192.168.1.31`, user `admin`, pass `Abc@12345`:
-  - Main: `rtsp://admin:Abc@12345@192.168.1.31:554/Streaming/Channels/101`
-  - Sub: `rtsp://admin:Abc@12345@192.168.1.31:554/Streaming/Channels/102`
+  - Main: `rtsp://admin:Abc@12345@192.168.1.31:8554/Streaming/Channels/101`
+  - Sub: `rtsp://admin:Abc@12345@192.168.1.31:8554/Streaming/Channels/102`
 
 - NVR IP `192.168.1.30`, kênh 1:
-  - Main: `rtsp://admin:Abc@12345@192.168.1.30:554/Streaming/Channels/101`
-  - Kênh 2 Sub: `rtsp://admin:Abc@12345@192.168.1.30:554/Streaming/Channels/202`
+  - Main: `rtsp://admin:Abc@12345@192.168.1.30:8554/Streaming/Channels/101`
+  - Kênh 2 Sub: `rtsp://admin:Abc@12345@192.168.1.30:8554/Streaming/Channels/202`
 
 Quy tắc: `Channels/[kênh][luồng]` — kênh 1 = 1, kênh 2 = 2; luồng main = 01, sub = 02.
 
