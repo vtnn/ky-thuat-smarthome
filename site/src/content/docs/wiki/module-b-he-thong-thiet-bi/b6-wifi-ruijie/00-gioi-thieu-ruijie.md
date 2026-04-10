@@ -77,7 +77,7 @@ Trong thiết kế của công ty, Router (MikroTik) xử lý routing/firewall/V
 
 - **Ưu tiên có dây**: AP kết nối về switch qua Cat6, không dùng mesh/repeater nếu đã có sẵn hạ tầng cáp.
 - **AP càng gần trung tâm vùng phủ sóng càng tốt**: gắn trần giữa phòng, không góc tường.
-- **Tách SSID/VLAN**: Private cho gia đình, Guest cho khách, IoT cho thiết bị thông minh (chi tiết ở bài B6.04).
+- **Tách SSID/VLAN**: WiFi nhà (VLAN 1) cho nội bộ + Guest (VLAN 123) cho khách. Chi tiết ở bài B6.04.
 - **1 AP phủ khoảng 50-80m²**: tùy vật liệu tường (bê tông dày cần nhiều AP hơn).
 - **Roaming**: cùng SSID trên tất cả AP, bật 802.11k/v để thiết bị tự chuyển AP khi di chuyển.
 
