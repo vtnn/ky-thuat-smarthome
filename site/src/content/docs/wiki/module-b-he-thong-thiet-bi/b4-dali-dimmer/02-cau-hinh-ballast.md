@@ -24,9 +24,11 @@ Trước khi bắt đầu, xác định đang dùng gateway nào để chọn đ
 | Hệ thống | Tool commissioning |
 |----------|-------------------|
 | Standalone DALI (không gateway BMS) | Tridonic masterCONFIGURATOR + USB DALI adapter |
-| KNX-DALI Gateway (Siemens 5WG1141, ABB DG/S) | ETS 5/6 cho phần KNX, masterCONFIGURATOR hoặc DALI-Cockpit cho phần DALI driver |
-| MobiEyes Dimmer Module DALI | MobiEyes app / phần mềm cấu hình MobiEyes trên máy tính |
-| LifeSmart DALI Gateway | LifeSmart app + cổng cấu hình Gateway |
+| KNX-DALI Gateway (Siemens 5WG1141-1AB31, EAE) | ETS 5/6 — gateway Siemens/EAE hỗ trợ cấu hình DALI trên ETS luôn |
+| Tridonic DALI Interface RS232 PS/S (kết nối MobiEyes qua RS232) | Tridonic USB adapter + masterCONFIGURATOR (cho cấu hình DALI), MobiEyes app (cho điều khiển) |
+| LifeSmart DALI Gateway | Tridonic USB adapter + masterCONFIGURATOR (LifeSmart DALI Gateway chỉ điều khiển, không cấu hình DALI), LifeSmart app cho điều khiển |
+
+> **Lưu ý:** Tridonic masterCONFIGURATOR là tool chung cho cấu hình DALI khi dùng MobiEyes và LifeSmart. Cần USB DALI adapter của Tridonic.
 
 **Tridonic masterCONFIGURATOR** là tool phổ biến nhất cho phần DALI thuần — miễn phí, tải tại tridonic.com. Cần USB DALI adapter (Tridonic USB interface) để kết nối máy tính với bus DALI. Adapter rút khoảng 6mA từ bus, không cần nguồn ngoài.
 
@@ -198,7 +200,7 @@ Nếu mix DT6 và DT8 trong cùng group, lệnh CCT chỉ ảnh hưởng DT8 —
 
 ## Commissioning với ETS (KNX-DALI Gateway)
 
-Khi dùng Siemens 5WG1141 hoặc ABB DG/S làm gateway, quy trình có 2 lớp:
+Khi dùng Siemens 5WG1141-1AB31 hoặc EAE làm gateway, quy trình có 2 lớp:
 
 **Lớp KNX (trong ETS):**
 1. Import file .knxprod của gateway vào ETS catalog
@@ -206,9 +208,8 @@ Khi dùng Siemens 5WG1141 hoặc ABB DG/S làm gateway, quy trình có 2 lớp:
 3. Gán Group Address KNX cho từng DALI group/scene
 4. Download config KNX xuống gateway
 
-**Lớp DALI (trong ETS hoặc DALI-Cockpit):**
-- Một số gateway cho phép commissioning DALI driver trực tiếp từ ETS (có tab DALI riêng trong plugin)
-- Một số gateway cần dùng tool riêng (Siemens Symaro Config, DALI-Cockpit) kết nối vào bus DALI
+**Lớp DALI (trong ETS):**
+- Gateway Siemens/EAE hỗ trợ commissioning DALI driver trực tiếp từ ETS (có tab DALI riêng trong plugin) — ETS đã hỗ trợ cấu hình DALI trực tiếp cho gateway Siemens/EAE
 - Quy trình DALI (scan, identify, group, scene) giống như commissioning standalone
 
 **Điểm quan trọng:** Sau khi commissioning DALI xong, đảm bảo mapping giữa DALI Group và KNX Group Address là đúng. Test từng nút bấm KNX để verify scene DALI được trigger đúng.

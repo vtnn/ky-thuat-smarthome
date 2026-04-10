@@ -6,8 +6,8 @@ level: "2-4"
 tags: ["knx", "lap-dat", "push-button", "dali-gateway", "actuator", "thi-cong"]
 ---
 
-![ABB KNX-DALI Gateway DG/S](../../../../../assets/images/wiki/module-b/b3-knx/abb-knx-dali-gateway.jpg)
-<p class="hero-image-caption">ABB KNX-DALI Gateway DG/S 2.64.5.1 — lắp DIN rail, cầu nối giữa KNX bus và DALI bus.</p>
+![KNX-DALI Gateway](../../../../../assets/images/wiki/module-b/b3-knx/abb-knx-dali-gateway.jpg)
+<p class="hero-image-caption">KNX-DALI Gateway DIN rail — cầu nối giữa KNX bus và DALI bus. Tại Thạch Anh IT dùng Siemens 5WG1141-1AB31.</p>
 
 ## Mục tiêu
 
@@ -101,7 +101,7 @@ DIN rail 35mm trong tủ điện. Cần:
 - Khe DIN rail: 2 SU (36mm) phần lớn các model
 - Kết nối Ethernet: cáp Cat5e/Cat6 đến switch mạng
 - Kết nối bus: 2 dây từ bus KNX (đỏ + đen)
-- Nguồn: tùy model — Bus powered (Weinzierl 5263, MDT SCN-IP100.03) hoặc cần 12–30V DC / PoE (ABB IPR/S 3.5.1)
+- Nguồn: PoE (Siemens N 148/23) — cắm vào PoE switch, không cần nguồn riêng
 
 ### Đấu nối
 
@@ -115,20 +115,20 @@ Tủ điện
 │       └── RJ45 Ethernet  ←── Patch cord đến switch
 │
 └── Switch mạng (LAN)
-    └── ←── MobiEyes controller, máy tính ETS
+    └── ←── máy tính ETS, Home Assistant
 ```
 
-**Nếu model dùng PoE (ABB IPR/S 3.5.1):** Cắm cáp Ethernet vào PoE switch — gateway nhận cả data và nguồn từ một cáp. Không cần cấp thêm 12V. Đây là lợi thế lớn khi lắp xa tủ nguồn.
+**Siemens N 148/23 (PoE powered):** Cắm cáp Ethernet vào PoE switch — gateway nhận cả data và nguồn từ một cáp. Không cần cấp thêm 12V. Đây là lợi thế lớn khi lắp xa tủ nguồn.
 
 ### Cấu hình IP
 
 Mặc định: DHCP — gateway tự xin IP từ router/DHCP server. Sau khi lắp, dùng phần mềm của hãng hoặc ETS để tìm gateway trên mạng (scan IP multicast 224.0.23.12).
 
-Với hệ thống production: nên đặt IP tĩnh để MobiEyes không mất kết nối khi DHCP lease thay đổi. Đặt IP trong ETS → Properties → IP Address.
+Với hệ thống production: nên đặt IP tĩnh để ETS và Home Assistant không mất kết nối khi DHCP lease thay đổi. Đặt IP trong ETS → Properties → IP Address.
 
 ### Số kết nối tunneling đồng thời
 
-Weinzierl 5263 và ABB IPR/S: 5 kết nối. MDT SCN-IP100.03: 4 kết nối. Nếu MobiEyes + ETS + 1 app giám sát đều kết nối cùng lúc, 3 slot đã bị chiếm. Thêm 1–2 slot dự phòng là đủ.
+Siemens N 148/23 hỗ trợ 4 kết nối tunneling đồng thời. Nếu ETS + Home Assistant + 1 app giám sát đều kết nối cùng lúc, 3 slot đã bị chiếm. Thêm 1 slot dự phòng là đủ.
 
 ---
 
@@ -201,7 +201,7 @@ DALI gateway cần nguồn 230V AC **riêng** (ngoài bus KNX 29V). Nguồn 230V
 
 1. Bật nguồn DALI gateway
 2. Kiểm tra LED trạng thái (thường có LED "KNX", "DALI", "Error")
-3. Mở ABB i-bus Tool (với ABB DG/S) hoặc ETS để thực hiện DALI commissioning (auto-assign address)
+3. Mở ETS (với KNX-DALI Gateway Siemens/EAE) để thực hiện DALI commissioning (auto-assign address)
 4. DALI commissioning bắt buộc phải làm trước khi nạp ETS đầy đủ — xem B3.06 cho quy trình
 
 ---
@@ -261,7 +261,7 @@ Motor cable:
 
 Cơ chế khóa chéo (interlock): phần cứng đảm bảo không bao giờ UP và DOWN đóng cùng lúc. Kể cả khi có lỗi phần mềm, motor không bị phá.
 
-Auto travel detection (ABB JRA/S x.y.5.1): sau khi lắp, chạy lệnh "Identify" từ ETS — actuator tự chạy motor đến cuối hành trình, đo thời gian, lưu lại. Không cần nhập thủ công travel time.
+Auto travel detection: sau khi lắp, chạy lệnh "Identify" từ ETS — actuator tự chạy motor đến cuối hành trình, đo thời gian, lưu lại. Không cần nhập thủ công travel time.
 
 ---
 

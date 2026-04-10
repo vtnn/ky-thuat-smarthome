@@ -210,7 +210,7 @@ Dùng checklist này trước khi bật nguồn lần đầu:
 Khi bật PSU lần đầu, quan sát:
 - LED trên PSU phải sáng (nếu có LED bus voltage indicator)
 - Đo điện áp bus: 29V DC ±1V
-- Nếu PSU có LED dòng điện (ABB SV/S 30.320.2.1): số LED sáng tương ứng với dòng bus — dùng để estimate số thiết bị đang draw current
+- Nếu PSU có LED dòng điện (Meanwell KNX-20E hoặc Siemens N 125): số LED sáng tương ứng với dòng bus — dùng để estimate số thiết bị đang draw current
 
 Chỉ sau khi điện áp ổn định mới bắt đầu gắn thiết bị và nạp địa chỉ qua ETS.
 

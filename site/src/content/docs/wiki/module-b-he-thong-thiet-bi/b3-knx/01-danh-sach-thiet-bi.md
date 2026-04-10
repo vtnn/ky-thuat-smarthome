@@ -40,8 +40,10 @@ Nguồn bus có tích hợp cuộn cảm (choke) để tách nguồn DC khỏi t
 Mỗi thiết bị KNX tiêu thụ khoảng 5–15mA từ bus. Push button thường 8–10mA, actuator DIN rail 10–12mA. Tính tổng current trước khi chọn PSU.
 
 **Model tham khảo:**
-- ABB SV/S 30.320.2.1: 320mA, có chẩn đoán qua 7 LED hiển thị dòng bus — rất hữu ích khi debug
-- MDT STC-0640.01: 640mA, ring buffer 9 sự kiện với timestamp — phát hiện thiết bị lỗi sau thực tế
+- Meanwell KNX-20E-640: 640mA, compact, giá tốt — lựa chọn thường dùng
+- Meanwell KNX-20E-320: 320mA, cho dự án nhỏ
+- Siemens N 125/22 (5WG1125-1AB22): 640mA, thương hiệu Đức, chất lượng cao
+- Siemens N 125/12 (5WG1125-1AB12): 320mA
 
 **Lắp đặt:** DIN rail 35mm, vào tủ điện. Input 230V AC, output 29V DC lên bus. Khoảng cách tối thiểu 200m (chiều dài cáp bus) nếu có 2 nguồn trên cùng 1 line.
 
@@ -52,28 +54,22 @@ Mỗi thiết bị KNX tiêu thụ khoảng 5–15mA từ bus. Push button thư�
 Thiết bị kết nối bus KNX với mạng LAN/Ethernet. Có hai chức năng chính:
 
 - **Lập trình qua mạng:** ETS kết nối tới bus qua IP thay vì cáp USB — tiện hơn nhiều khi làm việc từ xa hoặc tủ điện đặt xa máy tính
-- **Tích hợp MobiEyes:** MobiEyes controller giao tiếp với KNX bus qua KNXnet/IP tunneling
+- **Tích hợp hệ thống:** Home Assistant có thể kết nối với KNX bus qua KNXnet/IP tunneling để đồng bộ với MobiEyes
 
 Hai loại cần phân biệt:
 - **IP Interface (không routing):** Chỉ tunneling, không thể làm line/area coupler
 - **IP Router (có routing):** Vừa tunneling vừa coupler — loại này dùng cho dự án chuyên nghiệp
 
-#### So sánh 3 model hay dùng
+#### Model sử dụng tại Thạch Anh IT
 
-| Tính năng | Weinzierl 5263 (BAOS 774) | ABB IPR/S 3.5.1 | MDT SCN-IP100.03 |
-|---|---|---|---|
-| Loại | IP Interface + BAOS | IP Router | IP Router |
-| Tunneling đồng thời | 5 | 5 | 4 |
-| KNX Secure | Không | Có | Có |
-| Nguồn | Bus (không cần 12V) | PoE hoặc 12–30V DC | Bus (không cần 12V) |
-| Tính năng đặc biệt | API JSON/Binary cho third-party | PoE tiện lắp xa tủ | Built-in time server, email alert |
-| Routing (line coupler) | Không | Có | Có |
-| Giá tham khảo | €120–160 | €180–250 | €120–160 |
+**Siemens N 148/23 (5WG1148-1AB23):**
+- Loại: IP Interface (tunneling)
+- Tunneling đồng thời: 4 kết nối
+- KNX Secure: Có
+- Nguồn: PoE — cắm vào PoE switch, không cần nguồn riêng
+- ETS lập trình qua IP — tiện lợi khi làm việc từ xa hoặc tủ điện đặt xa máy tính
 
-**Khuyến nghị thực tế:**
-- Dự án dùng MobiEyes: Weinzierl 5263 (BAOS) — MobiEyes đọc data point qua BAOS protocol nhanh hơn
-- Dự án nhiều Line/Area: ABB IPR/S hoặc MDT SCN-IP100.03 (có routing)
-- Muốn đơn giản, nguồn từ bus không cần cấp thêm: Weinzierl 5263 hoặc MDT SCN-IP100.03
+Thạch Anh IT lập trình chủ yếu qua IP, không sử dụng USB Interface.
 
 ---
 
@@ -93,10 +89,9 @@ DALI Gateway đồng thời cấp nguồn cho bus DALI (không cần nguồn DAL
 - Cấp nguồn DALI tích hợp (không cần PSU DALI riêng)
 - Lắp DIN rail, cần cấp 230V AC riêng cho DALI
 
-**ABB DG/S 1.64.5.1** (1 kênh, 64 ballast) và **DG/S 2.64.5.1** (2 kênh độc lập, 128 ballast):
-- Premium version: hỗ trợ Dim2Warm, HCL, sequence, load shedding
-- Commissioning bằng ABB i-bus Tool (không cần mở ETS)
-- Đọc trạng thái từng ballast riêng lẻ qua KNX
+**EAE KNX-DALI Gateway** (phương án thay thế):
+- Tương thích KNX/DALI, giá cạnh tranh
+- Dùng khi Siemens 5WG1141-1AB31 không có sẵn hoặc dự án cần tối ưu ngân sách
 
 **Lưu ý thực tế:** DALI bus tối đa 300m với cáp 1.5mm², 100m với 0.5mm². Điện áp DALI khoảng 16V DC — đo bằng đồng hồ để kiểm tra.
 
@@ -270,9 +265,8 @@ Các thiết bị này ít dùng tại Thạch Anh IT do hệ thống MobiEyes �
 Nhận telegram KNX on/off, đóng/ngắt tải điện (đèn, ổ cắm, điều hoà). Mỗi kênh là một relay độc lập.
 
 Model tham khảo:
-- **ABB SA/S 8.16.6.1:** 8 kênh, 16A/20AX C-Load, phát hiện dòng điện (0.02–20A), DIN rail
+- **Siemens N 567/22 (5WG1567-1AB22):** 16 kênh, 10A, DIN rail
 - **EAE SW108:** 8 kênh, 16A/20AX, lắp wall box — nhỏ gọn hơn cho lắp tường
-- **MDT AMS-0816.01:** 8 kênh, 16A, MDRC, có đo dòng
 
 Chức năng thường dùng: switching, staircase (tắt tự động sau N giây), scene recall, logic AND/OR, reaction on bus failure.
 
@@ -297,7 +291,7 @@ Hai loại:
 Điều khiển động cơ rèm UP/DOWN. Mỗi kênh gồm 2 relay (lên + xuống) được khóa chéo cơ học để tránh cấp điện đồng thời (sẽ phá motor).
 
 Model tham khảo:
-- **ABB JRA/S 4.230.5.1:** 4 kênh, 230V AC, tự động phát hiện thời gian chạy (current detection), có nút thủ công
+- **Siemens N 523/23 (5WG1523-1AB23):** 4 kênh, 230V AC, DIN rail — lựa chọn chuẩn cho dự án Siemens
 - **MDT JAL-0410D.02:** 4 kênh, 230V, DIN rail
 
 Chức năng: vị trí lên/xuống (0–100%), góc cánh (slat), preset vị trí, bảo vệ gió/mưa/sương, sun protection automation.
@@ -316,13 +310,9 @@ Chức năng: vị trí lên/xuống (0–100%), góc cánh (slat), preset vị 
 - Điện áp định mức: 50V DC SELV
 - Chỉ đấu 2 dây đỏ (+) và đen (-) cho bus KNX
 
-### USB Interface for Programming
+### Lập trình qua IP
 
-Khi không có KNX/IP Gateway hoặc cần lập trình lần đầu, dùng USB interface:
-- **MDT SCN-USBR.02:** cắm trực tiếp vào laptop qua USB, kết nối với bus qua 2 dây
-- **Weinzierl KNX USB (art. 5268):** tương tự, hỗ trợ ETS4–ETS6
-
-USB interface chỉ có 1 kết nối tại một thời điểm (không tunneling). Dùng để nạp địa chỉ và download khi không có IP Gateway.
+Thạch Anh IT lập trình chủ yếu qua KNX/IP Gateway (Siemens N 148/23). ETS kết nối đến bus qua IP — không cần USB Interface. Đây là phương pháp tiện lợi hơn nhiều: có thể lập trình từ bất kỳ vị trí nào trong mạng LAN, không cần ngồi cạnh tủ điện.
 
 ---
 
@@ -330,7 +320,7 @@ USB interface chỉ có 1 kết nối tại một thời điểm (không tunneli
 
 Khi lên bill of material cho một dự án KNX, cần có ít nhất:
 - 1 nguồn bus (320mA hoặc 640mA tùy số thiết bị)
-- 1 KNX/IP Gateway (để ETS và MobiEyes kết nối)
+- 1 KNX/IP Gateway Siemens N 148/23 (để ETS lập trình qua IP)
 - Push button (số lượng theo phòng, chọn hãng theo ngân sách và thẩm mỹ)
 - DALI Gateway (nếu có đèn LED cần dim)
 - Cáp LIYCY 2×2×0.8mm (tính toán chiều dài + dư 20%)

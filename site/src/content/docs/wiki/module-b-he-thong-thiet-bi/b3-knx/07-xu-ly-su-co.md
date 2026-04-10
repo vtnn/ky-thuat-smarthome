@@ -99,7 +99,7 @@ Luôn kiểm tra từ tầng thấp nhất trước. Không có ích gì khi deb
 | Triệu chứng | Nguyên nhân | Cách kiểm tra | Khắc phục |
 |---|---|---|---|
 | DALI LED "Error" đỏ trên gateway | DALI bus lỗi hoặc ngắn mạch | Đo điện áp DALI: phải ~16V DC | Kiểm tra cáp DALI, driver |
-| Một vài driver không phản hồi | DALI address chưa gán | ABB i-bus Tool / ETS DALI commissioning | Chạy lại DALI auto-addressing |
+| Một vài driver không phản hồi | DALI address chưa gán | ETS DALI commissioning | Chạy lại DALI auto-addressing |
 | Tất cả driver không phản hồi | DALI commissioning chưa làm | Kiểm tra trạng thái commissioning | Chạy DALI commissioning từ đầu |
 | Dim không mượt (giật cục) | DPT sai (gửi 1-byte thay vì 4-bit) | Kiểm tra CO liên kết | Dùng đúng CO và DPT 3.007 |
 | Đèn không tắt hết về 0% | Min level cấu hình > 0 | ETS DALI Gateway → Min dim level | Set min level về 0 hoặc giá trị phù hợp |
@@ -171,12 +171,12 @@ Liệt kê tất cả thiết bị đang "sống" trên bus với PA của chún
 - PA trong scan nhưng không trong project = thiết bị lạ (thiết bị cũ còn sót)
 - PA trong project nhưng không trong scan = thiết bị offline (mất điện, hỏng, PA chưa nạp)
 
-### 5. ABB i-bus Tool (cho thiết bị ABB)
+### 5. Commissioning DALI (ETS)
 
-Tool riêng của ABB, dùng song song với ETS:
-- Commissioning DALI mà không cần ETS
-- Đọc live current consumption của từng relay trong Switch Actuator
-- Thay DALI driver mà không cần mở ETS project
+DALI commissioning thực hiện trong ETS (với KNX-DALI Gateway Siemens/EAE):
+- Tự động assign DALI address cho từng driver
+- Kiểm tra trạng thái từng ballast riêng lẻ
+- Thay DALI driver: nạp lại DALI address qua ETS
 
 ---
 
@@ -208,7 +208,7 @@ Tool riêng của ABB, dùng song song với ETS:
 - [ ] Kiểm tra Windows Firewall: UDP 3671 có bị chặn không?
 - [ ] Đếm số client đang kết nối: có vượt tunneling slot không?
 - [ ] Thử restart KNX/IP Gateway
-- [ ] Dùng USB interface thay thế nếu cần nạp gấp
+- [ ] Nếu IP Gateway có vấn đề, xử lý gateway trước khi tiếp tục
 
 ---
 
@@ -244,7 +244,7 @@ Liên hệ hỗ trợ kỹ thuật nhà sản xuất khi:
 - File log từ Bus Monitor (export ra CSV)
 
 **Liên hệ:**
-- ABB i-bus KNX: [new.abb.com/smarthome](https://new.abb.com/smarthome)
+- Siemens Building Technologies: [siemens.com/knx](https://www.siemens.com/knx)
 - EAE Technology: [eaetechnology.com/support](https://www.eaetechnology.com)
 - Ekinex: [ekinex.com/support](https://www.ekinex.com)
 - Vimar: [vimar.com/en/support](https://www.vimar.com)

@@ -33,7 +33,7 @@ Bốn lý do kỹ thuật:
 
 **1. Vật lý tách biệt với ứng dụng.** Cáp KNX bus (LIYCY 2×2×0.8mm, điện áp 29V DC) chạy riêng với cáp điện 220V. Nếu có sự cố ở lớp ứng dụng (cài đặt sai, firmware lỗi), thiết bị vẫn giữ cấu hình cũ và tiếp tục hoạt động.
 
-**2. Giao thức S-mode (Standard mode).** Mọi thiết bị KNX của mọi hãng đều tương thích với nhau qua ETS (Engineering Tool Software). Push button EAE Turkey có thể nói chuyện với actuator ABB, DALI Gateway Siemens — không cần cầu nối, không cần middleware.
+**2. Giao thức S-mode (Standard mode).** Mọi thiết bị KNX của mọi hãng đều tương thích với nhau qua ETS (Engineering Tool Software). Push button EAE Turkey có thể nói chuyện với actuator Siemens, DALI Gateway Siemens/EAE — không cần cầu nối, không cần middleware.
 
 **3. Tốc độ phù hợp.** 9.600 bit/s có vẻ chậm, nhưng một lệnh bật đèn chỉ cần 2–3 telegram, thời gian phản hồi dưới 100ms. Với ứng dụng điều khiển nhà, đây là đủ.
 
@@ -113,8 +113,9 @@ KNX bus hỗ trợ ba kiểu đi dây:
          │                                             │
          │  ┌──────────┐    ┌──────────────────────┐  │
          │  │  KNX PSU │    │   KNX/IP Gateway      │  │
-         │  │  29V DC  │    │  (Weinzierl / ABB)    │  │
-         │  │  640mA   │    │  ──► LAN ──► MobiEyes │  │
+         │  │  29V DC  │    │  (Siemens N 148/23)   │  │
+         │  │  640mA   │    │  ──► LAN ──► ETS /    │  │
+         │  │          │    │      Home Assistant    │  │
          │  └────┬─────┘    └──────────┬────────────┘  │
          │       │                     │               │
          │       └──────────┬──────────┘               │
@@ -126,9 +127,9 @@ KNX bus hỗ trợ ba kiểu đi dây:
          ┌────┴────┐  ┌─────┴─────┐  ┌───┴──────┐
          │  Push   │  │ KNX-DALI  │  │  Switch  │
          │ Button  │  │  Gateway  │  │ Actuator │
-         │(EAE/    │  │(Siemens/  │  │(nếu có)  │
-         │Vimar/   │  │ ABB)      │  │          │
-         │Ekinex)  │  │     │     │  └──────────┘
+         │(EAE/    │  │(Siemens   │  │(nếu có)  │
+         │Vimar/   │  │5WG1141 /  │  │          │
+         │Ekinex)  │  │EAE)       │  └──────────┘
          └─────────┘  └─────┼─────┘
                             │ DALI bus
                      ┌──────┼──────┐
@@ -147,13 +148,13 @@ Tại Thạch Anh IT, KNX được triển khai theo mô hình kết hợp:
 
 **Thiết bị KNX trọng tâm:**
 - Push Button KNX (EAE Technology, Vimar, Ekinex) — điều khiển trực tiếp từ tường
-- KNX-DALI Gateway (Siemens 5WG1141, ABB DG/S) — điều khiển dimmer DALI
-- KNX/IP Gateway — kết nối bus với mạng LAN, để ETS lập trình và MobiEyes tích hợp
+- KNX-DALI Gateway (Siemens 5WG1141-1AB31, EAE) — điều khiển dimmer DALI
+- KNX/IP Gateway (Siemens N 148/23) — kết nối bus với mạng LAN để ETS lập trình qua IP
 
 **Không dùng Switch Actuator và Binary Input KNX nhiều** vì hệ thống MobiEyes đã có module relay và input riêng. Tuy nhiên, với dự án KNX thuần (không có MobiEyes hoặc công trình thương mại lớn), Switch Actuator và Binary Input KNX vẫn là lựa chọn hợp lý.
 
 **Ví dụ thực tế — Villa Nha Trang:**
-Dự án gồm các phòng: Sân vườn, Phòng khách, Phòng bếp, Phòng Master, Phòng ngủ 2, Phòng ngủ 3. Mỗi phòng có 1–2 push button KNX (EAE Rosa hoặc Ekinex), tất cả kết nối về tủ điện chạy qua KNX/IP Gateway tới MobiEyes controller. DALI Gateway điều khiển toàn bộ đèn LED downlight và track light. Tất cả kịch bản (Scene) được lập trình trong MobiEyes, push button KNX gọi scene qua Group Address.
+Dự án gồm các phòng: Sân vườn, Phòng khách, Phòng bếp, Phòng Master, Phòng ngủ 2, Phòng ngủ 3. Mỗi phòng có 1–2 push button KNX (EAE Rosa hoặc Ekinex), tất cả kết nối về tủ điện chạy qua KNX/IP Gateway (Siemens). Hệ thống KNX và MobiEyes không giao tiếp trực tiếp với nhau — Thạch Anh IT sử dụng Home Assistant để đồng bộ hai hệ thống, chi tiết sẽ được hướng dẫn trong Module D (Lập trình). DALI Gateway điều khiển toàn bộ đèn LED downlight và track light. push button KNX điều khiển đèn DALI trực tiếp qua Group Address.
 
 ---
 

@@ -1,9 +1,9 @@
 ---
 title: "B3.06 — Lập trình kịch bản KNX"
-description: "Lập trình KNX thực tế: switching, dimming qua DALI, scene, short/long press, timer, tích hợp MobiEyes và status feedback."
+description: "Lập trình KNX thực tế: switching, dimming qua DALI, scene, short/long press, timer, tích hợp Home Assistant và status feedback."
 module: "b"
 level: "4-6"
-tags: ["knx", "lap-trinh", "scene", "dimming", "dali", "mobieyes", "ets"]
+tags: ["knx", "lap-trinh", "scene", "dimming", "dali", "home-assistant", "ets"]
 ---
 
 ## Mục tiêu
@@ -12,7 +12,7 @@ tags: ["knx", "lap-trinh", "scene", "dimming", "dali", "mobieyes", "ets"]
 - Lập trình dimming qua DALI Gateway
 - Tạo và gọi scene KNX
 - Cấu hình short press / long press trên push button
-- Hiểu cách tích hợp KNX với MobiEyes
+- Hiểu cách tích hợp KNX với hệ thống điều khiển qua Home Assistant
 
 ---
 
@@ -186,49 +186,55 @@ Switch Actuator có chức năng "Staircase" — sau khi nhận lệnh ON, tự 
 **Cách 2: Logic Module trong Binary Input / Push Button**
 MDT và một số hãng tích hợp logic module ngay trong thiết bị. Có thể làm timer, delay ON/OFF đơn giản. Nhưng giới hạn độ phức tạp.
 
-**Cách 3: MobiEyes Controller**
-Với Thạch Anh IT, logic phức tạp (schedule theo giờ, logic điều kiện, automation) đều thực hiện trong MobiEyes. KNX push button gửi telegram → MobiEyes nhận → MobiEyes thực thi logic → MobiEyes gửi lệnh ngược lại KNX bus qua GA.
+**Cách 3: Home Assistant**
+Với Thạch Anh IT, logic phức tạp (schedule theo giờ, logic điều kiện, automation) được xử lý trong Home Assistant. KNX push button gửi telegram → Home Assistant nhận → Home Assistant thực thi logic → gửi lệnh đến KNX bus hoặc MobiEyes tùy thiết bị cần điều khiển.
 
 ---
 
-## 6. Tích hợp KNX với MobiEyes
+## 6. Tích hợp KNX với hệ thống điều khiển (Home Assistant)
 
 ### Kiến trúc tích hợp
+
+KNX và MobiEyes là hai hệ thống độc lập, không giao tiếp trực tiếp với nhau. Thạch Anh IT dùng Home Assistant để đồng bộ hai hệ thống:
 
 ```
 Nhấn nút KNX Push Button
         ↓
-KNX Telegram → GA 0/0/0 (trên bus)
+KNX Telegram → GA (trên bus)
         ↓
-KNX/IP Gateway → KNXnet/IP Tunneling → LAN
+KNX/IP Gateway (Siemens N 148/23) → KNXnet/IP → LAN
         ↓
-MobiEyes Controller (subscribe GA 0/0/0)
+Home Assistant (KNX integration)
+        ↓  ↑
+        ↓  MobiEyes (kết nối qua API)
         ↓
-MobiEyes xử lý logic (scene, timer, điều kiện)
-        ↓
-MobiEyes gửi lệnh: GA 3/0/0 Scene "Xem phim"
+Home Assistant xử lý logic và gửi lệnh
         ↓
 DALI Gateway nhận → thực thi dim level cho từng đèn
 ```
 
-### Cấu hình phía KNX
+### Nguyên tắc hoạt động
 
-Về phía KNX, không cần làm gì đặc biệt — MobiEyes đăng ký (subscribe) Group Address cần thiết qua KNXnet/IP tunneling. MobiEyes cũng có thể gửi telegram đến bất kỳ GA nào.
+- **KNX và MobiEyes không giao tiếp trực tiếp** — hai hệ thống này độc lập với nhau
+- **Home Assistant làm cầu nối:** kết nối vào KNX bus qua KNXnet/IP (Siemens N 148/23), và kết nối vào MobiEyes qua API
+- **Logic automation** được xử lý trong Home Assistant: nhận telegram từ KNX, thực thi cảnh, gửi lệnh về cả hai hệ thống
 
 Điều cần đảm bảo:
-- KNX/IP Gateway phải trong cùng subnet với MobiEyes
-- IP Gateway phải còn tunneling slot trống (Weinzierl 5263 có 5 slot)
-- MobiEyes cấu hình đúng IP và tunneling port của Gateway
+- KNX/IP Gateway (Siemens N 148/23) phải trong cùng subnet với Home Assistant
+- IP Gateway phải còn tunneling slot trống (Siemens N 148/23 có 4 slot)
+- Home Assistant cấu hình đúng IP và tunneling port của Gateway
 
-### Ví dụ thực tế: Push button KNX gọi scene MobiEyes
+### Ví dụ thực tế: Push button KNX kích hoạt cảnh qua Home Assistant
 
 1. Push button nhấn nút "Xem phim" → gửi scene number 2 lên GA 3/0/0
-2. MobiEyes lắng nghe GA 3/0/0, nhận value "2"
-3. MobiEyes kích hoạt scene nội bộ của mình: "Living Room - Movie"
-4. Trong scene MobiEyes: gửi dim value xuống DALI Gateway qua GA 1/0/0 (đèn trần 10%), GA 1/0/1 (đèn strip 30%)
-5. Đồng thời MobiEyes điều khiển rèm qua module riêng, điều hoà theo setpoint đã cài
+2. Home Assistant lắng nghe GA 3/0/0, nhận value "2"
+3. Home Assistant kích hoạt automation "Living Room - Movie"
+4. Automation gửi dim value xuống DALI Gateway qua GA 1/0/0 (đèn trần 10%), GA 1/0/1 (đèn strip 30%)
+5. Đồng thời Home Assistant gửi lệnh đến MobiEyes qua API để điều khiển rèm, điều hoà và các thiết bị không phải KNX
 
 Kết quả: 1 nút bấm kích hoạt toàn bộ cảnh phòng, bao gồm cả thiết bị không phải KNX.
+
+Chi tiết cấu hình Home Assistant sẽ được hướng dẫn trong Module D (Lập trình).
 
 ---
 

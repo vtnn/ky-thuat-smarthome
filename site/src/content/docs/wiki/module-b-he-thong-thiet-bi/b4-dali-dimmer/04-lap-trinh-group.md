@@ -195,21 +195,24 @@ Cấu hình trong ETS:
 - Hoặc: map từng scene DALI vào 1 GA bit (1 GA = 1 scene call)
 - Chọn cách nào tùy theo số lượng scene và số GA khả dụng
 
-### MobiEyes: Controller → Dimmer Module DALI → DALI command
+### MobiEyes: Controller → Tridonic DALI Interface RS232 PS/S → DALI command
 
-MobiEyes Dimmer Module DALI (MobiEyes_Dimmer_Dali.pdf) nhận lệnh từ MobiEyes controller qua giao thức nội bộ và chuyển thành lệnh DALI:
+Tridonic DALI Interface RS232 PS/S (art. 28001847) nhận lệnh từ MobiEyes controller qua RS232 và chuyển thành lệnh DALI:
 
 ```
 MobiEyes App / Touch Panel
     │ Tap "Scene Thư giãn"
     ▼
 MobiEyes Controller (qua LAN/Wi-Fi)
-    │
-MobiEyes Dimmer Module DALI
+    │ RS232
+    ▼
+Tridonic DALI Interface RS232 PS/S (art. 28001847)
     │ Gửi DALI GO_TO_SCENE 1
     ▼
 DALI Bus → Tất cả driver recall Scene 1
 ```
+
+> **Lưu ý:** MobiEyes điều khiển DALI qua giao thức RS232, không liên quan đến driver đèn — khách có thể sử dụng bất kỳ hãng đèn và driver DALI nào.
 
 Trong cấu hình MobiEyes: tạo "Scene" trong app, gán các kênh DALI group với mức dim tương ứng. Có thể scene MobiEyes điều khiển đồng thời cả DALI và thiết bị khác (điều hòa, rèm).
 

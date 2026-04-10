@@ -132,8 +132,8 @@ Tại biệt thự cao cấp, đèn hắt trần (đèn strip ánh sáng gián t
 ┌─────────────────┐
 │  DALI GATEWAY   │
 │  (KNX-DALI GW / │
-│  MobiEyes Dimmer│
-│  / LS DALI GW)  │
+│  Tridonic RS232 │
+│  PS/S / LS GW)  │
 │  [DALI Master]  │
 └────────┬────────┘
          │ DALI Bus (2 dây DA/DA, 16V DC)
@@ -155,9 +155,9 @@ Gateway đóng vai trò **DALI Application Controller (Master)**: nhận lệnh 
 
 | Hệ thống | Thiết bị Gateway | Commissioning Tool | Ghi chú |
 |----------|-----------------|-------------------|---------|
-| **KNX** | ABB DG/S hoặc Siemens 5WG1141-1AB31 | ETS 5/6 (KNX) + Tridonic masterCONFIGURATOR (DALI) | Tài liệu Siemens 5WG1141 có trong Google Drive |
-| **MobiEyes** | MobiEyes Dimmer Module DALI (MobiEyes_Dimmer_Dali.pdf) hoặc MobiLife Dimmer DALI (MobiLife_Dimmer_Dali.pdf) | MobiEyes app / phần mềm cấu hình MobiEyes | Cũng có module 0-10V riêng |
-| **LifeSmart** | LifeSmart DALI Gateway | LifeSmart app + cấu hình Gateway | Xem thêm LS174 Dimmer Switch, LS180 Dimmer Controller |
+| **KNX** | Siemens 5WG1141-1AB31 hoặc EAE | ETS 5/6 — KNX-DALI Gateway Siemens/EAE hỗ trợ cấu hình DALI trực tiếp trên ETS | Tài liệu Siemens 5WG1141 có trong Google Drive |
+| **MobiEyes** | Tridonic DALI Interface RS232 PS/S (art. 28001847) — kết nối MobiEyes qua RS232 | Tridonic USB adapter + masterCONFIGURATOR cho cấu hình DALI, MobiEyes app cho điều khiển | MobiEyes giao tiếp qua RS232, không liên quan đến driver đèn — khách có thể dùng bất kỳ hãng đèn và driver DALI nào |
+| **LifeSmart** | LifeSmart DALI Gateway | Tridonic USB adapter + masterCONFIGURATOR cho cấu hình DALI (LifeSmart DALI Gateway chỉ hỗ trợ điều khiển, không cấu hình được), LifeSmart app cho điều khiển | Xem thêm LS174 Dimmer Switch, LS180 Dimmer Controller |
 
 Khi bắt đầu dự án, xác định ngay hệ thống điều khiển chính là gì → chọn gateway phù hợp → thiết kế DALI bus theo gateway đó. Đừng để thi công xong mới hỏi dùng gateway nào.
 

@@ -135,7 +135,7 @@ Hầu hết driver có LED indicator trên vỏ:
 |-------------|-------------|----------------|
 | Gateway báo "bus error" hoặc offline | Bus power mất hoặc quá tải | Đo điện áp bus; kiểm tra số thiết bị và dòng tổng |
 | KNX-DALI gateway không nhận lệnh KNX | KNX bus lỗi hoặc địa chỉ KNX gateway sai | Debug phần KNX: kiểm tra KNX bus voltage, địa chỉ device trong ETS |
-| MobiEyes gateway mất liên lạc | LAN/Wi-Fi lỗi, hoặc IP conflict | Kiểm tra kết nối mạng; ping gateway IP; reboot gateway |
+| MobiEyes / Tridonic RS232 interface mất liên lạc | LAN/Wi-Fi lỗi, hoặc IP conflict, hoặc kết nối RS232 bị ngắt | Kiểm tra kết nối mạng; ping gateway IP; kiểm tra cáp RS232 và cấu hình COM port; reboot gateway |
 | Gateway phản hồi KNX nhưng không gửi DALI | Cấu hình mapping gateway bị mất | Reload firmware configuration; re-download ETS config |
 
 ---
@@ -233,7 +233,7 @@ Một số trường hợp vượt quá khả năng xử lý tại chỗ:
 
 **Liên hệ hỗ trợ KNX/MobiEyes/LifeSmart:**
 - Gateway không download config từ ETS được sau nhiều lần thử
-- MobiEyes Dimmer Module không sync về controller
+- MobiEyes không giao tiếp được với Tridonic DALI Interface RS232
 - LifeSmart gateway mất config sau firmware update
 
 ---

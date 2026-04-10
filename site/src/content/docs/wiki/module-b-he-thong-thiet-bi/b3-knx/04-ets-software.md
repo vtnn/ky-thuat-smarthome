@@ -164,7 +164,7 @@ Mỗi thiết bị có danh sách Communication Objects (CO). Ví dụ:
 
 #### Kết nối ETS với bus
 
-ETS → Connections → chọn KNX/IP Gateway đã tìm thấy trên mạng. Nếu dùng USB Interface: chọn port COM tương ứng.
+ETS → Connections → chọn KNX/IP Gateway đã tìm thấy trên mạng. Thạch Anh IT lập trình qua IP — không dùng USB Interface.
 
 #### Programming Mode (nạp Physical Address)
 
