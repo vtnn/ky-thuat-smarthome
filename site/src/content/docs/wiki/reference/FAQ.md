@@ -9,7 +9,7 @@ description: "Tổng hợp các câu hỏi thường gặp khi thi công, lập 
 
 ---
 
-## 📁 A. Kỹ Thuật Cơ Bản
+## A. Kỹ Thuật Cơ Bản
 
 ### A1. Bản vẽ & Thi công
 
@@ -30,7 +30,7 @@ Tối thiểu 30cm nếu đi song song. Nếu giao nhau thì phải vuông góc 
 
 ---
 
-## 📁 B. Hệ Thống Thiết Bị
+## B. Hệ Thống Thiết Bị
 
 ### B1. LifeSmart
 
@@ -69,115 +69,146 @@ Không. KNX là hệ phi tập trung — thiết bị giao tiếp trực tiếp 
 Dùng **Binary Input** (Dry Contact). Nối dây từ công tắc cơ vào channel trên Binary Input → cấu hình trong ETS.
 
 **Q16: Phần mềm lập trình KNX là gì?**
-ETS (Engineering Tool Software). Phiên bản hiện tại: ETS6. Cần license (Demo miễn phí giới hạn 5 thiết bị).
+ETS (Engineering Tool Software). Thạch Anh IT hiện đang sử dụng **ETS6**. Cần license chuyên dụng (Demo miễn phí giới hạn 5 thiết bị).
 
 **Q17: Group Address KNX đặt theo quy ước nào?**
 3 cấp: `Main/Middle/Sub`. Ví dụ: `0/0/1` = Switching / Tầng 1 / Đèn trần PK.
 
+**Q18: KNX và MobiEyes giao tiếp trực tiếp với nhau được không?**
+Không. KNX và MobiEyes là hai hệ thống sử dụng giao thức phần cứng khác nhau hoàn toàn. Thạch Anh IT sử dụng Home Assistant để làm "cầu nối" đồng bộ trạng thái và điều khiển giữa hai hệ thống. Chi tiết sẽ được hướng dẫn trong Module D.
+
+**Q19: PSU KNX nên dùng hãng nào?**
+Tùy vào ngân sách và yêu cầu dự án: **Meanwell KNX-20E** (giá tốt, kích thước compact) hoặc **Siemens N 125** (thương hiệu Đức, độ bền và chất lượng cao). Cả hai đều có dòng 320mA và 640mA tùy số lượng thiết bị trên bus.
+
+**Q20: Tại sao không dùng USB Interface mà lập trình qua IP?**
+Lập trình qua IP Gateway (ví dụ Siemens N 148/23) tiện lợi hơn nhiều. Kỹ thuật viên có thể nạp chương trình từ bất kỳ đâu trong mạng LAN qua WiFi, không cần phải cắm dây ngồi cạnh tủ điện. Chỉ cần phần mềm ETS kết nối đến địa chỉ IP của Gateway.
+
 ### B4. DALI
 
-**Q18: DALI dùng bao nhiêu dây?**
+**Q21: DALI dùng bao nhiêu dây?**
 2 dây, không phân cực. Có thể đi chung ống với dây nguồn 220V.
 
-**Q19: Tối đa bao nhiêu đèn trên 1 bus DALI?**
-64 thiết bị (driver/ballast). Tối đa 16 nhóm, 16 scene.
+**Q22: Tối đa bao nhiêu đèn trên 1 bus DALI?**
+64 địa chỉ thiết bị (driver/ballast). Tối đa 16 nhóm, 16 kịch bản (scene).
 
-**Q20: DALI áp dụng cho hệ thống nào?**
+**Q23: DALI áp dụng cho hệ thống nào?**
 DALI Dimmer áp dụng cho cả 3 hệ: LifeSmart, MobiEyes, KNX thông qua gateway tương ứng.
+
+**Q24: MobiEyes điều khiển DALI bằng cách nào?**
+MobiEyes kết nối qua giao thức RS232, sử dụng bộ **Tridonic DALI Interface RS232 PS/S** (art. 28001847). Giao diện này không liên quan đến hãng driver đèn — khách có thể dùng bất kỳ hãng đèn và driver DALI nào (như Philips, Tridonic, Osram) miễn là chuẩn DALI.
+
+**Q25: Cấu hình DALI dùng phần mềm gì?**
+Tùy thuộc vào Gateway đang dùng:
+- **Hệ KNX**: Cấu hình trực tiếp trên phần mềm ETS (các Gateway Siemens/EAE hỗ trợ rất tốt).
+- **Hệ MobiEyes/LifeSmart**: Sử dụng phần mềm **masterCONFIGURATOR** của Tridonic kết hợp với bộ USB adapter chuyên dụng.
+*Lưu ý: LifeSmart DALI Gateway chỉ đóng vai trò điều khiển, không có chức năng quét địa chỉ hay cấu hình chấn lưu DALI.*
 
 ### B5. Camera Hikvision
 
-**Q21: Phần mềm tìm camera Hikvision trong mạng LAN là gì?**
+**Q26: Phần mềm tìm camera Hikvision trong mạng LAN là gì?**
 SADP Tool — quét tìm tất cả camera/NVR Hikvision trong mạng nội bộ.
 
-**Q22: Camera Hikvision truy cập từ xa bằng gì?**
-Ứng dụng **Hik-Connect** (cloud P2P) — không cần port forwarding.
+**Q27: Camera Hikvision truy cập từ xa bằng gì?**
+Thạch Anh IT sử dụng **Hik-ProConnect** để quản lý danh sách thiết bị cho cấp kỹ thuật/installer, và bàn giao tài khoản **Hik-Connect** (cloud P2P) cho khách hàng sử dụng cuối.
 
-**Q23: HDD surveillance nên dùng loại nào?**
+**Q28: HDD surveillance nên dùng loại nào?**
 WD Purple hoặc Seagate SkyHawk — thiết kế cho ghi hình 24/7.
 
-**Q24: Có cần đổi mật khẩu mặc định camera?**
+**Q29: Có cần đổi mật khẩu mặc định camera?**
 BẮT BUỘC. Đổi ngay lần đầu cấu hình. Mật khẩu ≥ 8 ký tự, chữ hoa + thường + số + đặc biệt.
+
+**Q30: Camera nên đặt IP tĩnh hay DHCP?**
+Luôn luôn đặt IP tĩnh cho camera để đảm bảo đầu ghi NVR không bị mất kết nối khi IP thay đổi. Quy hoạch chuẩn: NVR đặt `192.168.1.30`, các camera bắt đầu từ `.31` trở đi.
 
 ### B6. WiFi Ruijie
 
-**Q25: Site survey WiFi là gì?**
+**Q31: Site survey WiFi là gì?**
 Khảo sát vị trí đặt AP trước thi công — đo tín hiệu, xác định vùng chết, tính số lượng AP cần thiết.
 
-**Q26: Ruijie Controller dùng để làm gì?**
+**Q32: Ruijie Controller dùng để làm gì?**
 Quản lý tập trung tất cả AP Ruijie — cấu hình SSID, cập nhật firmware, giám sát tín hiệu.
+
+**Q33: Model AP Ruijie nào phổ biến nhất tại công trình?**
+- **RG-RAP2260(G)**: Ưu tiên cho các vị trí lắp ốp trần (ceiling mount).
+- **RG-RAP2260(E)**: Ưu tiên cho các vị trí yêu cầu thẩm mỹ cao hoặc lắp âm tường (wall mount).
 
 ---
 
-## 📁 C. WiFi Và Mạng
+## C. WiFi Và Mạng
 
-**Q27: Tại sao phải chia VLAN?**
-Để cách ly hệ thống: Smarthome (VLAN 10), Camera (VLAN 20), WiFi gia đình (VLAN 30), WiFi khách (VLAN 40). Bảo mật + hiệu suất.
+**Q34: Tại sao phải chia VLAN?**
+Để cách ly và bảo mật hệ thống. Cấu hình thực tế tại Thạch Anh IT: 
+- **VLAN 1** (Dải 192.168.1.0/24): Dùng cho tất cả thiết bị nội bộ (Smarthome, Camera, AP, User gia đình).
+- **VLAN 123** (Dải 172.16.20.0/24): Dành riêng cho Guest WiFi (khách dùng WiFi chỉ được ra internet, không thấy thiết bị thông minh).
 
-**Q28: Camera có nên ra Internet không?**
-Không. Camera nên ở VLAN riêng, không truy cập Internet trực tiếp. Chỉ cho phép từ mạng chính xem camera.
+**Q35: Camera có nên ra Internet không?**
+Không. Camera nên ở VLAN riêng (nếu quy mô lớn) và không truy cập Internet trực tiếp để tránh bị hacker tấn công. Chỉ cho phép truy cập từ mạng chính hoặc qua Cloud bảo mật.
 
-**Q29: Thiết bị IoT nên nối WiFi 2.4GHz hay 5GHz?**
+**Q36: Thiết bị IoT nên nối WiFi 2.4GHz hay 5GHz?**
 2.4GHz — phạm vi rộng hơn, xuyên tường tốt hơn. Tách SSID riêng cho IoT.
 
-**Q30: IP tĩnh hay DHCP cho thiết bị smart home?**
+**Q37: IP tĩnh hay DHCP cho thiết bị smart home?**
 Thiết bị quan trọng (Hub, NVR, camera, AP) → IP tĩnh hoặc DHCP Reservation. Thiết bị cá nhân → DHCP.
 
 ---
 
-## 📁 D. Lập Trình
+## D. Lập Trình & Tích Hợp
 
-**Q31: Trigger là gì?**
+**Q38: Home Assistant dùng để làm gì trong hệ thống Thạch Anh IT?**
+Home Assistant (HA) đóng vai trò là "bộ não" trung gian làm cầu nối giữa các hệ sinh thái khác nhau, cụ thể là KNX và MobiEyes (hai hệ thống này vốn không giao tiếp trực tiếp). HA kết nối với KNX qua chuẩn KNXnet/IP và kết nối với MobiEyes qua API. Việc này giúp khách hàng có thể điều khiển toàn bộ ngôi nhà trên một giao diện duy nhất. Chi tiết tại Module D.
+
+**Q39: Trigger là gì?**
 Điều kiện kích hoạt automation: thời gian, cảm biến, nút bấm, vị trí GPS...
 
-**Q32: Làm sao tránh xung đột automation?**
+**Q40: Làm sao tránh xung đột automation?**
 Kiểm tra không có 2 scene cùng trigger nhưng hành động ngược nhau. Dùng `d4-checklist-review-automation.md`.
 
-**Q33: Số scene tối thiểu cần lập trình cho 1 căn hộ?**
+**Q41: Số scene tối thiểu cần lập trình cho 1 căn hộ?**
 Thường 5-8 scene cơ bản: Về nhà, Ra ngoài, Đi ngủ, Sáng dậy, Xem phim, Đón khách, Eco Mode, Chống trộm.
 
-**Q34: Có cần khách hàng xác nhận kịch bản trước khi lập trình?**
+**Q42: Có cần khách hàng xác nhận kịch bản trước khi lập trình?**
 CÓ. Phải đối chiếu với tư vấn ban đầu và lấy xác nhận khách hàng trước khi lập trình.
 
 ---
 
-## 📁 E. Xử Lý Sự Cố
+## E. Xử Lý Sự Cố
 
-**Q35: Quy trình xử lý sự cố chuẩn?**
+**Q43: Quy trình xử lý sự cố chuẩn?**
 Xác định lỗi → Phân loại → Kiểm tra mạng → Kiểm tra nguồn → Kiểm tra cấu hình → Kiểm tra automation.
 
-**Q36: Lỗi phổ biến nhất khi thi công?**
+**Q44: Lỗi phổ biến nhất khi thi công?**
 Nhầm IP / VLAN, sai mapping module (MobiEyes), sai Group Address (KNX), dây đấu sai cực.
 
-**Q37: Khi nào cần escalation?**
+**Q45: Khi nào cần escalation?**
 Sau 30 phút không xác định được nguyên nhân, nghi lỗi phần cứng, lỗi firmware, cần công cụ đặc biệt.
 
 ---
 
-## 📁 F. Tiêu Chuẩn Chất Lượng
+## F. Tiêu Chuẩn Chất Lượng
 
-**Q38: Tủ điện cần đạt tiêu chuẩn gì?**
+**Q46: Tủ điện cần đạt tiêu chuẩn gì?**
 Gọn gàng, có nhãn dán rõ ràng, có sơ đồ dán trong tủ, dây buộc bằng búng nhựa (không dùng dây thép).
 
-**Q39: Có cần chụp ảnh nghiệm thu không?**
+**Q47: Có cần chụp ảnh nghiệm thu không?**
 CÓ. Chụp đầy đủ: tủ điện, đấu nối, vị trí thiết bị, kết quả test. Theo checklist `f1-tieu-chuan-hinh-anh-cong-trinh.md`.
 
-**Q40: SLA bảo hành là gì?**
+**Q48: SLA bảo hành là gì?**
 Service Level Agreement — cam kết thời gian xử lý: 24h (khẩn cấp), 48h (thông thường), 72h (không ảnh hưởng sử dụng).
 
 ---
 
-## 📁 G. Đánh Giá Năng Lực
+## G. Đánh Giá Năng Lực
 
-**Q41: Có bao nhiêu cấp độ kỹ thuật viên?**
+**Q49: Có bao nhiêu cấp độ kỹ thuật viên?**
 6 cấp: (1) Hỗ trợ → (2) Thi công dây → (3) Lắp đặt → (4) Cấu hình & Lập trình → (5) Triển khai độc lập → (6) Trưởng nhóm.
 
-**Q42: Mất bao lâu để lên Level 4?**
+**Q50: Mất bao lâu để lên Level 4?**
 Trung bình 12-18 tháng, tùy năng lực và số dự án thực tế.
 
-**Q43: Level nào được phép tự ý lập trình automation?**
+**Q51: Level nào được phép tự ý lập trình automation?**
 Level 4 trở lên. Level 1-3 chỉ thao tác theo hướng dẫn của cấp trên.
 
 ---
 
 > **Ghi chú:** Tài liệu này sẽ được cập nhật thường xuyên. Nếu có câu hỏi mới, bổ sung vào cuối mỗi section tương ứng.
+

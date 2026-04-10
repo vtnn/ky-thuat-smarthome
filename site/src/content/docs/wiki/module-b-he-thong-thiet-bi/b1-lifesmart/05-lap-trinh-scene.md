@@ -43,6 +43,26 @@ Là khoảng thời gian hệ thống đứng đợi giữa các Action. Delay r
 
 ---
 
+## Các bước tạo kịch bản (Scene) thực tế trên App
+
+1. **Chuẩn bị ngữ cảnh:** Sử dụng App để bật, tắt các thiết bị smarthome theo đúng trạng thái của kịch bản mong muốn (ví dụ: mở 2 đèn, đóng rèm). Việc này giúp app tự động bắt trạng thái ở bước sau.
+2. **Tạo Scene mới:** Bấm chọn **Automation** (ở thanh menu bên dưới ứng dụng), chuyển sang tab **Scene** rồi bấm chọn nút **Add New Scene**.
+   ![Add New Scene](../../../../../assets/images/wiki/module-b/b1-lifesmart/scene-1-new-scene.png)
+3. **Thiết lập thông tin chung:**
+   - Chọn **Smart Station** sẽ lưu và chạy scene này (nếu nhà chỉ có 1 station thì app sẽ tự chọn).
+   - Đặt tên cho Scene (nên đặt tên tiếng Việt có ý nghĩa, dễ hiểu cho khách hàng).
+   - Chọn **Owned Room** để chỉ định phòng sẽ hiển thị nút bấm scene này.
+   - Chọn **Device List Range**: chọn *Current Smart Station* nếu chỉ điều khiển các thiết bị ở trạm hiện tại, hoặc chọn *Smart Station Under The Same Network* nếu cần lấy thiết bị ở các trạm khác cùng mạng LAN nội bộ.
+   - Xong bấm dấu **+** ở phần Action để tiến hành thêm các thiết bị.
+   ![Đặt tên Scene](../../../../../assets/images/wiki/module-b/b1-lifesmart/scene-2-name.png)
+   ![Thiết lập Station và Network](../../../../../assets/images/wiki/module-b/b1-lifesmart/scene-3-setting.png)
+4. **Thêm thiết bị vào Scene:** Chọn các thiết bị cần điều khiển trong kịch bản này. Vì bạn đã chuẩn bị trạng thái ở bước 1, chỉ cần tích chọn ở đầu thiết bị, App sẽ tự động lấy trạng thái hiện tại đó gán vào kịch bản.
+   ![Chọn thiết bị](../../../../../assets/images/wiki/module-b/b1-lifesmart/scene-4-device.png)
+5. **Cấu hình Work Mode và Delay:** Chọn **Work Mode** cho phù hợp. Nếu cần thêm thời gian chờ (delay) giữa các lệnh (ví dụ: rèm kéo 3 giây sau mới tắt đèn), hãy bỏ dấu tích ở mục **Fast** và bấm thiết lập thêm độ trễ ở từng thiết bị tương ứng.
+   ![Cấu hình Work Mode và Delay](../../../../../assets/images/wiki/module-b/b1-lifesmart/scene-5-work-mode.png)
+
+---
+
 ## 3 phương pháp kích hoạt kịch bản (Trigger)
 
 Scene thiết lập xong thì vẫn chỉ nằm đó. Để nó chạy, anh em phải gán cho nó nguồn kích hoạt (Trigger). Có 3 dạng kích hoạt cơ bản:
@@ -91,6 +111,60 @@ Gần như dự án nào cũng cần cài sẵn 3 kịch bản cơ bản sau. K�
   - Đóng rèm phòng ngủ.
   - Chỉnh điều hòa phòng ngủ về mức dễ chịu (VD: 26°C).
   - Bật cảm biến vòng ngoài khu vực trệt để cảnh báo an ninh đêm.
+
+---
+
+## Thư viện AI Builder Templates (Cài đặt nhanh)
+
+Việc thiết lập các kịch bản tự động hóa nâng cao (Logic chéo AND/OR, IF/THEN/ELSE) thường được thực hiện qua công cụ AI Builder. Anh em kỹ thuật có thể sử dụng các mẫu (template) đã được tổng hợp sẵn dưới đây để rút ngắn thời gian cấu hình tại công trình.
+
+### 1. Hướng dẫn sử dụng Template
+
+1. Bôi đen và **Copy** trọn vẹn đoạn mã (link) của kịch bản cần dùng trong bảng bên dưới.
+2. Mở App LifeSmart trên điện thoại.
+3. App sẽ tự động nhận diện đoạn mã từ bộ nhớ đệm (clipboard) và hiển thị bảng **AI Configuration**.
+4. Tiến hành cài đặt và gán thiết bị thực tế vào các vị trí đã được dọn sẵn trong mẫu.
+
+![AI Configuration 1](../../../../../assets/images/wiki/module-b/b1-lifesmart/ai-configuration-1.png)
+![AI Configuration 2](../../../../../assets/images/wiki/module-b/b1-lifesmart/ai-configuration-2.png)
+
+### 2. Danh sách Templates
+
+#### An Ninh: Báo động hở cửa (Có Delay bỏ qua)
+Báo động trên App khi mở cửa (có delay để nếu đóng lại liền không bị thông báo). Chạy theo khung giờ, có thể kích hoạt bật còi hú/đèn và tự tắt sau một khoảng thời gian.
+```text
+lifesmartapp://?cgy=aibt&cont=ApksAqtZEaPpKoU0OCPpOqPmEqUhOq38EqEoXbIx1HyoVCtZ1FLtUCemKoMpEbunEqUlEaEpKaI8Xb7y&sign=Aps0KhNOcLts9CTD4xJquP
+```
+
+#### An Ninh: Báo động cửa (Kết hợp General Controller)
+Báo động trên App khi mở cửa (kết hợp điều kiện nút bấm hiển thị thông báo và alarm từ General Controller). Kích hoạt còi/đèn tự tắt, hỗ trợ link thông báo hệ thống MobiEyes và KNX.
+```text
+lifesmartapp://?cgy=aibt&cont=ApksAqtZEaPpKoU0OCPpOqPmEqU8XoMpOC3hO4Ix1HyoVCtZ1FLtUCemKoMpEbunEqUlEaEpKaI8Xb7y&sign=U1TXqaKJGBuyX1lvHoyryh
+```
+
+#### An Ninh: Báo cháy / Báo khói lập tức
+Tự động bắn thông báo khẩn cấp về App và kích hoạt lập tức hệ thống còi hú báo động ngay khi phát hiện khói, hỗ trợ link thông báo hệ thống MobiEyes và KNX.
+```text
+lifesmartapp://?cgy=aibt&cont=ApksAqtZEaPpKoU0OCPpOqPmEqUoXqctEq3nX4Ix1HyoVCtZ1FLtUCemKoMpEbunEqUlEaEpKaI8Xb7y&sign=Q8z7mEisyNgb2NHDkPILgP
+```
+
+#### Chiếu sáng: Bật đèn tự động theo chuyển động
+Bật đèn tự động từ cảm biến chuyển động. Hỗ trợ khung giờ hoạt động và độ trễ sáng (kết hợp delay từ AI và delay gốc của bản thân cảm biến).
+```text
+lifesmartapp://?cgy=aibt&cont=ApksAqtZEaPpKoU0OCPpOqPmEqcvOCIpECE8ObIx1HyoVCtZ1FLtUCemKoMpEbunEqUlEaEpKaI8Xb7y&sign=V7C9j4U5H%5FwRr4eoZFetfP
+```
+
+#### Chiếu sáng: Đèn thông minh Cầu thang (2 Cảm biến)
+Bật/tắt đèn thông minh cho cầu thang. Logic: chỉ tắt đèn khi **cả 2** cảm biến (đỉnh và chân cầu thang) đều hết chuyển động. Hỗ trợ khung thời gian cấu hình.
+```text
+lifesmartapp://?cgy=aibt&cont=ApksAqtZEaPpKoU0OCPpOqPmEqShOCYpXCSvXZIx1HyoVCtZ1FLtUCemKoMpEbunEqUlEaEpKaI8Xb7y&sign=%5FgCgdsTHglq9t%5FXom%2DvrH3
+```
+
+#### Chiếu sáng: Đèn phòng WC (Cửa + Chuyển động)
+Tự động hóa ánh sáng phòng vệ sinh. Kết hợp điều kiện giữa cảm biến chuyển động và trạng thái cảm biến cửa đóng/mở. Hỗ trợ khung giờ hoạt động.
+```text
+lifesmartapp://?cgy=aibt&cont=ApksAqtZEaPpKoU0OCPpOqPmEqShOCrpOqIuXbIx1HyoVCtZ1FLtUCemKoMpEbunEqUlEaEpKaI8Xb7y&sign=XVIHiM7G3t7YirmOHJkjuY
+```
 
 ---
 
