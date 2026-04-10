@@ -30,6 +30,9 @@ Nhiệt độ vận hành của NVR Hikvision: -10°C đến +55°C. Tuy nhiên 
 
 ---
 
+![Sơ đồ kết nối Camera PoE với NVR](../../../../../assets/images/wiki/module-b/b5-camera/poe-nvr-diagram.jpg)
+<p class="hero-image-caption">Sơ đồ kết nối hệ thống camera IP qua Switch PoE đến NVR.</p>
+
 ## 2. Sơ đồ kết nối
 
 Công ty sử dụng NVR không tích hợp PoE, kết hợp với Switch PoE riêng. Đây là sơ đồ chuẩn cho mọi dự án:
@@ -49,6 +52,9 @@ Switch PoE vừa cấp nguồn cho camera qua cáp Cat6, vừa trung chuyển d�
 Khi dự án có nhiều cụm camera phân bố xa nhau, có thể dùng nhiều Switch PoE đặt gần từng cụm, rồi kéo 1 đường uplink về Switch/NVR trung tâm.
 
 ---
+
+![Lắp HDD vào NVR Hikvision](../../../../../assets/images/wiki/module-b/b5-camera/nvr-hdd-install.jpg)
+<p class="hero-image-caption">Lắp ổ cứng vào NVR Hikvision — cắm cáp SATA tín hiệu và nguồn.</p>
 
 ## 3. Quy trình lắp HDD
 

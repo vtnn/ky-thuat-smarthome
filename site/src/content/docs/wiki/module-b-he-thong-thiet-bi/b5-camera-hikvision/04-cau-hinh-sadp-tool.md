@@ -29,6 +29,9 @@ SADP lắng nghe bản tin broadcast ở tầng Layer 2 (ARP). Nghĩa là laptop
 
 ---
 
+![Giao diện SADP Tool](../../../../../assets/images/wiki/module-b/b5-camera/sadp-tool-interface.jpg)
+<p class="hero-image-caption">Giao diện SADP Tool — liệt kê thiết bị Hikvision trong mạng LAN.</p>
+
 ## 2. Cài đặt
 
 1. Tải SADP Tool từ trang chủ Hikvision: [hikvision.com → Support → Tools](https://www.hikvision.com/en/support/tools/).

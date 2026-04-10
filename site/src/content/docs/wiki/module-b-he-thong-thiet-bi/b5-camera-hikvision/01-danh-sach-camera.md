@@ -39,6 +39,9 @@ Dòng này phù hợp khi ngân sách có hạn và vị trí lắp đặt khôn
 
 </details>
 
+![Camera Dome Hikvision](../../../../../assets/images/wiki/module-b/b5-camera/camera-dome-ds2cd1143g2.jpg)
+<p class="hero-image-caption">Camera Dome DS-2CD1143G2-LIU — gọn gàng, phù hợp lắp trong nhà.</p>
+
 ### 1.2. Dòng AcuSense (DS-2CD2x43G2) — Trung cao cấp
 
 Dòng camera tích hợp AI phân loại người/xe — giảm báo động giả từ lá cây, chó mèo, ánh sáng. Có WDR 120dB, xử lý tốt cảnh ngược sáng.
@@ -65,6 +68,9 @@ Dòng camera tích hợp AI phân loại người/xe — giảm báo động gi�
 </details>
 
 ---
+
+![NVR Hikvision DS-7608NI-K2](../../../../../assets/images/wiki/module-b/b5-camera/nvr-ds7608ni-k2.jpg)
+<p class="hero-image-caption">Đầu ghi NVR Hikvision dòng K2 — mặt trước với cổng USB và đèn trạng thái.</p>
 
 ## 2. NVR phổ biến
 

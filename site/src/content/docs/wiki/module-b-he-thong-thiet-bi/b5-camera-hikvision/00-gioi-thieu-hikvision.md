@@ -21,6 +21,9 @@ Hikvision là hãng camera giám sát lớn nhất thế giới, cung cấp gi�
 
 Ngoài ra, hệ thống Hikvision tích hợp được với LifeSmart — có thể xem trực tiếp luồng camera ngay trên màn hình Nature 7 hoặc trong ứng dụng LifeSmart mà không cần mở app riêng.
 
+![Camera Bullet và Dome Hikvision](../../../../../assets/images/wiki/module-b/b5-camera/camera-bullet-ds2cd1043g2.jpg)
+<p class="hero-image-caption">Camera Bullet DS-2CD1043G2-LIU — dòng phổ biến cho lắp ngoài trời.</p>
+
 ## 2. Phân loại Camera
 
 | Loại | Hình dáng | Ứng dụng phổ biến | Lý do chọn |

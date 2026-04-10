@@ -35,6 +35,9 @@ Hikvision cung cấp 2 nền tảng riêng biệt cho 2 đối tượng khác nh
 
 ## 2. Hik-ProConnect — Dành cho kỹ thuật viên
 
+![Hik-ProConnect Dashboard](../../../../../assets/images/wiki/module-b/b5-camera/hik-proconnect-dashboard.jpg)
+<p class="hero-image-caption">Hik-ProConnect — giao diện quản lý thiết bị từ xa dành cho kỹ thuật viên.</p>
+
 ### 2.1. Đăng ký và đăng nhập
 
 1. Vào [hik-proconnect.com](https://www.hik-proconnect.com) hoặc tải app Hik-ProConnect.
@@ -91,6 +94,9 @@ Nếu nhà mạng cấp IP tĩnh (hoặc IP tĩnh qua gói cước doanh nghiệ
 
 Khi nhà mạng cấp IP động (thay đổi mỗi lần restart modem) — đây là trường hợp phổ biến với gói cước gia đình. Công ty có sẵn dịch vụ DDNS riêng.
 
+![Cấu hình DDNS trên NVR](../../../../../assets/images/wiki/module-b/b5-camera/nvr-ddns-config.jpg)
+<p class="hero-image-caption">Màn hình cấu hình DDNS trên NVR Hikvision.</p>
+
 #### Cấu hình DDNS trên NVR
 
 Vào Configuration → Network → DDNS:
@@ -122,6 +128,9 @@ Khi dùng IP/domain + port forwarding, cần đặc biệt chú ý bảo mật v
 | Bật HTTPS nếu NVR hỗ trợ | Mã hóa dữ liệu trên đường truyền |
 
 ---
+
+![Hik-Connect App](../../../../../assets/images/wiki/module-b/b5-camera/hik-connect-app.jpg)
+<p class="hero-image-caption">App Hik-Connect — khách hàng xem camera từ xa trên điện thoại.</p>
 
 ## 4. Hik-Connect — Bàn giao cho khách hàng
 
