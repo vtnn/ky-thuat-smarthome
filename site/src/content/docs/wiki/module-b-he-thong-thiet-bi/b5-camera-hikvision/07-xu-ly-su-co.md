@@ -23,7 +23,7 @@ tags: ["camera", "troubleshooting", "Hikvision", "NVR"]
 | Hình bị trắng xóa 1 vùng | Hồng ngoại phản xạ tường/vật cản gần | Xoay camera hoặc dời vật cản |
 | Hình giật lag khi xem live | Băng thông mạng không đủ, NVR quá tải | Giảm Sub Stream bitrate, kiểm tra mạng |
 | NVR không ghi hình | HDD chưa format, HDD lỗi, lịch ghi chưa bật | Xem mục "NVR không ghi hình" bên dưới |
-| Không xem từ xa | Mất Internet, Hik-Connect offline, DNS sai | Xem mục "Mất truy cập từ xa" bên dưới |
+| Không xem từ xa | Mất Internet, Hik-Connect offline, DNS sai, port forwarding lỗi | Xem mục "Mất truy cập từ xa" bên dưới |
 | SADP không tìm thấy thiết bị | Khác VLAN, firewall laptop, camera mất nguồn | Xem bài B5.04 mục 6 |
 
 ---
@@ -46,7 +46,7 @@ Nhiều cuộc gọi hỗ trợ kết thúc ở bước này: cáp bị chuột 
 ### Bước 2 — Kiểm tra mạng
 
 Từ laptop cùng mạng LAN:
-1. **Ping IP camera**: `ping 192.168.20.201` — nếu reply → camera sống, lỗi ở NVR hoặc cấu hình. Nếu timeout → camera offline hoặc IP sai.
+1. **Ping IP camera**: `ping 192.168.1.31` — nếu reply → camera sống, lỗi ở NVR hoặc cấu hình. Nếu timeout → camera offline hoặc IP sai.
 2. **Mở SADP Tool**: Quét xem camera có xuất hiện không. Nếu SADP thấy nhưng ping không được → IP conflict hoặc subnet sai.
 3. **Ping NVR**: Đảm bảo NVR cũng online.
 
@@ -131,15 +131,15 @@ Xử lý: Xoay camera hoặc dời vật cản. Nếu không thể, đổi sang 
 
 ---
 
-## Mất truy cập từ xa (Hik-Connect)
+## Mất truy cập từ xa
+
+Công ty chủ yếu dùng truy cập qua IP/domain. Kiểm tra theo thứ tự:
 
 1. **NVR có Internet không?** Từ NVR: Configuration → Network → kiểm tra Default Gateway và DNS. Thử ping 8.8.8.8 nếu NVR hỗ trợ.
-2. **Hik-Connect có Online không?** Configuration → Platform Access → kiểm tra Status. Nếu "Offline":
-   - DNS server sai hoặc không phân giải được.
-   - Router/Firewall chặn traffic outbound.
-   - Internet mất.
-3. **App hiện "Device Offline"**: Đảm bảo verification code đúng. Thử xóa thiết bị khỏi app và thêm lại.
-4. **Xem được Live nhưng Playback không tải**: Upload Internet quá chậm. Playback đòi hỏi băng thông lớn hơn live view. Giải pháp: tăng gói cước Internet hoặc xem playback trực tiếp trên NVR tại chỗ.
+2. **Port forwarding trên router còn đúng không?** Kiểm tra các port (HTTP, 554, 8000) có đang forward đúng về IP NVR (`192.168.1.30`). Nếu router bị reset, cấu hình port forwarding có thể mất.
+3. **IP WAN có thay đổi không?** Nếu dùng IP động mà không có DDNS, IP sẽ thay đổi khi modem restart. Kiểm tra IP WAN hiện tại hoặc cấu hình DDNS.
+4. **Nếu dùng Hik-Connect (P2P)**: Configuration → Platform Access → kiểm tra Status. Nếu "Offline" → DNS sai, Firewall chặn outbound, hoặc mất Internet.
+5. **Xem được Live nhưng Playback không tải**: Upload Internet quá chậm. Playback đòi hỏi băng thông lớn hơn live view. Giải pháp: tăng gói cước Internet hoặc xem playback trực tiếp trên NVR tại chỗ.
 
 ---
 
@@ -169,6 +169,6 @@ Trước khi gọi, chuẩn bị:
 - [ ] Khởi động lại: Switch → Camera (rút cáp) → NVR (đúng thứ tự)
 - [ ] Cô lập: đổi port, đổi cáp, test trực tiếp
 - [ ] Kiểm tra ghi hình: playback ngày hiện tại có vạch timeline không
-- [ ] Kiểm tra Hik-Connect: status Online, app xem được
+- [ ] Kiểm tra truy cập từ xa: port forwarding đúng, Hik-Connect Online, app xem được
 - [ ] Ghi log: thiết bị nào lỗi, nguyên nhân, cách xử lý, thời gian hoàn thành
 - [ ] Xác nhận với khách hàng: cho khách xem trực tiếp trên app để confirm

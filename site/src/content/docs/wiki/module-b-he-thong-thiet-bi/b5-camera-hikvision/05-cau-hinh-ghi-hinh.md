@@ -105,13 +105,13 @@ Khi cần đưa luồng camera vào Home Assistant, LifeSmart, VLC hoặc phần
 
 ### Ví dụ cụ thể
 
-- Camera IP `192.168.20.201`, user `admin`, pass `Abc@12345`:
-  - Main: `rtsp://admin:Abc@12345@192.168.20.201:554/Streaming/Channels/101`
-  - Sub: `rtsp://admin:Abc@12345@192.168.20.201:554/Streaming/Channels/102`
+- Camera IP `192.168.1.31`, user `admin`, pass `Abc@12345`:
+  - Main: `rtsp://admin:Abc@12345@192.168.1.31:554/Streaming/Channels/101`
+  - Sub: `rtsp://admin:Abc@12345@192.168.1.31:554/Streaming/Channels/102`
 
-- NVR IP `192.168.20.200`, kênh 1:
-  - Main: `rtsp://admin:Abc@12345@192.168.20.200:554/Streaming/Channels/101`
-  - Kênh 2 Sub: `rtsp://admin:Abc@12345@192.168.20.200:554/Streaming/Channels/202`
+- NVR IP `192.168.1.30`, kênh 1:
+  - Main: `rtsp://admin:Abc@12345@192.168.1.30:554/Streaming/Channels/101`
+  - Kênh 2 Sub: `rtsp://admin:Abc@12345@192.168.1.30:554/Streaming/Channels/202`
 
 Quy tắc: `Channels/[kênh][luồng]` — kênh 1 = 1, kênh 2 = 2; luồng main = 01, sub = 02.
 

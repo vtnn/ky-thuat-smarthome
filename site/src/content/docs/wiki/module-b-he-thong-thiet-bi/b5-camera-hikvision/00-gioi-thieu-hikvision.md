@@ -76,7 +76,8 @@ Tại công ty, chuẩn camera mặc định là **4MP** với codec **H.265+**.
 | Phần mềm | Nền tảng | Công dụng |
 |---|---|---|
 | **SADP Tool** | Windows/Mac | Quét thiết bị trong LAN, kích hoạt camera mới, gán IP tĩnh |
-| **Hik-Connect** | iOS/Android | Xem camera từ xa qua Cloud P2P, nhận thông báo chuyển động |
+| **Hik-ProConnect** | Web/iOS/Android | Dành cho kỹ thuật viên: cấu hình từ xa, quản lý thiết bị, firmware update |
+| **Hik-Connect** | iOS/Android | Dành cho khách hàng: xem camera từ xa, nhận thông báo chuyển động |
 | **iVMS-4200** | Windows/Mac | Phần mềm quản lý chuyên nghiệp: xem live, playback, quản lý nhiều NVR |
 
 ---

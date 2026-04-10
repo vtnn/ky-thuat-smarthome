@@ -78,17 +78,17 @@ Sau khi kích hoạt, camera/NVR mặc định nhận IP từ DHCP hoặc dùng 
 3. Nhập IP bắt đầu, Subnet Mask, Gateway.
 4. SADP sẽ tự gán IP tăng dần cho từng thiết bị.
 
-### Ví dụ quy hoạch IP (tham khảo)
+### Ví dụ quy hoạch IP (theo chuẩn công ty)
 
 | Thiết bị | IP | Ghi chú |
 |---|---|---|
-| NVR | 192.168.20.200 | Đầu ghi |
-| CAM-PK-01 | 192.168.20.201 | Phòng khách |
-| CAM-HL-02 | 192.168.20.202 | Hành lang tầng 1 |
-| CAM-BX-03 | 192.168.20.203 | Bãi xe |
-| CAM-Cong-04 | 192.168.20.204 | Cổng chính |
+| NVR | 192.168.1.30 | Đầu ghi — cố định .30 |
+| CAM-PK-01 | 192.168.1.31 | Phòng khách |
+| CAM-HL-02 | 192.168.1.32 | Hành lang tầng 1 |
+| CAM-BX-03 | 192.168.1.33 | Bãi xe |
+| CAM-Cong-04 | 192.168.1.34 | Cổng chính |
 
-Quy ước: NVR dùng IP .200, camera bắt đầu từ .201 trở đi. Dải 192.168.20.x là VLAN Camera, tách biệt với VLAN WiFi và VLAN Smarthome.
+Quy ước công ty: NVR luôn đặt IP `192.168.1.30`, camera bắt đầu từ `.31` trở đi và tăng dần.
 
 ---
 

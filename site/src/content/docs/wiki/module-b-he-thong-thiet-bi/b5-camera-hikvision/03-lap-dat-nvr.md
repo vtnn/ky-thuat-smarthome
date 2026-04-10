@@ -32,25 +32,21 @@ Nhiệt độ vận hành của NVR Hikvision: -10°C đến +55°C. Tuy nhiên 
 
 ## 2. Sơ đồ kết nối
 
-### NVR có PoE tích hợp (phổ biến nhất)
+Công ty sử dụng NVR không tích hợp PoE, kết hợp với Switch PoE riêng. Đây là sơ đồ chuẩn cho mọi dự án:
+
 ```
-[Camera] ──Cat6──→ [Port PoE trên NVR] ──→ [NVR ghi hình vào HDD]
+[Camera] ──Cat6──→ [Switch PoE] ──Cat6──→ [NVR LAN port] ──→ [HDD ghi hình]
                                               ↓
-                                        [Router/Internet] (1 cáp Cat6 từ LAN port NVR)
+                                        [Router/Internet]
                                               ↓
-                                        [Hik-Connect Cloud → App điện thoại]
+                                   [Hik-Connect → App điện thoại]
 
 [Màn hình HDMI/VGA] ←── [NVR]
 ```
 
-### NVR không có PoE + Switch PoE riêng
-```
-[Camera] ──Cat6──→ [Switch PoE] ──Cat6──→ [NVR LAN port]
-                                              ↓
-                                        [Router/Internet]
-```
+Switch PoE vừa cấp nguồn cho camera qua cáp Cat6, vừa trung chuyển dữ liệu về NVR. NVR chỉ việc nhận dữ liệu và ghi hình — không liên quan đến việc cấp nguồn camera.
 
-Sơ đồ thứ hai dùng khi: NVR không có port PoE, số camera vượt quá port PoE trên NVR, hoặc camera phân bố xa NVR (đặt Switch PoE gần cụm camera để giảm chiều dài cáp).
+Khi dự án có nhiều cụm camera phân bố xa nhau, có thể dùng nhiều Switch PoE đặt gần từng cụm, rồi kéo 1 đường uplink về Switch/NVR trung tâm.
 
 ---
 
@@ -70,8 +66,9 @@ Tất cả NVR mới đều chưa có HDD — phải mua và lắp riêng. Quy t
 
 ### Lưu ý quan trọng
 
-- NVR DS-7604 (4 kênh): Chỉ có 1 khe SATA → tối đa 1 HDD (đến 6TB).
-- NVR DS-7608 và DS-7616 (8/16 kênh): Có 2 khe SATA → tối đa 2 HDD (đến 12TB tổng).
+- DS-7604NI-K1 (4 kênh): 1 khe SATA → tối đa 1 HDD (đến 6TB).
+- DS-7608NI-K2 / DS-7616NI-K2 (8/16 kênh): 2 khe SATA, nhưng thực tế công ty thường chỉ lắp 1 HDD là đủ.
+- DS-7632NI-K2 (32 kênh): 2 khe SATA → lắp cả 2 HDD (mỗi khe tối đa 10TB).
 - Sau khi format xong, trạng thái HDD phải hiện "Normal". Nếu hiện "Uninitialized" hoặc "Error" → HDD lỗi hoặc cáp SATA chưa cắm chặt.
 
 ---
@@ -91,9 +88,9 @@ Quy tắc mật khẩu:
 ### 4.2. Cấu hình mạng
 
 Vào Configuration → Network → TCP/IP:
-- **IP Address**: Gán IP tĩnh theo quy hoạch VLAN Camera. Ví dụ: `192.168.20.200`.
-- **Subnet Mask**: `255.255.255.0` (hoặc theo thiết kế mạng).
-- **Default Gateway**: IP của Router/Gateway. Ví dụ: `192.168.20.1`.
+- **IP Address**: Gán IP tĩnh. Công ty dùng `192.168.1.30` cho NVR.
+- **Subnet Mask**: `255.255.255.0`.
+- **Default Gateway**: IP của Router/Gateway. Ví dụ: `192.168.1.1`.
 - **DNS Server**: `8.8.8.8` (Google DNS) — cần cho Hik-Connect hoạt động.
 
 Tại sao phải dùng IP tĩnh: Nếu NVR dùng DHCP, khi router khởi động lại có thể gán IP khác → camera mất kết nối với NVR.

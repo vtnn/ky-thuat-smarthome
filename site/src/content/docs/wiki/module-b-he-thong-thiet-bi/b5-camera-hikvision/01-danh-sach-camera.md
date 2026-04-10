@@ -68,13 +68,16 @@ Dòng camera tích hợp AI phân loại người/xe — giảm báo động gi�
 
 ## 2. NVR phổ biến
 
-NVR (Network Video Recorder) là đầu ghi hình mạng, nhận tín hiệu từ camera IP qua mạng LAN và lưu trữ vào HDD.
+NVR (Network Video Recorder) là đầu ghi hình mạng, nhận tín hiệu từ camera IP qua mạng LAN và lưu trữ vào HDD. Công ty sử dụng dòng NVR không tích hợp PoE (dòng K1/K2 thuần), kết hợp với Switch PoE riêng để linh hoạt hơn trong thi công.
 
-| Model | Số kênh | HDD tối đa | PoE tích hợp | Băng thông vào | Gợi ý |
-|---|---:|---|:--:|---|---|
-| DS-7604NI-K1/4P | 4 | 1 x 6TB | 4 port PoE | 40 Mbps | Căn hộ nhỏ, 2-4 camera |
-| DS-7608NI-K2/8P | 8 | 2 x 6TB | 8 port PoE | 80 Mbps | Nhà phố, biệt thự nhỏ |
-| DS-7616NI-K2/16P | 16 | 2 x 6TB | 16 port PoE | 160 Mbps | Biệt thự lớn, tòa nhà |
+| Model | Số kênh | Số khe SATA | HDD tối đa/khe | Băng thông vào | Gợi ý |
+|---|---:|---:|---|---|---|
+| DS-7604NI-K1 | 4 | 1 | 6TB | 40 Mbps | Căn hộ nhỏ, 2-4 camera |
+| DS-7608NI-K2 | 8 | 2 | 10TB | 80 Mbps | Nhà phố, biệt thự nhỏ |
+| DS-7616NI-K2 | 16 | 2 | 10TB | 160 Mbps | Biệt thự lớn, cửa hàng |
+| DS-7632NI-K2 | 32 | 2 | 10TB | 256 Mbps | Tòa nhà, dự án lớn |
+
+Thực tế tại công ty: đầu ghi 4/8/16 kênh thường chỉ lắp 1 HDD. Chỉ đầu 32 kênh mới sử dụng cả 2 khe HDD vì số camera nhiều, cần dung lượng lưu trữ lớn.
 
 <details>
 <summary>Lưu ý khi chọn NVR</summary>
@@ -83,14 +86,18 @@ NVR (Network Video Recorder) là đầu ghi hình mạng, nhận tín hiệu t�
 
 Quy tắc đơn giản: chọn NVR có số kênh bằng hoặc lớn hơn số camera dự kiến + 1-2 kênh dự phòng. Ví dụ, nhà có 6 camera thì chọn NVR 8 kênh, đừng ép vào NVR 4 kênh.
 
-### NVR có PoE vs Switch PoE riêng
+### Tại sao dùng Switch PoE riêng thay vì NVR có PoE tích hợp?
 
-- **NVR có PoE tích hợp** (model có chữ "P"): Camera cắm thẳng vào port PoE trên NVR. Gọn gàng, ít thiết bị, phù hợp nhà nhỏ 4-8 camera.
-- **NVR không có PoE + Switch PoE riêng**: Linh hoạt hơn khi số camera lớn hoặc camera phân bố xa NVR. Switch PoE đặt gần cụm camera, giảm chiều dài cáp.
+Công ty không sử dụng dòng NVR có PoE tích hợp (model có chữ "P" như DS-7604NI-K1/4P). Lý do:
+
+- **Linh hoạt**: Switch PoE đặt gần cụm camera, giảm chiều dài cáp. NVR thường đặt trong tủ rack ở phòng kỹ thuật — nếu dùng NVR PoE, mọi đường cáp camera đều phải kéo về đến NVR.
+- **Dễ mở rộng**: Thêm camera chỉ cần thêm port Switch, không phụ thuộc vào số port PoE trên NVR.
+- **Dễ thay thế**: Switch PoE hỏng thì thay Switch, NVR hỏng thì thay NVR — không ảnh hưởng lẫn nhau.
+- **Chi phí**: Dòng NVR không PoE (K1/K2) rẻ hơn dòng có PoE. Switch PoE riêng có nhiều lựa chọn thương hiệu và công suất.
 
 ### Băng thông (Bandwidth)
 
-NVR 4 kênh có băng thông vào 40 Mbps. Mỗi camera 4MP ghi Main Stream ~4-6 Mbps. Vậy NVR 4 kênh ghi đủ 4 camera 4MP mà không bị nghẽn. Khi chọn NVR, luôn tính tổng bitrate camera phải nhỏ hơn băng thông vào của NVR.
+Mỗi camera 4MP ghi Main Stream ~4-6 Mbps. NVR 4 kênh có băng thông vào 40 Mbps → ghi đủ 4 camera 4MP mà không bị nghẽn. Khi chọn NVR, luôn tính tổng bitrate camera phải nhỏ hơn băng thông vào của NVR.
 
 </details>
 
@@ -107,9 +114,10 @@ Camera ghi hình 24/7 là tải khắc nghiệt nhất đối với ổ cứng �
 
 ### Quy tắc chọn dung lượng
 
-- **NVR 4 kênh**: HDD 2TB (lưu ~15-20 ngày với 4 camera 4MP, H.265+)
-- **NVR 8 kênh**: HDD 4TB (lưu ~15-20 ngày với 8 camera 4MP)
-- **NVR 16 kênh**: 2 x 4TB (lưu ~15-20 ngày với 16 camera 4MP)
+- **NVR 4 kênh**: 1 HDD 2TB (lưu ~15-20 ngày với 4 camera 4MP, H.265+)
+- **NVR 8 kênh**: 1 HDD 4TB (lưu ~15-20 ngày với 8 camera 4MP)
+- **NVR 16 kênh**: 1 HDD 4-6TB (lưu ~10-15 ngày với 16 camera 4MP)
+- **NVR 32 kênh**: 2 HDD (ví dụ 2 x 4TB hoặc 2 x 6TB — tùy yêu cầu lưu trữ)
 
 Con số trên là ước tính với Main Stream 4Mbps, ghi liên tục 24/7. Nếu khách yêu cầu lưu 30 ngày trở lên, cần tăng dung lượng tương ứng. Xem chi tiết cách tính tại bài B5.05.
 
