@@ -94,7 +94,7 @@ Nếu nhà mạng cấp IP tĩnh (hoặc IP tĩnh qua gói cước doanh nghiệ
 
 Khi nhà mạng cấp IP động (thay đổi mỗi lần restart modem) — đây là trường hợp phổ biến với gói cước gia đình. Công ty có sẵn dịch vụ DDNS riêng.
 
-![Cấu hình DDNS trên NVR](../../../../../assets/images/wiki/module-b/b5-camera/nvr-ddns-config.jpg)
+![Cấu hình DDNS trên NVR](../../../../../assets/images/wiki/module-b/b5-camera/nvr-ddns-config.png)
 <p class="hero-image-caption">Màn hình cấu hình DDNS trên NVR Hikvision.</p>
 
 #### Cấu hình DDNS trên NVR
