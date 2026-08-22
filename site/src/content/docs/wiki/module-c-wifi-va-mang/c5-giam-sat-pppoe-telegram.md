@@ -35,7 +35,7 @@ Tên router sẽ được đính kèm vào nội dung tin nhắn Telegram để 
 
 Vào **System → Identity** hoặc chạy lệnh CLI (lưu ý chỉ dùng ký tự ASCII không dấu):
 
-```routeros
+```bash
 /system identity set name="NHA-ANH-THACH"
 ```
 
@@ -45,7 +45,7 @@ Vào **System → Identity** hoặc chạy lệnh CLI (lưu ý chỉ dùng ký t
 
 Tạo các static route trỏ IP probe ra đúng interface PPPoE của từng nhà mạng:
 
-```routeros
+```bash
 /ip route
 add dst-address=8.8.8.8/32 gateway=pppoe-out1 comment="PPPoE-monitor-isp1"
 add dst-address=9.9.9.9/32 gateway=pppoe-out2 comment="PPPoE-monitor-isp2"
@@ -67,7 +67,7 @@ add dst-address=9.9.9.9/32 gateway=pppoe-out2 comment="PPPoE-monitor-isp2"
 
 > **Lưu ý quan trọng:** Dán mã trực tiếp vào giao diện Scripts trên Winbox/WebFig, không paste vào cửa sổ Terminal CLI vì CLI không hỗ trợ ký tự tiếng Việt có dấu.
 
-```routeros
+```bash
 # ================================================================
 # CẤU HÌNH DÙNG CHUNG - mỗi MikroTik chỉ sửa khối này
 # ================================================================
@@ -327,7 +327,7 @@ Thiết lập Scheduler để router tự động kích hoạt script kiểm tra
 
 ### Lệnh CLI tương đương
 
-```routeros
+```bash
 /system scheduler add name="pppoe-monitor-every-3m" interval=3m on-event="/system script run pppoe-monitor" policy=read,write,test comment="PPPoE-monitor"
 ```
 
@@ -338,11 +338,11 @@ Thiết lập Scheduler để router tự động kích hoạt script kiểm tra
 Khi công trình có thêm đường truyền thứ 3 (ví dụ `pppoe-out3`), chỉ cần thực hiện thêm 2 thao tác:
 
 1. Thêm static route probe cho WAN 3 qua CLI:
-   ```routeros
+   ```bash
    /ip route add dst-address=1.1.1.1/32 gateway=pppoe-out3 comment="PPPoE-monitor-isp3"
    ```
 2. Thêm một dòng gọi hàm `$checkLine` ở cuối Script `pppoe-monitor`:
-   ```routeros
+   ```bash
    $checkLine lineKey="isp3" lineLabel="ISP 3 - đường phụ 2" pppoeName="pppoe-out3" probeAddress="1.1.1.1"
    ```
 
@@ -355,7 +355,7 @@ Khi công trình có thêm đường truyền thứ 3 (ví dụ `pppoe-out3`), c
 1. **Chạy thủ công:** Vào **System → Scripts**, chọn `pppoe-monitor` và nhấn **Run Script**.
 2. **Xem log hoạt động:** Mở cửa sổ **Log**, lọc từ khóa `PPPoE-MON`. Router cần ghi nhận đủ trạng thái của từng line và kết thúc bằng dòng `DONE | all configured lines checked`.
 3. **Xem log qua CLI:**
-   ```routeros
+   ```bash
    /log print where message~"PPPoE-MON"
    ```
 4. **Tắt chế độ Debug:** Khi hệ thống đã vận hành ổn định, đổi `:global pppMonDebug true` thành `false` trong script để tránh làm đầy bộ nhớ log của router.
@@ -369,7 +369,7 @@ Trong quá trình nghiệm thu hoặc test rút dây mạng, nếu script đã g
 1. Tạo một script phụ tên `pppoe-monitor-reset` trong **System → Scripts** (cùng quyền `read, write, test`).
 2. Dán nội dung sau và nhấn **Run Script**:
 
-```routeros
+```bash
 :global pppMonFailCount
 :global pppMonLastAlert
 :global pppMonAlertOpen

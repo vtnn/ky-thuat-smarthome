@@ -30,7 +30,7 @@ Nhiệt độ vận hành của NVR Hikvision: -10°C đến +55°C. Tuy nhiên 
 
 ---
 
-![Sơ đồ kết nối Camera PoE với NVR](../../../../../assets/images/wiki/module-b/b5-camera/poe-nvr-diagram.jpg)
+![Sơ đồ kết nối Camera PoE với NVR](../../../../../assets/images/wiki/module-b/b5-camera/poe-nvr-diagram.png)
 <p class="hero-image-caption">Sơ đồ kết nối hệ thống camera IP qua Switch PoE đến NVR.</p>
 
 ## 2. Sơ đồ kết nối
