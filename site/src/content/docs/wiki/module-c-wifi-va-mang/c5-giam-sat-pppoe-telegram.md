@@ -25,9 +25,68 @@ Hệ thống giám sát gồm 3 thành phần chính hoạt động phối hợp
    - **Chống spam tin nhắn:** Khi đường truyền đứt, script chỉ gửi 1 thông báo duy nhất trong ngày. Khi đường truyền có mạng trở lại, script tự động gửi 1 thông báo phục hồi (Recovery).
    - **Gửi tin qua Telegram Bot:** Sử dụng `/tool fetch` để gọi trực tiếp API Telegram với nội dung đã được mã hóa UTF-8/URL encoding.
 
+## 2. Cài nhanh bằng Terminal (Khuyên dùng)
+
+### Chuẩn bị trên RouterOS 7
+
+RouterOS 7 có thể chặn `fetch` hoặc Scheduler bằng `device-mode`. Kiểm tra trước khi cài:
+
+```bash
+/system/device-mode/print
+```
+
+Nếu thấy `fetch: no` hoặc `scheduler: no`, chỉ bật hai tính năng cần thiết:
+
+```bash
+/system/device-mode/update fetch=yes scheduler=yes
+```
+
+Trong thời gian router hiển thị (thường là 5 phút), **rút nguồn rồi cắm lại** để xác nhận vật lý. Không dùng `/system reboot` thay cho bước này. Sau khi router khởi động xong, kiểm tra lại:
+
+```bash
+/system/device-mode/print
+```
+
+Chỉ tiếp tục khi kết quả có đủ:
+
+```text
+fetch: yes
+scheduler: yes
+flagged: no
+```
+
+Nếu gặp `failure: not allowed by device-mode`, chưa chạy lại installer ngay; hãy bật `fetch` và `scheduler` theo các bước trên. Nếu `flagged: yes`, dừng cài đặt và kiểm tra an toàn của router trước khi gỡ trạng thái cảnh báo. Installer không thể tự bật các tính năng này vì chính `fetch` đang bị RouterOS chặn.
+
+Tài liệu chính thức: [MikroTik RouterOS Device-mode](https://help.mikrotik.com/docs/spaces/ROS/pages/93749258/Device-mode).
+
+### Chạy installer
+
+Mặc định installer dùng `pppoe-out1` và tự thêm `pppoe-out2` nếu interface này tồn tại. Thay `BOT_TOKEN` và `CHAT_ID` (liên hệ Anh Nghĩa để lấy token hệ thống hoặc tự tạo bot riêng), rồi dán nguyên một dòng ASCII sau vào Terminal:
+
+```bash
+:global pppMonInstallBotToken "BOT_TOKEN"; :global pppMonInstallChatId "CHAT_ID"; /tool fetch url="https://mikrotik-pppoe-monitor.vutrongnhannghia.workers.dev/install.rsc" dst-path="pppoe-install.rsc" check-certificate=no; /import file-name="pppoe-install.rsc"; /file remove [find where name="pppoe-install.rsc"]
+```
+
+Nếu interface không dùng tên mặc định, khai báo thêm trước lệnh `fetch`:
+
+```bash
+:global pppMonInstallPppoe1 "WAN1"; :global pppMonInstallPppoe2 "WAN2";
+```
+
+Installer tự tạo hoặc cập nhật route probe, `pppoe-monitor-config`, `pppoe-monitor`, `pppoe-monitor-reset` và Scheduler `pppoe-monitor-every-3m`. Bot Token và Chat ID chỉ được lưu trong script cấu hình trên router, không nằm trong URL công khai.
+
+Sau khi cài, chạy thử và xem log:
+
+```bash
+/system script run pppoe-monitor
+/log print where message~"PPPoE-MON"
+```
+
+Phải thấy `INSTALL | SUCCESS` và `DONE`. Việc kiểm tra thực tế trên RouterOS 6.49.x hoặc 7.x vẫn bắt buộc trước khi bàn giao chính thức.
+
 ---
 
-## 2. Các bước cài đặt chi tiết
+## 3. Cài đặt thủ công chi tiết (Tùy biến nâng cao)
 
 ### Bước 1: Đặt tên router (Identity)
 
@@ -314,9 +373,7 @@ $checkLine lineKey="isp2" lineLabel="ISP 2 - dự phòng" \
 }
 ```
 
----
-
-## 3. Cấu hình Scheduler chạy định kỳ
+### Bước 4: Cấu hình Scheduler chạy định kỳ
 
 Thiết lập Scheduler để router tự động kích hoạt script kiểm tra sau mỗi 3 phút.
 
