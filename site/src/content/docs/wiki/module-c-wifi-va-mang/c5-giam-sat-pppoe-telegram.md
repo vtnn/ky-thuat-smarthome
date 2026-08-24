@@ -65,14 +65,18 @@ add dst-address=9.9.9.9/32 gateway=pppoe-out2 comment="PPPoE-monitor-isp2"
    - **Policy:** Tích chọn `read`, `write`, `test`.
    - **Source:** Dán toàn bộ đoạn mã bên dưới. Cập nhật `pppMonBotToken`, `pppMonChatId` và điều chỉnh các dòng `$checkLine` ở cuối script theo đúng thực tế công trình.
 
+> **Lưu ý cấu hình Bot & Chat ID:**
+> - `pppMonBotToken`: Token của Telegram Bot gửi tin. Vui lòng **liên hệ Anh Nghĩa** để lấy token bot hệ thống của công ty hoặc tự tạo bot riêng qua [@BotFather](https://t.me/BotFather) để sử dụng.
+> - `pppMonChatId`: ID của nhóm/kênh Telegram nhận cảnh báo. Vui lòng **liên hệ Anh Nghĩa** để lấy ID nhóm dự án, hoặc thêm bot `@RawDataBot` / `@userinfobot` vào nhóm để lấy Chat ID (thường có tiền tố dấu `-`, ví dụ `-100xxxxxxxxx`).
+
 > **Lưu ý quan trọng:** Dán mã trực tiếp vào giao diện Scripts trên Winbox/WebFig, không paste vào cửa sổ Terminal CLI vì CLI không hỗ trợ ký tự tiếng Việt có dấu.
 
 ```bash
 # ================================================================
 # CẤU HÌNH DÙNG CHUNG - mỗi MikroTik chỉ sửa khối này
 # ================================================================
-:global pppMonBotToken "8624350503:AAFU3sLc-YSmZEydYlLZdxtkV29TifIXikg"
-:global pppMonChatId "-5341184222"
+:global pppMonBotToken "YOUR_BOT_TOKEN_HERE"
+:global pppMonChatId "YOUR_CHAT_ID_HERE"
 :global pppMonFailLimit 3
 :global pppMonPingCount 3
 :global pppMonDebug true
@@ -385,7 +389,7 @@ Trong quá trình nghiệm thu hoặc test rút dây mạng, nếu script đã g
 
 ## 6. Lưu ý an toàn và bảo mật
 
-- **Bảo mật Bot Token:** Không đưa `pppMonBotToken` và `pppMonChatId` vào kho lưu trữ mã nguồn mở (GitHub công khai) hoặc chia sẻ trên các kênh chat không được mã hóa.
+- **Bảo mật Bot Token:** Tuyệt đối không đưa token bot và Chat ID thật vào các kho lưu trữ mã nguồn mở (GitHub công khai) hoặc chia sẻ trên các kênh chat không an toàn. Khi triển khai công trình, liên hệ Anh Nghĩa để lấy thông tin bot hệ thống hoặc tự tạo bot riêng của dự án.
 - **Quyền hạn Script:** Script chỉ cần 3 quyền `read`, `write`, `test`. Không cấp quyền `full` hay `sensitive` khi không cần thiết.
 - **DNS Probe:** Chọn các DNS server công cộng có độ ổn định cao (Google `8.8.8.8`, Quad9 `9.9.9.9`, Cloudflare `1.1.1.1`) để tránh cảnh báo sai lệch do DNS server sập.
 
