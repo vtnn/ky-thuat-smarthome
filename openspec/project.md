@@ -27,6 +27,7 @@ Dự án này là một wiki kỹ thuật nội bộ về hệ thống nhà thô
 - Không lạm dụng bold, không dùng emoji trong body
 - Giữ thuật ngữ dễ hiểu, ưu tiên tiếng Việt khi có thể
 - Mọi thay đổi lớn về cấu trúc hoặc module nên đi qua OpenSpec
+- Không lưu file video trong repo (giữ repo nhẹ vì deploy tự động qua GitHub) — minh họa động làm dạng web theo Media Rules
 
 ## Done Criteria chung cho một bài
 Một bài chỉ xem là xong khi:
@@ -36,6 +37,7 @@ Một bài chỉ xem là xong khi:
 - không có H1 trong body
 - có ví dụ thực tế hoặc tình huống áp dụng
 - có lỗi thường gặp / checklist nếu phù hợp
+- nếu là bài quy trình: có flow Mermaid đúng nội dung; nếu là bài trọng điểm: có hình thật hoặc web animation đạt chuẩn
 - giọng văn tự nhiên, không kiểu AI/manual khô cứng
 - build pass
 - link và asset path đúng
@@ -53,12 +55,16 @@ Một bài chỉ xem là xong khi:
 3. `npm run build`
 4. nếu cần deploy thủ công:
    ```bash
-   CLOUDFLARE_API_TOKEN="$CLOUDFLARE_API_TOKEN" npx wrangler pages deploy dist --project-name kythuat-smarthome --branch main --commit-dirty=true
+CLOUDFLARE_API_TOKEN=<redacted>
    ```
 
 ## Media Rules
-- Mỗi bài tối đa 1 visual hero (ảnh hoặc video) nếu thật sự cần
+- Mỗi bài tối đa 1 visual hero (ảnh hoặc web animation) nếu thật sự cần
 - Ưu tiên ảnh thực tế hơn ảnh stock
-- Ảnh nên lưu theo cấu trúc phù hợp với Astro/Starlight
+- **Không lưu file video trong repo.** Minh họa động làm dạng web:
+  - Flow quy trình: Mermaid (qua integration `astro-mermaid`)
+  - Trình chiếu từng bước: component MDX kèm ảnh thật (thay vai trò của video)
+  - Luồng tín hiệu / nguyên lý: SVG inline + CSS animation
+- Ảnh nên lưu theo cấu trúc phù hợp với Astro/Starlight và tối ưu dung lượng (dùng `scripts/optimize-images.sh`) trước khi commit
 - Caption phải có ý nghĩa, không chỉ trang trí
 - Sau khi thêm ảnh mới trong `src/assets/`, nên restart dev server nếu Astro chưa hot reload đúng

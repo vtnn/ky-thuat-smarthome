@@ -10,6 +10,7 @@ Wiki kỹ thuật nhà thông minh nội bộ — dùng cho đào tạo kỹ thu
 - **Live**: https://kythuat.vtnn.io.vn
 - **Ngôn ngữ nội dung**: Tiếng Việt
 - **Tính chất**: Content-first, không phải code-first
+- **Độc giả chính**: kỹ thuật viên; kinh doanh tham khảo thêm (site đã có xác thực qua Cloudflare)
 
 ## Tech Stack
 
@@ -42,8 +43,7 @@ openspec/
   context/CURRENT_PRIORITY.md        ← priority đang active
   context/OWNER_CONTEXT.md           ← phong cách owner
   context/WORKING_PREFERENCES.md     ← ưu tiên vận hành
-  tasks/miu-master-roadmap.md        ← roadmap toàn dự án
-  tasks/miu-b1-05-b1-06-brief.md     ← brief thực thi B1.05 & B1.06
+  tasks/miu-master-roadmap.md        ← roadmap toàn dự án (v2, 22/10/2026)
   skills/                            ← 7 local skills
   workflows/                         ← 4 workflow wrappers
 ```
@@ -76,7 +76,7 @@ openspec/
 - Không bold quá mức, không emoji trong body
 - Giải thích "tại sao", không chỉ "cái gì"
 - Ưu tiên ví dụ thực tế từ công trình / nhà ở
-- **Xử lý Video**: File `.mp4` (chữ thường) -> lưu tại `public/wiki/assets/videos/` -> không dùng Git LFS -> nhúng bằng thẻ `<video autoplay muted loop playsinline>`.
+- **Trực quan (quy ước từ 22/10/2026)**: Không lưu file video trong repo (tốn dung lượng). Minh họa động làm dạng web: flow Mermaid cho bài quy trình; component MDX từng bước (kèm ảnh thật) hoặc SVG + CSS animation cho bài trọng điểm. Hình ảnh dùng ảnh thật, tối ưu dung lượng trước khi commit.
 - Chi tiết đầy đủ → xem `openspec/AGENTS.md` mục **Writing Rules**
 
 ## Quality Gate (checklist trước khi báo xong)
@@ -85,6 +85,7 @@ openspec/
 - [ ] Heading rõ ràng, không H1 trong body
 - [ ] Nội dung theo writing rules
 - [ ] Có ví dụ thật hoặc tình huống áp dụng
+- [ ] Bài quy trình có flow Mermaid; bài trọng điểm có hình thật / web animation
 - [ ] Link và asset path hoạt động đúng
 - [ ] Giọng văn tự nhiên (apply `project-humanizer` nếu cần)
 - [ ] `npm run build` pass (nếu thay đổi cấu trúc)
@@ -100,15 +101,22 @@ npm run build      # build production, kiểm tra lỗi
 
 ## Content Modules (Roadmap)
 
+Trạng thái theo kiểm kê 22/10/2026 — chi tiết trong `.agent/tasks/miu-master-roadmap.md` (Roadmap v2).
+
 | Module | Chủ đề | Trạng thái |
 |--------|--------|-----------|
-| A | Kỹ thuật cơ bản (bản vẽ, dụng cụ, an toàn, tiêu chuẩn) | Đang hoàn thiện |
-| B1 | LifeSmart (7 bài: B1.00–B1.06) | **Ưu tiên hiện tại** |
-| B2 | Mobieyes / CommandFusion | Chưa bắt đầu |
-| B3 | KNX | Chưa bắt đầu |
-| B4 | DALI | Chưa bắt đầu |
-| B5 | Camera Hikvision | Chưa bắt đầu |
-| B6 | WiFi Ruijie | Chưa bắt đầu |
+| A | Kỹ thuật cơ bản (bản vẽ, dụng cụ, an toàn, tiêu chuẩn) | Đã đủ 4 bài — chờ chuẩn hóa trực quan (Pha 1) |
+| B1 | LifeSmart (7 bài: B1.00–B1.06) | Đã đủ — hệ mẫu cho chuẩn trực quan |
+| B2 | Mobieyes / CommandFusion (9 bài) | Đã đủ — chờ chuẩn hóa trực quan |
+| B3 | KNX (8 bài) | Đã đủ — chờ chuẩn hóa trực quan |
+| B4 | DALI (6 bài) | Đã đủ — chờ chuẩn hóa trực quan |
+| B5 | Camera Hikvision (8 bài) | Đã đủ — chờ chuẩn hóa trực quan |
+| B6 | WiFi Ruijie (7 bài) | Đã đủ — chờ chuẩn hóa trực quan |
+| C | WiFi & Mạng (5 bài) | Đã đủ — chờ chuẩn hóa trực quan |
+| D | Lập trình (5 bài) | Mỏng — làm dày ở Pha 2 |
+| E | Xử lý sự cố (7 bài) | E1 đạt; E2–E7 mỏng — Pha 2 |
+| F | Tiêu chuẩn chất lượng (3 bài) | Mỏng — Pha 2 |
+| G | Đánh giá năng lực (8 bài) | Dạng khung — Pha 2 |
 
 ## Available Skills
 
