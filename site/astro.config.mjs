@@ -1,10 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import mermaid from 'astro-mermaid';
 
 export default defineConfig({
 	site: 'https://kythuat.vtnn.io.vn',
 	integrations: [
+		mermaid({ theme: 'default', autoTheme: true }),
 		starlight({
 			title: 'Kỹ thuật Smarthome',
 			description: 'Wiki kỹ thuật – tài liệu đào tạo & vận hành hệ thống nhà thông minh, camera và WiFi.',

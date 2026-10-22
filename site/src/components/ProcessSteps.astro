@@ -1,0 +1,191 @@
+---
+// ProcessSteps — trình chiếu quy trình từng bước kèm ảnh thật.
+// Dùng thay cho video: nhẹ, không tốn dung lượng repo.
+// Cách dùng trong file .mdx:
+//
+// import ProcessSteps from '../../../components/ProcessSteps.astro';
+//
+// <ProcessSteps title="Quy trình lắp đặt" steps={[
+//   { title: 'Bước 1 — Khảo sát vị trí', img: '/wiki/assets/images/.../anh.jpg', alt: '...', body: 'Mô tả ngắn gọn việc cần làm ở bước này.' },
+//   ...
+// ]} />
+//
+// Props:
+// - title?: tiêu đề khối (không bắt buộc)
+// - steps: mảng { title, img?, alt?, body }
+// - autoplay?: tự chạy chuyển bước mỗi 4 giây (mặc định tắt)
+
+interface Step {
+  title: string;
+  img?: string;
+  alt?: string;
+  body: string;
+}
+
+interface Props {
+  title?: string;
+  steps: Step[];
+  autoplay?: boolean;
+}
+
+const { title, steps, autoplay = false } = Astro.props as Props;
+const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
+---
+
+<div class="process-steps" id={uid} data-autoplay={autoplay ? 'true' : 'false'}>
+  {title && <p class="ps-heading">{title}</p>}
+
+  <div class="ps-stage">
+    {steps.map((step, i) => (
+      <figure class="ps-slide" data-index={i} hidden={i !== 0}>
+        {step.img && <img src={step.img} alt={step.alt ?? step.title} loading="lazy" />}
+        <figcaption>
+          <strong class="ps-step-title">{step.title}</strong>
+          <span class="ps-step-body">{step.body}</span>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <div class="ps-controls">
+    <button type="button" class="ps-btn" data-action="prev" aria-label="Bước trước">← Trước</button>
+    <div class="ps-dots" role="tablist" aria-label="Chọn bước">
+      {steps.map((_, i) => (
+        <button
+          type="button"
+          class="ps-dot"
+          data-index={i}
+          aria-label={`Bước ${i + 1}`}
+          aria-current={i === 0 ? 'true' : undefined}
+        />
+      ))}
+    </div>
+    <span class="ps-counter" aria-live="polite">1 / {steps.length}</span>
+    <button type="button" class="ps-btn" data-action="toggle-play" aria-label="Tự chạy / dừng">{autoplay ? '⏸ Dừng' : '▶ Tự chạy'}</button>
+    <button type="button" class="ps-btn" data-action="next" aria-label="Bước sau">Tiếp →</button>
+  </div>
+</div>
+
+<style>
+  .process-steps {
+    border: 1px solid var(--sl-color-gray-5, #d0d7de);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    background: var(--sl-color-bg, transparent);
+  }
+  .ps-heading {
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .ps-stage {
+    min-height: 4rem;
+  }
+  .ps-slide {
+    margin: 0;
+  }
+  .ps-slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    display: block;
+  }
+  .ps-slide figcaption {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .ps-step-title {
+    font-size: 1.05rem;
+  }
+  .ps-step-body {
+    color: var(--sl-color-gray-2, inherit);
+  }
+  .ps-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+  .ps-btn {
+    border: 1px solid var(--sl-color-gray-5, #d0d7de);
+    background: var(--sl-color-gray-6, transparent);
+    color: inherit;
+    border-radius: 999px;
+    padding: 0.3rem 0.9rem;
+    cursor: pointer;
+    font: inherit;
+  }
+  .ps-btn:hover {
+    border-color: var(--sl-color-accent, #4f46e5);
+  }
+  .ps-dots {
+    display: flex;
+    gap: 0.4rem;
+    flex: 1;
+    justify-content: center;
+  }
+  .ps-dot {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: var(--sl-color-gray-4, #9aa4b2);
+    opacity: 0.45;
+  }
+  .ps-dot[aria-current='true'] {
+    opacity: 1;
+    background: var(--sl-color-accent, #4f46e5);
+  }
+  .ps-counter {
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-gray-2, inherit);
+    min-width: 3.2rem;
+    text-align: center;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.process-steps').forEach((root) => {
+    const slides = Array.from(root.querySelectorAll('.ps-slide'));
+    const dots = Array.from(root.querySelectorAll('.ps-dot'));
+    const counter = root.querySelector('.ps-counter');
+    const playBtn = root.querySelector('[data-action="toggle-play"]');
+    let current = 0;
+    let timer = null;
+
+    function show(i) {
+      current = (i + slides.length) % slides.length;
+      slides.forEach((s, idx) => (s.hidden = idx !== current));
+      dots.forEach((d, idx) =>
+        idx === current ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')
+      );
+      if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
+    }
+
+    function stop() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+        if (playBtn) playBtn.textContent = '▶ Tự chạy';
+      }
+    }
+
+    function start() {
+      stop();
+      timer = setInterval(() => show(current + 1), 4000);
+      if (playBtn) playBtn.textContent = '⏸ Dừng';
+    }
+
+    root.querySelector('[data-action="prev"]')?.addEventListener('click', () => { stop(); show(current - 1); });
+    root.querySelector('[data-action="next"]')?.addEventListener('click', () => { stop(); show(current + 1); });
+    dots.forEach((d) => d.addEventListener('click', () => { stop(); show(Number(d.dataset.index)); }));
+    playBtn?.addEventListener('click', () => (timer ? stop() : start()));
+
+    if (root.dataset.autoplay === 'true') start();
+  });
+</script>
