@@ -1,0 +1,297 @@
+---
+// KNXDiagram — sơ đồ nguyên lý động: telegram chạy trên bus KNX và vì sao
+// cấm đấu vòng (Ring), theo B3.02 mục "Tại sao KHÔNG được đi Ring".
+// Nội dung bám B3.00 (phi tập trung: push button gửi telegram trực tiếp lên
+// bus, thiết bị nhận tự thực thi, không qua server/cloud; 1 lệnh cần 2–3
+// telegram, phản hồi dưới 100ms; cáp LIYCY 2×2×0.8mm, nguồn bus 29V DC;
+// thiết bị lưu cấu hình trong EEPROM), B3.01 (push button chỉ đấu 2 dây bus;
+// IP Interface tunneling, IP Router tunneling + coupler) và B3.02 (topology
+// Bus/Star/Tree; cấm Ring vì CSMA/CA — telegram đi hai hướng gặp lại chính
+// nó gây phản xạ và collision liên tục; mỗi Line tối đa 64 thiết bị, cáp
+// ≤ 1.000m). Demo v2 được chủ nhân duyệt ngày 24/10/2026: thiết bị nhận là
+// DALI Gateway + dãy đèn DALI, có Nguồn KNX và KNX/IP Gateway, mọi dây vẽ
+// theo tuyến riêng không đè nhau. Style is:global bám tiền tố .knx-diagram
+// (bài học LS212Diagram); trạng thái đổi bằng classList; root not-content.
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Sơ đồ động — Bus KNX: telegram chạy thẳng và lỗi đấu vòng Ring' } = Astro.props as Props;
+const uid = 'knx-' + Math.random().toString(36).slice(2, 9);
+const tId = uid + '-t';
+const dId = uid + '-d';
+const raId = uid + '-ra';
+const rbId = uid + '-rb';
+---
+
+<div class="knx-diagram not-content">
+  <p class="ad-heading">{title}</p>
+  <p class="ad-sub">Trên cùng một bus KNX: Nguồn KNX cấp 29V DC, push button gửi telegram, KNX/IP Gateway để ETS kết nối qua LAN, DALI Gateway chuyển telegram thành lệnh DALI cho dãy đèn. Đấu đúng dạng Bus (đường thẳng) thì đèn sáng dưới 100ms, không qua server; đấu vòng Ring thì telegram gặp lại chính nó, bus tê liệt.</p>
+
+  <svg viewBox="0 0 940 600" role="img" aria-label="Sơ đồ động bus KNX gồm nguồn KNX, push button, KNX IP Gateway và DALI Gateway điều khiển đèn DALI; đấu vòng Ring gây va chạm telegram">
+    <path data-role="ringpath" class="ringwire" d="M870,190 L900,190 L900,520 L70,520 L70,190"/>
+    <g data-role="ringjoints" class="fadeable">
+      <circle cx="870" cy="190" r="7" fill="var(--red)"/>
+      <circle cx="70" cy="190" r="7" fill="var(--red)"/>
+    </g>
+    <g data-role="ringcut" class="fadeable">
+      <circle cx="470" cy="520" r="16" fill="#fff" stroke="var(--ok)" stroke-width="2.4"/>
+      <path d="M462,512 L478,528 M478,512 L462,528" stroke="var(--ok)" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <rect data-role="boxIP" class="box" x="470" y="66" width="160" height="84" rx="9"/>
+    <path class="drop" d="M550,150 L550,190"/>
+    <text x="550" y="94" text-anchor="middle" class="lbl-b">KNX/IP Gateway</text>
+    <text x="550" y="114" text-anchor="middle" class="lbl-sm">nối ETS qua mạng LAN</text>
+    <text x="550" y="132" text-anchor="middle" class="lbl-sm">(tunneling / routing)</text>
+
+    <path data-role="busline" class="buswire" d="M70,190 L870,190" fill="none"/>
+    <text x="70" y="172" class="lbl-sm">đầu hở</text>
+    <text x="832" y="172" class="lbl-sm">đầu hở</text>
+    <text x="70" y="140" class="lbl-b">Cáp bus KNX — LIYCY 2×2×0.8mm</text>
+
+    <path class="drop" d="M150,190 L150,232"/>
+    <rect data-role="boxPSU" class="box" x="80" y="232" width="140" height="82" rx="9"/>
+    <text x="150" y="264" text-anchor="middle" class="lbl-b">Nguồn KNX</text>
+    <text x="150" y="284" text-anchor="middle" class="lbl-sm">PSU 29V DC</text>
+    <text x="150" y="300" text-anchor="middle" class="lbl-sm">cấp nguồn cho cả bus</text>
+
+    <path class="drop" d="M350,190 L350,232"/>
+    <rect data-role="swbox" class="swbox" x="285" y="232" width="130" height="82" rx="9"/>
+    <line data-role="lever" class="lever" x1="350" y1="302" x2="350" y2="246"/>
+    <text x="350" y="340" text-anchor="middle" class="lbl-b">Push button KNX</text>
+    <text x="350" y="358" text-anchor="middle" class="lbl-sm">chỉ đấu 2 dây bus, không cần 220V</text>
+
+    <path class="drop" d="M715,190 L715,232"/>
+    <rect data-role="boxDALI" class="box" x="625" y="232" width="180" height="88" rx="9"/>
+    <text x="715" y="260" text-anchor="middle" class="lbl-b">DALI Gateway</text>
+    <text x="715" y="282" text-anchor="middle" class="lbl">telegram KNX → lệnh DALI</text>
+    <text x="715" y="302" text-anchor="middle" class="lbl-sm">tự lưu cấu hình trong EEPROM</text>
+    <path class="drop" d="M715,320 L715,398" style="stroke:#7C3AED"/>
+
+    <path data-role="daliline" class="daliwire" d="M640,398 L856,398" fill="none"/>
+    <text x="640" y="386" class="lbl-sm" style="fill:#7C3AED">Bus DALI</text>
+    <g data-dlamp="1">
+      <path class="drop" d="M668,398 L668,428" style="stroke:#7C3AED"/>
+      <rect class="dlamp" x="628" y="428" width="80" height="58" rx="8"/>
+      <circle class="dbulb" cx="668" cy="452" r="11"/>
+      <text x="668" y="478" text-anchor="middle" class="lbl-sm">Đèn DALI 1</text>
+    </g>
+    <g data-dlamp="2">
+      <path class="drop" d="M762,398 L762,428" style="stroke:#7C3AED"/>
+      <rect class="dlamp" x="722" y="428" width="80" height="58" rx="8"/>
+      <circle class="dbulb" cx="762" cy="452" r="11"/>
+      <text x="762" y="478" text-anchor="middle" class="lbl-sm">Đèn DALI 2</text>
+    </g>
+    <g data-dlamp="3">
+      <path class="drop" d="M850,398 L850,428" style="stroke:#7C3AED"/>
+      <rect class="dlamp" x="810" y="428" width="80" height="58" rx="8"/>
+      <circle class="dbulb" cx="850" cy="452" r="11"/>
+      <text x="850" y="478" text-anchor="middle" class="lbl-sm">Đèn DALI 3</text>
+    </g>
+
+    <rect x="88" y="428" width="440" height="66" rx="10" fill="#F8FAFC" stroke="var(--line)"/>
+    <text x="108" y="454" class="lbl-b">Topology hợp lệ: Bus · Star · Tree — cấm Ring</text>
+    <text x="108" y="478" class="lbl">Mỗi Line tối đa 64 thiết bị, cáp bus ≤ 1.000m</text>
+
+    <path id={tId} d="M350,190 L715,190" fill="none" stroke="none"/>
+    <circle data-role="pkt" r="7" fill="var(--ok)" opacity="0" stroke="#fff" stroke-width="1.6">
+      <animateMotion data-role="animT" dur="1.1s" begin="indefinite" fill="freeze"><mpath href={`#${tId}`}/></animateMotion>
+    </circle>
+    <path id={dId} d="M715,398 L850,398" fill="none" stroke="none"/>
+    <circle data-role="dpkt" r="6" fill="#7C3AED" opacity="0" stroke="#fff" stroke-width="1.4">
+      <animateMotion data-role="animD" dur="0.8s" begin="indefinite" fill="freeze"><mpath href={`#${dId}`}/></animateMotion>
+    </circle>
+    <path id={raId} d="M350,190 L900,190 L900,520 L470,520" fill="none" stroke="none"/>
+    <path id={rbId} d="M350,190 L70,190 L70,520 L470,520" fill="none" stroke="none"/>
+    <circle data-role="pktA" r="7" fill="var(--wire-blue)" opacity="0" stroke="#fff" stroke-width="1.6">
+      <animateMotion data-role="animA" dur="1.75s" begin="indefinite" fill="freeze"><mpath href={`#${raId}`}/></animateMotion>
+    </circle>
+    <circle data-role="pktB" r="7" fill="var(--amber)" opacity="0" stroke="#fff" stroke-width="1.6">
+      <animateMotion data-role="animB" dur="1.35s" begin="indefinite" fill="freeze"><mpath href={`#${rbId}`}/></animateMotion>
+    </circle>
+    <g data-role="crash" class="crash">
+      <circle cx="470" cy="520" r="20" fill="#FEE2E2" stroke="var(--red)" stroke-width="2.4"/>
+      <path d="M459,509 L481,531 M481,509 L459,531" stroke="var(--red)" stroke-width="3.4" stroke-linecap="round"/>
+    </g>
+
+    <g class="callout" data-co="1"><rect x="300" y="18" width="340" height="26" rx="13"/><text x="470" y="35" text-anchor="middle">Telegram chạy thẳng trên bus KNX</text></g>
+    <g class="callout green" data-co="2"><rect x="452" y="18" width="440" height="26" rx="13"/><text x="672" y="35" text-anchor="middle">Đèn DALI sáng dưới 100ms — không qua server</text></g>
+    <g class="callout red" data-co="4"><rect x="238" y="18" width="464" height="26" rx="13"/><text x="470" y="35" text-anchor="middle">Telegram gặp lại chính nó — va chạm liên tục, bus tê liệt</text></g>
+    <g class="callout green" data-co="5"><rect x="290" y="18" width="360" height="26" rx="13"/><text x="470" y="35" text-anchor="middle">Cắt đường vòng — bus thẳng, đèn sáng lại</text></g>
+  </svg>
+
+  <div class="phasebar"><div class="phasefill" data-role="fill"></div></div>
+  <div class="bar2">
+    <span class="phname" data-role="phname"></span>
+    <div class="dots" data-role="dots"></div>
+    <button type="button" class="playbtn primary" data-role="playbtn">Tạm dừng</button>
+    <span class="cnt" data-role="cnt"></span>
+  </div>
+</div>
+
+<style is:global>
+  .knx-diagram {
+    --navy:#0F172A; --red:#AB1313; --wire-red:#DC2626; --wire-blue:#2563EB; --ink:#1F2937; --mut:#6B7280; --line:#CBD5E1; --ok:#16A34A; --amber:#D97706;
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px; margin:1.2em 0;
+  }
+  .knx-diagram, .knx-diagram * { margin-top:0; margin-bottom:0; }
+  .knx-diagram .ad-heading { font-size:1.05rem; font-weight:700; color:var(--navy); margin:0 0 4px; }
+  .knx-diagram .ad-sub { color:var(--mut); font-size:.86rem; margin:0 0 14px; line-height:1.45; }
+  .knx-diagram svg { width:100%; height:auto; display:block; }
+  .knx-diagram .lbl { font-size:13px; fill:var(--ink); }
+  .knx-diagram .lbl-sm { font-size:11px; fill:var(--mut); }
+  .knx-diagram .lbl-b { font-size:13px; font-weight:700; fill:var(--navy); }
+  .knx-diagram .box { fill:#F8FAFC; stroke:var(--navy); stroke-width:1.6; transition:filter .3s; }
+  .knx-diagram .box.pulse { filter:drop-shadow(0 0 10px rgba(22,163,74,.55)); }
+  .knx-diagram .buswire { stroke:#374151; stroke-width:3.4; stroke-linecap:round; transition:stroke .3s; }
+  .knx-diagram .buswire.alarm { stroke:var(--red); animation:knx-busalarm .5s steps(2,start) infinite; }
+  @keyframes knx-busalarm { 50% { stroke:#FCA5A5; } }
+  .knx-diagram .daliwire { stroke:#7C3AED; stroke-width:3; stroke-linecap:round; transition:filter .3s; }
+  .knx-diagram .daliwire.hot { filter:drop-shadow(0 0 6px rgba(124,58,237,.8)); }
+  .knx-diagram .ringwire { fill:none; stroke:var(--red); stroke-width:3; stroke-dasharray:8 6; opacity:0; transition:opacity .45s; }
+  .knx-diagram .ringwire.on { opacity:1; }
+  .knx-diagram .drop { stroke:#374151; stroke-width:2.4; }
+  .knx-diagram .swbox { fill:#fff; stroke:var(--navy); stroke-width:1.6; transition:all .25s; }
+  .knx-diagram .swbox.press { fill:#FEF3C7; stroke:var(--red); }
+  .knx-diagram .lever { stroke:var(--navy); stroke-width:4; stroke-linecap:round; transition:transform .25s; transform-box:fill-box; transform-origin:50% 85%; }
+  .knx-diagram .lever.down { transform:rotate(24deg); }
+  .knx-diagram .dlamp { fill:#fff; stroke:#94A3B8; stroke-width:1.5; transition:all .3s; }
+  .knx-diagram .dlamp.on { stroke:var(--amber); filter:drop-shadow(0 0 8px rgba(245,158,11,.65)); }
+  .knx-diagram .dbulb { fill:#E5E7EB; stroke:#9CA3AF; stroke-width:1.4; transition:all .3s; }
+  .knx-diagram .dbulb.on { fill:#FDE68A; stroke:var(--amber); }
+  .knx-diagram .callout { opacity:0; transition:opacity .3s; }
+  .knx-diagram .callout.on { opacity:1; }
+  .knx-diagram .callout rect { fill:var(--navy); }
+  .knx-diagram .callout text { fill:#fff; font-size:12.5px; font-weight:600; }
+  .knx-diagram .callout.red rect { fill:var(--red); }
+  .knx-diagram .callout.green rect { fill:var(--ok); }
+  .knx-diagram .fadeable { opacity:0; transition:opacity .3s; }
+  .knx-diagram .fadeable.on { opacity:1; }
+  .knx-diagram .crash { opacity:0; }
+  .knx-diagram .crash.on { opacity:1; animation:knx-crashfl .45s steps(2,start) infinite; }
+  @keyframes knx-crashfl { 50% { opacity:.25; } }
+  .knx-diagram .phasebar { height:5px; background:#E5E7EB; border-radius:3px; overflow:hidden; margin-top:12px; }
+  .knx-diagram .phasefill { height:100%; width:0; background:var(--red); }
+  .knx-diagram .bar2 { display:flex; align-items:center; gap:10px; margin-top:12px; flex-wrap:wrap; }
+  .knx-diagram .playbtn { font:inherit; font-size:14px; padding:8px 16px; border-radius:8px; border:1px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
+  .knx-diagram .playbtn.primary { background:var(--navy); color:#fff; }
+  .knx-diagram .dots { display:flex; gap:6px; }
+  .knx-diagram .dot { width:9px; height:9px; border-radius:50%; background:#CBD5E1; border:none; padding:0; cursor:pointer; }
+  .knx-diagram .dot.act { background:var(--red); }
+  .knx-diagram .phname { font-size:14.5px; font-weight:600; color:var(--navy); }
+  .knx-diagram .cnt { color:var(--mut); font-size:13px; margin-left:auto; }
+</style>
+
+<script>
+  document.querySelectorAll('.knx-diagram').forEach((root) => {
+    if (root.dataset.init) return;
+    root.dataset.init = '1';
+    const q = (sel) => root.querySelector(sel);
+    const co = (n) => root.querySelector('[data-co="' + n + '"]');
+    let timers = [];
+    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+    function press(on) {
+      q('[data-role="swbox"]').classList.toggle('press', on);
+      q('[data-role="lever"]').classList.toggle('down', on);
+    }
+    function dlamps(n) {
+      root.querySelectorAll('[data-dlamp]').forEach((g) => {
+        const on = Number(g.dataset.dlamp) <= n;
+        g.querySelector('.dlamp').classList.toggle('on', on);
+        g.querySelector('.dbulb').classList.toggle('on', on);
+      });
+    }
+    function resetState() {
+      timers.forEach(clearTimeout); timers = [];
+      press(false); dlamps(0);
+      q('[data-role="boxDALI"]').classList.remove('pulse');
+      q('[data-role="boxIP"]').classList.remove('pulse');
+      q('[data-role="boxPSU"]').classList.remove('pulse');
+      q('[data-role="busline"]').classList.remove('alarm');
+      q('[data-role="daliline"]').classList.remove('hot');
+      q('[data-role="ringpath"]').classList.remove('on');
+      q('[data-role="ringjoints"]').classList.remove('on');
+      q('[data-role="ringcut"]').classList.remove('on');
+      q('[data-role="crash"]').classList.remove('on');
+      ['pkt', 'dpkt', 'pktA', 'pktB'].forEach((r) => q('[data-role="' + r + '"]').setAttribute('opacity', '0'));
+      [1, 2, 4, 5].forEach((n) => co(n).classList.remove('on'));
+    }
+    function fireTelegram() {
+      press(true);
+      later(() => { q('[data-role="pkt"]').setAttribute('opacity', '1'); q('[data-role="animT"]').beginElement(); }, 250);
+      later(() => press(false), 750);
+    }
+    function fireDali() {
+      q('[data-role="boxDALI"]').classList.add('pulse');
+      q('[data-role="daliline"]').classList.add('hot');
+      q('[data-role="dpkt"]').setAttribute('opacity', '1');
+      q('[data-role="animD"]').beginElement();
+      [250, 550, 850].forEach((ms, i) => later(() => dlamps(i + 1), ms));
+    }
+    const phases = [
+      { name: 'Trạng thái chờ — bus đấu dạng đường thẳng (Bus), hai đầu hở', dur: 2000, run() {} },
+      { name: 'Nhấn push button — telegram phát thẳng lên bus KNX, chạy tới DALI Gateway', dur: 2800, run() {
+          fireTelegram(); co(1).classList.add('on');
+        } },
+      { name: 'DALI Gateway nhận telegram, chuyển thành lệnh DALI — dãy đèn sáng, không qua server', dur: 3400, run() {
+          q('[data-role="pkt"]').setAttribute('opacity', '0');
+          fireDali();
+          co(2).classList.add('on');
+        } },
+      { name: 'Đấu sai thành Ring — thợ nối đầu cuối của bus về đầu nguồn “cho tiện cáp”', dur: 3000, run() {
+          q('[data-role="ringpath"]').classList.add('on');
+          q('[data-role="ringjoints"]').classList.add('on');
+        } },
+      { name: 'Nhấn công tắc trong Ring — telegram đi hai hướng, gặp lại chính nó và va chạm liên tục', dur: 3800, run() {
+          q('[data-role="ringpath"]').classList.add('on');
+          q('[data-role="ringjoints"]').classList.add('on');
+          press(true);
+          later(() => { q('[data-role="pktA"]').setAttribute('opacity', '1'); q('[data-role="animA"]').beginElement(); q('[data-role="pktB"]').setAttribute('opacity', '1'); q('[data-role="animB"]').beginElement(); }, 250);
+          later(() => { q('[data-role="crash"]').classList.add('on'); q('[data-role="busline"]').classList.add('alarm'); co(4).classList.add('on'); press(false); }, 1950);
+        } },
+      { name: 'Cắt bỏ đường vòng, trả bus về đường thẳng — nhấn lại, đèn DALI sáng bình thường', dur: 3600, run() {
+          q('[data-role="ringpath"]').classList.add('on');
+          q('[data-role="ringjoints"]').classList.add('on');
+          q('[data-role="ringcut"]').classList.add('on');
+          later(() => { q('[data-role="ringpath"]').classList.remove('on'); q('[data-role="ringjoints"]').classList.remove('on'); }, 500);
+          later(() => { q('[data-role="ringcut"]').classList.remove('on'); }, 1500);
+          later(() => { fireTelegram(); }, 700);
+          later(() => { fireDali(); co(5).classList.add('on'); }, 1900);
+        } },
+    ];
+    let idx = 0, playing = false, raf = null, phaseStart = 0;
+    const dotsEl = q('[data-role="dots"]');
+    phases.forEach((p, i) => {
+      const d = document.createElement('button');
+      d.type = 'button'; d.className = 'dot'; d.setAttribute('aria-label', 'Giai đoạn ' + (i + 1));
+      d.onclick = () => jump(i);
+      dotsEl.appendChild(d);
+    });
+    function apply(i) {
+      resetState(); idx = i; phases[i].run();
+      q('[data-role="phname"]').textContent = phases[i].name;
+      q('[data-role="cnt"]').textContent = (i + 1) + ' / ' + phases.length;
+      [...dotsEl.children].forEach((d, k) => d.classList.toggle('act', k === i));
+      phaseStart = performance.now();
+    }
+    function tick(now) {
+      if (!playing) return;
+      const el = now - phaseStart, d = phases[idx].dur;
+      q('[data-role="fill"]').style.width = Math.min(100, el / d * 100) + '%';
+      if (el >= d) { apply((idx + 1) % phases.length); }
+      raf = requestAnimationFrame(tick);
+    }
+    function play() { if (playing) return; playing = true; q('[data-role="playbtn"]').textContent = 'Tạm dừng'; phaseStart = performance.now() - (parseFloat(q('[data-role="fill"]').style.width) || 0) / 100 * phases[idx].dur; raf = requestAnimationFrame(tick); }
+    function pause() { playing = false; q('[data-role="playbtn"]').textContent = 'Tự chạy'; if (raf) cancelAnimationFrame(raf); }
+    function jump(i) { apply(i); if (playing) { phaseStart = performance.now(); } q('[data-role="fill"]').style.width = '0%'; }
+    q('[data-role="playbtn"]').onclick = () => playing ? pause() : play();
+    apply(0);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => { es.forEach((e) => { e.isIntersecting ? play() : pause(); }); }, { threshold: 0.35 });
+      io.observe(root);
+    }
+  });
+</script>
