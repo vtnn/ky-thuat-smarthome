@@ -26,6 +26,9 @@ import multipleControl2 from '../../../../../assets/images/wiki/module-b/b1-life
 import multipleControl3 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/multiple-control-3.jpeg';
 import family1 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/family-management-1.jpeg';
 import family2 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/family-management-2.jpeg';
+import stationPrep from '../../../../../assets/images/wiki/module-b/b1-lifesmart/add-station-step-1-prep.jpg';
+import familyMenu from '../../../../../assets/images/wiki/module-b/b1-lifesmart/family-step-1-menu.jpg';
+import familyRole from '../../../../../assets/images/wiki/module-b/b1-lifesmart/family-step-4-role.jpg';
 
 ## Mục tiêu
 
@@ -57,7 +60,7 @@ flowchart TD
 ## 1. Thêm Smart Station
 
 <ProcessSteps title="Thêm Smart Station vào tài khoản" steps={[
-  { title: 'Bước 1 — Chuẩn bị', body: 'Tải ứng dụng LifeSmart, đăng ký tài khoản mới: mỗi nhà 1 tài khoản riêng. Cắm dây cáp mạng LAN vào Smart Station để kết nối ổn định nhất. Điện thoại phải đang kết nối cùng mạng Wi-Fi, cùng lớp mạng LAN với Smart Station, nếu không app quét không thấy Station.' },
+  { title: 'Bước 1 — Chuẩn bị', img: stationPrep.src, alt: 'Smart Station đã cắm dây mạng LAN và dây nguồn', body: 'Tải ứng dụng LifeSmart, đăng ký tài khoản mới: mỗi nhà 1 tài khoản riêng. Cắm dây cáp mạng LAN vào Smart Station để kết nối ổn định nhất. Điện thoại phải đang kết nối cùng mạng Wi-Fi, cùng lớp mạng LAN với Smart Station, nếu không app quét không thấy Station.' },
   { title: 'Bước 2 — Mở màn hình thêm thiết bị', img: addStation1.src, alt: 'Mở thêm thiết bị trong app LifeSmart', body: 'Trong ứng dụng, nhấn dấu + để bắt đầu thêm thiết bị mới.' },
   { title: 'Bước 3 — Chọn loại Smart Station', img: addStation2.src, alt: 'Chọn thêm Smart Station', body: 'Chọn đúng loại thiết bị là Smart Station trong danh sách.' },
   { title: 'Bước 4 — Chọn Search để quét trong LAN', img: addStation3.src, alt: 'Dùng Search quét Smart Station trong mạng nội bộ', body: 'Chọn Search (khuyến nghị). Ứng dụng tự quét mạng nội bộ và liệt kê các Station đang online. Cách này ổn định hơn hẳn so với thêm thủ công.' },
@@ -442,10 +445,10 @@ Vì lý do bảo mật, tính năng mở khóa qua App mặc định có thể b
 ## 16. Chia sẻ Nhà (Family Management)
 
 <ProcessSteps title="Chia sẻ nhà cho thành viên và khách hàng" steps={[
-  { title: 'Bước 1 — Mở menu nhà', body: 'Vào ứng dụng LifeSmart, chọn mũi tên xuống cạnh tên nhà ở góc trên bên trái.' },
+  { title: 'Bước 1 — Mở menu nhà', img: familyMenu.src, alt: 'Mở menu chọn nhà trong ứng dụng LifeSmart', body: 'Vào ứng dụng LifeSmart, chọn mũi tên xuống cạnh tên nhà ở góc trên bên trái.' },
   { title: 'Bước 2 — Chọn Family Management', img: family1.src, alt: 'Chọn Family Management', body: 'Chọn mục Family Management trong menu.' },
   { title: 'Bước 3 — Mời thành viên', img: family2.src, alt: 'Mời thành viên bằng email hoặc UserID', body: 'Mời thành viên bằng email hoặc UserID.' },
-  { title: 'Bước 4 — Chọn quyền', body: 'Chọn quyền: Default hoặc tạo thêm quyền (có thể giới hạn quyền điều khiển theo từng phòng).' },
+  { title: 'Bước 4 — Chọn quyền', img: familyRole.src, alt: 'Màn hình Family Management — danh sách quyền Role List', body: 'Chọn quyền: Default hoặc tạo thêm quyền (có thể giới hạn quyền điều khiển theo từng phòng).' },
 ]} />
 
 :::caution[Chỉ cấp Admin sau khi bàn giao xong]

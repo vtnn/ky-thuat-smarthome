@@ -8,8 +8,9 @@ tags: ["LifeSmart", "thi công", "lắp đặt", "HVAC", "LS212", "Nature", "MIN
 
 import ProcessSteps from '../../../../../components/ProcessSteps.astro';
 import nature0 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/nature_mini_doc_0.jpg';
-import nature1 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/nature_mini_doc_1.jpg';
-import nature2 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/nature_mini_doc_2.jpg';
+import natureSafety from '../../../../../assets/images/wiki/module-b/b1-lifesmart/nature-step-1-safety.jpg';
+import natureWired from '../../../../../assets/images/wiki/module-b/b1-lifesmart/nature-step-3-wired.jpg';
+import natureFaceplate from '../../../../../assets/images/wiki/module-b/b1-lifesmart/nature-step-4-faceplate.jpg';
 import hvac1 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/hvac-huong-dan-b1.jpg';
 import hvac2 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/hvac-huong-dan-b2.jpg';
 import hvac3 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/hvac-huong-dan-b3.jpg';
@@ -107,10 +108,10 @@ Nếu hộp công tắc cũ không có dây N thì phải kéo thêm dây N từ
 Nature tách rời hai phần: cụm đế âm cấp tải và mặt màn hình. Ngàm liên kết giữa hai module ép khá chặt để tăng độ chắc chắn khi nhấn mặt cảm ứng, nên bước tách và ráp cần làm đúng tay, tránh vặn xoắn gây nứt mặt kính hoặc gãy chốt nhựa.
 
 <ProcessSteps title="Trình tự lắp màn hình Nature" steps={[
-  { title: 'Bước 1 — Cắt điện và kiểm tra an toàn', body: 'Dập hẳn CB cấp nguồn cục bộ của nhánh đó. Bắt buộc dùng bút thử điện xác nhận lại không còn điện rò ở dây lửa tại hộp âm tường trước khi đấu dây vào màn hình.' },
+  { title: 'Bước 1 — Cắt điện và kiểm tra an toàn', img: natureSafety.src, alt: 'Tắt CB cấp nguồn trước khi thi công', body: 'Dập hẳn CB cấp nguồn cục bộ của nhánh đó. Bắt buộc dùng bút thử điện xác nhận lại không còn điện rò ở dây lửa tại hộp âm tường trước khi đấu dây vào màn hình.' },
   { title: 'Bước 2 — Tách rời đế âm và cụm mặt màn hình', img: nature0.src, alt: 'Tách khớp đế và màn hình Nature', body: 'Tìm điểm tiếp nối gờ nhựa ở cạnh dưới hoặc trên, lấy que nạy dẹt bẩy nhẹ một phía ra trước. Tránh bóp sức vặn xoắn gây nứt mặt kính hoặc gãy chốt cài nhựa bên trong.' },
-  { title: 'Bước 3 — Đấu cáp tải vào terminal mặt sau', img: nature1.src, alt: 'Đấu N và L cấp nguồn màn hình Nature', body: 'Lõi đồng tuốt vỏ chỉ lộ tầm 6mm, cắm chặt vào terminal. Siết chặt ốc cáp N (nguội) và L (lửa) cấp nguồn cho bo mạch. Ngõ L1, L2 nào không dùng thì để trống, tuyệt đối không đấu chập các nhánh này lại với nhau.' },
-  { title: 'Bước 4 — Lên nguồn và rà soát', img: nature2.src, alt: 'Màn hình Nature khởi động sau khi cấp điện', body: 'Lùa các đoạn dây dài xếp nếp gọn gàng ôm vào thành đế âm, không để cáp đè ngay giữa. Đưa đế công tắc vào đế âm tường, vặn ốc hai bên hông siết chặt vừa tay để mặt ngàm bám sát vách tường. Ráp khít mặt màn hình vào đế công tắc, bật CB cấp điện trở lại. Màn hình sáng lên giao diện chọn ngôn ngữ là đạt. Thử bật tắt từng tải ngay tại chỗ trước khi rời vị trí.' },
+  { title: 'Bước 3 — Đấu cáp tải vào terminal mặt sau', img: natureWired.src, alt: 'Công tắc đã đấu dây xong, chuẩn bị đưa vào hộp âm', body: 'Lõi đồng tuốt vỏ chỉ lộ tầm 6mm, cắm chặt vào terminal. Siết chặt ốc cáp N (nguội) và L (lửa) cấp nguồn cho bo mạch. Ngõ L1, L2 nào không dùng thì để trống, tuyệt đối không đấu chập các nhánh này lại với nhau.' },
+  { title: 'Bước 4 — Lên nguồn và rà soát', img: natureFaceplate.src, alt: 'Màn hình Nature đã ráp hoàn thiện lên tường', body: 'Lùa các đoạn dây dài xếp nếp gọn gàng ôm vào thành đế âm, không để cáp đè ngay giữa. Đưa đế công tắc vào đế âm tường, vặn ốc hai bên hông siết chặt vừa tay để mặt ngàm bám sát vách tường. Ráp khít mặt màn hình vào đế công tắc, bật CB cấp điện trở lại. Màn hình sáng lên giao diện chọn ngôn ngữ là đạt. Thử bật tắt từng tải ngay tại chỗ trước khi rời vị trí.' },
 ]} />
 
 Phần cài đặt trên màn hình (ngôn ngữ, Working Mode, Engineering Mode) thuộc về cấu hình, xem ở bài B1.03.
