@@ -13,7 +13,9 @@
 // Props:
 // - title?: tiêu đề khối (không bắt buộc)
 // - steps: mảng { title, img?, alt?, body }
-// - autoplay?: tự chạy chuyển bước mỗi 4 giây (mặc định tắt)
+// - autoplay?: tự chạy chuyển bước mỗi 4 giây khi khối cuộn vào tầm nhìn
+//   (mặc định BẬT; truyền false để tắt hẳn). Tự dừng khi cuộn qua khỏi,
+//   người dùng bấm dừng/điều hướng tay thì không tự chạy lại.
 
 interface Step {
   title: string;
@@ -28,7 +30,7 @@ interface Props {
   autoplay?: boolean;
 }
 
-const { title, steps, autoplay = false } = Astro.props as Props;
+const { title, steps, autoplay = true } = Astro.props as Props;
 const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
 ---
 
@@ -47,6 +49,8 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
     ))}
   </div>
 
+  <div class="ps-progress" aria-hidden="true"><div class="ps-progress-fill"></div></div>
+
   <div class="ps-controls">
     <button type="button" class="ps-btn ps-prev" data-action="prev" aria-label="Bước trước">← Trước</button>
     <div class="ps-dots" role="tablist" aria-label="Chọn bước">
@@ -61,7 +65,7 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
       ))}
     </div>
     <span class="ps-counter" aria-live="polite">1 / {steps.length}</span>
-    <button type="button" class="ps-btn ps-play" data-action="toggle-play" aria-label="Tự chạy / dừng">{autoplay ? '⏸ Dừng' : '▶ Tự chạy'}</button>
+    <button type="button" class="ps-btn ps-play" data-action="toggle-play" aria-label="Tự chạy / dừng">▶ Tự chạy</button>
     <button type="button" class="ps-btn ps-next" data-action="next" aria-label="Bước sau">Tiếp →</button>
   </div>
 </div>
@@ -86,11 +90,48 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
   .ps-slide {
     margin: 0;
   }
+  /* Hiệu ứng khi bước hiện: mờ dần vào; ảnh zoom rất nhẹ (Ken Burns) trong lúc dừng ở bước */
+  .ps-slide:not([hidden]) {
+    animation: ps-in 0.45s ease both;
+  }
+  .ps-slide:not([hidden]) img {
+    animation: ps-zoom 4.4s ease-out both;
+  }
+  @keyframes ps-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes ps-zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.045); }
+  }
   .ps-slide img {
     width: 100%;
     height: auto;
     border-radius: 0.5rem;
     display: block;
+  }
+  /* Thanh tiến trình của chế độ tự chạy */
+  .ps-progress {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--sl-color-gray-5, #d0d7de);
+    overflow: hidden;
+    margin: 0.85rem 0 0;
+  }
+  .ps-progress > * {
+    margin: 0;
+  }
+  .ps-progress-fill {
+    height: 100%;
+    width: 0;
+    background: var(--sl-color-accent, #ab1313);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ps-slide:not([hidden]),
+    .ps-slide:not([hidden]) img {
+      animation: none;
+    }
   }
   .ps-slide figcaption {
     margin-top: 0.75rem;
@@ -233,8 +274,14 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
     const dots = Array.from(root.querySelectorAll('.ps-dot'));
     const counter = root.querySelector('.ps-counter');
     const playBtn = root.querySelector('[data-action="toggle-play"]');
+    const fill = root.querySelector('.ps-progress-fill');
+    const INTERVAL = 4000;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let current = 0;
     let timer = null;
+    let raf = null;
+    let startedAt = 0;
+    let userHold = false;
 
     function show(i) {
       current = (i + slides.length) % slides.length;
@@ -245,25 +292,72 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
       if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
     }
 
+    function paintProgress() {
+      if (!timer) return;
+      const el = performance.now() - startedAt;
+      if (fill) fill.style.width = Math.min(100, (el / INTERVAL) * 100) + '%';
+      raf = requestAnimationFrame(paintProgress);
+    }
+
     function stop() {
       if (timer) {
         clearInterval(timer);
         timer = null;
-        if (playBtn) playBtn.textContent = '▶ Tự chạy';
       }
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
+      if (playBtn) playBtn.textContent = '▶ Tự chạy';
     }
 
     function start() {
+      if (reduced || slides.length < 2) return;
       stop();
-      timer = setInterval(() => show(current + 1), 4000);
+      startedAt = performance.now();
+      if (fill) fill.style.width = '0%';
+      timer = setInterval(() => {
+        show(current + 1);
+        startedAt = performance.now();
+        if (fill) fill.style.width = '0%';
+      }, INTERVAL);
       if (playBtn) playBtn.textContent = '⏸ Dừng';
+      raf = requestAnimationFrame(paintProgress);
     }
 
-    root.querySelector('[data-action="prev"]')?.addEventListener('click', () => { stop(); show(current - 1); });
-    root.querySelector('[data-action="next"]')?.addEventListener('click', () => { stop(); show(current + 1); });
-    dots.forEach((d) => d.addEventListener('click', () => { stop(); show(Number(d.dataset.index)); }));
-    playBtn?.addEventListener('click', () => (timer ? stop() : start()));
+    function manual(i) {
+      userHold = true;
+      stop();
+      if (fill) fill.style.width = '0%';
+      show(i);
+    }
 
-    if (root.dataset.autoplay === 'true') start();
+    root.querySelector('[data-action="prev"]')?.addEventListener('click', () => manual(current - 1));
+    root.querySelector('[data-action="next"]')?.addEventListener('click', () => manual(current + 1));
+    dots.forEach((d) => d.addEventListener('click', () => manual(Number(d.dataset.index))));
+    playBtn?.addEventListener('click', () => {
+      if (timer) {
+        userHold = true;
+        stop();
+      } else {
+        userHold = false;
+        start();
+      }
+    });
+
+    // Tự chạy khi khối cuộn vào tầm nhìn (thấy từ 35% trở lên), dừng khi cuộn qua khỏi.
+    if (root.dataset.autoplay === 'true' && !reduced && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              if (!userHold && !timer) start();
+            } else if (timer) {
+              stop();
+            }
+          });
+        },
+        { threshold: 0.35 }
+      );
+      io.observe(root);
+    }
   });
 </script>
