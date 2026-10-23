@@ -1,0 +1,286 @@
+---
+// CubeDiagram — sơ đồ nguyên lý động: CUBE đảo chiều cầu thang, Cách 2
+// (2 Module liên kết không dây qua CoSS) theo B1.02 mục 4.2.
+// Demo v3 đã được chủ nhân duyệt chuẩn hiệu ứng ngày 23/10/2026: nhấn công tắc
+// chỉ gạt lẫy + dây K1 nóng lên; rơ-le vẽ ngay tại vị trí L–L1; dây L/N kéo
+// thẳng vào đúng chân; có cầu thang + 2 sàn. Không hiệu ứng trang trí bay lượn.
+// Style is:global với selector bám tiền tố .cube-diagram (bài học LS212Diagram:
+// JS setAttribute class làm rơi class scope của Astro; phần tử JS tạo không có
+// class scope). Trạng thái đổi bằng classList. Tự chạy khi cuộn tới vị trí,
+// tôn trọng prefers-reduced-motion. Root not-content + reset margin.
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Sơ đồ động — CUBE đảo chiều cầu thang (Cách 2: 2 Module không dây)' } = Astro.props as Props;
+const uid = 'cube-' + Math.random().toString(36).slice(2, 9);
+const linkId = uid + '-link';
+const linkRId = uid + '-linkr';
+const outId = uid + '-out';
+---
+
+<div class="cube-diagram not-content" id={uid}>
+  <p class="ad-heading">{title}</p>
+  <p class="ad-sub">Nhấn công tắc → dây K1 nóng lên → lệnh CoSS bay sang module bên kia → rơ-le ngay tại L–L1 gập đóng → đèn sáng. Cầu thang và hai sàn cho thấy rõ công tắc ở tầng dưới / tầng trên.</p>
+
+  <svg viewBox="0 0 940 586" role="img" aria-label="Sơ đồ nguyên lý CUBE đảo chiều cầu thang hai tầng">
+    <path d="M30,520 L318,520 L318,488 L396,488 L396,456 L474,456 L474,424 L552,424 L552,392 L910,392 L910,586 L30,586 Z" fill="#EEF2F7" />
+    <path d="M30,520 L318,520 L318,488 L396,488 L396,456 L474,456 L474,424 L552,424 L552,392 L910,392" fill="none" stroke="#94A3B8" stroke-width="2.4" />
+    <text x="44" y="512" class="lbl-sm">Sàn tầng 1</text>
+    <text x="566" y="384" class="lbl-sm">Sàn tầng 2</text>
+
+    <text x="30" y="28" class="lbl-b">Nguồn 220V</text>
+    <line x1="30" y1="46" x2="872" y2="46" stroke="var(--wire-red)" stroke-width="2.4" />
+    <line x1="30" y1="64" x2="872" y2="64" stroke="var(--wire-blue)" stroke-width="2.4" />
+    <text x="878" y="50" class="lbl">L</text>
+    <text x="878" y="68" class="lbl">N</text>
+
+    <rect data-role="box1" class="box" x="90" y="104" width="216" height="172" rx="10" />
+    <text x="198" y="130" text-anchor="middle" class="lbl-b">Module CUBE 1 · tầng 1</text>
+    <line x1="139.5" y1="64" x2="139.5" y2="150" stroke="var(--wire-blue)" stroke-width="2.2" />
+    <line x1="181.5" y1="46" x2="181.5" y2="150" stroke="var(--wire-red)" stroke-width="2.2" />
+    <rect x="126" y="150" width="27" height="19" rx="3" fill="var(--wire-blue)" /><text x="139.5" y="163.5" text-anchor="middle" class="term">N</text>
+    <rect x="168" y="150" width="27" height="19" rx="3" fill="var(--wire-red)" /><text x="181.5" y="163.5" text-anchor="middle" class="term">L</text>
+    <rect x="210" y="150" width="27" height="19" rx="3" fill="#9CA3AF" /><text x="223.5" y="163.5" text-anchor="middle" class="term">L1</text>
+    <text x="246" y="163" class="lbl-sm">bỏ trống</text>
+    <path d="M181.5,169 L181.5,196 L223.5,196 L223.5,169" fill="none" stroke="#9CA3AF" stroke-width="1.8" />
+    <circle cx="193" cy="196" r="3.4" fill="var(--red)" />
+    <line class="relay-arm" x1="193" y1="196" x2="214" y2="196" style="stroke:#9CA3AF" />
+    <circle cx="214" cy="196" r="3.4" fill="#9CA3AF" />
+    <text x="248" y="200" class="lbl-sm">rơ-le</text>
+    <rect x="126" y="222" width="27" height="19" rx="3" fill="#374151" /><text x="139.5" y="235.5" text-anchor="middle" class="term">G</text>
+    <rect data-term="k1a" x="168" y="222" width="27" height="19" rx="3" fill="#374151" /><text x="181.5" y="235.5" text-anchor="middle" class="term">K1</text>
+    <text x="204" y="235" class="lbl-sm">tiếp điểm khô</text>
+
+    <line data-role="w1a" class="kwire" x1="139.5" y1="241" x2="139.5" y2="472" />
+    <line data-role="w1b" class="kwire" x1="181.5" y1="241" x2="181.5" y2="472" />
+    <g>
+      <rect data-role="sw1" class="swbox" x="110" y="472" width="100" height="48" rx="9" />
+      <line data-role="lev1" class="lever" x1="160" y1="512" x2="160" y2="482" />
+      <text x="160" y="544" text-anchor="middle" class="lbl">Công tắc 1</text>
+    </g>
+
+    <path id={linkId} d="M306,172 C430,92 510,92 634,172" fill="none" stroke="var(--ok)" stroke-width="2.2" stroke-dasharray="6 6" class="flow" />
+    <circle data-role="pkt1" r="6.5" fill="var(--ok)" opacity="0">
+      <animateMotion data-role="animL1" dur="1.3s" begin="indefinite" fill="freeze"><mpath href={`#${linkId}`} /></animateMotion>
+    </circle>
+    <path id={linkRId} d="M634,172 C510,92 430,92 306,172" fill="none" stroke="none" />
+    <circle data-role="pkt2" r="6.5" fill="var(--ok)" opacity="0">
+      <animateMotion data-role="animL2" dur="1.3s" begin="indefinite" fill="freeze"><mpath href={`#${linkRId}`} /></animateMotion>
+    </circle>
+
+    <rect data-role="box2" class="box" x="634" y="104" width="216" height="172" rx="10" />
+    <text x="742" y="130" text-anchor="middle" class="lbl-b">Module CUBE 2 · tầng 2</text>
+    <line x1="683.5" y1="64" x2="683.5" y2="150" stroke="var(--wire-blue)" stroke-width="2.2" />
+    <line x1="725.5" y1="46" x2="725.5" y2="150" stroke="var(--wire-red)" stroke-width="2.2" />
+    <rect x="670" y="150" width="27" height="19" rx="3" fill="var(--wire-blue)" /><text x="683.5" y="163.5" text-anchor="middle" class="term">N</text>
+    <rect x="712" y="150" width="27" height="19" rx="3" fill="var(--wire-red)" /><text x="725.5" y="163.5" text-anchor="middle" class="term">L</text>
+    <rect x="754" y="150" width="27" height="19" rx="3" fill="var(--red)" /><text x="767.5" y="163.5" text-anchor="middle" class="term">L1</text>
+    <text x="790" y="163" class="lbl-sm">ra tải</text>
+    <path d="M725.5,169 L725.5,196 L767.5,196 L767.5,169" fill="none" stroke="#9CA3AF" stroke-width="1.8" />
+    <path data-role="flowIn" d="M725.5,169 L725.5,196 L767.5,196 L767.5,169" fill="none" stroke="var(--amber)" stroke-width="2.6" stroke-dasharray="6 5" class="flow" opacity="0" />
+    <circle cx="737" cy="196" r="3.4" fill="var(--red)" />
+    <line data-role="relay2" class="relay-arm" x1="737" y1="196" x2="758" y2="196" />
+    <circle cx="758" cy="196" r="3.4" fill="var(--red)" />
+    <text x="792" y="200" class="lbl-sm">rơ-le ra tải</text>
+    <rect x="670" y="222" width="27" height="19" rx="3" fill="#374151" /><text x="683.5" y="235.5" text-anchor="middle" class="term">G</text>
+    <rect data-term="k1b" x="712" y="222" width="27" height="19" rx="3" fill="#374151" /><text x="725.5" y="235.5" text-anchor="middle" class="term">K1</text>
+    <text x="748" y="235" class="lbl-sm">tiếp điểm khô</text>
+
+    <line data-role="w2a" class="kwire" x1="683.5" y1="241" x2="683.5" y2="344" />
+    <line data-role="w2b" class="kwire" x1="725.5" y1="241" x2="725.5" y2="344" />
+    <g>
+      <rect data-role="sw2" class="swbox" x="656" y="344" width="100" height="48" rx="9" />
+      <line data-role="lev2" class="lever" x1="706" y1="384" x2="706" y2="354" />
+      <text x="706" y="416" text-anchor="middle" class="lbl">Công tắc 2</text>
+    </g>
+
+    <path id={outId} d="M767.5,169 L767.5,300 L826,300" fill="none" stroke="none" />
+    <path d="M767.5,196 L767.5,300 L826,300" fill="none" stroke="var(--red)" stroke-width="2.4" stroke-dasharray="7 6" class="flow" />
+    <circle data-role="cur1" r="5.5" fill="var(--amber)" opacity="0">
+      <animateMotion dur="1.1s" repeatCount="indefinite"><mpath href={`#${outId}`} /></animateMotion>
+    </circle>
+    <g>
+      <circle data-role="lamp" class="lamp" cx="848" cy="300" r="17" />
+      <g data-role="rays" class="rays" stroke="var(--amber)" stroke-width="2.4">
+        <line x1="848" y1="268" x2="848" y2="257" /><line x1="822" y1="281" x2="815" y2="274" />
+        <line x1="874" y1="281" x2="881" y2="274" /><line x1="820" y1="300" x2="809" y2="300" />
+        <line x1="876" y1="300" x2="887" y2="300" />
+      </g>
+      <text x="848" y="340" text-anchor="middle" class="lbl">Đèn cầu thang</text>
+    </g>
+
+    <g class="callout" data-co="1"><rect x="52" y="552" width="216" height="26" rx="13" /><text x="160" y="569" text-anchor="middle">Nhấn công tắc — tầng 1</text></g>
+    <g class="callout" data-co="2"><rect x="356" y="52" width="228" height="26" rx="13" /><text x="470" y="69" text-anchor="middle">Lệnh đảo trạng thái qua CoSS</text></g>
+    <g class="callout" data-co="3"><rect x="724" y="356" width="196" height="26" rx="13" /><text x="822" y="373" text-anchor="middle">Rơ-le đóng — đèn sáng</text></g>
+    <g class="callout" data-co="4"><rect x="598" y="424" width="216" height="26" rx="13" /><text x="706" y="441" text-anchor="middle">Nhấn công tắc — tầng 2</text></g>
+    <g class="callout" data-co="5"><rect x="330" y="52" width="280" height="26" rx="13" /><text x="470" y="69" text-anchor="middle">Lệnh chạy ngược lại — đèn tắt</text></g>
+  </svg>
+
+  <div class="phasebar"><div class="phasefill" data-role="fill"></div></div>
+  <div class="bar2">
+    <span class="phname" data-role="phname"></span>
+    <div class="dots" data-role="dots"></div>
+    <button type="button" class="playbtn primary" data-role="playbtn">Tạm dừng</button>
+    <span class="cnt" data-role="cnt"></span>
+  </div>
+</div>
+
+<style is:global>
+  .cube-diagram {
+    --navy:#0F172A; --red:#AB1313; --wire-red:#DC2626; --wire-blue:#2563EB; --ink:#1F2937; --mut:#6B7280; --line:#CBD5E1; --ok:#16A34A; --amber:#D97706;
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px; margin:1.2em 0;
+  }
+  .cube-diagram, .cube-diagram * { margin-top:0; margin-bottom:0; }
+  .cube-diagram .ad-heading { font-size:1.05rem; font-weight:700; color:var(--navy); margin:0 0 4px; }
+  .cube-diagram .ad-sub { color:var(--mut); font-size:.86rem; margin:0 0 14px; line-height:1.45; }
+  .cube-diagram svg { width:100%; height:auto; display:block; }
+  .cube-diagram .lbl { font-size:13px; fill:var(--ink); }
+  .cube-diagram .lbl-sm { font-size:11px; fill:var(--mut); }
+  .cube-diagram .lbl-b { font-size:13px; font-weight:700; fill:var(--navy); }
+  .cube-diagram .term { font-size:11px; font-weight:700; fill:#fff; }
+  .cube-diagram .box { fill:#F8FAFC; stroke:var(--navy); stroke-width:1.6; transition:filter .3s; }
+  .cube-diagram .box.pulse { filter:drop-shadow(0 0 10px rgba(22,163,74,.55)); }
+  .cube-diagram .flow { fill:none; stroke-width:2.4; stroke-dasharray:7 6; animation:cube-dash 1.1s linear infinite; }
+  @keyframes cube-dash { to { stroke-dashoffset:-13; } }
+  .cube-diagram .kwire { stroke:#374151; stroke-width:2; transition:stroke .25s, stroke-width .25s; }
+  .cube-diagram .kwire.hot { stroke:var(--red); stroke-width:3.2; }
+  .cube-diagram .relay-arm { stroke:var(--red); stroke-width:3.2; stroke-linecap:round; transition:transform .3s; transform-box:fill-box; transform-origin:0% 100%; transform:rotate(-30deg); }
+  .cube-diagram .relay-arm.closed { transform:rotate(0deg); }
+  .cube-diagram .lamp { fill:#E5E7EB; stroke:#9CA3AF; transition:all .35s; }
+  .cube-diagram .lamp.on { fill:#FDE68A; stroke:var(--amber); filter:drop-shadow(0 0 16px rgba(245,158,11,.9)); }
+  .cube-diagram .rays { opacity:0; transition:opacity .35s; }
+  .cube-diagram .rays.on { opacity:1; }
+  .cube-diagram .swbox { fill:#fff; stroke:var(--navy); stroke-width:1.6; transition:all .25s; }
+  .cube-diagram .swbox.press { fill:#FEF3C7; stroke:var(--red); }
+  .cube-diagram .lever { stroke:var(--navy); stroke-width:4; stroke-linecap:round; transition:transform .25s; transform-box:fill-box; transform-origin:50% 85%; }
+  .cube-diagram .lever.down { transform:rotate(24deg); }
+  .cube-diagram .termflash { animation:cube-tf .5s ease-in-out 3; }
+  @keyframes cube-tf { 50% { filter:brightness(1.7); } }
+  .cube-diagram .callout { opacity:0; transition:opacity .3s; }
+  .cube-diagram .callout.on { opacity:1; }
+  .cube-diagram .callout rect { fill:var(--navy); }
+  .cube-diagram .callout text { fill:#fff; font-size:12.5px; font-weight:600; }
+  .cube-diagram .phasebar { height:5px; background:#E5E7EB; border-radius:3px; overflow:hidden; margin-top:12px; }
+  .cube-diagram .phasefill { height:100%; width:0; background:var(--red); }
+  .cube-diagram .bar2 { display:flex; align-items:center; gap:10px; margin-top:12px; flex-wrap:wrap; }
+  .cube-diagram .playbtn { font:inherit; font-size:14px; padding:8px 16px; border-radius:8px; border:1px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
+  .cube-diagram .playbtn.primary { background:var(--navy); color:#fff; }
+  .cube-diagram .dots { display:flex; gap:6px; }
+  .cube-diagram .dot { width:9px; height:9px; border-radius:50%; background:#CBD5E1; border:none; padding:0; cursor:pointer; }
+  .cube-diagram .dot.act { background:var(--red); }
+  .cube-diagram .phname { font-size:14.5px; font-weight:600; color:var(--navy); }
+  .cube-diagram .cnt { color:var(--mut); font-size:13px; margin-left:auto; }
+</style>
+
+<script>
+  document.querySelectorAll('.cube-diagram').forEach((root) => {
+    if (root.dataset.init) return;
+    root.dataset.init = '1';
+    const q = (sel) => root.querySelector(sel);
+    const term = (name) => root.querySelector('[data-term="' + name + '"]');
+    const co = (n) => root.querySelector('[data-co="' + n + '"]');
+    let lampTimer = null;
+    function lampOn() {
+      q('[data-role="relay2"]').classList.add('closed');
+      q('[data-role="flowIn"]').setAttribute('opacity', '1');
+      q('[data-role="lamp"]').classList.add('on');
+      q('[data-role="rays"]').classList.add('on');
+      q('[data-role="cur1"]').setAttribute('opacity', '1');
+    }
+    function lampOff() {
+      q('[data-role="relay2"]').classList.remove('closed');
+      q('[data-role="flowIn"]').setAttribute('opacity', '0');
+      q('[data-role="lamp"]').classList.remove('on');
+      q('[data-role="rays"]').classList.remove('on');
+      q('[data-role="cur1"]').setAttribute('opacity', '0');
+    }
+    function flash(el) { if (!el) return; el.classList.remove('termflash'); void el.getBBox(); el.classList.add('termflash'); }
+    const phases = [
+      { name: 'Trạng thái chờ — đèn tắt', dur: 2000, run() {} },
+      { name: 'Nhấn công tắc ở tầng 1 — dây K1 dẫn tín hiệu lên Module 1', dur: 2400, run() {
+          q('[data-role="sw1"]').classList.add('press'); q('[data-role="lev1"]').classList.add('down');
+          q('[data-role="w1a"]').classList.add('hot'); q('[data-role="w1b"]').classList.add('hot');
+          flash(term('k1a')); co(1).classList.add('on');
+        }, clean() {
+          q('[data-role="sw1"]').classList.remove('press'); q('[data-role="lev1"]').classList.remove('down');
+          q('[data-role="w1a"]').classList.remove('hot'); q('[data-role="w1b"]').classList.remove('hot');
+          co(1).classList.remove('on');
+        } },
+      { name: 'Lệnh bay qua CoSS sang Module 2', dur: 2400, run() {
+          q('[data-role="box1"]').classList.add('pulse');
+          q('[data-role="pkt1"]').setAttribute('opacity', '1'); q('[data-role="animL1"]').beginElement();
+          co(2).classList.add('on');
+        }, clean() {
+          q('[data-role="box1"]').classList.remove('pulse');
+          q('[data-role="pkt1"]').setAttribute('opacity', '0'); co(2).classList.remove('on');
+        } },
+      { name: 'Rơ-le tại L–L1 đóng — đèn sáng', dur: 2800, run() {
+          q('[data-role="box2"]').classList.add('pulse'); lampOn(); co(3).classList.add('on');
+        }, clean() {
+          q('[data-role="box2"]').classList.remove('pulse'); co(3).classList.remove('on');
+        } },
+      { name: 'Nhấn công tắc ở tầng 2 — dây K1 dẫn tín hiệu lên Module 2', dur: 2400, run() {
+          lampOn();
+          q('[data-role="sw2"]').classList.add('press'); q('[data-role="lev2"]').classList.add('down');
+          q('[data-role="w2a"]').classList.add('hot'); q('[data-role="w2b"]').classList.add('hot');
+          flash(term('k1b')); co(4).classList.add('on');
+        }, clean() {
+          q('[data-role="sw2"]').classList.remove('press'); q('[data-role="lev2"]').classList.remove('down');
+          q('[data-role="w2a"]').classList.remove('hot'); q('[data-role="w2b"]').classList.remove('hot');
+          co(4).classList.remove('on');
+        } },
+      { name: 'Lệnh chạy ngược — rơ-le mở, đèn tắt, xong một vòng đảo chiều', dur: 2800, run() {
+          lampOn();
+          q('[data-role="pkt2"]').setAttribute('opacity', '1'); q('[data-role="animL2"]').beginElement();
+          co(5).classList.add('on');
+          lampTimer = setTimeout(lampOff, 1400);
+        }, clean() {
+          if (lampTimer) { clearTimeout(lampTimer); lampTimer = null; }
+          q('[data-role="pkt2"]').setAttribute('opacity', '0'); co(5).classList.remove('on'); lampOff();
+        } },
+    ];
+    let idx = 0, playing = false, raf = null, phaseStart = 0;
+    const dotsEl = q('[data-role="dots"]');
+    phases.forEach((p, i) => {
+      const d = document.createElement('button');
+      d.type = 'button'; d.className = 'dot'; d.setAttribute('aria-label', 'Giai đoạn ' + (i + 1));
+      d.onclick = () => jump(i);
+      dotsEl.appendChild(d);
+    });
+    function cleanAll() { phases.forEach((p) => p.clean && p.clean()); lampOff(); }
+    function apply(i) {
+      cleanAll(); idx = i; phases[i].run();
+      q('[data-role="phname"]').textContent = phases[i].name;
+      q('[data-role="cnt"]').textContent = (i + 1) + ' / ' + phases.length;
+      [...dotsEl.children].forEach((d, k) => d.classList.toggle('act', k === i));
+      phaseStart = performance.now();
+    }
+    function tick(now) {
+      if (!playing) return;
+      const el = now - phaseStart, d = phases[idx].dur;
+      q('[data-role="fill"]').style.width = Math.min(100, el / d * 100) + '%';
+      if (el >= d) apply((idx + 1) % phases.length);
+      raf = requestAnimationFrame(tick);
+    }
+    function play() {
+      if (playing) return; playing = true;
+      q('[data-role="playbtn"]').textContent = 'Tạm dừng';
+      phaseStart = performance.now() - (parseFloat(q('[data-role="fill"]').style.width) || 0) / 100 * phases[idx].dur;
+      raf = requestAnimationFrame(tick);
+    }
+    function pause() {
+      playing = false; q('[data-role="playbtn"]').textContent = 'Tự chạy';
+      if (raf) cancelAnimationFrame(raf);
+    }
+    function jump(i) { apply(i); if (playing) phaseStart = performance.now(); q('[data-role="fill"]').style.width = '0%'; }
+    q('[data-role="playbtn"]').onclick = () => (playing ? pause() : play());
+    apply(0);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => { es.forEach((e) => { e.isIntersecting ? play() : pause(); }); }, { threshold: 0.35 });
+      io.observe(root);
+    }
+  });
+</script>

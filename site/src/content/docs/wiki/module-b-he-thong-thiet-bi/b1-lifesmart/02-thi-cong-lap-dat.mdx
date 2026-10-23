@@ -7,6 +7,8 @@ tags: ["LifeSmart", "thi công", "lắp đặt", "HVAC", "LS212", "Nature", "MIN
 ---
 
 import ProcessSteps from '../../../../../components/ProcessSteps.astro';
+import LS212Diagram from '../../../../../components/LS212Diagram.astro';
+import CubeDiagram from '../../../../../components/CubeDiagram.astro';
 import nature0 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/nature_mini_doc_0.jpg';
 import natureSafety from '../../../../../assets/images/wiki/module-b/b1-lifesmart/nature-step-1-safety.jpg';
 import natureWired from '../../../../../assets/images/wiki/module-b/b1-lifesmart/nature-step-3-wired.jpg';
@@ -180,6 +182,8 @@ Cách thi công:
 ![Sơ đồ 2 Module không dây](../../../../../assets/images/wiki/module-b/b1-lifesmart/cube_double_2.png)
 <p class="hero-image-caption">Dùng 2 Module tách biệt, liên kết bằng kịch bản không dây: giải pháp khi tường không có cáp liên lạc nối thông.</p>
 
+<CubeDiagram />
+
 ---
 
 ## 5. Lắp đặt dòng công tắc SUBLIME
@@ -292,6 +296,8 @@ Thiết bị có thể sử dụng nguồn 12VDC hoặc nguồn trực tiếp t�
 - Cáp tín hiệu đấu từ cổng AIR CON Interface trên LS212 vào cổng tín hiệu trên board mạch dàn lạnh.
 - **Nếu đấu sai cực (đảo thứ tự dây)**: đèn RUN sẽ nháy nhanh mãi không dừng, thiết bị không tìm thấy điều hòa. Lúc này chỉ cần đảo lại 2 đầu dây tín hiệu là xong. Đây là dấu hiệu nhận biết nhanh nhất khi LS212 không kết nối được, kiểm tra cực dây trước khi nghi ngờ hỏng thiết bị.
 - Không đi chung cáp tín hiệu với cáp nguồn điện lưới.
+
+<LS212Diagram />
 
 <ProcessSteps title="Nhận diện phần cứng và trình tự lắp LS212" steps={[
   { title: 'Bước 1 — Nhận diện các cổng trên LS212', img: ls212Port.src, alt: 'Sơ đồ cổng kết nối LS212', body: 'Trên thân LS212: (1) Đèn STA/RUN, (2) Nút SET, (3) Các cổng AIR CON, (4) Cổng H1/H2, (5) Cổng PANEL A2/B2, (6) Ngõ ra nguồn. Xác định đúng cổng của hãng điều hòa đang lắp theo bảng tra cứu bên dưới trước khi đấu.' },
