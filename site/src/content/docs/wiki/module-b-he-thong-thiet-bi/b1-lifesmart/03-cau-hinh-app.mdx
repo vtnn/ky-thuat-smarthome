@@ -7,6 +7,7 @@ tags: ["LifeSmart", "cấu hình", "ứng dụng", "điều hòa", "LS212", "gh�
 ---
 
 import ProcessSteps from '../../../../../components/ProcessSteps.astro';
+import HVACDiagram from '../../../../../components/HVACDiagram.astro';
 import addStation1 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/add-station-1.jpeg';
 import addStation2 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/add-station-2.jpeg';
 import addStation3 from '../../../../../assets/images/wiki/module-b/b1-lifesmart/add-station-3.jpeg';
@@ -182,6 +183,8 @@ Ngoài ra, thao tác vật lý trên nút nhấn board mạch chỉ dùng cho 2 
 ### 5.2. Luồng cấu hình lên ứng dụng
 
 Sau khi cấp nguồn 12V một chiều, thiết bị sẽ khởi động:
+
+<HVACDiagram />
 
 1. Chờ trên màn hình hiển thị chạy số đếm ngược. Nó cho 20 giây hiển thị chế độ Reset: đừng bấm gì, cứ đợi để nó tự nhảy.
 2. Màn hình báo "Searching HVAC ...". Gateway sẽ tự quét tìm thiết bị dàn lạnh. Quá trình này tốn chừng 2 đến 5 phút.

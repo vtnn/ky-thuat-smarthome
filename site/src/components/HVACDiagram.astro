@@ -1,0 +1,281 @@
+---
+// HVACDiagram — sơ đồ nguyên lý động: HVAC Gateway (LS175), khi nào thì
+// hoạt động được, theo B1.03 mục 5.2. Nội dung màn hình LCD lấy đúng theo
+// LS175 HVAC Gateway User Manual V1.0 mục 3.1–3.5 và ảnh chụp các trang LCD
+// trong tài liệu hãng: khởi tạo ~20 giây → trang Reset (giữ SET 5 giây để
+// Reset, chờ 20 giây tự nhảy) → "Searching HVAC …" 2–5 phút → trang vận hành
+// (hãng + giao thức / "Máy đang vận hành" / số dàn lạnh, cuộn ▲▼ xem trang
+// IP/Firmware và trang tính năng) → khi lỗi màn hình hiện mã lỗi điều hòa.
+// Đèn HBS nháy theo nhịp giao tiếp AC; STA giữ tối khi bình thường, nháy
+// nhanh khi lỗi tín hiệu cáp (B1.06). Demo v2 được chủ nhân duyệt ngày
+// 23/10/2026: bỏ hẳn phần App LifeSmart, sơ đồ chỉ trả lời "khi nào hoạt
+// động được". Style is:global bám tiền tố .hvac-diagram (bài học
+// LS212Diagram); trạng thái đổi bằng classList; root not-content.
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Sơ đồ động — HVAC Gateway: từ cấp nguồn tới lúc hoạt động' } = Astro.props as Props;
+const uid = 'hvac-' + Math.random().toString(36).slice(2, 9);
+const pwrId = uid + '-pwr';
+---
+
+<div class="hvac-diagram not-content">
+  <p class="ad-heading">{title}</p>
+  <p class="ad-sub">Nhìn màn hình LCD và 2 đèn trên Gateway là biết trạng thái: trang Reset 20 giây → Searching HVAC 2–5 phút → trang vận hành là đã hoạt động; màn hình hiện mã lỗi + STA nháy nhanh là chưa.</p>
+
+  <svg viewBox="0 0 940 560" role="img" aria-label="Sơ đồ động HVAC Gateway: các trạng thái hiển thị trên màn hình LCD từ Reset, Searching tới vận hành và lỗi">
+    <text x="60" y="34" class="lbl-b">Nguồn 12V DC</text>
+    <path data-role="pwrwire" id={pwrId} d="M195,44 L195,106" fill="none" stroke="#9CA3AF" stroke-width="2.4"/>
+    <circle data-role="pwrDot" r="5" fill="var(--amber)" opacity="0">
+      <animateMotion dur="0.9s" repeatCount="indefinite"><mpath href={`#${pwrId}`}/></animateMotion>
+    </circle>
+
+    <rect data-role="boxGW" class="box" x="60" y="106" width="270" height="252" rx="10"/>
+    <rect x="182" y="94" width="26" height="18" rx="3" fill="#374151"/><text x="195" y="107" text-anchor="middle" class="term">12V</text>
+    <text x="195" y="134" text-anchor="middle" class="lbl-b">HVAC Gateway</text>
+    <rect data-role="lcd" class="lcd off" x="80" y="146" width="230" height="90" rx="6"/>
+    <text data-role="lcd1" x="92" y="174" class="lcd1"></text>
+    <text data-role="lcd2" x="92" y="198" class="lcd2"></text>
+    <text data-role="lcd3" x="92" y="222" class="lcd3"></text>
+    <text data-role="lcdscrl" x="296" y="228" text-anchor="middle" class="lcdscrl"></text>
+    <circle data-role="ledHBS" class="led" cx="140" cy="262" r="9"/>
+    <text x="140" y="286" text-anchor="middle" class="lbl-b">HBS</text>
+    <text x="140" y="302" text-anchor="middle" class="lbl-sm">nhịp tín hiệu</text>
+    <circle data-role="ledSTA" class="led" cx="250" cy="262" r="9"/>
+    <text x="250" y="286" text-anchor="middle" class="lbl-b">STA</text>
+    <text x="250" y="302" text-anchor="middle" class="lbl-sm">trạng thái</text>
+    <text x="80" y="332" class="lbl-b">Cổng AIR CON (F1 / F2)</text>
+    <text x="80" y="350" class="lbl-sm">cáp xoắn đôi chống nhiễu ≥ 0.75mm²</text>
+    <rect x="316" y="180" width="28" height="20" rx="3" fill="var(--wire-red)"/><text x="330" y="194" text-anchor="middle" class="term">F1</text>
+    <rect x="316" y="220" width="28" height="20" rx="3" fill="var(--wire-blue)"/><text x="330" y="234" text-anchor="middle" class="term">F2</text>
+
+    <path data-role="w1" class="sigwire" stroke="var(--wire-red)" d="M344,190 L596,190"/>
+    <path data-role="w2" class="sigwire" stroke="var(--wire-blue)" d="M344,230 L596,230"/>
+    <g data-role="errX" class="fadeable">
+      <circle cx="470" cy="210" r="17" fill="#fff" stroke="var(--red)" stroke-width="2.4"/>
+      <path d="M460,200 L480,220 M480,200 L460,220" stroke="var(--red)" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <rect data-role="boxOD" class="box" x="610" y="106" width="270" height="132" rx="10"/>
+    <text x="745" y="134" text-anchor="middle" class="lbl-b">Dàn nóng</text>
+    <circle cx="745" cy="180" r="30" fill="#fff" stroke="#94A3B8" stroke-width="1.6"/>
+    <path d="M745,158 L745,202 M723,180 L767,180 M729,164 L761,196 M761,164 L729,196" stroke="#94A3B8" stroke-width="1.8"/>
+    <text x="745" y="228" text-anchor="middle" class="lbl-sm">điểm đấu tập trung của cả hệ</text>
+    <rect x="596" y="180" width="28" height="20" rx="3" fill="var(--wire-red)"/><text x="610" y="194" text-anchor="middle" class="term">F1</text>
+    <rect x="596" y="220" width="28" height="20" rx="3" fill="var(--wire-blue)"/><text x="610" y="234" text-anchor="middle" class="term">F2</text>
+
+    <path d="M745,238 L745,282" stroke="#94A3B8" stroke-width="2.2"/>
+    <path d="M640,282 L850,282" stroke="#94A3B8" stroke-width="2.2"/>
+    <path d="M640,282 L640,300 M745,282 L745,300 M850,282 L850,300" stroke="#94A3B8" stroke-width="2.2"/>
+    <g data-iu="1">
+      <rect class="iu" x="592" y="300" width="96" height="62" rx="7"/>
+      <text x="640" y="324" text-anchor="middle" class="lbl-b" style="font-size:12px">Dàn lạnh 1</text>
+      <path class="cool" d="M612,338 L608,352 M640,338 L640,354 M668,338 L672,352"/>
+    </g>
+    <g data-iu="2">
+      <rect class="iu" x="697" y="300" width="96" height="62" rx="7"/>
+      <text x="745" y="324" text-anchor="middle" class="lbl-b" style="font-size:12px">Dàn lạnh 2</text>
+      <path class="cool" d="M717,338 L713,352 M745,338 L745,354 M773,338 L777,352"/>
+    </g>
+    <g data-iu="3">
+      <rect class="iu" x="802" y="300" width="96" height="62" rx="7"/>
+      <text x="850" y="324" text-anchor="middle" class="lbl-b" style="font-size:12px">Dàn lạnh 3</text>
+      <path class="cool" d="M822,338 L818,352 M850,338 L850,354 M878,338 L882,352"/>
+    </g>
+
+    <text x="60" y="404" class="lbl-b">Màn hình còn các trang khác, bấm ▲ ▼ trên Gateway để xem:</text>
+    <text x="60" y="426" class="lbl">Trang thông tin: IP của Gateway · phiên bản Firmware</text>
+    <text x="60" y="448" class="lbl">Trang tính năng: Điều khiển từ xa — Có · Gió tươi — Có · Sưởi sàn — Có</text>
+    <text x="60" y="470" class="lbl">Trang lỗi: thay dòng vận hành bằng “Mã lỗi điều hòa: xxxx”</text>
+
+    <rect x="560" y="392" width="320" height="118" rx="10" fill="#F8FAFC" stroke="var(--line)"/>
+    <text x="580" y="418" class="lbl-b">Dấu hiệu Gateway đã hoạt động:</text>
+    <text x="580" y="444" class="lbl">✓ Màn hình: “Máy đang vận hành” + số dàn lạnh</text>
+    <text x="580" y="470" class="lbl">✓ Đèn HBS nháy theo nhịp tín hiệu</text>
+    <text x="580" y="496" class="lbl">✓ Đèn STA tối</text>
+
+    <g class="callout" data-co="1"><rect x="52" y="66" width="286" height="26" rx="13"/><text x="195" y="83" text-anchor="middle">Trang Reset — đừng bấm, chờ 20s tự qua</text></g>
+    <g class="callout" data-co="2"><rect x="330" y="140" width="280" height="26" rx="13"/><text x="470" y="157" text-anchor="middle">Đang quét — chờ 2 đến 5 phút</text></g>
+    <g class="callout green" data-co="3"><rect x="45" y="66" width="350" height="26" rx="13"/><text x="220" y="83" text-anchor="middle">Màn hình vận hành — Gateway đã hoạt động</text></g>
+    <g class="callout red" data-co="4"><rect x="300" y="252" width="340" height="26" rx="13"/><text x="470" y="269" text-anchor="middle">Hiện mã lỗi + STA nháy nhanh — chưa hoạt động</text></g>
+  </svg>
+
+  <div class="phasebar"><div class="phasefill" data-role="fill"></div></div>
+  <div class="bar2">
+    <span class="phname" data-role="phname"></span>
+    <div class="dots" data-role="dots"></div>
+    <button type="button" class="playbtn primary" data-role="playbtn">Tạm dừng</button>
+    <span class="cnt" data-role="cnt"></span>
+  </div>
+</div>
+
+<style is:global>
+  .hvac-diagram {
+    --navy:#0F172A; --red:#AB1313; --wire-red:#DC2626; --wire-blue:#2563EB; --ink:#1F2937; --mut:#6B7280; --line:#CBD5E1; --ok:#16A34A; --amber:#D97706;
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px; margin:1.2em 0;
+  }
+  .hvac-diagram, .hvac-diagram * { margin-top:0; margin-bottom:0; }
+  .hvac-diagram .ad-heading { font-size:1.05rem; font-weight:700; color:var(--navy); margin:0 0 4px; }
+  .hvac-diagram .ad-sub { color:var(--mut); font-size:.86rem; margin:0 0 14px; line-height:1.45; }
+  .hvac-diagram svg { width:100%; height:auto; display:block; }
+  .hvac-diagram .lbl { font-size:13px; fill:var(--ink); }
+  .hvac-diagram .lbl-sm { font-size:11px; fill:var(--mut); }
+  .hvac-diagram .lbl-b { font-size:13px; font-weight:700; fill:var(--navy); }
+  .hvac-diagram .term { font-size:11px; font-weight:700; fill:#fff; }
+  .hvac-diagram .box { fill:#F8FAFC; stroke:var(--navy); stroke-width:1.6; transition:filter .3s, stroke .3s; }
+  .hvac-diagram .box.pulse { filter:drop-shadow(0 0 10px rgba(22,163,74,.55)); }
+  .hvac-diagram .box.err { stroke:var(--red); }
+  .hvac-diagram .lcd { fill:#F8FAFC; stroke:#0F172A; stroke-width:1.6; transition:fill .3s; }
+  .hvac-diagram .lcd.off { fill:#E5E7EB; }
+  .hvac-diagram .lcd1 { font-size:14.5px; font-weight:700; fill:#111827; }
+  .hvac-diagram .lcd2 { font-size:13.5px; fill:#111827; }
+  .hvac-diagram .lcd3 { font-size:13.5px; fill:#111827; }
+  .hvac-diagram .lcdscrl { font-size:13px; fill:#111827; }
+  .hvac-diagram .flow { stroke-dasharray:7 6; animation:hvac-dash 1.1s linear infinite; }
+  @keyframes hvac-dash { to { stroke-dashoffset:-13; } }
+  .hvac-diagram .sigwire { fill:none; stroke-width:3; }
+  .hvac-diagram .led { fill:#E5E7EB; stroke:#9CA3AF; stroke-width:1.4; transition:fill .2s; }
+  .hvac-diagram .led.blinkslow { fill:var(--ok); stroke:var(--ok); animation:hvac-blinks 1.1s steps(2,start) infinite; }
+  @keyframes hvac-blinks { 50% { fill:#E5E7EB; filter:none; } }
+  .hvac-diagram .led.blinkfastred { fill:var(--red); stroke:var(--red); animation:hvac-blinkfr .36s steps(2,start) infinite; }
+  @keyframes hvac-blinkfr { 50% { fill:#E5E7EB; filter:none; } }
+  .hvac-diagram .iu { fill:#fff; stroke:#94A3B8; stroke-width:1.5; transition:all .3s; }
+  .hvac-diagram .iu.on { stroke:var(--ok); filter:drop-shadow(0 0 6px rgba(22,163,74,.45)); }
+  .hvac-diagram .cool { stroke:#38BDF8; stroke-width:2.2; stroke-linecap:round; opacity:0; transition:opacity .3s; }
+  .hvac-diagram .cool.on { opacity:1; }
+  .hvac-diagram .callout { opacity:0; transition:opacity .3s; }
+  .hvac-diagram .callout.on { opacity:1; }
+  .hvac-diagram .callout rect { fill:var(--navy); }
+  .hvac-diagram .callout text { fill:#fff; font-size:12.5px; font-weight:600; }
+  .hvac-diagram .callout.red rect { fill:var(--red); }
+  .hvac-diagram .callout.green rect { fill:var(--ok); }
+  .hvac-diagram .fadeable { opacity:0; transition:opacity .35s; }
+  .hvac-diagram .fadeable.on { opacity:1; }
+  .hvac-diagram .phasebar { height:5px; background:#E5E7EB; border-radius:3px; overflow:hidden; margin-top:12px; }
+  .hvac-diagram .phasefill { height:100%; width:0; background:var(--red); }
+  .hvac-diagram .bar2 { display:flex; align-items:center; gap:10px; margin-top:12px; flex-wrap:wrap; }
+  .hvac-diagram .playbtn { font:inherit; font-size:14px; padding:8px 16px; border-radius:8px; border:1px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
+  .hvac-diagram .playbtn.primary { background:var(--navy); color:#fff; }
+  .hvac-diagram .dots { display:flex; gap:6px; }
+  .hvac-diagram .dot { width:9px; height:9px; border-radius:50%; background:#CBD5E1; border:none; padding:0; cursor:pointer; }
+  .hvac-diagram .dot.act { background:var(--red); }
+  .hvac-diagram .phname { font-size:14.5px; font-weight:600; color:var(--navy); }
+  .hvac-diagram .cnt { color:var(--mut); font-size:13px; margin-left:auto; }
+</style>
+
+<script>
+  document.querySelectorAll('.hvac-diagram').forEach((root) => {
+    if (root.dataset.init) return;
+    root.dataset.init = '1';
+    const q = (sel) => root.querySelector(sel);
+    const co = (n) => root.querySelector('[data-co="' + n + '"]');
+    let timers = [];
+    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+    function setLCD(l1, l2, l3, scrl, off) {
+      const lcd = q('[data-role="lcd"]');
+      lcd.classList.toggle('off', !!off);
+      q('[data-role="lcd1"]').textContent = l1 || '';
+      q('[data-role="lcd2"]').textContent = l2 || '';
+      q('[data-role="lcd3"]').textContent = l3 || '';
+      q('[data-role="lcdscrl"]').textContent = scrl || '';
+    }
+    function setLED(role, cls) {
+      const el = q('[data-role="' + role + '"]');
+      el.classList.remove('blinkslow', 'blinkfastred');
+      if (cls) el.classList.add(cls);
+    }
+    function iuAll(on) {
+      root.querySelectorAll('[data-iu]').forEach((g) => {
+        g.querySelector('.iu').classList.toggle('on', on);
+        g.querySelector('.cool').classList.toggle('on', on);
+      });
+    }
+    function searching() {
+      setLCD('Searching HVAC …', 'Đang tìm dàn lạnh', 'Chờ 2–5 phút', '', false);
+      q('[data-role="w1"]').classList.add('flow');
+      q('[data-role="w2"]').classList.add('flow');
+    }
+    function resetState() {
+      timers.forEach(clearTimeout); timers = [];
+      q('[data-role="pwrwire"]').setAttribute('stroke', '#9CA3AF');
+      q('[data-role="pwrDot"]').setAttribute('opacity', '0');
+      setLCD('', '', '', '', true);
+      setLED('ledHBS'); setLED('ledSTA');
+      q('[data-role="boxGW"]').classList.remove('pulse', 'err');
+      q('[data-role="boxOD"]').classList.remove('pulse', 'err');
+      q('[data-role="w1"]').classList.remove('flow');
+      q('[data-role="w2"]').classList.remove('flow');
+      q('[data-role="errX"]').classList.remove('on');
+      iuAll(false);
+      [1, 2, 3, 4].forEach((n) => co(n).classList.remove('on'));
+    }
+    function powered() {
+      q('[data-role="pwrwire"]').setAttribute('stroke', 'var(--wire-red)');
+      q('[data-role="pwrDot"]').setAttribute('opacity', '1');
+    }
+    const phases = [
+      { name: 'Trạng thái chờ — Gateway chưa cấp nguồn, màn hình tắt', dur: 2000, run() {} },
+      { name: 'Cấp nguồn 12V — màn hình hiện trang Reset trong 20 giây, không cần Reset thì đừng bấm', dur: 3200, run() {
+          powered();
+          setLCD('Trang Reset', 'Giữ SET 5 giây để Reset', 'Không Reset: chờ 20s tự qua', '', false);
+          co(1).classList.add('on');
+        } },
+      { name: 'Searching HVAC — Gateway tự quét tìm dàn lạnh qua cáp F1/F2 (2–5 phút)', dur: 3400, run() {
+          powered(); searching(); q('[data-role="boxOD"]').classList.add('pulse');
+          later(() => setLED('ledHBS', 'blinkslow'), 1400);
+          co(2).classList.add('on');
+        } },
+      { name: 'ĐÃ HOẠT ĐỘNG — màn hình hiện hãng, “Máy đang vận hành”, số dàn lạnh; HBS nháy, STA tối', dur: 3800, run() {
+          powered(); searching();
+          setLCD('Daikin TCP/485/KNX', 'Máy đang vận hành', 'Số dàn lạnh: 3', '▼', false);
+          setLED('ledHBS', 'blinkslow');
+          q('[data-role="boxGW"]').classList.add('pulse');
+          q('[data-role="boxOD"]').classList.add('pulse');
+          iuAll(true);
+          co(3).classList.add('on');
+        } },
+      { name: 'Chưa hoạt động — màn hình hiện mã lỗi điều hòa, STA nháy nhanh: kiểm tra cáp tín hiệu, ghi mã lỗi gửi hãng', dur: 3600, run() {
+          powered(); searching();
+          setLCD('Daikin TCP/485/KNX', 'Mã lỗi điều hòa: 0001', 'Số dàn lạnh: 3', '▼', false);
+          setLED('ledSTA', 'blinkfastred');
+          q('[data-role="boxGW"]').classList.add('err');
+          q('[data-role="errX"]').classList.add('on');
+          co(4).classList.add('on');
+        } },
+    ];
+    let idx = 0, playing = false, raf = null, phaseStart = 0;
+    const dotsEl = q('[data-role="dots"]');
+    phases.forEach((p, i) => {
+      const d = document.createElement('button');
+      d.type = 'button'; d.className = 'dot'; d.setAttribute('aria-label', 'Giai đoạn ' + (i + 1));
+      d.onclick = () => jump(i);
+      dotsEl.appendChild(d);
+    });
+    function apply(i) {
+      resetState(); idx = i; phases[i].run();
+      q('[data-role="phname"]').textContent = phases[i].name;
+      q('[data-role="cnt"]').textContent = (i + 1) + ' / ' + phases.length;
+      [...dotsEl.children].forEach((d, k) => d.classList.toggle('act', k === i));
+      phaseStart = performance.now();
+    }
+    function tick(now) {
+      if (!playing) return;
+      const el = now - phaseStart, d = phases[idx].dur;
+      q('[data-role="fill"]').style.width = Math.min(100, el / d * 100) + '%';
+      if (el >= d) { apply((idx + 1) % phases.length); }
+      raf = requestAnimationFrame(tick);
+    }
+    function play() { if (playing) return; playing = true; q('[data-role="playbtn"]').textContent = 'Tạm dừng'; phaseStart = performance.now() - (parseFloat(q('[data-role="fill"]').style.width) || 0) / 100 * phases[idx].dur; raf = requestAnimationFrame(tick); }
+    function pause() { playing = false; q('[data-role="playbtn"]').textContent = 'Tự chạy'; if (raf) cancelAnimationFrame(raf); }
+    function jump(i) { apply(i); if (playing) { phaseStart = performance.now(); } q('[data-role="fill"]').style.width = '0%'; }
+    q('[data-role="playbtn"]').onclick = () => playing ? pause() : play();
+    apply(0);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => { es.forEach((e) => { e.isIntersecting ? play() : pause(); }); }, { threshold: 0.35 });
+      io.observe(root);
+    }
+  });
+</script>
