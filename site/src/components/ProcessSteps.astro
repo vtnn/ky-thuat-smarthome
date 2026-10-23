@@ -48,7 +48,7 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
   </div>
 
   <div class="ps-controls">
-    <button type="button" class="ps-btn" data-action="prev" aria-label="Bước trước">← Trước</button>
+    <button type="button" class="ps-btn ps-prev" data-action="prev" aria-label="Bước trước">← Trước</button>
     <div class="ps-dots" role="tablist" aria-label="Chọn bước">
       {steps.map((_, i) => (
         <button
@@ -61,8 +61,8 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
       ))}
     </div>
     <span class="ps-counter" aria-live="polite">1 / {steps.length}</span>
-    <button type="button" class="ps-btn" data-action="toggle-play" aria-label="Tự chạy / dừng">{autoplay ? '⏸ Dừng' : '▶ Tự chạy'}</button>
-    <button type="button" class="ps-btn" data-action="next" aria-label="Bước sau">Tiếp →</button>
+    <button type="button" class="ps-btn ps-play" data-action="toggle-play" aria-label="Tự chạy / dừng">{autoplay ? '⏸ Dừng' : '▶ Tự chạy'}</button>
+    <button type="button" class="ps-btn ps-next" data-action="next" aria-label="Bước sau">Tiếp →</button>
   </div>
 </div>
 
@@ -73,6 +73,8 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
     padding: 1rem;
     margin: 1.5rem 0;
     background: var(--sl-color-bg, transparent);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   .ps-heading {
     font-weight: 700;
@@ -103,49 +105,110 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
     color: var(--sl-color-gray-2, inherit);
   }
   .ps-controls {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    grid-template-areas: 'prev dots counter play next';
     align-items: center;
     gap: 0.75rem;
     margin-top: 1rem;
-    flex-wrap: wrap;
+  }
+  .ps-prev {
+    grid-area: prev;
+  }
+  .ps-next {
+    grid-area: next;
+  }
+  .ps-play {
+    grid-area: play;
   }
   .ps-btn {
     border: 1px solid var(--sl-color-gray-5, #d0d7de);
     background: var(--sl-color-gray-6, transparent);
     color: inherit;
     border-radius: 999px;
-    padding: 0.3rem 0.9rem;
+    padding: 0.45rem 1rem;
     cursor: pointer;
     font: inherit;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    flex: none;
+    -webkit-tap-highlight-color: transparent;
   }
   .ps-btn:hover {
     border-color: var(--sl-color-accent, #4f46e5);
   }
   .ps-dots {
+    grid-area: dots;
+    justify-self: center;
     display: flex;
-    gap: 0.4rem;
-    flex: 1;
-    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 0.45rem;
+    align-items: center;
   }
   .ps-dot {
     width: 0.65rem;
     height: 0.65rem;
+    flex: none;
     border-radius: 50%;
     border: none;
     padding: 0;
+    margin: 0;
     cursor: pointer;
     background: var(--sl-color-gray-4, #9aa4b2);
     opacity: 0.45;
+    -webkit-tap-highlight-color: transparent;
   }
   .ps-dot[aria-current='true'] {
     opacity: 1;
     background: var(--sl-color-accent, #4f46e5);
   }
   .ps-counter {
+    grid-area: counter;
     font-variant-numeric: tabular-nums;
     color: var(--sl-color-gray-2, inherit);
     min-width: 3.2rem;
     text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Mobile (iPhone): dots nằm 1 hàng riêng ở giữa, hàng nút Trước | số bước | Tiếp
+     dàn đều 1 hàng, nút Tự chạy xuống hàng riêng ở giữa — không vỡ layout. */
+  @media (max-width: 640px) {
+    .process-steps {
+      padding: 0.85rem;
+    }
+    .ps-controls {
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-areas:
+        'dots dots dots'
+        'prev counter next'
+        'play play play';
+      gap: 0.65rem 0.5rem;
+    }
+    .ps-dots {
+      padding: 0.25rem 0;
+    }
+    .ps-dot {
+      width: 0.7rem;
+      height: 0.7rem;
+    }
+    .ps-prev {
+      justify-self: start;
+    }
+    .ps-next {
+      justify-self: end;
+    }
+    .ps-counter {
+      justify-self: center;
+      min-width: 0;
+    }
+    .ps-play {
+      justify-self: center;
+    }
+    .ps-btn {
+      padding: 0.5rem 1.05rem;
+    }
   }
 </style>
 
