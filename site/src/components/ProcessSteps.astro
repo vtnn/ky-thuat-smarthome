@@ -40,7 +40,7 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
   <div class="ps-stage">
     {steps.map((step, i) => (
       <figure class="ps-slide" data-index={i} hidden={i !== 0}>
-        {step.img && <img src={step.img} alt={step.alt ?? step.title} loading="lazy" />}
+        {step.img && <img src={step.img} alt={step.alt ?? step.title} loading="eager" decoding="async" />}
         <figcaption>
           <strong class="ps-step-title">{step.title}</strong>
           <span class="ps-step-body">{step.body}</span>
