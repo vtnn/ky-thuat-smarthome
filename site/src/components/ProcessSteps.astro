@@ -32,7 +32,7 @@ const { title, steps, autoplay = false } = Astro.props as Props;
 const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
 ---
 
-<div class="process-steps" id={uid} data-autoplay={autoplay ? 'true' : 'false'}>
+<div class="process-steps not-content" id={uid} data-autoplay={autoplay ? 'true' : 'false'}>
   {title && <p class="ps-heading">{title}</p>}
 
   <div class="ps-stage">
@@ -111,6 +111,11 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
     align-items: center;
     gap: 0.75rem;
     margin-top: 1rem;
+  }
+  /* Chặn rule flow của Starlight (.sl-markdown-content ... + ... { margin-top })
+     rò vào component: phần tử con của thanh điều khiển không bao giờ có margin riêng. */
+  .ps-controls > * {
+    margin: 0;
   }
   .ps-prev {
     grid-area: prev;
