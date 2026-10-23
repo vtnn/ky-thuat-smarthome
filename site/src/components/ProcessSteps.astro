@@ -133,7 +133,17 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
     line-height: 1.2;
     white-space: nowrap;
     flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+  }
+  /* Nút Trước và Tiếp luôn bằng khổ nhau, đối xứng quanh số bước */
+  .ps-prev,
+  .ps-next {
+    min-width: 7.5rem;
   }
   .ps-btn:hover {
     border-color: var(--sl-color-accent, #4f46e5);
@@ -193,11 +203,11 @@ const uid = 'ps-' + Math.random().toString(36).slice(2, 9);
       width: 0.7rem;
       height: 0.7rem;
     }
-    .ps-prev {
-      justify-self: start;
-    }
+    .ps-prev,
     .ps-next {
-      justify-self: end;
+      width: 100%;
+      min-width: 0;
+      justify-self: stretch;
     }
     .ps-counter {
       justify-self: center;
