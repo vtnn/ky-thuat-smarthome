@@ -1,0 +1,104 @@
+---
+title: "GP.05 — Cảm biến và tự động hóa"
+description: "Phân biệt chuyển động và hiện diện, so sánh cảm biến theo nhu cầu và chọn tình huống để tư vấn nhanh."
+module: gp
+sidebar:
+  order: 5
+---
+
+import SensorGuide from '../../../../components/SensorGuide.astro';
+
+## Mục tiêu
+
+- Phân biệt nhu cầu phát hiện người đi qua với giữ trạng thái có người.
+- Chọn cảm biến theo hành vi, vị trí và môi trường sử dụng.
+- Biết cần kiểm tra gì trước khi hứa tính năng tự động với khách.
+
+## Chuyển động khác hiện diện thế nào?
+
+Phát hiện chuyển động trả lời “vừa có thay đổi trong vùng theo dõi không?”. Hiện diện hướng đến “khu vực vẫn đang có người không?”, kể cả khi người ít cử động. Hai việc này liên quan nhưng không thay thế hoàn toàn cho nhau.
+
+Hành lang thường cần bắt người bước qua. Bàn làm việc lại cần tránh báo vắng khi người đọc tài liệu lâu. Cảm biến phải phù hợp hành vi đó; tên gọi “thông minh” hoặc tần số cao hơn chưa đủ để kết luận.
+
+## So sánh nhanh nhóm phát hiện người
+
+| Nhóm | Đáng cân nhắc khi | Điểm cần kiểm tra | Hạ tầng và công sức |
+|---|---|---|---|
+| PIR | Chủ yếu có người đi qua vùng quét | Góc nhìn, kính che, người ít cử động, điều kiện nhiệt | Có mẫu pin và có mẫu cấp nguồn; khảo sát vùng quét |
+| Radar chuyển động 5,8 GHz | Bài toán phát hiện chuyển động đã có mẫu phù hợp | Bắt ngoài vùng mong muốn; không suy ra giữ hiện diện từ tần số | Kiểm tra nguồn, vùng phát hiện và thông số đúng mẫu |
+| Radar hiện diện 24 GHz | Người ngồi lâu, cần thử cử động nhỏ | Nhiễu, thời gian báo vắng, vật cản, cách hiệu chỉnh | Nhiều mẫu cần nguồn liên tục; dành thời gian thử phòng trống |
+| Radar hiện diện 60 GHz | Nhu cầu hiện diện; có thể cần vị trí/vùng nếu mẫu hỗ trợ | Không mặc định có phân vùng hoặc AI; tính năng theo hệ tích hợp | Xét cả nguồn, hub/nền tảng và công cấu hình |
+
+Chi phí phải tính cả thiết bị, nguồn, bộ trung tâm và thời gian thử. PIR cho một hành lang có thể là phương án gọn; phòng cần theo dõi vị trí nhiều khu có thể cần mẫu khác và công cấu hình lớn hơn. Không xếp hạng chỉ bằng 24 hay 60 GHz.
+
+## Chọn tình huống để tư vấn
+
+<SensorGuide mode="quick" />
+
+Muốn tự đổi độ nhạy, vách kính, trạng thái người và nguồn nhiễu, mở [GP.05A — Mô phỏng chuyên sâu](/wiki/giai-phap/05a-mo-phong-cam-bien/). Công cụ dùng giả định minh họa, không phải thử nghiệm đo xác suất phát hiện.
+
+## Những cảm biến khác cần phối hợp
+
+| Nhóm | Cho biết điều gì | Ví dụ sử dụng | Điều kiện cần hỏi |
+|---|---|---|---|
+| Cửa / tiếp điểm từ | Trạng thái tại vị trí lắp đầu báo | Cửa mở thì nhắc đóng hoặc tạm ngừng điều hòa sau một khoảng trễ | Khe hở, loại cửa, pin/dây; cửa đóng chưa chứng minh đã khóa |
+| Ánh sáng | Độ sáng tại điểm đo | Chỉ bật đèn tự động khi khu vực thiếu sáng | Vị trí đo có bị chính đèn đang điều khiển chiếu vào không? |
+| Nhiệt độ / độ ẩm | Điều kiện tại điểm cảm biến | Theo dõi phòng, điều kiện hỗ trợ kịch bản | Tránh lấy số gần luồng gió điều hòa làm nhiệt độ đại diện cả phòng |
+| Khói, khí, nước | Sự kiện theo loại đầu báo | Cảnh báo sự cố và gọi người xử lý | Đúng loại nguy cơ, vị trí, nguồn và phương thức cảnh báo |
+
+Nhóm cảnh báo sự cố được trình bày riêng ở [GP.06 — An ninh và cảnh báo](/wiki/giai-phap/06-an-ninh-canh-bao/).
+
+## Các câu hỏi thường gặp khi tư vấn
+
+<details>
+<summary>Khách hỏi “loại nào ngồi im không tắt đèn?”</summary>
+
+Đề xuất thử thiết bị hiện diện với tư thế và vị trí dùng thật. Hỏi khách có đọc sách, ngủ, ngồi sau vách hay quay lưng với cảm biến không. Cần kiểm tra cả thời gian báo vắng và logic trễ tắt; không hứa chỉ dựa trên tần số.
+
+</details>
+
+<details>
+<summary>Phòng có quạt thì cứ nâng lên 60 GHz là hết nhiễu?</summary>
+
+Chưa đủ cơ sở. Khả năng xử lý phụ thuộc đúng mẫu, thuật toán, vị trí và cấu hình. Nếu cần vùng loại trừ, phải xác nhận mẫu hỗ trợ và nền tảng đang dùng có cho cấu hình chức năng đó.
+
+</details>
+
+<details>
+<summary>Dùng cảm biến bật đèn để chống trộm luôn được không?</summary>
+
+Cần thiết kế và đầu báo phù hợp hệ an ninh. Phải xét chế độ bật bảo vệ, chống can thiệp nếu có, giám sát kết nối, nguồn và nơi nhận cảnh báo. Chức năng bật đèn không chứng minh thiết bị đủ cho nhu cầu báo động.
+
+</details>
+
+## Ví dụ sản phẩm: tính năng phải gắn với cách tích hợp
+
+Aqara công bố FP400 dùng radar 60 GHz và hỗ trợ cấu hình vùng. Tuy nhiên, kết nối Matter trực tiếp và thiết lập qua Aqara Home có phạm vi tính năng khác nhau. Khi tư vấn phân vùng, cần kiểm tra đúng đường tích hợp, bộ điều khiển và phiên bản đang dùng; không chỉ nhìn nhãn Matter trên hộp. [Nguồn: trang sản phẩm FP400 của Aqara](https://www.aqara.com/en/product/spatial-multi-sensor-fp400)
+
+## Ví dụ khảo sát phòng tắm
+
+Trong tình huống minh họa, cảm biến đặt ngoài khu tắm, người ở sau kính và quạt hút chạy liên tục. Trước khi chọn loại đắt hơn, kỹ thuật đánh dấu vùng người đứng/ngồi, chụp vị trí dự kiến, xem lại khả năng đặt cảm biến quan sát trực tiếp và điều kiện ẩm.
+
+Sau đó thử khi có người ít cử động, khi người ra ngoài và khi phòng trống nhưng quạt/nước vẫn hoạt động. Sale có thể nói: “Bên em cần xác nhận vị trí và thử mẫu để giữ đèn đúng trong cả hai trạng thái, rồi mới chốt phương án.”
+
+## Checklist trước khi chốt
+
+- [ ] Người đi qua hay ngồi lâu? Có cần theo dõi từng vùng không?
+- [ ] Có bản vẽ, vị trí lắp, vật cản và nguồn nhiễu?
+- [ ] Nguồn/pin, kết nối, hub và điều kiện làm việc đã phù hợp?
+- [ ] Đã thử có người ít cử động và phòng trống có nhiễu?
+- [ ] Đã thống nhất thời gian giữ/trễ tắt và cách bật tay?
+- [ ] Tính năng phân vùng/AI được xác nhận theo đúng mã và nền tảng?
+
+## Đi tiếp đến triển khai
+
+- [B1.02 — Lắp đặt LifeSmart](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/02-thi-cong-lap-dat/): bố trí và lắp cảm biến theo hệ.
+- [B1.03 — Cấu hình ứng dụng](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/03-cau-hinh-app/).
+- [B1.05 — Lập trình kịch bản](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/05-lap-trinh-scene/).
+- [B1.06 — Xử lý sự cố](/wiki/module-b-he-thong-thiet-bi/b1-lifesmart/06-xu-ly-su-co/).
+
+## Nguồn kỹ thuật
+
+- [Panasonic — PaPIRs FAQ](https://api.pim.na.industrial.panasonic.com/file_stream/main/fileversion/244673): nguyên lý PIR và ảnh hưởng của vật cản.
+- [Texas Instruments — Tuning overview](https://dev.ti.com/tirex/explore/content/radar_toolbox_4_00_00_05/software_docs/Tuning_Guides/tuning_overview.html): các phần cấu hình radar cần xét.
+- [Aqara — FP400](https://www.aqara.com/en/product/spatial-multi-sensor-fp400): ví dụ tính năng phụ thuộc sản phẩm và đường tích hợp.

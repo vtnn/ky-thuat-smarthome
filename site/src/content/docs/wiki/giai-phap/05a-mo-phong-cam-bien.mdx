@@ -1,0 +1,54 @@
+---
+title: "GP.05A — Mô phỏng cảm biến chuyên sâu"
+description: "Thử tình huống, độ nhạy, trạng thái người, vật cản và nguồn nhiễu để hiểu đánh đổi khi chọn cảm biến."
+module: gp
+sidebar:
+  order: 6
+---
+
+import SensorGuide from '../../../../components/SensorGuide.astro';
+
+## Mục tiêu
+
+- Thay từng điều kiện để hiểu vì sao cùng một cảm biến có thể cho trải nghiệm khác nhau.
+- So sánh công nghệ trong cùng giả định, xác định việc cần thử tại công trình.
+- Lưu đường dẫn cấu hình để trao đổi giữa sale và kỹ thuật.
+
+## Cách thử
+
+Chọn tình huống gần nhu cầu khách, sau đó đổi từng yếu tố. Khi thay thông số, công cụ ghi “Đang tùy chỉnh” và thay gợi ý mẫu bằng nhận xét cho cấu hình hiện tại. Nút đặt lại khôi phục tình huống đang chọn.
+
+Đọc nhanh kiến thức nền ở [GP.05 — Cảm biến và tự động hóa](/wiki/giai-phap/05-cam-bien/).
+
+<SensorGuide mode="deep" />
+
+## Hiểu đúng kết quả
+
+| Kết quả | Cách dùng khi tư vấn |
+|---|---|
+| Đáng thử cho nhu cầu này | Có hướng lựa chọn ban đầu, cần xác nhận với mẫu và vị trí thật |
+| Có hạn chế cần xử lý | Xem lại hành vi sử dụng, vị trí lắp hoặc phương án cảm biến |
+| Cần kiểm tra thực tế | Chưa đủ cơ sở kết luận từ giả định đang có |
+| Không có người trong giả định | Dùng để kiểm tra kích hoạt ngoài ý muốn khi phòng trống |
+
+Công cụ không tính suy hao sóng, độ chính xác hay xác suất báo giả. Các mức nhạy chỉ giúp trao đổi về đánh đổi; không coi mức Thấp của hai model là cùng một ngưỡng vật lý.
+
+Đèn thực tế còn phụ thuộc thời gian giữ, trễ tắt, điều kiện ánh sáng và trạng thái của kịch bản. “Có người” cũng không chứng minh cửa đã khóa hoặc hệ thống đã bật bảo vệ.
+
+## Ba bài thử nên làm cùng khách
+
+1. Hành lang: so sánh người đi qua với người đứng yên; hỏi mục tiêu thực sự là bật khi đi qua hay giữ sáng khi dừng lại.
+2. Phòng làm việc: thử ít cử động, thêm quạt/rèm, rồi hạ nhạy. Ghi điều cần kiểm tra thay vì kết luận hạ nhạy sẽ hết nhiễu.
+3. Phòng tắm: thêm vật cản và môi trường ẩm. Xem lại vị trí lắp, cấp bảo vệ và thử thực tế trước khi chọn mẫu.
+
+Đường dẫn trình duyệt lưu đầy đủ cấu hình sau mỗi lần chỉnh. Sao chép đường dẫn để kỹ thuật mở lại đúng bài toán.
+
+## Từ minh họa sang nghiệm thu
+
+- [ ] Ghi đúng model, firmware, nền tảng và cấu hình dùng khi thử.
+- [ ] Thử vị trí xa/gần, tư thế ít cử động, cửa và vách ở trạng thái sử dụng thật.
+- [ ] Thử phòng trống với quạt, rèm và các nguồn gây nhiễu liên quan.
+- [ ] Ghi thời điểm báo có người, báo vắng và thời gian đèn thực sự thay đổi.
+- [ ] Khách thử bật tay và cách xử lý khi tự động hóa chưa đúng.
+
+Nguồn và giải thích nguyên lý nằm trong [bài cảm biến](/wiki/giai-phap/05-cam-bien/#nguồn-kỹ-thuật). Mô phỏng này không gắn kết quả minh họa với một mã sản phẩm cụ thể.

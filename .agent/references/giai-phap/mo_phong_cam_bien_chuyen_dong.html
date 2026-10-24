@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Công cụ Tư vấn & Mô phỏng Cảm biến Hiện diện Thực tế</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .meter-fill {
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease;
+    }
+    /* Custom scrollbar for tables on mobile */
+    ::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen p-3 sm:p-6">
+
+  <div class="max-w-6xl mx-auto space-y-5">
+
+    <!-- HEADER & ROLE BADGE -->
+    <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-2 border border-blue-200">
+          <span>🎯 Công cụ Trực quan cho Sale • Kỹ thuật • Khách hàng</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+          Mô phỏng Chọn Cảm biến: Được gì &amp; Đánh đổi gì?
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1">
+          Chọn nhanh khu vực lắp đặt hoặc tự điều chỉnh <strong>Độ nhạy (Sensitivity)</strong> để thấy rõ khi nào đèn tự bật sáng vô lý (Báo giả) hoặc tự tắt khi vẫn có người (Bỏ sót).
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2 text-xs">
+        <div class="px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800">
+          <div class="font-bold">Ngưỡng kích hoạt: ≥ 30%</div>
+          <div class="text-[11px] opacity-80">Tín hiệu vượt 30% sẽ BẬT đèn</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 1: QUICK ROOM / SCENARIO PRESETS -->
+    <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">1</span>
+          <h2 class="text-sm sm:text-base font-bold text-slate-800 uppercase tracking-wider">
+            Chọn nhanh Nhu cầu / Khu vực lắp đặt thực tế
+          </h2>
+        </div>
+        <span class="text-xs text-slate-500">Bấm vào từng khu vực để tự động thiết lập bài toán khó nhất của phòng đó</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5" id="presetGrid">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Scenario Context Explanation Banner -->
+      <div id="presetBanner" class="mt-3 p-3.5 rounded-xl bg-slate-900 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500 text-white" id="presetTag">Bài toán thực tế</span>
+            <span class="font-bold text-sm sm:text-base text-amber-300" id="presetTitle">Nhà vệ sinh / Phòng tắm có vách kính</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed" id="presetProblem"></p>
+        </div>
+        <div class="shrink-0 bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2 text-xs">
+          <div class="text-slate-400 font-medium">Khuyên dùng tối ưu:</div>
+          <div class="text-emerald-400 font-bold text-sm mt-0.5" id="presetBestChoice"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: SENSOR SELECTOR & SENSITIVITY TUNING + GAIN/LOSS CARD -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+      <!-- Left Column (7 cols): Controls -->
+      <div class="lg:col-span-7 bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">2</span>
+            <h2 class="text-sm sm:text-base font-bold text-slate-800 uppercase tracking-wider">
+              Chọn Cảm biến &amp; Chỉnh Độ nhạy / Môi trường
+            </h2>
+          </div>
+          <span class="text-xs text-blue-600 font-medium">Tùy chỉnh thông số</span>
+        </div>
+
+        <!-- 2.1 Sensor Technology Selector -->
+        <div class="space-y-2">
+          <label class="text-xs font-bold uppercase tracking-wider text-slate-500 block">
+            A. Công nghệ cảm biến &amp; Mã sản phẩm đại diện:
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="sensorSelector">
+            <button type="button" data-group="sensor" data-value="pir" class="sensor-btn text-left p-3 rounded-xl border transition-all flex items-start justify-between gap-2">
+              <div>
+                <div class="font-bold text-sm">1. Hồng ngoại (PIR)</div>
+                <div class="text-xs opacity-75">Panasonic WTKG2310</div>
+              </div>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Bắt nhiệt đi lại</span>
+            </button>
+
+            <button type="button" data-group="sensor" data-value="radar_58" class="sensor-btn text-left p-3 rounded-xl border transition-all flex items-start justify-between gap-2">
+              <div>
+                <div class="font-bold text-sm">2. Radar Vi sóng 5.8GHz</div>
+                <div class="text-xs opacity-75">Kawasan KW-RS02D2</div>
+              </div>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Xuyên kính giá rẻ</span>
+            </button>
+
+            <button type="button" data-group="sensor" data-value="mmwave_24" class="sensor-btn text-left p-3 rounded-xl border transition-all flex items-start justify-between gap-2">
+              <div>
+                <div class="font-bold text-sm">3. mmWave 24GHz (1D)</div>
+                <div class="text-xs opacity-75">LifeSmart MIR-HE200</div>
+              </div>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Hiện diện cơ bản</span>
+            </button>
+
+            <button type="button" data-group="sensor" data-value="mmwave_60" class="sensor-btn text-left p-3 rounded-xl border transition-all flex items-start justify-between gap-2">
+              <div>
+                <div class="font-bold text-sm">4. mmWave 60GHz + AI</div>
+                <div class="text-xs opacity-75">Aqara FP400 (2D/3D Zone)</div>
+              </div>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Chống báo giả AI</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2.2 Universal Sensitivity Adjustment (Applies to ALL 4 sensors) -->
+        <div class="p-3.5 rounded-xl bg-blue-50/70 border border-blue-200 space-y-2.5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-900 flex items-center gap-1.5">
+              <span>🎛️ B. Chỉnh Độ nhạy / Khoảng cách trên thiết bị:</span>
+              <span id="sensHardwareLabel" class="font-bold text-blue-700 underline"></span>
+            </span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="sensSelector">
+            <button type="button" data-group="sens" data-value="high" class="chip-btn px-3 py-2 rounded-lg text-xs font-semibold border transition-all text-center" id="sensBtnHigh">
+              Độ nhạy Cao
+            </button>
+            <button type="button" data-group="sens" data-value="medium" class="chip-btn px-3 py-2 rounded-lg text-xs font-semibold border transition-all text-center" id="sensBtnMed">
+              Độ nhạy Trung bình
+            </button>
+            <button type="button" data-group="sens" data-value="low" class="chip-btn px-3 py-2 rounded-lg text-xs font-semibold border transition-all text-center" id="sensBtnLow">
+              Độ nhạy Thấp (Khử nhiễu)
+            </button>
+          </div>
+          <p id="sensTradeoffHint" class="text-xs text-blue-950 bg-white/90 p-2.5 rounded-lg border border-blue-100 leading-relaxed"></p>
+        </div>
+
+        <!-- 2.3 Human Activity, Barrier, Noise -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+          <!-- Human State -->
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">
+              C. Trạng thái người:
+            </span>
+            <div class="flex flex-col gap-1.5">
+              <button type="button" data-group="activity" data-value="walking" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                🚶 Đi lại (500mm)
+              </button>
+              <button type="button" data-group="activity" data-value="typing" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                🤳 Cử động nhẹ (30mm)
+              </button>
+              <button type="button" data-group="activity" data-value="breathing" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                🧘 Ngồi/Nằm im thở (3mm)
+              </button>
+              <button type="button" data-group="activity" data-value="empty" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                🚪 Phòng trống (Không người)
+              </button>
+            </div>
+          </div>
+
+          <!-- Barrier State -->
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">
+              D. Vách ngăn che chắn:
+            </span>
+            <div class="flex flex-col gap-1.5">
+              <button type="button" data-group="barrier" data-value="none" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                🔓 Không vách ngăn
+              </button>
+              <button type="button" data-group="barrier" data-value="dry_glass" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                🪟 Vách kính khô 10mm
+              </button>
+              <button type="button" data-group="barrier" data-value="wet_glass" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                💧 Kính đọng nước / Hơi
+              </button>
+            </div>
+          </div>
+
+          <!-- Environmental Noise State -->
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">
+              E. Nguồn gây nhiễu:
+            </span>
+            <div class="flex flex-col gap-1.5">
+              <button type="button" data-group="noise" data-value="none" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                ✨ Môi trường tĩnh
+              </button>
+              <button type="button" data-group="noise" data-value="fan_curtain" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                🌀 Quạt quay / Rèm mát
+              </button>
+              <button type="button" data-group="noise" data-value="sun_curtain" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                ☀️ Rèm/Cây bị nắng + Gió
+              </button>
+              <button type="button" data-group="noise" data-value="water_steam" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                🚿 Vòi nước chảy / Hơi
+              </button>
+              <button type="button" data-group="noise" data-value="passerby" class="chip-btn text-left px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-all">
+                🏃 Người đi ngoài vách
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column (5 cols): What You Gain vs What You Lose Summary Card -->
+      <div class="lg:col-span-5 bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 flex flex-col justify-between gap-4">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-blue-600 block">Tóm tắt Tư vấn Nhanh</span>
+              <h3 id="cardSensorTitle" class="text-base sm:text-lg font-bold text-slate-900"></h3>
+            </div>
+            <div id="cardPriceTier" class="text-right"></div>
+          </div>
+
+          <!-- ĐƯỢC GÌ (Pros) -->
+          <div class="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1.5">
+            <div class="text-xs font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
+              <span>✅ BẠN ĐƯỢC GÌ KHI CHỌN MẪU NÀY?</span>
+            </div>
+            <ul id="cardGainList" class="text-xs text-emerald-950 space-y-1.5 list-disc pl-4 leading-relaxed"></ul>
+          </div>
+
+          <!-- MẤT GÌ / ĐÁNH ĐỔI GÌ (Cons) -->
+          <div class="p-3 rounded-xl bg-rose-50/70 border border-rose-200 space-y-1.5">
+            <div class="text-xs font-bold text-rose-800 uppercase tracking-wider flex items-center gap-1.5">
+              <span>⚠️ BẠN MẤT GÌ / ĐÁNH ĐỔI GÌ?</span>
+            </div>
+            <ul id="cardLossList" class="text-xs text-rose-950 space-y-1.5 list-disc pl-4 leading-relaxed"></ul>
+          </div>
+        </div>
+
+        <!-- Best fit / Avoid rooms -->
+        <div class="p-3 rounded-xl bg-slate-100 border border-slate-200 space-y-2 text-xs">
+          <div>
+            <span class="font-bold text-slate-800">👍 Nên lắp ở:</span>
+            <span id="cardBestRooms" class="text-slate-700 ml-1"></span>
+          </div>
+          <div>
+            <span class="font-bold text-rose-700">⛔ Kỵ lắp ở:</span>
+            <span id="cardAvoidRooms" class="text-slate-700 ml-1"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- STEP 3: REAL-TIME SIMULATION METERS & FINAL VERDICT -->
+    <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">3</span>
+          <h2 class="text-sm sm:text-base font-bold text-slate-800 uppercase tracking-wider">
+            Kết quả Đo lường Tín hiệu &amp; Phán quyết Thực tế
+          </h2>
+        </div>
+        <span id="activeConfigSummary" class="text-xs font-mono-code text-slate-500"></span>
+      </div>
+
+      <!-- Final Verdict Banner (Prominent) -->
+      <div id="verdictContainer" class="p-4 rounded-xl border-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs font-bold uppercase tracking-wider opacity-75">Trạng thái Đèn / Thiết bị đầu ra:</span>
+            <span id="verdictBadge" class="px-3 py-1 rounded-full text-xs sm:text-sm font-bold"></span>
+          </div>
+          <p id="verdictDetail" class="text-xs sm:text-sm font-medium"></p>
+        </div>
+        <div id="verdictActionTip" class="text-xs p-2.5 rounded-lg bg-white/80 border border-black/10 max-w-md shrink-0"></div>
+      </div>
+
+      <!-- Dual Meters -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Meter 1: Human Signal -->
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-bold text-slate-800">1. Tín hiệu phản hồi từ Người:</span>
+              <span id="signalPercent" class="font-mono-code text-base font-bold text-blue-600">0%</span>
+            </div>
+            <span id="statusBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold"></span>
+          </div>
+
+          <div class="relative w-full h-3.5 bg-slate-200 rounded-full overflow-hidden">
+            <div class="absolute top-0 bottom-0 left-[30%] w-0.5 bg-slate-900 z-10" title="Ngưỡng 30%"></div>
+            <div id="meterBarFill" class="meter-fill h-full rounded-full w-0"></div>
+          </div>
+
+          <div class="flex justify-between text-[11px] font-mono-code text-slate-500">
+            <span>0% (Mất dấu)</span>
+            <span class="text-slate-900 font-bold">▲ Ngưỡng bắt người: 30%</span>
+            <span>100% (Rất mạnh)</span>
+          </div>
+
+          <p id="explanationText" class="text-xs text-slate-700 leading-relaxed pt-1 border-t border-slate-200"></p>
+        </div>
+
+        <!-- Meter 2: Environmental False Alarm / Noise -->
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-bold text-slate-800">2. Độ nhiễu môi trường (Nguy cơ Báo giả):</span>
+              <span id="noisePercent" class="font-mono-code text-base font-bold">0%</span>
+            </div>
+            <span id="noiseBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold"></span>
+          </div>
+
+          <div class="relative w-full h-3.5 bg-slate-200 rounded-full overflow-hidden">
+            <div class="absolute top-0 bottom-0 left-[30%] w-0.5 bg-slate-900 z-10" title="Ngưỡng báo giả 30%"></div>
+            <div id="noiseBarFill" class="meter-fill h-full rounded-full w-0"></div>
+          </div>
+
+          <div class="flex justify-between text-[11px] font-mono-code text-slate-500">
+            <span>0% (Sạch nhiễu)</span>
+            <span class="text-slate-900 font-bold">▲ Ngưỡng gây báo giả: 30%</span>
+            <span>100% (Báo giả nặng)</span>
+          </div>
+
+          <p id="noiseExplanationText" class="text-xs text-slate-700 leading-relaxed pt-1 border-t border-slate-200"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: SIDE-BY-SIDE COMPARISON OF ALL 4 SENSORS IN CURRENT SCENARIO -->
+    <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">4</span>
+          <h2 class="text-sm sm:text-base font-bold text-slate-800 uppercase tracking-wider">
+            Đặt 4 Cảm biến Cạnh nhau trong Bối cảnh đang chọn
+          </h2>
+        </div>
+        <span class="text-xs text-slate-500">Giúp khách hàng &amp; sale so sánh tức thì nếu đổi sang loại cảm biến khác (ở cùng mức độ nhạy)</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="liveComparisonGrid">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </div>
+
+    <!-- STEP 5: QUICK REFERENCE MATRIX BY ROOM & TECHNICAL GUIDE -->
+    <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <h2 class="text-sm sm:text-base font-bold text-slate-800 uppercase tracking-wider">
+            📋 Cẩm nang Chọn nhanh theo Khu vực &amp; Nguyên lý Độ nhạy (Dành cho Sale &amp; Kỹ thuật)
+          </h2>
+          <p class="text-xs text-slate-500">Bảng tổng hợp ưu nhược điểm thực chiến khi tư vấn khách hàng</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-slate-100 text-slate-800 border-b border-slate-200">
+              <th class="p-3 font-bold w-1/5">Loại Cảm biến &amp; Mẫu</th>
+              <th class="p-3 font-bold w-1/5">Cơ chế chỉnh Độ nhạy thực tế</th>
+              <th class="p-3 font-bold w-1/5">Quạt trần / Rèm bay / Vòi nước</th>
+              <th class="p-3 font-bold w-1/5">Xuyên vách kính &amp; Bắt ngồi im</th>
+              <th class="p-3 font-bold w-1/5">Khu vực Khuyên dùng</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-slate-700">
+            <tr>
+              <td class="p-3 align-top">
+                <div class="font-bold text-slate-900">1. Hồng ngoại (PIR)</div>
+                <div class="text-[11px] text-slate-500">Panasonic WTKG2310</div>
+                <span class="inline-block mt-1 px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold text-[10px]">Ổn định • Giá hợp lý</span>
+              </td>
+              <td class="p-3 align-top">
+                Chỉnh ngưỡng xung nhiệt hoặc tấm chắn góc quét. Hạ xuống <strong>Thấp</strong> giúp bớt nhạy với gió nóng nhưng <strong>mất khả năng bắt cử động tay nhỏ</strong>.
+              </td>
+              <td class="p-3 align-top">
+                <strong class="text-emerald-700">Miễn nhiễm quạt/rèm mát &amp; nước chảy.</strong> Chỉ báo giả khi rèm bị nắng nung nóng (+5–10°C) và gió thổi đung đưa.
+              </td>
+              <td class="p-3 align-top">
+                <strong class="text-rose-600">Bị kính chặn 100%.</strong> Không bắt được người ngồi bất động (hết Timer là tắt đèn).
+              </td>
+              <td class="p-3 align-top">
+                <strong>Hành lang, Cầu thang, Sảnh, Kho, WC không vách kính, An ninh sân vườn.</strong>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-3 align-top">
+                <div class="font-bold text-slate-900">2. Radar 5.8GHz</div>
+                <div class="text-[11px] text-slate-500">Kawasan KW-RS02D2</div>
+                <span class="inline-block mt-1 px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold text-[10px]">Giá rẻ • Xuyên vật cản</span>
+              </td>
+              <td class="p-3 align-top">
+                Vặn biến trở <strong>SENS (2m–8m)</strong> để thu hẹp bán kính phát sóng. Vặn nhỏ giúp sóng không lọt ra ngoài cửa nhưng giảm độ nhạy đi nhẹ.
+              </td>
+              <td class="p-3 align-top">
+                <strong class="text-rose-600">Báo giả rất nặng (80–88%)</strong> với quạt quay, rèm bay và dòng nước vòi sen chảy.
+              </td>
+              <td class="p-3 align-top">
+                <strong class="text-emerald-700">Xuyên kính &amp; gỗ mỏng dễ dàng.</strong> Nhưng không bắt được nhịp thở khi nằm im.
+              </td>
+              <td class="p-3 align-top">
+                <strong>Hầm để xe, Hành lang kín không quạt, Lắp âm trần thạch cao/máng đèn kín.</strong>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-3 align-top">
+                <div class="font-bold text-slate-900">3. mmWave 24GHz (1D)</div>
+                <div class="text-[11px] text-slate-500">LifeSmart MIR-HE200</div>
+                <span class="inline-block mt-1 px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold text-[10px]">Hiện diện phổ thông</span>
+              </td>
+              <td class="p-3 align-top">
+                Chỉnh <strong>Độ nhạy Cao / TB / Thấp</strong> trên App. Hạ xuống <strong>Thấp</strong> khử được nhiễu quạt/rèm nhưng <strong>mất luôn khả năng bắt nhịp thở 3mm</strong>.
+              </td>
+              <td class="p-3 align-top">
+                Ở độ nhạy Cao dễ báo giả do quạt/rèm/nước chảy. Phải phòng không có quạt trần hoặc hạ độ nhạy mới ổn định.
+              </td>
+              <td class="p-3 align-top">
+                Xuyên kính khô tốt; bắt được ngồi im thở (ở độ nhạy Cao). Suy hao khi kính đọng nước dày.
+              </td>
+              <td class="p-3 align-top">
+                <strong>Phòng làm việc, Phòng khách/Ngủ dùng máy lạnh (không quạt trần), WC khô.</strong>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-3 align-top">
+                <div class="font-bold text-slate-900">4. mmWave 60GHz + AI</div>
+                <div class="text-[11px] text-slate-500">Aqara FP400 (2D/3D)</div>
+                <span class="inline-block mt-1 px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-semibold text-[10px]">Cao cấp • Chuẩn xác nhất</span>
+              </td>
+              <td class="p-3 align-top">
+                Vừa chỉnh <strong>Độ nhạy AI</strong> vừa vẽ <strong>Vùng loại trừ 2D/3D (Exclusion Zone)</strong> trên lưới 0.5m để cắt riêng ô có quạt/rèm/vòi sen.
+              </td>
+              <td class="p-3 align-top">
+                <strong class="text-emerald-700">Lọc sạch quạt, rèm, vòi sen (&lt;20%)</strong> mà không làm giảm độ nhạy bắt người ở các ô bên cạnh.
+              </td>
+              <td class="p-3 align-top">
+                Bắt nhịp thở 3mm cực nhạy; xuyên kính khô tốt. Kính xông ướt đọng nước dày sẽ cản sóng 60GHz.
+              </td>
+              <td class="p-3 align-top">
+                <strong>WC có vách kính + quạt hút, Phòng ngủ có quạt trần/rèm, Văn phòng, Sofa.</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+  // Trạng thái hiện tại của bộ mô phỏng
+  const STATE = {
+    preset: 'wc_glass',
+    sensor: 'pir',
+    sens: 'high',
+    activity: 'breathing',
+    barrier: 'dry_glass',
+    noise: 'fan_curtain'
+  };
+
+  // Danh sách 6 kịch bản thực tế (Presets) cho Sale, Kỹ thuật & Khách hàng
+  const SCENARIO_PRESETS = {
+    wc_glass: {
+      id: 'wc_glass',
+      icon: '🚽',
+      name: '1. Phòng tắm / WC có vách kính',
+      sub: 'Ngồi im + Vách kính + Quạt hút',
+      config: { activity: 'breathing', barrier: 'dry_glass', noise: 'fan_curtain', sens: 'high' },
+      problem: 'Khách ngồi bồn cầu lâu (ít cử động) hoặc đứng tắm sau vách kính, trong phòng lại có quạt hút âm trần quay liên tục. PIR bị vách kính chặn làm tắt đèn tối om; Radar 5.8GHz và 24GHz (độ nhạy cao) lại bị quạt hút/vòi nước làm sáng đèn suốt ngày.',
+      bestChoice: 'mmWave 60GHz + AI (Aqara FP400)'
+    },
+    bedroom_fan: {
+      id: 'bedroom_fan',
+      icon: '🛏️',
+      name: '2. Phòng ngủ / Phòng làm việc',
+      sub: 'Nằm/Ngồi im thở + Bật quạt / Rèm',
+      config: { activity: 'breathing', barrier: 'none', noise: 'fan_curtain', sens: 'high' },
+      problem: 'Cần giữ đèn/điều hòa khi người đọc sách hoặc ngủ (chỉ thở nhẹ 3mm) nhưng trong phòng đang bật quạt trần hoặc rèm cửa đung đưa. Nếu hạ độ nhạy 24GHz để khỏi nhiễu quạt thì lại mất khả năng bắt nhịp thở!',
+      bestChoice: 'mmWave 60GHz + AI (Khoanh vùng bỏ quạt)'
+    },
+    corridor_stairs: {
+      id: 'corridor_stairs',
+      icon: '🚶',
+      name: '3. Hành lang / Cầu thang / Sảnh',
+      sub: 'Đi qua lại + Có người đi phòng bên',
+      config: { activity: 'walking', barrier: 'none', noise: 'passerby', sens: 'high' },
+      problem: 'Chỉ cần bật đèn tức thì khi có người bước vào hành lang/cầu thang và tắt nhanh khi đi khỏi, tuyệt đối KHÔNG được bắt xuyên cửa/vách kính sang phòng bên cạnh.',
+      bestChoice: 'Hồng ngoại PIR (Panasonic WTKG2310)'
+    },
+    balcony_sun: {
+      id: 'balcony_sun',
+      icon: '☀️',
+      name: '4. Ban công / Cửa sổ nắng & gió',
+      sub: 'Phòng trống + Nắng chiếu rèm/cây bay',
+      config: { activity: 'empty', barrier: 'none', noise: 'sun_curtain', sens: 'high' },
+      problem: 'Không có người nhưng nắng mặt trời nung nóng rèm cửa/cây cảnh kết hợp gió thổi đung đưa. Cả PIR (nhiễu nhiệt di chuyển) lẫn Radar 5.8GHz/24GHz (nhiễu chuyển động cơ học) đều dễ tự bật đèn báo giả!',
+      bestChoice: '60GHz + AI hoặc 24GHz (Hạ độ nhạy Thấp)'
+    },
+    steam_shower: {
+      id: 'steam_shower',
+      icon: '🚿',
+      name: '5. Phòng tắm xông ướt (Kính đọng nước)',
+      sub: 'Cử động nhẹ + Kính ướt + Vòi sen xả',
+      config: { activity: 'typing', barrier: 'wet_glass', noise: 'water_steam', sens: 'high' },
+      problem: 'Khi tắm nước nóng, màng nước ngưng tụ trên vách kính làm suy hao mạnh sóng mmWave tần số cao (đặc biệt 60GHz), đồng thời tia nước vòi sen chảy gây phản xạ sóng giả.',
+      bestChoice: 'Lắp cảm biến ngay trên đỉnh khu ướt hoặc dùng 60GHz khoanh vùng vòi sen'
+    },
+    security_guard: {
+      id: 'security_guard',
+      icon: '🛡️',
+      name: '6. An ninh chống đột nhập ban đêm',
+      sub: 'Phòng trống + Quạt/Rèm bay nhẹ',
+      config: { activity: 'empty', barrier: 'none', noise: 'fan_curtain', sens: 'medium' },
+      problem: 'Báo động chống trộm cần độ tin cậy tuyệt đối: Khi nhà trống mà gió lùa làm rèm bay hoặc quạt quay, cảm biến KHÔNG ĐƯỢC hú còi báo giả, nhưng có kẻ gian bước vào là bắt ngay.',
+      bestChoice: 'Hồng ngoại PIR (Panasonic WTKG2310) hoặc 60GHz AI'
+    }
+  };
+
+  // Hồ sơ Được gì & Mất gì + Cơ chế Độ nhạy của từng loại cảm biến
+  const SENSOR_INFO = {
+    pir: {
+      name: '1. Hồng ngoại PIR (Panasonic WTKG2310)',
+      shortName: 'PIR Panasonic',
+      priceText: '💰 Chi phí: Tiết kiệm (~800k - 1.2tr)',
+      hardwareControl: 'Gạt chỉnh độ nhạy xung nhiệt / Che góc thấu kính Fresnel',
+      sensLabels: {
+        high: 'Cao (Mặc định - Bắt cả cử động tay)',
+        medium: 'Trung bình (Tiêu chuẩn)',
+        low: 'Thấp (Chống nhiễu nắng/gió nóng)'
+      },
+      sensHints: {
+        high: 'Độ nhạy Cao: Thấu kính đa vùng của Panasonic bắt tốt cả cử động gõ phím/cầm điện thoại, nhưng nếu rèm cửa sổ bị nắng chiếu nóng rực + gió thổi sẽ gây báo giả (65%).',
+        medium: 'Độ nhạy Trung bình: Giảm bớt nguy cơ báo giả do luồng khí ấm thoáng qua, vẫn giữ được khả năng bắt cử động tay vừa phải.',
+        low: 'Độ nhạy Thấp: Khử được báo giả do rèm nắng nóng bay nhẹ (nhiễu tụt xuống 25% < 30%), NHƯNG ĐÁNH ĐỔI là mất khả năng bắt cử động nhẹ (ngồi bấm điện thoại sẽ bị tắt đèn, phải bước đi mới bật).'
+      },
+      gains: [
+        '<strong>Miễn nhiễm 100% với quạt trần, rèm mát, nước chảy:</strong> Vật thể đồng nhiệt độ phòng dù quay tít cũng không làm đèn tự sáng.',
+        '<strong>Không bao giờ nhìn xuyên tường/kính:</strong> Đi ngoài hành lang không làm bật đèn bên trong phòng.',
+        '<strong>Bền bỉ, tiêu thụ điện cực thấp:</strong> Dòng Panasonic WTKG2310 rất ổn định cho khu vực đi lại.'
+      ],
+      losses: [
+        '<strong>Không bắt được người ngồi/nằm bất động:</strong> Ngồi đọc sách, nằm ngủ hoặc ngồi WC lâu quá thời gian hẹn giờ (Timer) đèn sẽ tự tắt.',
+        '<strong>Bị vách kính chặn đứng 100%:</strong> Lắp ngoài khu khô sẽ hoàn toàn "mù" trước người đang tắm bên trong vách kính.',
+        '<strong>Báo giả nếu rèm bị nắng chiếu nóng + gió:</strong> Mảng rèm nóng hơn nền phòng 5–10°C bay qua lại sẽ bị tưởng nhầm là thân nhiệt người.'
+      ],
+      bestRooms: 'Hành lang, Cầu thang, Sảnh đón, Phòng kho, Gara, An ninh chống trộm, WC không vách kính.',
+      avoidRooms: 'Phòng ngủ, Phòng làm việc ngồi tĩnh lâu, Khu tắm đứng ngăn vách kính.'
+    },
+    radar_58: {
+      name: '2. Radar Vi sóng 5.8GHz (Kawasan KW-RS02D2)',
+      shortName: 'Radar 5.8GHz Kawasan',
+      priceText: '💰 Chi phí: Rẻ nhất (~250k - 450k)',
+      hardwareControl: 'Vặn núm biến trở SENS trên thân (Thu hẹp bán kính 2m – 8m)',
+      sensLabels: {
+        high: 'Cao (Bán kính 6–8m, xuyên mạnh)',
+        medium: 'Trung bình (Bán kính 4–5m)',
+        low: 'Thấp (Thu hẹp 2–3m chống xuyên vách)'
+      },
+      sensHints: {
+        high: 'Mức Cao (6–8m): Bắt người bước đi cực nhạy và xuyên kính mạnh, nhưng sóng đâm xuyên cửa/tường mỏng ra tận hành lang bắt nhầm người đi ngoài phòng (85%).',
+        medium: 'Mức Trung bình (4–5m): Giảm bớt bán kính quét nhưng vẫn dễ lọt sóng qua vách kính/cửa gỗ và vẫn bị quạt/rèm trong phòng gây báo giả.',
+        low: 'Mức Thấp (2–3m): Sóng thu hẹp lại nên HẾT bắt nhầm người đi ngoài hành lang (nhiễu xuyên vách giảm còn 24% < 30%), nhưng đánh đổi là mất dấu cử động tay sau vách kính và vẫn bị báo giả nếu quạt/vòi nước nằm ngay dưới cảm biến.'
+      },
+      gains: [
+        '<strong>Xuyên thấu vách kính, gỗ, thạch cao:</strong> Có thể giấu kín cảm biến trên trần thạch cao hoặc trong hộp đèn mà vẫn bắt được người đi lại.',
+        '<strong>Giá thành rất rẻ, nhạy với bước chân:</strong> Bắt chuyển động bước đi tức thì không phụ thuộc nhiệt độ môi trường nóng hay lạnh.'
+      ],
+      losses: [
+        '<strong>Đèn sáng vĩnh viễn nếu có Quạt / Rèm / Nước chảy:</strong> Sóng Doppler 5.8GHz phản xạ mạnh với cánh quạt quay và tia nước vòi sen, không thể phân biệt người với đồ vật.',
+        '<strong>Báo giả xuyên tường/vách kính:</strong> Nếu để độ nhạy cao, người đi ngoài hành lang cũng làm đèn trong phòng tự bật.',
+        '<strong>Không bắt được nhịp thở tĩnh (3mm):</strong> Bước sóng 51.7mm quá dài nên khi nằm im vẫn bị tắt đèn.'
+      ],
+      bestRooms: 'Hầm để xe, Hành lang kín không có quạt/cây, Cầu thang bộ kín, Lắp ẩn trong máng đèn.',
+      avoidRooms: 'Phòng có quạt trần/quạt hút, Phòng có rèm cửa bay, Nhà vệ sinh nhỏ sát hành lang.'
+    },
+    mmwave_24: {
+      name: '3. mmWave 24GHz (LifeSmart MIR-HE200)',
+      shortName: 'mmWave 24GHz LifeSmart',
+      priceText: '💰 Chi phí: Tầm trung (~1.2tr - 1.7tr)',
+      hardwareControl: 'Chỉnh Độ nhạy 3 mức (Cao / TB / Thấp) & Bán kính 1D trên App',
+      sensLabels: {
+        high: 'Cao (Mặc định - Bắt thở 3mm)',
+        medium: 'Trung bình (Cân bằng)',
+        low: 'Thấp (Khử nhiễu quạt/rèm nhẹ)'
+      },
+      sensHints: {
+        high: 'Độ nhạy Cao: Bắt tốt nhịp thở 3mm khi nằm bất động, nhưng quạt quay, rèm đung đưa hay vòi nước chảy đều gây báo giả giữ đèn (62–72%).',
+        medium: 'Độ nhạy Trung bình: Khử được lỗi bắt nhầm người đi rìa hành lang (còn 25%), nhưng bắt nhịp thở qua vách kính bị yếu đi.',
+        low: 'Độ nhạy Thấp: Ép nhiễu quạt quay, rèm bay, nước chảy xuống dưới 30% (HẾT BÁO GIẢ), nhưng ĐÁNH ĐỔI lớn nhất là tín hiệu nhịp thở 3mm tụt xuống 18% (<30%) — mất khả năng giữ đèn khi nằm/ngồi bất động!'
+      },
+      gains: [
+        '<strong>Bắt được nhịp thở lồng ngực (3mm):</strong> Giữ đèn sáng ổn định khi người ngồi đọc sách, làm việc hoặc nằm ngủ (ở độ nhạy Cao).',
+        '<strong>Xuyên qua vách kính khô tốt:</strong> Một cảm biến có thể bao quát cả khu khô và khu tắm kính khô.',
+        '<strong>Cho phép hạ độ nhạy bằng App:</strong> Linh hoạt giảm độ nhạy khi phòng có nhiễu nhẹ.'
+      ],
+      losses: [
+        '<strong>Nghịch lý Độ nhạy (Được thở - Mất chống nhiễu):</strong> Do chỉ quét 1D (theo bán kính tròn) mà không cắt được ô vuông 2D, nếu bật độ nhạy Cao để bắt nhịp thở thì dính báo giả quạt/rèm; nếu hạ độ nhạy Thấp để chống quạt thì mất khả năng bắt nhịp thở.',
+        '<strong>Suy hao qua kính đọng nước dày:</strong> Khi phòng tắm xông hơi ướt đẫm, sóng 24GHz bị màng nước cản mạnh.'
+      ],
+      bestRooms: 'Phòng ngủ/Phòng làm việc dùng điều hòa (không bật quạt trần, rèm kín), Phòng tắm khô.',
+      avoidRooms: 'Phòng vừa muốn bắt người nằm ngủ im vừa bật quạt trần hoặc mở cửa sổ rèm bay.'
+    },
+    mmwave_60: {
+      name: '4. mmWave 60GHz + AI (Aqara FP400)',
+      shortName: 'mmWave 60GHz Aqara AI',
+      priceText: '💰 Chi phí: Cao cấp (~2.2tr - 2.9tr)',
+      hardwareControl: 'Chỉnh Độ nhạy AI + Vẽ Vùng loại trừ 2D/3D (Exclusion Zone 0.5m)',
+      sensLabels: {
+        high: 'Cao (Siêu nhạy 5mm - Chưa khoanh vùng)',
+        medium: 'Trung bình (Chuẩn AI + Khoanh vùng)',
+        low: 'Thấp (Lọc AI tối đa + Khoanh vùng)'
+      },
+      sensHints: {
+        high: 'Mức Cao (Mặc định): Bước sóng 5mm cực nhạy bắt trọn nhịp thở (82%) ngay cả qua kính khô, AI tự lọc hầu hết nhiễu quạt/rèm (<24%).',
+        medium: 'Mức Trung bình (Khuyên dùng): Kết hợp AI và khoanh vùng loại trừ 2D tại ô có quạt/vòi sen giúp nhiễu tụt sâu (~15%) mà VẪN GIỮ NGUYÊN khả năng bắt nhịp thở 74%!',
+        low: 'Mức Thấp (Lọc tối đa): Dành cho phòng cực nhiều nhiễu động; vẫn giữ được khả năng bắt nhịp thở trong phòng (58% > 30%) — ưu thế tuyệt đối so với 24GHz.'
+      },
+      gains: [
+        '<strong>Không phải đánh đổi giữa Bắt thở và Chống nhiễu:</strong> Nhờ chia phòng thành lưới ô vuông 0.5m x 0.5m, bạn cắt bỏ đúng ô có quạt hút/rèm cửa/vòi sen mà các ô còn lại vẫn bắt nhịp thở 3mm ở độ nhạy cao nhất.',
+        '<strong>Cắt biên phòng vuông vức 2D/3D:</strong> Chặn hoàn toàn lỗi bắt nhầm người đi ngoài hành lang.',
+        '<strong>Độ phân giải đám mây điểm 60GHz:</strong> Nhận biết chính xác tư thế đứng, ngồi, nằm hoặc té ngã.'
+      ],
+      losses: [
+        '<strong>Kính đọng nước dày (Steam) cản sóng mạnh:</strong> Bước sóng 5mm bị lớp nước ngưng tụ hấp thụ tới ~80%, nếu ngồi bất động sau vách kính xông hơi ướt đẫm sẽ bị mất dấu (cần lắp cảm biến lệch vào vùng tắm).',
+        '<strong>Chi phí đầu tư và yêu cầu cài đặt cao hơn:</strong> Cần cấp nguồn liên tục (USB-C) và kỹ thuật viên cấu hình bản đồ Zone trên App ban đầu.'
+      ],
+      bestRooms: 'Phòng tắm/WC có vách kính & quạt hút, Phòng ngủ có quạt trần/rèm cửa, Phòng khách/Sofa, Văn phòng.',
+      avoidRooms: 'Khu vực ngoài trời mưa tạt trực tiếp hoặc chỉ cần bật/tắt đi qua đơn giản (lãng phí chi phí so với PIR).'
+    }
+  };
+
+  // Ma trận Tín hiệu từ Người ở mức Độ nhạy CAO (Base Signal) + Hệ số quy đổi theo Độ nhạy
+  const HUMAN_BASE = {
+    pir: {
+      none:      { walking: 98, typing: 75, breathing: 8,  empty: 0 },
+      dry_glass: { walking: 0,  typing: 0,  breathing: 0,  empty: 0 },
+      wet_glass: { walking: 0,  typing: 0,  breathing: 0,  empty: 0 }
+    },
+    radar_58: {
+      none:      { walking: 95, typing: 60, breathing: 12, empty: 0 },
+      dry_glass: { walking: 85, typing: 52, breathing: 10, empty: 0 },
+      wet_glass: { walking: 62, typing: 38, breathing: 8,  empty: 0 }
+    },
+    mmwave_24: {
+      none:      { walking: 97, typing: 85, breathing: 52, empty: 0 },
+      dry_glass: { walking: 82, typing: 65, breathing: 36, empty: 0 },
+      wet_glass: { walking: 52, typing: 32, breathing: 14, empty: 0 }
+    },
+    mmwave_60: {
+      none:      { walking: 99, typing: 95, breathing: 82, empty: 0 },
+      dry_glass: { walking: 80, typing: 75, breathing: 65, empty: 0 },
+      wet_glass: { walking: 45, typing: 25, breathing: 18, empty: 0 }
+    }
+  };
+
+  // Hệ số nhân Tín hiệu Người khi chỉnh Độ nhạy (High / Medium / Low) cho từng loại cảm biến
+  const HUMAN_SENS_SCALE = {
+    pir: {
+      high:   { walking: 1.0,  typing: 1.0,  breathing: 1.0,  empty: 0 },
+      medium: { walking: 0.92, typing: 0.65, breathing: 0.60, empty: 0 },
+      low:    { walking: 0.80, typing: 0.32, breathing: 0.25, empty: 0 } // Hạ thấp làm typing (75*0.32 = 24%) rớt dưới ngưỡng 30%!
+    },
+    radar_58: {
+      high:   { walking: 1.0,  typing: 1.0,  breathing: 1.0,  empty: 0 },
+      medium: { walking: 0.88, typing: 0.72, breathing: 0.75, empty: 0 },
+      low:    { walking: 0.72, typing: 0.45, breathing: 0.50, empty: 0 } // Hạ thấp làm typing qua kính (52*0.45 = 23%) rớt dưới 30%!
+    },
+    mmwave_24: {
+      high:   { walking: 1.0,  typing: 1.0,  breathing: 1.0,  empty: 0 },
+      medium: { walking: 0.92, typing: 0.82, breathing: 0.65, empty: 0 }, // Thở qua kính khô (36*0.65 = 23%) rớt dưới 30%!
+      low:    { walking: 0.80, typing: 0.56, breathing: 0.34, empty: 0 }  // Thở không vách (52*0.34 = 18%) rớt dưới 30%!
+    },
+    mmwave_60: {
+      high:   { walking: 1.0,  typing: 1.0,  breathing: 1.0,  empty: 0 },
+      medium: { walking: 0.96, typing: 0.92, breathing: 0.90, empty: 0 }, // Nhờ khoanh vùng 2D, thở vẫn đạt 74% (không vách) và 59% (kính khô)
+      low:    { walking: 0.90, typing: 0.80, breathing: 0.70, empty: 0 }  // Thở trong phòng vẫn đạt 57% (>30%), chỉ qua kính khô mới sát ngưỡng (45%)
+    }
+  };
+
+  // Ma trận Độ nhiễu cơ sở ở mức Độ nhạy CAO (Base Noise)
+  const NOISE_BASE = {
+    pir: {
+      none:        { none: 2,  dry_glass: 2,  wet_glass: 2 },
+      fan_curtain: { none: 14, dry_glass: 4,  wet_glass: 4 },
+      sun_curtain: { none: 65, dry_glass: 5,  wet_glass: 5 },
+      water_steam: { none: 18, dry_glass: 5,  wet_glass: 5 },
+      passerby:    { none: 5,  dry_glass: 0,  wet_glass: 0 }
+    },
+    radar_58: {
+      none:        { none: 5,  dry_glass: 5,  wet_glass: 5 },
+      fan_curtain: { none: 88, dry_glass: 78, wet_glass: 60 },
+      sun_curtain: { none: 88, dry_glass: 78, wet_glass: 60 },
+      water_steam: { none: 68, dry_glass: 55, wet_glass: 45 },
+      passerby:    { none: 85, dry_glass: 85, wet_glass: 80 }
+    },
+    mmwave_24: {
+      none:        { none: 4,  dry_glass: 4,  wet_glass: 4 },
+      fan_curtain: { none: 72, dry_glass: 64, wet_glass: 52 },
+      sun_curtain: { none: 72, dry_glass: 64, wet_glass: 52 },
+      water_steam: { none: 62, dry_glass: 48, wet_glass: 38 },
+      passerby:    { none: 38, dry_glass: 35, wet_glass: 28 }
+    },
+    mmwave_60: {
+      none:        { none: 3,  dry_glass: 3,  wet_glass: 3 },
+      fan_curtain: { none: 22, dry_glass: 18, wet_glass: 14 },
+      sun_curtain: { none: 22, dry_glass: 18, wet_glass: 14 },
+      water_steam: { none: 26, dry_glass: 20, wet_glass: 16 },
+      passerby:    { none: 10, dry_glass: 8,  wet_glass: 6 }
+    }
+  };
+
+  // Hệ số nhân Độ nhiễu khi chỉnh Độ nhạy (High / Medium / Low)
+  const NOISE_SENS_SCALE = {
+    pir: {
+      high:   { default: 1.0,  sun_curtain: 1.0 },
+      medium: { default: 0.75, sun_curtain: 0.68 }, // sun_curtain: 65 * 0.68 = 44% (vẫn báo giả nhẹ)
+      low:    { default: 0.50, sun_curtain: 0.38 }  // sun_curtain: 65 * 0.38 = 25% (<30%, hết báo giả!)
+    },
+    radar_58: {
+      high:   { default: 1.0,  passerby: 1.0 },
+      medium: { default: 0.80, passerby: 0.62 }, // passerby: 85 * 0.62 = 53%
+      low:    { default: 0.52, passerby: 0.28 }  // passerby: 85 * 0.28 = 24% (<30%, hết bắt nhầm ngoài vách!), nhưng quạt 88*0.52 = 46% (vẫn báo giả)
+    },
+    mmwave_24: {
+      high:   { default: 1.0 },
+      medium: { default: 0.66 }, // passerby: 38 * 0.66 = 25% (<30%), quạt: 72 * 0.66 = 48%
+      low:    { default: 0.35 }  // quạt: 72 * 0.35 = 25% (<30%, hết báo giả!)
+    },
+    mmwave_60: {
+      high:   { default: 1.0 },
+      medium: { default: 0.70 },
+      low:    { default: 0.45 }
+    }
+  };
+
+  // Hàm tính toán kết quả cho 1 cảm biến bất kỳ với cấu hình hiện tại
+  function evaluateSensor(sensorKey, sensLevel, activityKey, barrierKey, noiseKey) {
+    const rawHuman = HUMAN_BASE[sensorKey][barrierKey][activityKey];
+    const hScale = HUMAN_SENS_SCALE[sensorKey][sensLevel][activityKey];
+    const humanSignal = Math.round(rawHuman * hScale);
+
+    const rawNoise = NOISE_BASE[sensorKey][noiseKey][barrierKey];
+    const nScaleObj = NOISE_SENS_SCALE[sensorKey][sensLevel];
+    const nScale = (nScaleObj[noiseKey] !== undefined) ? nScaleObj[noiseKey] : nScaleObj.default;
+    const noiseSignal = Math.round(rawNoise * nScale);
+
+    const hasPerson = activityKey !== 'empty';
+    const humanDetected = hasPerson && humanSignal >= 30;
+    const isFalseAlarm = noiseSignal >= 30;
+
+    // Phân loại kết quả tổng thể
+    let statusType = 'perfect'; // perfect | warning | false_alarm | missed
+    let shortVerdict = '';
+    let badgeClass = '';
+
+    if (!hasPerson && isFalseAlarm) {
+      statusType = 'false_alarm';
+      shortVerdict = 'LỖI BÁO GIẢ (Đèn tự sáng)';
+      badgeClass = 'bg-rose-100 text-rose-800 border border-rose-300';
+    } else if (!hasPerson && !isFalseAlarm) {
+      statusType = 'perfect';
+      shortVerdict = 'CHUẨN XÁC (Đèn tắt an toàn)';
+      badgeClass = 'bg-emerald-100 text-emerald-800 border border-emerald-300';
+    } else if (hasPerson && humanDetected && !isFalseAlarm) {
+      statusType = 'perfect';
+      shortVerdict = 'HOÀN HẢO (Bắt đúng người, Sạch nhiễu)';
+      badgeClass = 'bg-emerald-100 text-emerald-800 border border-emerald-300';
+    } else if (hasPerson && humanDetected && isFalseAlarm) {
+      statusType = 'warning';
+      shortVerdict = 'DÍNH NHIỄU (Ra khỏi phòng đèn KHÔNG tắt)';
+      badgeClass = 'bg-amber-100 text-amber-900 border border-amber-300';
+    } else if (hasPerson && !humanDetected && isFalseAlarm) {
+      statusType = 'warning';
+      shortVerdict = 'MẤT DẤU NGƯỜI + BÁO GIẢ NHIỄU';
+      badgeClass = 'bg-amber-100 text-amber-900 border border-amber-300';
+    } else {
+      statusType = 'missed';
+      shortVerdict = 'LỖI BỎ SÓT (Tắt đèn khi đang có người!)';
+      badgeClass = 'bg-rose-100 text-rose-800 border border-rose-300';
+    }
+
+    return {
+      humanSignal,
+      noiseSignal,
+      hasPerson,
+      humanDetected,
+      isFalseAlarm,
+      statusType,
+      shortVerdict,
+      badgeClass
+    };
+  }
+
+  // Sinh lời giải thích chi tiết cho Tín hiệu Người dựa trên cảm biến + độ nhạy
+  function getHumanExplanation(sensor, sens, activity, barrier, humanSignal) {
+    const sensText = sens === 'high' ? 'Độ nhạy Cao' : (sens === 'medium' ? 'Độ nhạy TB' : 'Độ nhạy Thấp');
+    if (activity === 'empty') {
+      return 'Phòng đang trống (không có người). Tín hiệu phản hồi từ người bằng 0%.';
+    }
+
+    if (sensor === 'pir') {
+      if (barrier !== 'none') {
+        return `[Panasonic WTKG2310] Vách kính chặn đứng 100% bức xạ hồng ngoại xa (8–14µm) từ cơ thể người. Dù chỉnh độ nhạy mức nào cảm biến cũng bị "mù" hoàn toàn phía sau vách kính (0%).`;
+      }
+      if (activity === 'walking') {
+        return `[Panasonic WTKG2310 - ${sensText}] Nhiệt cơ thể bước đi cắt ngang qua các chùm tia Fresnel tạo xung điện mạnh (${humanSignal}% ≥ 30%), bật đèn tức thì.`;
+      }
+      if (activity === 'typing') {
+        if (humanSignal >= 30) {
+          return `[Panasonic WTKG2310 - ${sensText}] Nhờ thấu kính đa vùng mật độ cao, cử động tay nhỏ vẫn vượt ngưỡng (${humanSignal}%).`;
+        } else {
+          return `[ĐÁNH ĐỔI ĐỘ NHẠY - ${sensText}] Do bạn hạ độ nhạy PIR xuống Thấp để chống nhiễu nhiệt, cử động tay nhỏ chỉ đạt ${humanSignal}% (<30%). Người ngồi bấm điện thoại sẽ bị TẮT ĐÈN!`;
+        }
+      }
+      return `[Panasonic WTKG2310] Khi ngồi/nằm bất động chỉ thở (3mm), thân nhiệt nằm im trong 1 ô quang học không tạo ra độ lệch nhiệt mới (${humanSignal}% < 30%). Hết bộ đếm Timer đèn sẽ tự tắt.`;
+    }
+
+    if (sensor === 'radar_58') {
+      if (activity === 'breathing') {
+        return `[Kawasan KW-RS02D2 - ${sensText}] Bước sóng vi ba 5.8GHz dài 51.7mm nên không đủ độ phân giải để nhận biết lồng ngực phập phồng 3mm (${humanSignal}% < 30%).`;
+      }
+      if (activity === 'typing' && humanSignal < 30) {
+        return `[ĐÁNH ĐỔI ĐỘ NHẠY - ${sensText}] Khi vặn nhỏ biến trở SENS để tránh xuyên vách, công suất sóng suy giảm qua vách kính khiến cử động nhẹ chỉ còn ${humanSignal}% (<30%), không bắt được người!`;
+      }
+      return `[Kawasan KW-RS02D2 - ${sensText}] Sóng 5.8GHz xuyên qua vách kính dễ dàng và thu nhận phản xạ Doppler từ người đạt ${humanSignal}% (≥30%).`;
+    }
+
+    if (sensor === 'mmwave_24') {
+      if (activity === 'breathing') {
+        if (barrier === 'wet_glass') {
+          return `[LifeSmart MIR-HE200] Màng nước đọng trên kính hấp thụ và tán xạ sóng 24GHz làm tín hiệu nhịp thở tụt xuống ${humanSignal}% (<30%), mất dấu người ngồi im.`;
+        }
+        if (humanSignal >= 30) {
+          return `[LifeSmart MIR-HE200 - ${sensText}] Sóng FMCW 24GHz (bước sóng 12.5mm) bắt tốt nhịp phồng xẹp lồng ngực 3mm (${humanSignal}% ≥ 30%), giữ đèn sáng liên tục.`;
+        } else {
+          return `[ĐÁNH ĐỔI ĐỘ NHẠY - ${sensText}] Khi hạ độ nhạy để khử nhiễu quạt/rèm, biên độ phản hồi nhịp thở bị ép xuống còn ${humanSignal}% (<30%) -> MẤT khả năng bắt người nằm/ngồi bất động!`;
+        }
+      }
+      if (activity === 'typing' && humanSignal < 30) {
+        return `[LifeSmart MIR-HE200 - ${sensText}] Qua lớp kính ướt cộng với việc giảm độ nhạy làm tín hiệu cử động nhẹ tụt xuống ${humanSignal}% (<30%).`;
+      }
+      return `[LifeSmart MIR-HE200 - ${sensText}] Phản hồi sóng milimét 24GHz từ cơ thể người đạt ${humanSignal}% (vượt ngưỡng 30%).`;
+    }
+
+    if (sensor === 'mmwave_60') {
+      if (barrier === 'wet_glass' && activity !== 'walking') {
+        return `[Aqara FP400 - ${sensText}] Bước sóng 60GHz cực ngắn (5mm) bị lớp nước ngưng tụ trên vách kính hấp thụ ~80%, làm tín hiệu tĩnh tụt xuống ${humanSignal}% (<30%). Cần lắp cảm biến lệch vào bên trong khu tắm.`;
+      }
+      return `[Aqara FP400 - ${sensText}] Sóng 60GHz mật độ cao bắt chính xác vi chuyển động cơ thể & nhịp thở (${humanSignal}% ≥ 30%). Nhờ khoanh vùng 2D riêng cho nguồn nhiễu, cảm biến KHÔNG bị giảm độ nhạy tại vị trí người ngồi!`;
+    }
+    return '';
+  }
+
+  // Sinh lời giải thích chi tiết cho Độ nhiễu / Báo giả
+  function getNoiseExplanation(sensor, sens, noise, barrier, noiseSignal) {
+    const sensText = sens === 'high' ? 'Độ nhạy Cao' : (sens === 'medium' ? 'Độ nhạy TB' : 'Độ nhạy Thấp');
+    if (noise === 'none') {
+      return 'Môi trường tĩnh: Không có nguồn gây nhiễu chuyển động hay nhiệt độ bất thường.';
+    }
+
+    if (sensor === 'pir') {
+      if (noise === 'fan_curtain') {
+        return `AN TOÀN (${noiseSignal}%): Cánh quạt và rèm cửa trong phòng mát có cùng nhiệt độ với không khí (đồng nhiệt), nên dù quay hay bay mạnh cũng không tạo xung hồng ngoại trên Panasonic WTKG2310.`;
+      }
+      if (noise === 'water_steam') {
+        return `AN TOÀN (${noiseSignal}%): Dòng nước chảy cố định không cắt qua các tia Fresnel nên không gây báo giả. (Hơi nước nóng dày đặc chỉ gây "mù nhiệt" giảm độ nhạy chứ không tự bật đèn).`;
+      }
+      if (noise === 'passerby') {
+        return `AN TOÀN (${noiseSignal}%): Tia hồng ngoại của PIR không thể xuyên qua kính hay cửa/tường, hoàn toàn miễn nhiễm với người đi ngoài hành lang.`;
+      }
+      if (noise === 'sun_curtain') {
+        if (barrier !== 'none') {
+          return `AN TOÀN (${noiseSignal}%): Vách kính chặn 100% bức xạ nhiệt từ tấm rèm nóng bên kia vách.`;
+        }
+        if (noiseSignal >= 30) {
+          return `BÁO GIẢ DO NHIỆT (${noiseSignal}% ≥ 30%): Nắng nung tấm rèm nóng hơn phòng 5–10°C, gió thổi làm mảng rèm nóng di chuyển cắt qua các ô Fresnel khiến PIR tưởng là người đi qua! (Hãy thử hạ Độ nhạy xuống Thấp để khử lỗi này).`;
+        } else {
+          return `ĐÃ LỌC NHIỄU (${noiseSignal}% < 30%): Nhờ hạ PIR xuống Độ nhạy Thấp, dao động nhiệt từ rèm nắng được ép xuống dưới ngưỡng 30% (hết báo giả), nhưng đổi lại cảm biến bị giảm độ nhạy bắt cử động tay.`;
+        }
+      }
+    }
+
+    if (sensor === 'radar_58') {
+      if (noise === 'passerby') {
+        if (noiseSignal >= 30) {
+          return `BÁO GIẢ XUYÊN VÁCH (${noiseSignal}%): Ở ${sensText}, sóng 5.8GHz đâm xuyên kính/tường mỏng ra ngoài hành lang, bắt nhầm người đi ngang qua! (Hãy thử hạ Độ nhạy xuống Thấp để thu hẹp bán kính sóng).`;
+        } else {
+          return `ĐÃ CHẶN XUYÊN VÁCH (${noiseSignal}% < 30%): Nhờ vặn biến trở SENS xuống mức Thấp (2–3m), sóng 5.8GHz không còn tràn ra hành lang nên hết bắt nhầm người bên ngoài!`;
+        }
+      }
+      return `BÁO GIẢ NẶNG (${noiseSignal}% ≥ 30%): Sóng Doppler 5.8GHz (Kawasan KW-RS02D2) phản xạ mạnh với chuyển động cơ học của cánh quạt, rèm bay và tia nước chảy. Dù vặn nhỏ độ nhạy vẫn vượt ngưỡng 30% nếu nguồn nhiễu ở trong phòng -> Đèn sáng mãi không tắt!`;
+    }
+
+    if (sensor === 'mmwave_24') {
+      if (noise === 'passerby') {
+        if (noiseSignal >= 30) {
+          return `NHIỄU RÌA HÀNH LANG (${noiseSignal}%): Do 24GHz quét theo cung tròn 1D không cắt góc vuông 2D như 60GHz nên ở Độ nhạy Cao dễ lẹm sóng ra hành lang. Chuyển sang Độ nhạy TB/Thấp sẽ hết ngay.`;
+        } else {
+          return `AN TOÀN (${noiseSignal}% < 30%): Đã thu gọn biên độ nhạy nên người đi ngoài vách/hành lang không còn gây kích hoạt giả.`;
+        }
+      }
+      if (noiseSignal >= 30) {
+        return `BÁO GIẢ (${noiseSignal}% ≥ 30%): Ở ${sensText}, sóng 24GHz (LifeSmart MIR-HE200) bắt mọi vi dao động của quạt/rèm/nước chảy làm đèn không thể tắt. Bạn phải hạ xuống Độ nhạy Thấp mới khử được nhiễu này (<30%).`;
+      } else {
+        return `ĐÃ KHỬ NHIỄU (${noiseSignal}% < 30%): Nhờ hạ xuống Độ nhạy Thấp, nhiễu quạt/rèm/nước chảy đã nằm dưới ngưỡng 30% (hết báo giả), nhưng bạn bị MẤT khả năng bắt nhịp thở tĩnh!`;
+      }
+    }
+
+    if (sensor === 'mmwave_60') {
+      return `KIỂM SOÁT TỐT (${noiseSignal}% < 30%): Nhờ tính năng khoanh vùng loại trừ 2D/3D (Exclusion Zone) trên lưới 0.5m của Aqara FP400 kết hợp AI nhận diện chu kỳ quay của quạt, nguồn nhiễu bị khóa hoàn toàn mà không ảnh hưởng tới vùng có người.`;
+    }
+    return '';
+  }
+
+  // Render danh sách 6 nút Kịch bản (Presets)
+  function renderPresetButtons() {
+    const grid = document.getElementById('presetGrid');
+    if (!grid) return;
+    grid.innerHTML = Object.values(SCENARIO_PRESETS).map(p => {
+      const active = STATE.preset === p.id;
+      return `
+        <button type="button" data-preset="${p.id}"
+          class="preset-btn text-left p-3 rounded-xl border transition-all flex items-start gap-3 ${
+            active
+              ? 'bg-blue-600 text-white border-blue-600 shadow-sm ring-2 ring-blue-300'
+              : 'bg-slate-50 hover:bg-slate-100 text-slate-800 border-slate-200'
+          }">
+          <span class="text-2xl leading-none mt-0.5">${p.icon}</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-bold text-xs sm:text-sm truncate">${p.name}</div>
+            <div class="text-[11px] mt-0.5 truncate ${active ? 'text-blue-100' : 'text-slate-500'}">${p.sub}</div>
+          </div>
+        </button>
+      `;
+    }).join('');
+
+    grid.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const presetId = btn.dataset.preset;
+        const p = SCENARIO_PRESETS[presetId];
+        if (!p) return;
+        STATE.preset = presetId;
+        STATE.activity = p.config.activity;
+        STATE.barrier = p.config.barrier;
+        STATE.noise = p.config.noise;
+        STATE.sens = p.config.sens;
+        updateAllUI();
+      });
+    });
+  }
+
+  // Cập nhật toàn bộ giao diện
+  function updateAllUI() {
+    renderPresetButtons();
+
+    // 1. Update Preset Banner
+    const p = SCENARIO_PRESETS[STATE.preset];
+    if (p) {
+      document.getElementById('presetTitle').textContent = p.name;
+      document.getElementById('presetProblem').textContent = p.problem;
+      document.getElementById('presetBestChoice').textContent = p.bestChoice;
+    }
+
+    // 2. Highlight active Sensor & Control Buttons
+    document.querySelectorAll('[data-group]').forEach(btn => {
+      const grp = btn.dataset.group;
+      const val = btn.dataset.value;
+      const isActive = STATE[grp] === val;
+
+      if (btn.classList.contains('sensor-btn')) {
+        btn.className = `sensor-btn text-left p-3 rounded-xl border transition-all flex items-start justify-between gap-2 ${
+          isActive
+            ? 'bg-blue-600 text-white border-blue-600 shadow-sm ring-2 ring-blue-200'
+            : 'bg-slate-50 hover:bg-slate-100 text-slate-800 border-slate-200'
+        }`;
+      } else {
+        btn.className = `chip-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+          grp === 'sens' ? 'text-center py-2' : 'text-left'
+        } ${
+          isActive
+            ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
+            : 'bg-white hover:bg-slate-100 text-slate-700 border-slate-200'
+        }`;
+      }
+    });
+
+    // 3. Update Sensitivity Box Labels & Hints for active sensor
+    const sInfo = SENSOR_INFO[STATE.sensor];
+    document.getElementById('sensHardwareLabel').textContent = sInfo.hardwareControl;
+    document.getElementById('sensBtnHigh').textContent = sInfo.sensLabels.high;
+    document.getElementById('sensBtnMed').textContent = sInfo.sensLabels.medium;
+    document.getElementById('sensBtnLow').textContent = sInfo.sensLabels.low;
+    document.getElementById('sensTradeoffHint').innerHTML = `<strong>💡 Hiệu quả mức độ nhạy đang chọn:</strong> ${sInfo.sensHints[STATE.sens]}`;
+
+    // 4. Update "Được gì & Mất gì" Card
+    document.getElementById('cardSensorTitle').textContent = sInfo.name;
+    document.getElementById('cardPriceTier').innerHTML = `<span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-semibold border border-slate-200">${sInfo.priceText}</span>`;
+    document.getElementById('cardGainList').innerHTML = sInfo.gains.map(i => `<li>${i}</li>`).join('');
+    document.getElementById('cardLossList').innerHTML = sInfo.losses.map(i => `<li>${i}</li>`).join('');
+    document.getElementById('cardBestRooms').textContent = sInfo.bestRooms;
+    document.getElementById('cardAvoidRooms').textContent = sInfo.avoidRooms;
+
+    // 5. Evaluate Current Sensor & Update Meters
+    const res = evaluateSensor(STATE.sensor, STATE.sens, STATE.activity, STATE.barrier, STATE.noise);
+
+    const sensLabelShort = STATE.sens === 'high' ? 'Độ nhạy Cao' : (STATE.sens === 'medium' ? 'Độ nhạy TB' : 'Độ nhạy Thấp');
+    document.getElementById('activeConfigSummary').textContent = `${sInfo.shortName} • ${sensLabelShort}`;
+
+    // Human Meter
+    const sigPercentEl = document.getElementById('signalPercent');
+    const statusBadgeEl = document.getElementById('statusBadge');
+    const meterFillEl = document.getElementById('meterBarFill');
+    const expEl = document.getElementById('explanationText');
+
+    sigPercentEl.textContent = res.humanSignal + '%';
+    meterFillEl.style.width = res.humanSignal + '%';
+    expEl.textContent = getHumanExplanation(STATE.sensor, STATE.sens, STATE.activity, STATE.barrier, res.humanSignal);
+
+    if (!res.hasPerson) {
+      meterFillEl.className = 'meter-fill h-full rounded-full bg-slate-400';
+      statusBadgeEl.textContent = 'Phòng trống (0%)';
+      statusBadgeEl.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-200 text-slate-700';
+    } else if (res.humanDetected) {
+      meterFillEl.className = 'meter-fill h-full rounded-full bg-emerald-500';
+      statusBadgeEl.textContent = 'Bắt được người (≥30%)';
+      statusBadgeEl.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800';
+    } else {
+      meterFillEl.className = 'meter-fill h-full rounded-full bg-rose-500';
+      statusBadgeEl.textContent = res.humanSignal > 0 ? 'Bỏ sót người (<30%)' : 'Mất tín hiệu (0%)';
+      statusBadgeEl.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-800';
+    }
+
+    // Noise Meter
+    const noisePercentEl = document.getElementById('noisePercent');
+    const noiseBadgeEl = document.getElementById('noiseBadge');
+    const noiseFillEl = document.getElementById('noiseBarFill');
+    const noiseExpEl = document.getElementById('noiseExplanationText');
+
+    noisePercentEl.textContent = res.noiseSignal + '%';
+    noiseFillEl.style.width = res.noiseSignal + '%';
+    noiseExpEl.textContent = getNoiseExplanation(STATE.sensor, STATE.sens, STATE.noise, STATE.barrier, res.noiseSignal);
+
+    if (res.isFalseAlarm) {
+      noiseFillEl.className = 'meter-fill h-full rounded-full bg-rose-500';
+      noisePercentEl.className = 'font-mono-code text-base font-bold text-rose-600';
+      noiseBadgeEl.textContent = 'BÁO GIẢ! (Nhiễu ≥30%)';
+      noiseBadgeEl.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-800';
+    } else if (res.noiseSignal >= 15) {
+      noiseFillEl.className = 'meter-fill h-full rounded-full bg-amber-500';
+      noisePercentEl.className = 'font-mono-code text-base font-bold text-amber-600';
+      noiseBadgeEl.textContent = 'Đã lọc nhiễu (<30%)';
+      noiseBadgeEl.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800';
+    } else {
+      noiseFillEl.className = 'meter-fill h-full rounded-full bg-emerald-500';
+      noisePercentEl.className = 'font-mono-code text-base font-bold text-emerald-600';
+      noiseBadgeEl.textContent = 'Sạch nhiễu';
+      noiseBadgeEl.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800';
+    }
+
+    // Final Verdict Banner
+    const vContainer = document.getElementById('verdictContainer');
+    const vBadge = document.getElementById('verdictBadge');
+    const vDetail = document.getElementById('verdictDetail');
+    const vTip = document.getElementById('verdictActionTip');
+
+    vBadge.textContent = res.shortVerdict;
+    vBadge.className = `px-3 py-1 rounded-full text-xs sm:text-sm font-bold ${res.badgeClass}`;
+
+    if (res.statusType === 'perfect') {
+      vContainer.className = 'p-4 rounded-xl border-2 border-emerald-300 bg-emerald-50/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+      vDetail.textContent = res.hasPerson
+        ? 'Cảm biến nhận diện chính xác con người và không bị kích hoạt sai bởi môi trường.'
+        : 'Phòng trống và cảm biến hoàn toàn không bị đánh lừa bởi nguồn nhiễu xung quanh.';
+      vTip.innerHTML = '<strong>✅ Kết luận tư vấn:</strong> Cấu hình này hoàn toàn phù hợp để lắp đặt thực tế.';
+    } else if (res.statusType === 'false_alarm') {
+      vContainer.className = 'p-4 rounded-xl border-2 border-rose-300 bg-rose-50/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+      vDetail.textContent = 'Phòng không có người nhưng độ nhiễu vượt ngưỡng 30% khiến đèn tự bật sáng hoặc không bao giờ tắt!';
+      vTip.innerHTML = '<strong>🔧 Cách xử lý:</strong> Hãy thử bấm giảm <strong>Độ nhạy xuống Thấp</strong> ở mục 2B hoặc đổi sang <strong>PIR / 60GHz AI</strong>.';
+    } else if (res.statusType === 'missed') {
+      vContainer.className = 'p-4 rounded-xl border-2 border-rose-300 bg-rose-50/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+      vDetail.textContent = 'Đang có người trong phòng nhưng tín hiệu phản hồi dưới ngưỡng 30% -> Đèn tự TẮT tối om khi người vẫn đang ngồi/tắm!';
+      vTip.innerHTML = '<strong>🔧 Cách xử lý:</strong> Tăng <strong>Độ nhạy lên Cao</strong>, dời cảm biến vào trong vách kính hoặc nâng cấp lên <strong>mmWave 24GHz / 60GHz</strong>.';
+    } else {
+      vContainer.className = 'p-4 rounded-xl border-2 border-amber-300 bg-amber-50/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+      vDetail.textContent = res.humanDetected
+        ? 'Đang bắt được người, NHƯNG độ nhiễu môi trường cũng vượt 30% -> Khi người bước ra khỏi phòng, đèn sẽ bị kẹt SÁNG MÃI không tắt!'
+        : 'Cảm biến đã mất dấu con người (<30%), chỉ đang vô tình giữ đèn sáng nhờ bắt nhầm nguồn nhiễu môi trường!';
+      vTip.innerHTML = '<strong>🔧 Cách xử lý:</strong> Hãy thử <strong>hạ Độ nhạy xuống Thấp</strong> xem có cắt được nhiễu mà vẫn giữ được tín hiệu người không, hoặc chọn <strong>Aqara FP400 (60GHz AI)</strong>.';
+    }
+
+    // 6. Render Side-by-Side Comparison of All 4 Sensors
+    renderComparisonGrid();
+  }
+
+  function renderComparisonGrid() {
+    const grid = document.getElementById('liveComparisonGrid');
+    if (!grid) return;
+
+    const keys = ['pir', 'radar_58', 'mmwave_24', 'mmwave_60'];
+    grid.innerHTML = keys.map(k => {
+      const info = SENSOR_INFO[k];
+      const r = evaluateSensor(k, STATE.sens, STATE.activity, STATE.barrier, STATE.noise);
+      const isSelected = STATE.sensor === k;
+
+      let borderStyle = isSelected ? 'border-2 border-blue-600 bg-blue-50/30 shadow-sm' : 'border border-slate-200 bg-slate-50';
+      let icon = r.statusType === 'perfect' ? '✅' : (r.statusType === 'warning' ? '⚠️' : '❌');
+
+      return `
+        <div class="p-3.5 rounded-xl ${borderStyle} flex flex-col justify-between gap-3 cursor-pointer hover:border-blue-400 transition-all"
+             onclick="selectSensorFromGrid('${k}')">
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between gap-1">
+              <span class="font-bold text-xs sm:text-sm text-slate-900">${info.shortName}</span>
+              ${isSelected ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-600 text-white">Đang xem</span>' : ''}
+            </div>
+            <div class="inline-block px-2 py-0.5 rounded text-[11px] font-bold ${r.badgeClass}">
+              ${icon} ${r.shortVerdict}
+            </div>
+          </div>
+
+          <div class="space-y-1.5 text-xs pt-2 border-t border-slate-200/80">
+            <div class="flex justify-between">
+              <span class="text-slate-500">Tín hiệu Người:</span>
+              <span class="font-mono-code font-bold ${r.humanDetected || !r.hasPerson ? 'text-emerald-700' : 'text-rose-600'}">${r.humanSignal}%</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500">Nhiễu Báo giả:</span>
+              <span class="font-mono-code font-bold ${r.isFalseAlarm ? 'text-rose-600' : 'text-emerald-700'}">${r.noiseSignal}%</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.selectSensorFromGrid = function(sensorKey) {
+    STATE.sensor = sensorKey;
+    updateAllUI();
+  };
+
+  function initApp() {
+    document.querySelectorAll('[data-group]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const target = e.currentTarget;
+        const grp = target.dataset.group;
+        const val = target.dataset.value;
+        STATE[grp] = val;
+        updateAllUI();
+      });
+    });
+    updateAllUI();
+  }
+
+  document.addEventListener('DOMContentLoaded', initApp);
+  if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    initApp();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+---
+import { profiles, scenarios, options, scenarioState, evaluateSensor, stateURL } from '../data/sensor-guide';
+interface Props { mode?: 'quick' | 'deep' }
+const { mode = 'quick' } = Astro.props;
+const state = scenarioState('corridor');
+const scenario = scenarios[0];
+const result = evaluateSensor(state);
+const labels = { sensor: 'Công nghệ cảm biến', sensitivity: 'Độ nhạy', activity: 'Trạng thái người', barrier: 'Vật cản', noise: 'Nguồn nhiễu' };
+---
+
+<section class="sensor-guide not-content" data-sensor-guide data-mode={mode} aria-label={mode === 'deep' ? 'Mô phỏng cảm biến chuyên sâu' : 'Chọn cảm biến theo tình huống'}>
+  <p class="sg-eyebrow">{mode === 'deep' ? 'Thử điều kiện sử dụng' : 'Chọn theo nhu cầu'}</p>
+  <p class="sg-note">Minh họa xu hướng để khảo sát và tư vấn; không phải số đo hay cam kết khả năng của một mẫu thiết bị.</p>
+  <div class="sg-controls">
+    <label for={'sg-' + mode + '-scenario'}>Tình huống sử dụng</label>
+    <select id={'sg-' + mode + '-scenario'} data-scenario>
+      {scenarios.map(s => <option value={s.id} selected={s.id === state.scenario}>{s.title}</option>)}
+    </select>
+  </div>
+  <div class:list={['sg-layout', { 'sg-layout-deep': mode === 'deep' }]}>
+    {mode === 'deep' && <div class="sg-settings sg-controls">
+      {(Object.keys(options) as (keyof typeof options)[]).map(key => <div>
+        <label for={'sg-deep-' + key}>{labels[key]}</label>
+        <select id={'sg-deep-' + key} data-option={key}>
+          {options[key].map(o => <option value={o.id} selected={o.id === state[key]}>{o.label}</option>)}
+        </select>
+      </div>)}
+      <p class="sg-note">Cao / Vừa / Thấp là lựa chọn minh họa. Cách chỉnh và hiệu quả thực tế khác nhau giữa từng mẫu.</p>
+      <button type="button" data-reset>Đặt lại tình huống</button>
+    </div>}
+    <div class="sg-result" aria-live="polite" aria-atomic="true">
+      <p class="sg-status" data-status>Tình huống mẫu</p>
+      <h3 data-title>{scenario.title}</h3>
+      <p data-problem>{scenario.problem}</p>
+      {mode === 'quick' && <dl class="sg-advice">
+        <div><dt>Hướng lựa chọn</dt><dd data-advice>{scenario.advice}</dd></div>
+        <div><dt>Đánh đổi</dt><dd data-tradeoff>{scenario.tradeoff}</dd></div>
+        <div><dt>Kiểm tra tại công trình</dt><dd data-check>{scenario.check}</dd></div>
+      </dl>}
+      {mode === 'deep' && <div class="sg-assessments">
+        <div><h4>Khả năng phát hiện</h4><p class="sg-tag" data-detection>{result.detection.label}</p><p data-detection-detail>{result.detection.detail}</p></div>
+        <div><h4>Kích hoạt ngoài ý muốn</h4><p class="sg-tag" data-interference>{result.interference.label}</p><p data-interference-detail>{result.interference.detail}</p></div>
+        <p class="sg-conclusion" data-conclusion>{result.conclusion}</p>
+        <p data-action>{result.action}</p>
+      </div>}
+      <a class="sg-link" data-next href={stateURL(state, mode === 'quick' ? 'deep' : 'quick')}>
+        {mode === 'quick' ? 'Mở mô phỏng chuyên sâu →' : '← Về bài tư vấn cảm biến'}
+      </a>
+    </div>
+  </div>
+  <figure class="sg-flow">
+    <svg viewBox="0 0 600 100" role="img" aria-label="Luồng minh họa: người và môi trường tác động đến cảm biến, cảm biến gửi trạng thái cho kịch bản">
+      <rect x="4" y="10" width="170" height="68" rx="8" />
+      <text x="89" y="38">Người / môi trường</text><text x="89" y="59" class="sg-small">cử động · vật cản · nhiễu</text>
+      <path d="M174 44 H214 M384 44 H424" />
+      <rect x="214" y="10" width="170" height="68" rx="8" />
+      <text x="299" y="38">Cảm biến</text><text x="299" y="59" class="sg-small">phát hiện · xử lý</text>
+      <rect x="424" y="10" width="172" height="68" rx="8" />
+      <text x="510" y="38">Kịch bản</text><text x="510" y="59" class="sg-small">điều kiện · trễ · lệnh</text>
+    </svg>
+    <ol class="sg-flow-mobile" aria-label="Luồng minh họa">
+      <li>Người / môi trường: cử động, vật cản, nhiễu</li>
+      <li>Cảm biến: phát hiện và xử lý</li>
+      <li>Kịch bản: điều kiện, thời gian trễ và lệnh</li>
+    </ol>
+    <figcaption>Cảm biến gửi trạng thái; đèn còn phụ thuộc điều kiện và thời gian của kịch bản.</figcaption>
+  </figure>
+  {mode === 'deep' && <div class="sg-comparison">
+    <h3>So sánh trong cùng điều kiện</h3>
+    <p class="sg-note">Cùng nhãn độ nhạy để thảo luận; không coi các thiết bị có cùng ngưỡng vật lý.</p>
+    <div class="sg-cards">
+      {profiles.map(profile => {
+        const assessment = evaluateSensor({ ...state, sensor: profile.id });
+        return <article data-profile={profile.id} class="sg-profile">
+          <h4>{profile.title}</h4>
+          <p>{profile.summary}</p>
+          <p><strong>Phát hiện:</strong> <span data-card-detection>{assessment.detection.label}</span></p>
+          <p><strong>Môi trường:</strong> <span data-card-noise>{assessment.interference.label}</span></p>
+          <p class="sg-note">{profile.verify}</p>
+        </article>;
+      })}
+    </div>
+    <a data-share href={stateURL(state)}>Liên kết mở lại cấu hình này</a>
+    <p class="sg-note">Sau khi chỉnh, có thể sao chép địa chỉ trên trình duyệt để chia sẻ nội bộ.</p>
+  </div>}
+  <noscript><p>Tương tác cần JavaScript. Nội dung trên đang dùng mẫu hành lang; bảng kiến thức và checklist trong bài vẫn đọc được.</p></noscript>
+</section>
+
+<script>
+  import { profiles, scenarios, scenarioState, parseState, evaluateSensor, stateURL, isCustomized } from '../data/sensor-guide';
+  import type { SensorState } from '../data/sensor-guide';
+  document.querySelectorAll<HTMLElement>('[data-sensor-guide]').forEach(root => {
+    const mode = root.dataset.mode === 'deep' ? 'deep' : 'quick';
+    let state = parseState(new URLSearchParams(location.search));
+    const scenarioSelect = root.querySelector<HTMLSelectElement>('[data-scenario]')!;
+    const controls = root.querySelectorAll<HTMLSelectElement>('[data-option]');
+    const text = (selector: string, value: string) => {
+      const target = root.querySelector(selector);
+      if (target) target.textContent = value;
+    };
+    function render(syncURL = true) {
+      const scenario = scenarios.find(s => s.id === state.scenario)!;
+      const profile = profiles.find(p => p.id === state.sensor)!;
+      const custom = isCustomized(state);
+      const result = evaluateSensor(state);
+      scenarioSelect.value = state.scenario;
+      controls.forEach(control => { control.value = state[control.dataset.option as keyof SensorState]; });
+      text('[data-status]', custom ? 'Đang tùy chỉnh · ' + profile.title : 'Tình huống mẫu · ' + profile.title);
+      text('[data-title]', scenario.title);
+      text('[data-problem]', scenario.problem);
+      text('[data-advice]', custom ? result.conclusion : scenario.advice);
+      text('[data-tradeoff]', custom ? result.detection.detail : scenario.tradeoff);
+      text('[data-check]', custom ? result.action : scenario.check);
+      text('[data-detection]', result.detection.label);
+      text('[data-detection-detail]', result.detection.detail);
+      text('[data-interference]', result.interference.label);
+      text('[data-interference-detail]', result.interference.detail);
+      text('[data-conclusion]', result.conclusion);
+      text('[data-action]', result.action);
+      const next = root.querySelector<HTMLAnchorElement>('[data-next]')!;
+      next.href = stateURL(state, mode === 'deep' ? 'quick' : 'deep');
+      const share = root.querySelector<HTMLAnchorElement>('[data-share]');
+      if (share) share.href = stateURL(state);
+      root.querySelectorAll<HTMLElement>('[data-profile]').forEach(card => {
+        const other = evaluateSensor({ ...state, sensor: card.dataset.profile! });
+        card.querySelector('[data-card-detection]')!.textContent = other.detection.label;
+        card.querySelector('[data-card-noise]')!.textContent = other.interference.label;
+        card.classList.toggle('is-selected', card.dataset.profile === state.sensor);
+      });
+      if (syncURL) history.replaceState(null, '', stateURL(state, mode));
+    }
+    scenarioSelect.addEventListener('change', () => { state = scenarioState(scenarioSelect.value); render(); });
+    controls.forEach(control => control.addEventListener('change', () => {
+      const params = new URLSearchParams(state);
+      params.set(control.dataset.option!, control.value);
+      state = parseState(params);
+      render();
+    }));
+    root.querySelector('[data-reset]')?.addEventListener('click', () => {
+      state = scenarioState(state.scenario);
+      render();
+    });
+    render(false);
+    root.classList.add('is-ready');
+  });
+</script>
+
+<style>
+  .sensor-guide { border:1px solid var(--sl-color-gray-5); border-radius:12px; padding:clamp(1rem,3vw,1.5rem); margin:1.5rem 0; font-size:.95rem; }
+  .sensor-guide p { margin:.5rem 0; }
+  .sensor-guide .sg-eyebrow { font-size:1.1rem; font-weight:700; margin:0; }
+  .sg-note { color:var(--sl-color-gray-2); font-size:.88rem; line-height:1.55; }
+  .sg-controls { margin:1rem 0; }
+  .sensor-guide:not(.is-ready) .sg-controls { display:none; }
+  label { display:block; font-weight:600; margin-bottom:.3rem; }
+  select, button { font:inherit; color:var(--sl-color-text); background:var(--sl-color-bg); border:1px solid var(--sl-color-gray-3); border-radius:6px; min-height:44px; padding:.5rem .7rem; }
+  select { width:100%; min-width:0; }
+  button { cursor:pointer; }
+  select:focus-visible, button:focus-visible, a:focus-visible { outline:3px solid var(--sl-color-text-accent); outline-offset:3px; }
+  .sg-layout { display:grid; gap:1.25rem; }
+  .sg-settings { display:grid; gap:.8rem; align-content:start; margin:0; }
+  .sg-result { border-inline-start:3px solid var(--sl-color-text-accent); padding:1rem; background:var(--sl-color-gray-7,var(--sl-color-bg)); min-width:0; }
+  .sensor-guide h3 { font-size:1.1rem!important; margin:.25rem 0 .75rem!important; }
+  .sensor-guide h4 { font-size:.95rem; margin:.5rem 0; }
+  .sg-status { color:var(--sl-color-text-accent); font-size:.85rem; font-weight:600; }
+  .sg-advice { margin:1rem 0; display:grid; gap:.9rem; }
+  dt { font-weight:700; }
+  dd { margin:0; }
+  .sg-link { display:inline-block; margin-top:.5rem; font-weight:600; }
+  .sg-assessments { border-top:1px solid var(--sl-color-gray-5); margin-top:1rem; padding-top:.75rem; }
+  .sg-tag { font-weight:600; }
+  .sg-conclusion { border-top:1px solid var(--sl-color-gray-5); padding-top:.75rem; }
+  .sg-flow { margin:1.5rem 0 0; }
+  .sg-flow svg { display:block; width:100%; height:auto; }
+  .sg-flow-mobile { display:none; }
+  .sg-flow rect { fill:var(--sl-color-bg); stroke:var(--sl-color-gray-3); }
+  .sg-flow text { fill:var(--sl-color-text); font:14px sans-serif; text-anchor:middle; }
+  .sg-flow .sg-small { font-size:11px; }
+  .sg-flow path { stroke:var(--sl-color-text-accent); stroke-width:2; stroke-dasharray:5 4; animation:sg-flow 1.5s linear infinite; }
+  figcaption { color:var(--sl-color-gray-2); font-size:.85rem; }
+  .sg-comparison { margin-top:1.5rem; }
+  .sg-cards { display:grid; gap:.75rem; margin:1rem 0; }
+  .sg-profile { border:1px solid var(--sl-color-gray-5); padding:1rem; border-radius:8px; min-width:0; overflow-wrap:anywhere; }
+  .sg-profile.is-selected { border-color:var(--sl-color-text-accent); box-shadow:inset 0 0 0 1px var(--sl-color-text-accent); }
+  @media(min-width:50rem) { .sg-layout-deep { grid-template-columns:minmax(13rem,1fr) minmax(0,1.5fr); } .sg-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media(max-width:30rem) { .sg-flow svg { display:none; } .sg-flow-mobile { display:grid; gap:.6rem; padding-inline-start:1.4rem; margin:.75rem 0; font-size:.9rem; } }
+  @keyframes sg-flow { to { stroke-dashoffset:-18; } }
+  @media(prefers-reduced-motion:reduce) { .sg-flow path { animation:none; } }
+</style>

@@ -36,6 +36,7 @@ export default defineConfig({
 			],
 			sidebar: [
 				{ label: 'Tổng quan', link: '/wiki/' },
+				{ label: 'Giải pháp & Tư vấn lựa chọn', autogenerate: { directory: 'wiki/giai-phap' } },
 				{
 					label: 'Lộ trình học',
 					items: [

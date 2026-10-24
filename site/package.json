@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "test": "node --test tests/*.test.ts",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",

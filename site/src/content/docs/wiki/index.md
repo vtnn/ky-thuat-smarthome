@@ -3,6 +3,12 @@ title: "Tổng quan"
 description: "Tài liệu đào tạo kỹ thuật viên — Hệ thống nhà thông minh"
 ---
 
+## Giải pháp & Tư vấn lựa chọn
+
+Sale và kỹ thuật có thể bắt đầu từ [nhu cầu của khách](/wiki/giai-phap/00-tong-quan/) để so sánh chiếu sáng, điều hòa, cửa, rèm, cảm biến và an ninh trước khi chọn hệ thống.
+
+Muốn thử một tình huống cụ thể, mở [tư vấn cảm biến](/wiki/giai-phap/05-cam-bien/) hoặc [mô phỏng chuyên sâu](/wiki/giai-phap/05a-mo-phong-cam-bien/).
+
 # 📘 Tài Liệu Đào Tạo Kỹ Thuật Viên — Hệ Thống Nhà Thông Minh
 
 > Cấu trúc tài liệu phục vụ đào tạo kỹ thuật viên thi công, lập trình và xử lý sự cố hệ thống nhà thông minh (Smart Home), Camera giám sát và WiFi.

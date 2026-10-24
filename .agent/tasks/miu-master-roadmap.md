@@ -56,6 +56,10 @@ Quy trình làm 1 bài chuẩn hóa có trực quan:
 
 ## Lộ trình theo pha
 
+### Chuyên mục độc lập GP — được duyệt 24/10/2026
+
+[Giải pháp & Tư vấn lựa chọn](giai-phap-tu-van-roadmap.md) phục vụ sale và kỹ thuật theo nhu cầu khách. Có bài so sánh nhanh và trang mô phỏng cảm biến chuyên sâu; triển khai theo năm đợt trong OpenSpec add-solutions-guide. Đây là phần bổ sung độc lập với lộ trình A–G. Đã triển khai cục bộ cả năm đợt ngày 24/10/2026; chủ nhân yêu cầu commit/push main sau khi kiểm tra lại.
+
 ### Pha 0 — Đồng bộ bản đồ repo (ĐÃ XONG 22/10/2026)
 - Roadmap v2 này thay bản cũ; bảng module trong `AGENTS.md` và `CURRENT_PRIORITY.md` đã sửa khớp kiểm kê; quy ước media trong `openspec/project.md` chuyển sang web-first.
 

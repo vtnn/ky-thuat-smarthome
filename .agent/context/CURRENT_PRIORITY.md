@@ -1,5 +1,11 @@
 # Current Priority
 
+## Hạng mục được duyệt bổ sung — 24/10/2026
+
+Chủ nhân yêu cầu triển khai chuyên mục độc lập **Giải pháp & Tư vấn lựa chọn** (GP), gồm tư vấn nhanh và mô phỏng cảm biến chuyên sâu. Theo dõi trong [roadmap GP](../tasks/giai-phap-tu-van-roadmap.md); trạng thái thực thi nằm tại [OpenSpec tasks](../../openspec/changes/add-solutions-guide/tasks.md).
+
+Đã triển khai đủ GP.00–GP.07 và GP.05A; test 8/8, build 114 trang pass. Chủ nhân yêu cầu commit và push main ngày 24/10/2026; phát hành qua GitHub Actions → Cloudflare Pages. Phần chuẩn hóa A–G tiếp tục theo thứ tự bên dưới.
+
 ## Repo priority now
 1. **Pha 1 của Roadmap v2: chuẩn hóa + trực quan hóa từ bài cũ** (xem `.agent/tasks/miu-master-roadmap.md`).
 2. Việc cụ thể trước mắt:
